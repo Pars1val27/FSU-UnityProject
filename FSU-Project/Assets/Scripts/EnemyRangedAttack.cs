@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class EnemyRangedAttack : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Transform shootPos;
+
+    [SerializeField] int shootRate;
+    [SerializeField] GameObject projectile;
+
+    bool isShooting;
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        
+        Debug.Log("testUpdate");
+        if (isShooting == false)
+        {
+            Debug.Log("Test IsShooting");
+            StartCoroutine(shoot());
+        }
+    }
+
+    IEnumerator shoot()
+    {
+        Debug.Log("Test Shoot");
+        isShooting = true;
+        Instantiate(projectile, shootPos.position, transform.rotation);
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
     }
 }

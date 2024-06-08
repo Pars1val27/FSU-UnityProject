@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 0
+  HP: 10
   agent: {fileID: 7764598650618861331}
 --- !u!33 &434863627186335722
 MeshFilter:

@@ -24,5 +24,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+
+        if(HP <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
