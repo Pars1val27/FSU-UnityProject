@@ -6,9 +6,11 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject grenadePrefab;
     [SerializeField] int maxAmmoCount;
     [SerializeField] float shootRate;
     [SerializeField] float reloadTime;
+    [SerializeField] float grenadeThrowForce;
 
     int currentAmmoCount;
     bool isShooting;
@@ -31,6 +33,11 @@ public class Gun : MonoBehaviour
             StartCoroutine(Shoot());
         }
 
+        if (Input.GetButtonDown("Fire3") && !isShooting)
+        {
+            ThrowGrenade();
+        }
+
         if (currentAmmoCount <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
@@ -48,11 +55,19 @@ public class Gun : MonoBehaviour
         isShooting = false;
     }
 
+    void ThrowGrenade()
+    {
+        GameObject grenade = Instantiate(grenadePrefab, shootPos.position, shootPos.rotation);
+        Rigidbody rb = grenade.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(shootPos.forward * grenadeThrowForce, ForceMode.VelocityChange);
+        }
+    }
+
     IEnumerator Reload()
     {
         isReloading = true;
-
-        Debug.Log("Reloading...");
         yield return new WaitForSeconds(reloadTime);
 
         currentAmmoCount = maxAmmoCount;
