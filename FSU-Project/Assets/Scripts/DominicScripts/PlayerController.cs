@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashCD;
 
     int jumpCount;
+    int origHP;
 
     bool isDashing;
 
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        origHP = PlayerHP;
     }
 
     // Update is called once per frame
@@ -101,6 +102,12 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(dashDuration);
         speed /= dashMod;
+    }
+
+    void UpdatePlayerUI()
+    {
+        UIManager.instance.playerHPBar.fillAmount = (float)PlayerHP / origHP;
+        UIManager.instance.DashCoolDownFill.fillAmount = dashCD;
     }
 
 }
