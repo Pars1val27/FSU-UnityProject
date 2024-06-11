@@ -93,7 +93,7 @@ public class PlayerController : MonoBehaviour
 
         if(PlayerHP <= 0)
         {
-            
+            UIManager.instance.onLose();
         }
     }
 
