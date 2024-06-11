@@ -340,7 +340,7 @@ GameObject:
   - component: {fileID: 4083442258784724825}
   - component: {fileID: 7764598650618861331}
   m_Layer: 0
-  m_Name: Mid range Enemy 1
+  m_Name: Mid range Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,6 +379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   agent: {fileID: 7764598650618861331}
+  faceTaregtSpeed: 20
 --- !u!114 &4348472145347803749
 MonoBehaviour:
   m_ObjectHideFlags: 0

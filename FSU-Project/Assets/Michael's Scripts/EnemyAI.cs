@@ -8,8 +8,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     //Michael
     [SerializeField] int HP;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] int faceTaregtSpeed;
 
     int currHP;
+    bool playerInRange;
+
+    Vector3 playerDir;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +23,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        playerDir = EnemyManager.instance.player.transform.position - transform.position;
+      
+            if (agent.remainingDistance < agent.stoppingDistance)
+            {
+                faceTarget();
+            }
         agent.SetDestination(EnemyManager.instance.player.transform.position);
     }
 
@@ -30,5 +40,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             Destroy(gameObject);
         }
+    }
+
+    void faceTarget()
+    {
+        Quaternion rot = Quaternion.LookRotation(playerDir);
+        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTaregtSpeed);
     }
 }

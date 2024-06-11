@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ExplosiveShot : MonoBehaviour
 {
     //Michael
     [SerializeField] Rigidbody rb;
@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
+
+    [SerializeField] GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,18 +22,17 @@ public class Projectile : MonoBehaviour
     {
         if (other.isTrigger)
             return;
-        if(other.tag == "Player")
-        {
 
         IDamage dmg = other.GetComponent<IDamage>();
 
-                if (dmg != null)
-                {
-                    dmg.TakeDamage(damage);
-                }
+        if (dmg != null)
+        {
+            dmg.TakeDamage(damage);
         }
-        
+
+        Instantiate(explosion, transform.position, transform.rotation);
 
         Destroy(gameObject);
+
     }
 }

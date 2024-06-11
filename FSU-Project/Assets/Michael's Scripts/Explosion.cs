@@ -2,36 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
-    //Michael
-    [SerializeField] Rigidbody rb;
 
     [SerializeField] int damage;
-    [SerializeField] int speed;
-    [SerializeField] int destroyTime;
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
-        Destroy(gameObject, destroyTime);
+        
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.isTrigger)
-            return;
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
 
-        IDamage dmg = other.GetComponent<IDamage>();
+         IDamage dmg = other.GetComponent<IDamage>();
 
                 if (dmg != null)
                 {
                     dmg.TakeDamage(damage);
                 }
         }
-        
 
+        Invoke("explode", 1);
+    }
+
+    void explode()
+    {
         Destroy(gameObject);
     }
 }
