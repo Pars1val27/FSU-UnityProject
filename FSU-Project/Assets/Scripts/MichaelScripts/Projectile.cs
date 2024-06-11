@@ -18,12 +18,19 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger)
+            return;
+        if(other.tag == "Player")
+        {
+
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null)
-        {
-            dmg.TakeDamage(damage);
+                if (dmg != null)
+                {
+                    dmg.TakeDamage(damage);
+                }
         }
+        
 
         Destroy(gameObject);
     }

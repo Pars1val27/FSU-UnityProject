@@ -487,6 +487,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   agent: {fileID: 7764598650618861331}
+  faceTaregtSpeed: 5
 --- !u!114 &4348472145347803749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,7 +502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootPos: {fileID: 1046810298608582495}
   shootRate: 3
-  projectile: {fileID: 8048136264307098328, guid: e5f77b69572dafc4c95fb948a2082bcf, type: 3}
+  projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
 --- !u!33 &434863627186335722
 MeshFilter:
   m_ObjectHideFlags: 0
