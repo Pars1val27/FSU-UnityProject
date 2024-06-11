@@ -23,7 +23,7 @@ public class Shootblast : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isShooting == false)
+        if (isShooting == false )
         {
             
             StartCoroutine(shoot());
@@ -33,7 +33,7 @@ public class Shootblast : MonoBehaviour
  
     IEnumerator shoot()
     {
-       
+
         isShooting = true;
         Instantiate(projectile, shootPos1.position, shootPos1.rotation);
         Instantiate(projectile, shootPos2.position, shootPos2.rotation);

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 150849555607303561}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0.377, y: -0.128, z: 0.117}
+  m_LocalPosition: {x: 0.308, y: -0.128, z: 0.29}
   m_LocalScale: {x: 0.445925, y: 0.5945667, z: 0.445925}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,7 +215,7 @@ Transform:
   m_GameObject: {fileID: 3919146659189081588}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.248, y: 0.124078274, z: 1.071}
+  m_LocalPosition: {x: 0.265, y: -0.139, z: 1.074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -252,7 +252,7 @@ Transform:
   m_GameObject: {fileID: 5788263070341835923}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -0.035775006}
+  m_LocalPosition: {x: 0, y: 3, z: -0.27}
   m_LocalScale: {x: 4, y: 3, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -275,6 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 10
   agent: {fileID: 7764598650618861331}
+  faceTaregtSpeed: 10
 --- !u!114 &4348472145347803749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,8 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 1046810298608582495}
-  shootRate: 0.5
-  projectile: {fileID: 8048136264307098328, guid: 1c3f0525bdd4c6f4c865d86cc9b8a38c, type: 3}
+  shootRate: 4
+  projectile: {fileID: 2512350404852353110, guid: ea762609097156f4eb048459f3a21062, type: 3}
 --- !u!33 &434863627186335722
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -355,11 +356,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 16
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -373,11 +374,11 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.7
-  m_Speed: 4.5
+  m_Speed: 2
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 900
-  m_StoppingDistance: 8
+  m_StoppingDistance: 20
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
