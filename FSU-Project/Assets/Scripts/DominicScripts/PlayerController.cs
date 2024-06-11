@@ -86,6 +86,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void TakeDamage(int dmg)
+    {
+        PlayerHP -= dmg;
+        UpdatePlayerUI();
+
+        if(PlayerHP <= 0)
+        {
+            
+        }
+    }
+
     IEnumerator Dash()
     {
         isDashing = true;
