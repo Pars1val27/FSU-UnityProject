@@ -81,5 +81,12 @@ public class UIManager : MonoBehaviour
         }
         
     }
+
+    public void onLose()
+    {
+        statePause();
+        menuActive = menuLose;
+        menuActive.SetActive(gamePause);
+    }
    
 }
