@@ -6,6 +6,7 @@ public class EnemyManager : MonoBehaviour
 
     
 { 
+    //Michael
     public static EnemyManager instance;
 
     public GameObject player;

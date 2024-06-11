@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    //Michael
     [SerializeField] Rigidbody rb;
 
     [SerializeField] int damage;

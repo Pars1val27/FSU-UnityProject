@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : MonoBehaviour
 {
-
+    //Michael
     [SerializeField] int Dmg;
     [SerializeField] float AttackRate;
 
@@ -25,13 +25,13 @@ public class EnemyMeleeAttack : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
 
-        Debug.Log("Hit");
+       
         if ((Time.time - SavedTime) > AttackRate)
         {
             SavedTime = Time.time;
 
             IDamage dmg = other.GetComponent<IDamage>();
-            Debug.Log("Hit");
+           
             if (dmg != null)
             {
 
