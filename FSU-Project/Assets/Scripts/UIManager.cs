@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -12,8 +14,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
 
+    [SerializeField] TMP_Text enemyCountText;
+
+    public Image playerHPBar;
+    public Image DashCoolDownFill;
+
 
     public bool gamePause;
+    public bool crosshairActive;
+
+    int enemyCount;
     // Start is called before the first frame update
     void Awake()
     {
@@ -41,6 +51,7 @@ public class UIManager : MonoBehaviour
     public void statePause()
     {
         gamePause = !gamePause;
+        crosshairActive = !crosshairActive; 
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -49,6 +60,7 @@ public class UIManager : MonoBehaviour
     public void stateUnpause()
     {
         gamePause = !gamePause;
+        crosshairActive = !crosshairActive;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -56,5 +68,18 @@ public class UIManager : MonoBehaviour
         menuActive = null;
     }
 
+    public void UpdateEnemyDisplay(int amount)
+    {
+        enemyCount += amount;
+        enemyCountText.text = enemyCount.ToString("f0");
+
+        if(enemyCount <= 0)
+        {
+            statePause();
+            menuActive = menuWin;
+            menuActive.SetActive(gamePause);
+        }
+        
+    }
    
 }
