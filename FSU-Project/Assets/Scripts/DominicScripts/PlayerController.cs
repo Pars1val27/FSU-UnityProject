@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
 
     [SerializeField] CharacterController controller;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void TakeDamage(int dmg)
+    public void TakeDamage(int dmg)
     {
         PlayerHP -= dmg;
         UpdatePlayerUI();
