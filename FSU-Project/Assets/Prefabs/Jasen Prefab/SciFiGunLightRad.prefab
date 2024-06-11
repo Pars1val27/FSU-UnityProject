@@ -125,11 +125,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8193046971490747676}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71986d311f1ee314098ed4c87b4037d9, type: 3}
+  m_Script: {fileID: 11500000, guid: ea8510b687581b74ba0bc2eef5c311b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootPos: {fileID: 3639340747846547039}
-  bullet: {fileID: 4556737859529640996, guid: 24052569765b2844c8a570be1c7a8ce3, type: 3}
-  maxAmmoCount: 24
+  shootPos: {fileID: 0}
+  bullet: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  maxAmmoCount: 0
   shootRate: 0
   reloadTime: 0
+  grenadeThrowForce: 0
