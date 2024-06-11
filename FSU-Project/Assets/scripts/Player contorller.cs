@@ -15,13 +15,9 @@ public class Playercontorller : MonoBehaviour, IDamage
     [SerializeField] int jumpMax;
     [SerializeField] int jumpsSpeed;
     [SerializeField] int gravity;
+   
 
 
-    //[SerializeField] GameObject cube;
-
-
-
-    bool isShooting;
 
     int HPOrig;
     int jumpCount;
@@ -31,24 +27,22 @@ public class Playercontorller : MonoBehaviour, IDamage
 
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         HPOrig = HP;
         UpdateUIElements();
     }
 
-    // Update is called oncse per frame
     void Update()
     {
 
         Movement();
         Sprint();
-       
+        
 
     }
     void Movement()
     {
-
-        //moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("vertical"));
-        //transform.position += moveDir * speed * Time.deltaTime;
         if (controller.isGrounded)
         {
             jumpCount = 0;
@@ -79,8 +73,8 @@ public class Playercontorller : MonoBehaviour, IDamage
             speed /= sprintMod;
         }
     }
-    
 
+   
     public void TakeDamage(int ammount)
     {
         HP -= ammount;
