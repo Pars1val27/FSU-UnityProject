@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int jumpMax;
     [SerializeField] int jumpSpeed;
     [SerializeField] int gravtiy;
+    [SerializeField] int PlayerHP;
+    [SerializeField] int bulletdmg;
 
     [SerializeField] float dashCD;
 
