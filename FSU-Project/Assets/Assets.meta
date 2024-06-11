@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:FSU-Project/Assets/Assets.meta
 guid: 0df3c9ae10e684440a620b82c406ecb4
+========
+guid: 613dd4a15f2478042b29073826a0b854
+>>>>>>>> WeaponTest:FSU-Project/Assets/Sci Fi Gun Light.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
