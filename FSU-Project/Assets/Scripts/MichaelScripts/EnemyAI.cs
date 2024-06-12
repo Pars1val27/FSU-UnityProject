@@ -11,13 +11,15 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int faceTaregtSpeed;
 
     int currHP;
+    int totalEnemies;
     bool playerInRange;
 
     Vector3 playerDir;
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.instance.UpdateEnemyDisplay(3);
+        totalEnemies += 1;
+        UIManager.instance.UpdateEnemyDisplay(totalEnemies);
     }
 
     // Update is called once per frame
