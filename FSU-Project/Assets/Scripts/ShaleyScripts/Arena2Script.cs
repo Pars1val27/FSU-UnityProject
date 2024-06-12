@@ -30,12 +30,12 @@ public class Arena2Script : MonoBehaviour
     void RandArena()
     {
         CreateRandQuad(0, 0);
-        CreateRandQuad(125, 0);
-        CreateRandQuad(0, 125);
-        CreateRandQuad(125, 125);
+        CreateRandQuad(62.5f, 0);
+        CreateRandQuad(0, 62.5f);
+        CreateRandQuad(62.5f, 62.5f);
     }
 
-    void CreateRandQuad(int x, int z)
+    void CreateRandQuad(float x, float z)
     {
         int dir = RandDir() * 90;
         GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, 1, 0, 0));
