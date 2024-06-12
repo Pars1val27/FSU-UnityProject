@@ -6,11 +6,14 @@ public class Gun : MonoBehaviour
 {
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject gun;
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] int maxAmmoCount;
     [SerializeField] float shootRate;
     [SerializeField] float reloadTime;
     [SerializeField] float grenadeThrowForce;
+
+    
 
     int currentAmmoCount;
     bool isShooting;
@@ -26,7 +29,10 @@ public class Gun : MonoBehaviour
     void Update()
     {
         if (isReloading)
+        {
             return;
+        }
+            
 
         if (Input.GetButtonDown("Fire1") && !isShooting && currentAmmoCount > 0)
         {
@@ -68,9 +74,12 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
+        Quaternion rot = gun.transform.rotation;
+        gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
-
         currentAmmoCount = maxAmmoCount;
+        gun.transform.Rotate(new Vector3(0, 0, 0));
+        gun.transform.rotation = rot;
         isReloading = false;
     }
 }
