@@ -9,11 +9,13 @@ public class Arena2Script : MonoBehaviour
     [SerializeField] GameObject[] QuadPresets;
 
     int lastDir;
+    int lastPreset;
     // Start is called before the first frame update
     void Start()
     {
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
         lastDir = 0;
+        lastPreset = -1;
         RandArena();
     }
 
@@ -33,14 +35,22 @@ public class Arena2Script : MonoBehaviour
 
     void CreateRandQuad(int x, int z)
     {
-        int dir = RandDir();
-        GameObject Quad1 = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, dir*90, 0, 0));
+        int dir = RandDir() * 90;
+        GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, dir, 0, 0));
     }
     GameObject RandPreset()
     {
-        System.Random randPreset = new System.Random();
+        //System.Random randPreset = new System.Random();
+        //int numPresets = QuadPresets.Length;
+        //int preset = randPreset.Next(0, numPresets);
+        //return QuadPresets[preset];
         int numPresets = QuadPresets.Length;
-        int preset = randPreset.Next(0, numPresets);
+        int preset = UnityEngine.Random.Range(0, numPresets);
+        if(lastPreset == preset)
+        {
+            preset = UnityEngine.Random.Range(0, numPresets);
+        }
+        lastPreset = preset;
         return QuadPresets[preset];
     }
     int RandDir()
