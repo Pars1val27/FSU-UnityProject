@@ -8,6 +8,7 @@ using UnityEditor.AI;
 public class Arena2Script : MonoBehaviour
 {
     [SerializeField] GameObject[] QuadPresets;
+    [SerializeField] EnemyManager enemyManager;
 
     int lastDir;
     int lastPreset;
