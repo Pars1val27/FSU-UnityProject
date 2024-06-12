@@ -16,19 +16,19 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int PlayerHP;
     [SerializeField] int bulletdmg;
 
-    [SerializeField] float dashCD;
+    [SerializeField] public float dashCD;
 
     int jumpCount;
     int origHP;
 
-    bool isDashing;
+    public bool isDashing;
 
-    float dashDuration = 0.2f;
+    public float dashDuration = 0.2f;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -118,7 +118,6 @@ public class PlayerController : MonoBehaviour, IDamage
     void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)PlayerHP / origHP;
-        UIManager.instance.DashCoolDownFill.fillAmount = dashCD;
     }
 
 }
