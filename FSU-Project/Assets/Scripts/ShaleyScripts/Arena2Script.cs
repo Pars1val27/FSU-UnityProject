@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+//Shaley
 
 public class Arena2Script : MonoBehaviour
 {
@@ -18,7 +19,8 @@ public class Arena2Script : MonoBehaviour
         lastPreset = -1;
         RandArena();
         gameManager.instance.surface.BuildNavMesh();
-        //EnemyManager.instance.
+        //EnemyManager.instance.enemies
+        
     }
 
     void Update()
