@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject player;
 
-
+    public GameObject[] enemies;
     // Start is called before the first frame update
     void Awake()
     {
