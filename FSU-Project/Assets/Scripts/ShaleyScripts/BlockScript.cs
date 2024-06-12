@@ -22,11 +22,11 @@ public class BlockScript : MonoBehaviour
         int preset = rand.Next(1, 4);
         if (preset == 1)
         {
-            this.gameObject.transform.position += new Vector3(0, 10, 0);
+            this.gameObject.transform.position += new Vector3(0, 25, 0);
         }
         else if (preset == 2)
         {
-            this.gameObject.transform.position += new Vector3(0, 20, 0);
+            this.gameObject.transform.position += new Vector3(0, 50, 0);
         }
         else { }
     }
