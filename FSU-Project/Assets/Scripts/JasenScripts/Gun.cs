@@ -74,12 +74,15 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
-        Quaternion rot = gun.transform.rotation;
+        Quaternion rot;
+        Vector3 pos;
+        gun.transform.GetLocalPositionAndRotation(out pos, out rot);
         gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
         currentAmmoCount = maxAmmoCount;
         gun.transform.Rotate(new Vector3(0, 0, 0));
-        gun.transform.rotation = rot;
+        gun.transform.localPosition = pos;
+        gun.transform.localRotation = rot;
         isReloading = false;
     }
 }
