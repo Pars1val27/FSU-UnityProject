@@ -38,8 +38,9 @@ public class Arena2Script : MonoBehaviour
     void CreateRandQuad(float x, float z)
     {
         int dir = RandDir() * 90;
-        GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, 1, 0, 0));
-        //Quad.transform.
+        GameObject Quad = Instantiate(RandPreset());
+        Quad.transform.localPosition = new Vector3(x, 0, z);
+        Quad.transform.localEulerAngles = new Vector3(0, dir, 0);
     }
     GameObject RandPreset()
     {
