@@ -8,10 +8,11 @@ using UnityEngine;
 public class Arena2Script : MonoBehaviour
 {
     [SerializeField] GameObject[] QuadPresets;
-    [SerializeField] EnemyManager enemyManager;
+    [SerializeField] GameObject[] SpawnPos;
 
     int lastDir;
     int lastPreset;
+    int lastEnemy;
 
     void Start()
     {
@@ -20,8 +21,7 @@ public class Arena2Script : MonoBehaviour
         lastPreset = -1;
         RandArena();
         gameManager.instance.surface.BuildNavMesh();
-        //EnemyManager.instance.enemies
-        
+        RandEnemies();
     }
 
     void Update()
@@ -35,6 +35,16 @@ public class Arena2Script : MonoBehaviour
         CreateRandQuad(62.5f, 0);
         CreateRandQuad(0, 62.5f);
         CreateRandQuad(62.5f, 62.5f);
+    }
+
+    void RandEnemies()
+    {
+
+        Instantiate(EnemyManager.instance.enemies[0], SpawnPos[0].transform);
+        for (int i = 1; i < SpawnPos.Length; ++i)
+        {
+            Instantiate(RandEnemy(), SpawnPos[i].transform);
+        }
     }
 
     void CreateRandQuad(float x, float z)
@@ -66,5 +76,14 @@ public class Arena2Script : MonoBehaviour
         return dir * 90;
     }
 
-
+    GameObject RandEnemy()
+    {
+        int enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
+        if(lastEnemy == enemy)
+        {
+            enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
+        }
+        lastEnemy = enemy;
+        return EnemyManager.instance.enemies[enemy];
+    }
 }
