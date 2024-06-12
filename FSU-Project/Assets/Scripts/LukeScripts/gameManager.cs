@@ -8,11 +8,11 @@ public class gameManager : MonoBehaviour
 {
     public static gameManager instance;
 
-    public NavMeshSurface mesh;
+    public NavMeshSurface surface;
     // Start is called before the first frame update
     void Awake()
     {
-        
+        instance = this;
     }
 
     // Update is called once per frame

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEditor.AI;
 
 public class Arena2Script : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Arena2Script : MonoBehaviour
         lastDir = 0;
         lastPreset = -1;
         RandArena();
+        gameManager.instance.surface.BuildNavMesh();
     }
 
     // Update is called once per frame
@@ -36,7 +38,7 @@ public class Arena2Script : MonoBehaviour
     void CreateRandQuad(int x, int z)
     {
         int dir = RandDir() * 90;
-        GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, dir, 0, 0));
+        GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, 1, 0, 0));
     }
     GameObject RandPreset()
     {
