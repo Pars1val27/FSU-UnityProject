@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 5
   agent: {fileID: 7764598650618861331}
   faceTaregtSpeed: 10
 --- !u!114 &4348472145347803749
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 1046810298608582495}
-  shootRate: 4
+  shootRate: 1
   projectile: {fileID: 2512350404852353110, guid: ea762609097156f4eb048459f3a21062, type: 3}
 --- !u!33 &434863627186335722
 MeshFilter:

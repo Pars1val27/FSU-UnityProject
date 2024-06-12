@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 3
   agent: {fileID: 7764598650618861331}
   faceTaregtSpeed: 20
 --- !u!33 &434863627186335722
@@ -544,7 +544,7 @@ MonoBehaviour:
   shootPos2: {fileID: 6339011585455824710}
   shootPos3: {fileID: 8300135253405953893}
   shootPos4: {fileID: 4448800177411390192}
-  shootRate: 1
+  shootRate: 3
   projectile: {fileID: 8048136264307098328, guid: b7433dcd27562d34ca3e00dd3765f7cc, type: 3}
 --- !u!23 &5623109574102055359
 MeshRenderer:
@@ -625,7 +625,7 @@ NavMeshAgent:
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 900
-  m_StoppingDistance: 4
+  m_StoppingDistance: 8
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
