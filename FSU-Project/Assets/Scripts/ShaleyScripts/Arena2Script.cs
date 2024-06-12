@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
-using UnityEditor.AI;
 
 public class Arena2Script : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class Arena2Script : MonoBehaviour
 
     int lastDir;
     int lastPreset;
-    // Start is called before the first frame update
+
     void Start()
     {
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
@@ -19,9 +18,9 @@ public class Arena2Script : MonoBehaviour
         lastPreset = -1;
         RandArena();
         gameManager.instance.surface.BuildNavMesh();
+        //EnemyManager.instance.
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -37,17 +36,13 @@ public class Arena2Script : MonoBehaviour
 
     void CreateRandQuad(float x, float z)
     {
-        int dir = RandDir() * 90;
+        int dir = RandDir();
         GameObject Quad = Instantiate(RandPreset());
         Quad.transform.localPosition = new Vector3(x, 0, z);
         Quad.transform.localEulerAngles = new Vector3(0, dir, 0);
     }
     GameObject RandPreset()
     {
-        //System.Random randPreset = new System.Random();
-        //int numPresets = QuadPresets.Length;
-        //int preset = randPreset.Next(0, numPresets);
-        //return QuadPresets[preset];
         int numPresets = QuadPresets.Length;
         int preset = UnityEngine.Random.Range(0, numPresets);
         if(lastPreset == preset)
@@ -65,7 +60,7 @@ public class Arena2Script : MonoBehaviour
             dir = UnityEngine.Random.Range(-1, 3);
         }
         lastDir = dir;
-        return dir;
+        return dir * 90;
     }
 
 
