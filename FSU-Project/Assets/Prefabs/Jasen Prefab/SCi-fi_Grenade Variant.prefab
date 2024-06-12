@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3336378095999741144}
-  - component: {fileID: 3374448209544140001}
   - component: {fileID: 6723787532139959807}
   - component: {fileID: 7721449761200909309}
   - component: {fileID: 8575371090880626016}
@@ -38,25 +37,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3374448209544140001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2468988000391874424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea8510b687581b74ba0bc2eef5c311b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootPos: {fileID: 0}
-  bullet: {fileID: 0}
-  grenadePrefab: {fileID: 0}
-  maxAmmoCount: 0
-  shootRate: 0
-  reloadTime: 0
-  grenadeThrowForce: 0
 --- !u!33 &6723787532139959807
 MeshFilter:
   m_ObjectHideFlags: 0
