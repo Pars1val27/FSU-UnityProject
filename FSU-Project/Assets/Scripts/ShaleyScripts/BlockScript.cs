@@ -7,6 +7,17 @@ public class BlockScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        moveBlockRand();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    void moveBlockRand()
+    {
         System.Random rand = new System.Random();
         int preset = rand.Next(1, 4);
         if (preset == 1)
@@ -18,11 +29,5 @@ public class BlockScript : MonoBehaviour
             this.gameObject.transform.position += new Vector3(0, 20, 0);
         }
         else { }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
