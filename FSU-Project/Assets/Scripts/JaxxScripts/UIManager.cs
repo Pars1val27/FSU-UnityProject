@@ -25,7 +25,7 @@ public class UIManager : MonoBehaviour
 
     int enemyCount;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         instance = this;
     }

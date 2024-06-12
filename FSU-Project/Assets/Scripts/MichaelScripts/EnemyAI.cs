@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-       
+        UIManager.instance.UpdateEnemyDisplay(3);
     }
 
     // Update is called once per frame
@@ -38,6 +38,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
         if(HP <= 0)
         {
+            UIManager.instance.UpdateEnemyDisplay(-1);
             Destroy(gameObject);
         }
     }
