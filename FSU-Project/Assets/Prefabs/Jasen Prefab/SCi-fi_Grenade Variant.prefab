@@ -47,13 +47,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2468988000391874424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d57e52a58635ee44e94bf8009d031f8d, type: 3}
+  m_Script: {fileID: 11500000, guid: ea8510b687581b74ba0bc2eef5c311b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 3
-  explosionRadius: 5
-  explosionForce: 700
-  explosionEffect: {fileID: 1245150629575113299}
+  shootPos: {fileID: 0}
+  bullet: {fileID: 0}
+  grenadePrefab: {fileID: 0}
+  maxAmmoCount: 0
+  shootRate: 0
+  reloadTime: 0
+  grenadeThrowForce: 0
 --- !u!33 &6723787532139959807
 MeshFilter:
   m_ObjectHideFlags: 0
