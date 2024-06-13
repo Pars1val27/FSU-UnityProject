@@ -262,6 +262,7 @@ MonoBehaviour:
   - {fileID: 2587100189705838034, guid: 8911747d770114043b28c5946b2aa401, type: 3}
   - {fileID: 670559891876075552, guid: 17e77de3fbd46dc4488159fb91e5ecad, type: 3}
   - {fileID: 7289234619955648525, guid: 312e019db28db0740a43a1647bdb6ee4, type: 3}
+  - {fileID: 5890661170444857827, guid: 3a9baefe91ac426488828ef5c6f0eb5d, type: 3}
   SpawnPos: []
 --- !u!114 &618603675479648443
 MonoBehaviour:
