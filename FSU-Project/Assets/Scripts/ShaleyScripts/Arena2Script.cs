@@ -28,13 +28,19 @@ public class Arena2Script : MonoBehaviour
     {
         
     }
-
+    
     void RandArena()
     {
-        CreateRandQuad(0, 0);
-        CreateRandQuad(62.5f, 0);
-        CreateRandQuad(0, 62.5f);
-        CreateRandQuad(62.5f, 62.5f);
+        CreateRandQuad(0, 0); //top left
+        CreateRandQuad(125, 0); //top right
+        CreateRandQuad(62.5f, 0); //top middle
+        CreateRandQuad(0, 62.5f); //middle left
+        CreateRandQuad(62.5f, 62.5f); //middle middle
+        CreateRandQuad(125, 62.5f); //middle right
+        CreateRandQuad(0, 125); //bottom left
+        CreateRandQuad(125, 125); //bottom right
+        CreateRandQuad(62.5f, 125); //bottom middle
+
     }
 
     void RandEnemies()

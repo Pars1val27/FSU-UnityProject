@@ -216,7 +216,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1001 &1539113990
+--- !u!1001 &478025470
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -267,6 +267,10 @@ PrefabInstance:
     - target: {fileID: 2948477570116705585, guid: 31d4b29830217bb49ae210e6258b7e13, type: 3}
       propertyPath: m_Name
       value: Arena2.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948477570116705585, guid: 31d4b29830217bb49ae210e6258b7e13, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -423,4 +427,4 @@ SceneRoots:
   - {fileID: 1707865814}
   - {fileID: 193299914}
   - {fileID: 1590187153}
-  - {fileID: 1539113990}
+  - {fileID: 478025470}
