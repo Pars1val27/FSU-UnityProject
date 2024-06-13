@@ -23,9 +23,7 @@ public class EnemyMeleeAttack : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other)
-    {
-
-        Debug.Log("is attacking");
+    { 
         if ((Time.time - SavedTime) > AttackRate && other.tag == "Player")
         {
             SavedTime = Time.time;

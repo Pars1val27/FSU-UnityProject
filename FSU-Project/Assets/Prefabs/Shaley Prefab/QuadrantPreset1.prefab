@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2882967842705351339, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e24ec3fc918a4a541a08bd95fbf5c2d4, type: 2}
     - target: {fileID: 6209711766292385993, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
       propertyPath: m_Name
       value: QuadrantFloor
