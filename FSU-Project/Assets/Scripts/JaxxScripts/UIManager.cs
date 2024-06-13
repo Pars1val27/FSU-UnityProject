@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
             {
                 stateUnpause();
             }
-        }
+        }/*
         if(playerInstance.isDashing)
         {
             DashCDRemaining = playerInstance.dashCD;
@@ -56,7 +56,7 @@ public class UIManager : MonoBehaviour
                 DashCDRemaining -= DashCDRemaining;
                 DashCoolDownFill.fillAmount = DashCDRemaining/ playerInstance.dashCD;
             }
-        }
+        }*/
     }
 
     public void statePause()
