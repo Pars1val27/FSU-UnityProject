@@ -22,7 +22,6 @@ public class EnemyRangedAttack : MonoBehaviour
     {
         if (isShooting == false)
         {
-            
             StartCoroutine(shoot());
         }
     }

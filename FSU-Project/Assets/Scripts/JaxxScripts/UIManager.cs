@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
     {
         statePause();
         menuActive = menuLose;
-        menuActive.SetActive(gamePause);
+        menuActive.SetActive(true);
     }
    
 }

@@ -275,7 +275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 5
   agent: {fileID: 7764598650618861331}
-  faceTaregtSpeed: 10
+  faceTaregtSpeed: 7
 --- !u!114 &4348472145347803749
 MonoBehaviour:
   m_ObjectHideFlags: 0
