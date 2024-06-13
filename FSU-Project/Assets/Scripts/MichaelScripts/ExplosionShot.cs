@@ -25,7 +25,7 @@ public class ExplosiveShot : MonoBehaviour
 
         IDamage dmg = other.GetComponent<IDamage>();
 
-        if (dmg != null)
+        if (dmg != null && other.tag == "Player")
         {
             dmg.TakeDamage(damage);
         }
