@@ -18,10 +18,12 @@ public class UIManager : MonoBehaviour
 
     public Image playerHPBar;
     public Image DashCoolDownFill;
+    static PlayerController playerInstance;
 
 
     public bool gamePause;
     public bool crosshairActive;
+    public float DashCDRemaining;
 
     int enemyCount;
     // Start is called before the first frame update
@@ -44,6 +46,15 @@ public class UIManager : MonoBehaviour
             else if(menuActive == menuPause)
             {
                 stateUnpause();
+            }
+        }
+        if(playerInstance.isDashing)
+        {
+            DashCDRemaining = playerInstance.dashCD;
+            while(DashCDRemaining > 0)
+            {
+                DashCDRemaining -= DashCDRemaining;
+                DashCoolDownFill.fillAmount = DashCDRemaining/ playerInstance.dashCD;
             }
         }
     }
