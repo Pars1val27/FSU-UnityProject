@@ -253,7 +253,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: -0.27}
-  m_LocalScale: {x: 4, y: 3, z: 4}
+  m_LocalScale: {x: 5, y: 4, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1913988406034942888}
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 10
+  HP: 5
   agent: {fileID: 7764598650618861331}
   faceTaregtSpeed: 10
 --- !u!114 &4348472145347803749
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 1046810298608582495}
-  shootRate: 4
+  shootRate: 5
   projectile: {fileID: 2512350404852353110, guid: ea762609097156f4eb048459f3a21062, type: 3}
 --- !u!33 &434863627186335722
 MeshFilter:
@@ -356,11 +356,11 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 16
+  m_Radius: 0.48
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

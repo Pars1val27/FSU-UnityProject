@@ -3,23 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+//Shaley
 
 public class Arena2Script : MonoBehaviour
 {
     [SerializeField] GameObject[] QuadPresets;
+    [SerializeField] GameObject[] SpawnPos;
 
     int lastDir;
     int lastPreset;
-    // Start is called before the first frame update
+    int lastEnemy;
+
     void Start()
     {
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
         lastDir = 0;
         lastPreset = -1;
         RandArena();
+        gameManager.instance.surface.BuildNavMesh();
+        RandEnemies();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -28,22 +32,30 @@ public class Arena2Script : MonoBehaviour
     void RandArena()
     {
         CreateRandQuad(0, 0);
-        CreateRandQuad(250, 0);
-        CreateRandQuad(0, 250);
-        CreateRandQuad(250, 250);
+        CreateRandQuad(62.5f, 0);
+        CreateRandQuad(0, 62.5f);
+        CreateRandQuad(62.5f, 62.5f);
     }
 
-    void CreateRandQuad(int x, int z)
+    void RandEnemies()
     {
-        int dir = RandDir() * 90;
-        GameObject Quad = Instantiate(RandPreset(), new Vector3(x, 0, z), new Quaternion(0, dir, 0, 0));
+
+        Instantiate(EnemyManager.instance.enemies[0], SpawnPos[0].transform);
+        for (int i = 1; i < SpawnPos.Length; ++i)
+        {
+            Instantiate(RandEnemy(), SpawnPos[i].transform);
+        }
+    }
+
+    void CreateRandQuad(float x, float z)
+    {
+        int dir = RandDir();
+        GameObject Quad = Instantiate(RandPreset());
+        Quad.transform.localPosition = new Vector3(x, 0, z);
+        Quad.transform.localEulerAngles = new Vector3(0, dir, 0);
     }
     GameObject RandPreset()
     {
-        //System.Random randPreset = new System.Random();
-        //int numPresets = QuadPresets.Length;
-        //int preset = randPreset.Next(0, numPresets);
-        //return QuadPresets[preset];
         int numPresets = QuadPresets.Length;
         int preset = UnityEngine.Random.Range(0, numPresets);
         if(lastPreset == preset)
@@ -61,8 +73,17 @@ public class Arena2Script : MonoBehaviour
             dir = UnityEngine.Random.Range(-1, 3);
         }
         lastDir = dir;
-        return dir;
+        return dir * 90;
     }
 
-
+    GameObject RandEnemy()
+    {
+        int enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
+        if(lastEnemy == enemy)
+        {
+            enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
+        }
+        lastEnemy = enemy;
+        return EnemyManager.instance.enemies[enemy];
+    }
 }
