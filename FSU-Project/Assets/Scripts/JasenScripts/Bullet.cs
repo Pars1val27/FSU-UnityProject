@@ -22,6 +22,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.isTrigger)
             return;
+        if (other.tag == "Player")
+            return;
         IDamage dmg = other.GetComponent<IDamage>();
         if (dmg != null)
         {
