@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+//Arc Calculation
+//(player transform - transform) + new Vector3(0,arc,0) * speed (speed = 3, arc = 2)
 public class LobbedAttack : MonoBehaviour
 {
     //Michael

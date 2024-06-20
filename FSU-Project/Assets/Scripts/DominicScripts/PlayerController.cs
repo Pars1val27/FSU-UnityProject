@@ -5,26 +5,37 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour, IDamage
 {
     
+
     [SerializeField] CharacterController controller;
-    
-    
-    [SerializeField] PlayerClass playerClass;
-
-
+    //[SerializeField] PlayerClass playerClass;
+    [SerializeField] GameObject classWeapon;
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
     [SerializeField] int dashMod;
     [SerializeField] int jumpMax;
     [SerializeField] int jumpSpeed;
-    [SerializeField] int gravtiy;
+    [SerializeField] int climbSpeed;
+    [SerializeField] int gravity;
     [SerializeField] int PlayerHP;
-    [SerializeField] int bulletdmg;
+    [SerializeField] GameObject muzzleFlash;
+
+    [SerializeField] int shootDmg;
+    [SerializeField] int shootRate;
+    [SerializeField] int shootDist;
+
+    [SerializeField] Transform climbPos;
 
     [SerializeField] public float dashCD;
 
     int jumpCount;
+    int origSpeed;
     int origHP;
+    int origGravity;
 
+    bool isShooting;
+    bool isClimbing;
+
+    public bool isSprinting;
     public bool isDashing;
 
     public float dashDuration = 0.2f;
@@ -36,7 +47,9 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        origSpeed = speed;
         origHP = PlayerHP;
+        origGravity = gravity;
     }
 
     // Update is called once per frame
@@ -44,6 +57,11 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         Movement();
         Sprint();
+        wallClimb();
+        if (Input.GetButtonDown("Fire1"))
+        {
+            StartCoroutine(shoot());
+        }
         if(Input.GetButton("Dash") && !isDashing)   
         {
             StartCoroutine(Dash());
@@ -75,7 +93,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 playerVelocity.y = (jumpSpeed * 1.5f);
             }
         }
-        playerVelocity.y -= gravtiy * Time.deltaTime;
+        playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
@@ -83,11 +101,39 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (Input.GetButtonDown("Sprint"))
         {
+            isSprinting = true;
             speed *= sprintMod;
         }else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
+            isSprinting = false;
         }
+    }
+
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        StartCoroutine(flashMuzzle());
+        RaycastHit hit;
+        if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
+        {
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            if(hit.transform != transform && dmg != null)
+            {
+                dmg.TakeDamage(shootDmg);
+            }
+        }
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+    }
+
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        muzzleFlash.SetActive(false);
     }
 
     public void TakeDamage(int dmg)
@@ -104,9 +150,8 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         isDashing = true;
-
-
         speed *= dashMod;
+
         StartCoroutine(DashDuration());
 
         yield return new WaitForSeconds(dashCD);
@@ -116,12 +161,40 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator DashDuration()
     {
         yield return new WaitForSeconds(dashDuration);
+
         speed /= dashMod;
+
     }
 
     void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)PlayerHP / origHP;
+    }
+
+    void wallClimb()
+    {
+        isClimbing = false;
+
+        Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
+        
+
+        RaycastHit hit;
+        if(Physics.Raycast(climbPos.position + new Vector3 (0,0,0), Camera.main.transform.forward, out hit , 2))
+        {
+            if(hit.collider.CompareTag("Climbable"))
+            {
+                Debug.Log(hit.collider.name);
+
+                isClimbing = true;
+                playerVelocity.y = climbSpeed;
+                gravity = 0;
+
+            }
+
+            isClimbing = false;
+            gravity = origGravity;
+
+        }
     }
 
 }
