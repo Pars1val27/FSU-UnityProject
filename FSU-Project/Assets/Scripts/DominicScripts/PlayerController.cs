@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int dashMod;
     [SerializeField] int jumpMax;
     [SerializeField] int jumpSpeed;
+    [SerializeField] int climbSpeed;
     [SerializeField] int gravity;
     [SerializeField] int PlayerHP;
     [SerializeField] GameObject muzzleFlash;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         Movement();
         Sprint();
-        //wallClimb();
+        wallClimb();
         if (Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(shoot());
@@ -170,21 +171,22 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.playerHPBar.fillAmount = (float)PlayerHP / origHP;
     }
 
-/*    void wallClimb()
+    void wallClimb()
     {
         isClimbing = false;
 
-        Debug.DrawRay(climbPos.position, Camera.main.transform.forward);
+        Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
         
 
         RaycastHit hit;
-        if(Physics.Raycast(climbPos.position, Camera.main.transform.forward, out hit))
+        if(Physics.Raycast(climbPos.position + new Vector3 (0,0,0), Camera.main.transform.forward, out hit , 2))
         {
             if(hit.collider.CompareTag("Climbable"))
             {
-                Debug.Log(hit.transform.name);
+                Debug.Log(hit.collider.name);
 
                 isClimbing = true;
+                playerVelocity.y = climbSpeed;
                 gravity = 0;
 
             }
@@ -193,6 +195,6 @@ public class PlayerController : MonoBehaviour, IDamage
             gravity = origGravity;
 
         }
-    }*/
+    }
 
 }
