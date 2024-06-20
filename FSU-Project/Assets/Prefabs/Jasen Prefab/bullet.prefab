@@ -50,7 +50,7 @@ MonoBehaviour:
   rb: {fileID: 7408463582375656683}
   damage: 1
   speed: 50
-  destroyTime: 5
+  destroyTime: 1
 --- !u!96 &3373436271336536182
 TrailRenderer:
   serializedVersion: 3

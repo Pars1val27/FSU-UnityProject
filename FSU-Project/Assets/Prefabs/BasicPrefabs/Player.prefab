@@ -35,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8473325563995612572}
+  - {fileID: 7363826527936653248}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9044953428541941548
@@ -123,16 +124,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 877574397350160705}
-  speed: 5
-  sprintMod: 3
-  dashMod: 5
+  speed: 16
+  sprintMod: 2
+  dashMod: 3
   jumpMax: 2
-  jumpSpeed: 8
-  gravtiy: 22
+  jumpSpeed: 15
+  gravity: 45
   PlayerHP: 10
   bulletdmg: 1
+  climbSpeed: 0
+  shootDmg: 1
+  shootRate: 1
+  shootDist: 100
+  climbPos: {fileID: 7363826527936653248}
   dashCD: 5
+  isSprinting: 0
   isDashing: 0
+  isClimbing: 0
   dashDuration: 0.2
 --- !u!143 &877574397350160705
 CharacterController:
@@ -160,7 +168,7 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &6436027978982961119
+--- !u!1 &3636845196230738340
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,28 +176,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 205847655670268802}
+  - component: {fileID: 7363826527936653248}
   m_Layer: 0
-  m_Name: ShootPos
+  m_Name: climbPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &205847655670268802
+--- !u!4 &7363826527936653248
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6436027978982961119}
+  m_GameObject: {fileID: 3636845196230738340}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.049531277, y: 0.053712495, z: -0.0017285249, w: 0.9973258}
-  m_LocalPosition: {x: -0.001, y: 0.135, z: 0.677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5279401896257973656}
+  m_Father: {fileID: 4399157211463977879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7287157294324660982
 GameObject:
@@ -297,7 +305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9069a2d0585b8e408d333b0bf4f942c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sens: 200
+  sens: 150
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
@@ -317,10 +325,6 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 4556737859529640996, guid: 24052569765b2844c8a570be1c7a8ce3, type: 3}
-    - target: {fileID: 378615793773045441, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
-      propertyPath: shootPos
-      value: 
-      objectReference: {fileID: 205847655670268802}
     - target: {fileID: 378615793773045441, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
       propertyPath: shootRate
       value: 0.5
@@ -385,12 +389,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SciFiGunLightRad
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 3476449095480867514, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 205847655670268802}
+    m_RemovedComponents:
+    - {fileID: 378615793773045441, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 262501236037999271, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2c48d378c33c3642a2cf2788ebf7c9e, type: 3}
 --- !u!1 &633156840698171966 stripped

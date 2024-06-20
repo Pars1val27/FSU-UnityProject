@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8423239177263318764}
   m_Layer: 0
   m_Name: ColumnTall
-  m_TagString: Untagged
+  m_TagString: Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
