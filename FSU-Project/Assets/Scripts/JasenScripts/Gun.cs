@@ -2,27 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class GunScript : MonoBehaviour
 {
-    [SerializeField] Transform shootPos;
-    [SerializeField] GameObject bullet;
+    [SerializeField] PlayerClass Gunner;
+    [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject grenadePrefab;
-    [SerializeField] int maxAmmoCount;
+    [SerializeField] int shootDamage;
+    [SerializeField] int shootDist;
+    [SerializeField] int currAmmo;
+    [SerializeField] int maxAmmo;
     [SerializeField] float shootRate;
     [SerializeField] float reloadTime;
     [SerializeField] float grenadeThrowForce;
-
     
-
-    int currentAmmoCount;
     bool isShooting;
     bool isReloading;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentAmmoCount = maxAmmoCount;
+        currAmmo = maxAmmo;
     }
 
     // Update is called once per frame
@@ -34,7 +34,7 @@ public class Gun : MonoBehaviour
         }
             
 
-        if (Input.GetButtonDown("Fire1") && !isShooting && currentAmmoCount > 0)
+        if (Input.GetButtonDown("Fire1") && !isShooting && currAmmo > 0)
         {
             StartCoroutine(Shoot());
         }
@@ -44,7 +44,7 @@ public class Gun : MonoBehaviour
             ThrowGrenade();
         }
 
-        if (currentAmmoCount <= 0 && !isReloading)
+        if (currAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
@@ -53,9 +53,22 @@ public class Gun : MonoBehaviour
     IEnumerator Shoot()
     {
         isShooting = true;
+        RaycastHit hit;
 
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        currentAmmoCount--;
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist))
+        {
+
+            IDamage dmg = hit.collider.GetComponent<IDamage>();
+
+            if (hit.transform != transform && dmg != null)
+            {
+                dmg.TakeDamage(shootDamage);
+            }
+
+        }
+
+
+        currAmmo--;
 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
@@ -63,11 +76,11 @@ public class Gun : MonoBehaviour
 
     void ThrowGrenade()
     {
-        GameObject grenade = Instantiate(grenadePrefab, shootPos.position, shootPos.rotation);
+        GameObject grenade = Instantiate(grenadePrefab, GrenadePos.position, GrenadePos.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(shootPos.forward * grenadeThrowForce, ForceMode.VelocityChange);
+            rb.AddForce(GrenadePos.forward * grenadeThrowForce, ForceMode.VelocityChange);
         }
     }
 
@@ -79,7 +92,7 @@ public class Gun : MonoBehaviour
         gun.transform.GetLocalPositionAndRotation(out pos, out rot);
         gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
-        currentAmmoCount = maxAmmoCount;
+        currAmmo = maxAmmo;
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;

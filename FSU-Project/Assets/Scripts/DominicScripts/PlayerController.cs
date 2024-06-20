@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
-
+    
     [SerializeField] CharacterController controller;
+    
+    
+    [SerializeField] PlayerClass playerClass;
+
 
     [SerializeField] int speed;
     [SerializeField] int sprintMod;
