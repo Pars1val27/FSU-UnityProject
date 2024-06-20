@@ -685,6 +685,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3629659006523887642, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
+      propertyPath: climbSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629659006523887642, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: muzzleFlash
       value: 
       objectReference: {fileID: 1111703467}

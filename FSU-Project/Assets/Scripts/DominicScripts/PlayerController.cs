@@ -55,17 +55,21 @@ public class PlayerController : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
-        Movement();
+        if (!UIManager.instance.gamePause)
+        {
+            Movement();
+            wallClimb();
+            if (Input.GetButtonDown("Fire1"))
+            {
+                StartCoroutine(shoot());
+            }
+            if (Input.GetButton("Dash") && !isDashing)
+            {
+                StartCoroutine(Dash());
+            }
+        }
+
         Sprint();
-        wallClimb();
-        if (Input.GetButtonDown("Fire1"))
-        {
-            StartCoroutine(shoot());
-        }
-        if(Input.GetButton("Dash") && !isDashing)   
-        {
-            StartCoroutine(Dash());
-        }
     }
 
     void Movement()
