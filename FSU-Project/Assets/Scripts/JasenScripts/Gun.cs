@@ -29,7 +29,6 @@ public class GunScript : MonoBehaviour
         {
            StartCoroutine(Shoot());
 
-
         }
         if (Input.GetButtonDown("Fire3") && !isShooting)
         {
@@ -48,6 +47,7 @@ public class GunScript : MonoBehaviour
     {
         isShooting = true;
         RaycastHit hit;
+        StartCoroutine(flashMuzzle());
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.damage))
         {

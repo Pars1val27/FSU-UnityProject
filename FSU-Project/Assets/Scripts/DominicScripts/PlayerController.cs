@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerClass playerClass;
-    [SerializeField] GameObject muzzleFlash;
+    //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
     [SerializeField] public float dashCD;
