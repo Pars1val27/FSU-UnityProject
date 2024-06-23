@@ -8,35 +8,21 @@ public class GunScript : MonoBehaviour
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject grenadePrefab;
-    [SerializeField] int shootDamage;
-    [SerializeField] int shootDist;
-    [SerializeField] int currAmmo;
-    [SerializeField] int maxAmmo;
-    [SerializeField] float shootRate;
-    [SerializeField] float reloadTime;
     [SerializeField] float grenadeThrowForce;
-    
+
     bool isShooting;
     bool isReloading;
 
-    // Start is called before the first frame update
     void Start()
     {
-        currAmmo = maxAmmo;
+        Gunner.currAmmo = Gunner.maxAmmo;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (isReloading)
         {
             return;
-        }
-            
-
-        if (Input.GetButtonDown("Fire1") && !isShooting && currAmmo > 0)
-        {
-            StartCoroutine(Shoot());
         }
 
         if (Input.GetButtonDown("Fire3") && !isShooting)
@@ -44,33 +30,38 @@ public class GunScript : MonoBehaviour
             ThrowGrenade();
         }
 
-        if (currAmmo <= 0 && !isReloading)
+        if (Gunner.currAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
     }
 
-    IEnumerator Shoot()
+    public void Shoot()
+    {
+        if (!isShooting && Gunner.currAmmo > 0)
+        {
+            StartCoroutine(ShootCoroutine());
+        }
+    }
+
+    IEnumerator ShootCoroutine()
     {
         isShooting = true;
         RaycastHit hit;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, shootDist))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.damage))
         {
-
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (hit.transform != transform && dmg != null)
             {
-                dmg.TakeDamage(shootDamage);
+                dmg.TakeDamage(Gunner.damage);
             }
-
         }
 
+        Gunner.currAmmo--;
 
-        currAmmo--;
-
-        yield return new WaitForSeconds(shootRate);
+        yield return new WaitForSeconds(Gunner.shootRate);
         isShooting = false;
     }
 
@@ -91,8 +82,8 @@ public class GunScript : MonoBehaviour
         Vector3 pos;
         gun.transform.GetLocalPositionAndRotation(out pos, out rot);
         gun.transform.Rotate(new Vector3(300, 0, 0));
-        yield return new WaitForSeconds(reloadTime);
-        currAmmo = maxAmmo;
+        yield return new WaitForSeconds(Gunner.reloadTime);
+        Gunner.currAmmo = Gunner.maxAmmo;
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;

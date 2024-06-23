@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c7b73d6da2b65408331ca1dc9ef95d, type: 3}
   m_Name: MeleeClass
   m_EditorClassIdentifier: 
-  className: 
+  classWeapon: {fileID: 0}
   speed: 1
   sprintMod: 1
   dashMod: 1
@@ -20,4 +20,12 @@ MonoBehaviour:
   jumpSpeed: 1
   gravity: 1
   playerHP: 1
-  bulletDmg: 1
+  damage: 1
+  attackSpeed: 1
+  maxAmmo: 1
+  shootRate: 0.1
+  reloadTime: 0.5
+  delay: 0
+  explosionRadius: 5
+  explosionForce: 50
+  explosionDamage: 5

@@ -7,25 +7,29 @@ public class PlayerController : MonoBehaviour, IDamage
     
 
     [SerializeField] CharacterController controller;
-    //[SerializeField] PlayerClass playerClass;
+    [SerializeField] PlayerClass playerClass;
     [SerializeField] GameObject classWeapon;
-    [SerializeField] int speed;
-    [SerializeField] int sprintMod;
+    [SerializeField] GunScript gunScript;
+    [SerializeField] GameObject muzzleFlash;
+    [SerializeField] Transform climbPos;
+    [SerializeField] public float dashCD;
+
+    //[SerializeField] int PlayerHP;
+    //[SerializeField] int speed;
+    //[SerializeField] int sprintMod;
     [SerializeField] int dashMod;
-    [SerializeField] int jumpMax;
+    //[SerializeField] int jumpMax;
     [SerializeField] int jumpSpeed;
     [SerializeField] int climbSpeed;
     [SerializeField] int gravity;
-    [SerializeField] int PlayerHP;
-    [SerializeField] GameObject muzzleFlash;
+    
+    
 
-    [SerializeField] int shootDmg;
-    [SerializeField] int shootRate;
-    [SerializeField] int shootDist;
+   // [SerializeField] int shootDmg;
+   // [SerializeField] int shootRate;
+   // [SerializeField] int shootDist;
 
-    [SerializeField] Transform climbPos;
 
-    [SerializeField] public float dashCD;
 
     int jumpCount;
     int origSpeed;
@@ -47,8 +51,8 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
-        origSpeed = speed;
-        origHP = PlayerHP;
+        origSpeed = playerClass.speed;
+        origHP = playerClass.playerHP;
         origGravity = gravity;
     }
 
@@ -60,9 +64,11 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         if (Input.GetButtonDown("Fire1"))
         {
-            StartCoroutine(shoot());
+            //StartCoroutine(shoot());
+            gunScript.Shoot();
         }
-        if(Input.GetButton("Dash") && !isDashing)   
+
+        if (Input.GetButton("Dash") && !isDashing)   
         {
             StartCoroutine(Dash());
         }
@@ -77,9 +83,9 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDirection * speed *  Time.deltaTime);
+        controller.Move(moveDirection * playerClass.speed *  Time.deltaTime);
         
-        if(Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if(Input.GetButtonDown("Jump") && jumpCount < playerClass.jumpMax)
         {
             if (jumpCount == 0)
             {
@@ -102,15 +108,15 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             isSprinting = true;
-            speed *= sprintMod;
+            playerClass.speed *= playerClass.sprintMod;
         }else if (Input.GetButtonUp("Sprint"))
         {
-            speed /= sprintMod;
+            playerClass.speed /= playerClass.sprintMod;
             isSprinting = false;
         }
     }
 
-    IEnumerator shoot()
+    /*IEnumerator shoot()
     {
         isShooting = true;
         StartCoroutine(flashMuzzle());
@@ -127,7 +133,7 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
-    }
+    }*/
 
     IEnumerator flashMuzzle()
     {
@@ -138,10 +144,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
-        PlayerHP -= dmg;
+        playerClass.playerHP -= dmg;
         UpdatePlayerUI();
 
-        if(PlayerHP <= 0)
+        if(playerClass.playerHP <= 0)
         {
             UIManager.instance.onLose();
         }
@@ -150,7 +156,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         isDashing = true;
-        speed *= dashMod;
+        playerClass.speed *= dashMod;
 
         StartCoroutine(DashDuration());
 
@@ -162,13 +168,13 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(dashDuration);
 
-        speed /= dashMod;
+        playerClass.speed /= dashMod;
 
     }
 
     void UpdatePlayerUI()
     {
-        UIManager.instance.playerHPBar.fillAmount = (float)PlayerHP / origHP;
+        UIManager.instance.playerHPBar.fillAmount = (float)playerClass.playerHP / origHP;
     }
 
     void wallClimb()
