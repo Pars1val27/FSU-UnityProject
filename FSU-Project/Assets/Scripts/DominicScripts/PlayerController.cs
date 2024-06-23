@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
-    
+
 
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerClass playerClass;
-    [SerializeField] GameObject classWeapon;
-    [SerializeField] GunScript gunScript;
     [SerializeField] GameObject muzzleFlash;
+    [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
     [SerializeField] public float dashCD;
 
@@ -22,12 +21,12 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int jumpSpeed;
     [SerializeField] int climbSpeed;
     [SerializeField] int gravity;
-    
-    
 
-   // [SerializeField] int shootDmg;
-   // [SerializeField] int shootRate;
-   // [SerializeField] int shootDist;
+
+
+    // [SerializeField] int shootDmg;
+    // [SerializeField] int shootRate;
+    // [SerializeField] int shootDist;
 
 
 
@@ -47,13 +46,18 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 moveDirection;
     Vector3 playerVelocity;
 
-    
+
+    GameObject classWeaponInstance;
+    GunScript gunScript;
+
     // Start is called before the first frame update
     void Start()
     {
         origSpeed = playerClass.speed;
         origHP = playerClass.playerHP;
         origGravity = gravity;
+
+        EquipClassWeapon();
     }
 
     // Update is called once per frame
@@ -62,13 +66,15 @@ public class PlayerController : MonoBehaviour, IDamage
         Movement();
         Sprint();
         wallClimb();
-        if (Input.GetButtonDown("Fire1"))
+
+        /* if (Input.GetButtonDown("Fire1"))
         {
             //StartCoroutine(shoot());
-            gunScript.Shoot();
-        }
+            
+            
+        }*/
 
-        if (Input.GetButton("Dash") && !isDashing)   
+        if (Input.GetButton("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
         }
@@ -83,9 +89,9 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDirection * playerClass.speed *  Time.deltaTime);
-        
-        if(Input.GetButtonDown("Jump") && jumpCount < playerClass.jumpMax)
+        controller.Move(moveDirection * playerClass.speed * Time.deltaTime);
+
+        if (Input.GetButtonDown("Jump") && jumpCount < playerClass.jumpMax)
         {
             if (jumpCount == 0)
             {
@@ -109,13 +115,15 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             isSprinting = true;
             playerClass.speed *= playerClass.sprintMod;
-        }else if (Input.GetButtonUp("Sprint"))
+        }
+        else if (Input.GetButtonUp("Sprint"))
         {
             playerClass.speed /= playerClass.sprintMod;
             isSprinting = false;
         }
     }
 
+    //moveed to Gun.cs
     /*IEnumerator shoot()
     {
         isShooting = true;
@@ -135,19 +143,21 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
     }*/
 
-    IEnumerator flashMuzzle()
+    /*IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
-    }
+    }*/
+
+
 
     public void TakeDamage(int dmg)
     {
         playerClass.playerHP -= dmg;
         UpdatePlayerUI();
 
-        if(playerClass.playerHP <= 0)
+        if (playerClass.playerHP <= 0)
         {
             UIManager.instance.onLose();
         }
@@ -182,12 +192,12 @@ public class PlayerController : MonoBehaviour, IDamage
         isClimbing = false;
 
         Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-        
+
 
         RaycastHit hit;
-        if(Physics.Raycast(climbPos.position + new Vector3 (0,0,0), Camera.main.transform.forward, out hit , 2))
+        if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2))
         {
-            if(hit.collider.CompareTag("Climbable"))
+            if (hit.collider.CompareTag("Climbable"))
             {
                 Debug.Log(hit.collider.name);
 
@@ -203,4 +213,13 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+    void EquipClassWeapon()
+    {
+        if (playerClass.classWeapon != null)
+        {
+            classWeaponInstance = Instantiate(playerClass.classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
+            gunScript = classWeaponInstance.GetComponent<GunScript>();
+            gunScript.Gunner = playerClass; 
+        }
+    }
 }

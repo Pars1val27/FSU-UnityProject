@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewPlayerClass", menuName = "Player Class")]
 public class PlayerClass : ScriptableObject
 {
 
-    [SerializeField] GameObject classWeapon;
+    [SerializeField] public GameObject classWeapon;
+    
 
     [Header("Base Attributes")]
 

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-    [SerializeField] PlayerClass Gunner;
+    public PlayerClass Gunner;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
+    [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] float grenadeThrowForce;
 
@@ -24,7 +25,12 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
+        if (Input.GetButtonDown("Fire1"))
+        {
+           StartCoroutine(Shoot());
 
+
+        }
         if (Input.GetButtonDown("Fire3") && !isShooting)
         {
             ThrowGrenade();
@@ -36,15 +42,9 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    public void Shoot()
-    {
-        if (!isShooting && Gunner.currAmmo > 0)
-        {
-            StartCoroutine(ShootCoroutine());
-        }
-    }
+    
 
-    IEnumerator ShootCoroutine()
+    IEnumerator Shoot()
     {
         isShooting = true;
         RaycastHit hit;
@@ -88,5 +88,11 @@ public class GunScript : MonoBehaviour
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;
         isReloading = false;
+    }
+    IEnumerator flashMuzzle()
+    {
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        muzzleFlash.SetActive(false);
     }
 }
