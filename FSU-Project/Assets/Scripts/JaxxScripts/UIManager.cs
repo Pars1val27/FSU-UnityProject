@@ -13,21 +13,25 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject inerface;
 
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] public TMP_Text ammoMax;
+    [SerializeField] public TMP_Text ammoCur;
 
     public Image playerHPBar;
     public Image DashCoolDownFill;
-    static PlayerController playerInstance;
+
 
 
     public bool gamePause;
-    public bool crosshairActive;
     public float DashCDRemaining;
+    public float dashingTime;
 
     int enemyCount;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
     }
@@ -47,22 +51,14 @@ public class UIManager : MonoBehaviour
             {
                 stateUnpause();
             }
-        }/*
-        if(playerInstance.isDashing)
-        {
-            DashCDRemaining = playerInstance.dashCD;
-            while(DashCDRemaining > 0)
-            {
-                DashCDRemaining -= DashCDRemaining;
-                DashCoolDownFill.fillAmount = DashCDRemaining/ playerInstance.dashCD;
-            }
-        }*/
+        }
+        
+        
     }
 
     public void statePause()
     {
-        gamePause = !gamePause;
-        crosshairActive = !crosshairActive; 
+        gamePause = !gamePause; 
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -71,12 +67,12 @@ public class UIManager : MonoBehaviour
     public void stateUnpause()
     {
         gamePause = !gamePause;
-        crosshairActive = !crosshairActive;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(gamePause);
-        menuActive = null;
+        inerface.SetActive(true);
+        menuActive = null;  
     }
 
     public void UpdateEnemyDisplay(int amount)
@@ -99,5 +95,21 @@ public class UIManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-   
+    public void MainMenu()
+    {
+        menuActive = menuMain;
+        statePause();
+        menuActive.SetActive(gamePause);
+    }
+    
+    public void StartDashCD()
+    {
+        dashingTime = PlayerController.playerInstance.dashCD + PlayerController.playerInstance.dashDuration;
+        DashCDRemaining = dashingTime;
+            while (DashCDRemaining >= 0)
+            {
+                DashCDRemaining -= DashCDRemaining;
+                DashCoolDownFill.fillAmount = DashCDRemaining / dashingTime;
+            }
+    }
 }

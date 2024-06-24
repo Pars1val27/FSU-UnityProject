@@ -23,6 +23,8 @@ public class Gun : MonoBehaviour
     void Start()
     {
         currentAmmoCount = maxAmmoCount;
+        UpdateGunUI();
+
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class Gun : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && !isShooting && currentAmmoCount > 0)
         {
             StartCoroutine(Shoot());
+            
         }
 
         if (Input.GetButtonDown("Fire3") && !isShooting)
@@ -56,7 +59,7 @@ public class Gun : MonoBehaviour
 
         Instantiate(bullet, shootPos.position, transform.rotation);
         currentAmmoCount--;
-
+        UpdateGunUI();
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
@@ -80,9 +83,16 @@ public class Gun : MonoBehaviour
         gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
         currentAmmoCount = maxAmmoCount;
+        UpdateGunUI();
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;
         isReloading = false;
+    }
+
+    public void UpdateGunUI()
+    {
+        UIManager.instance.ammoCur.text = currentAmmoCount.ToString("F0");
+        UIManager.instance.ammoMax.text = maxAmmoCount.ToString("F0");
     }
 }

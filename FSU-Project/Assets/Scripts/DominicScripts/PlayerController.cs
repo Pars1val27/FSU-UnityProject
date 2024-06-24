@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
-
+    public static PlayerController playerInstance;
     [SerializeField] CharacterController controller;
 
     [SerializeField] int speed;
@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        playerInstance = this;
         origHP = PlayerHP;
     }
 
@@ -100,7 +101,8 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         isDashing = true;
-
+        UIManager.instance.DashCoolDownFill.fillAmount = 0;
+        UIManager.instance.StartDashCD(); 
 
         speed *= dashMod;
         StartCoroutine(DashDuration());
