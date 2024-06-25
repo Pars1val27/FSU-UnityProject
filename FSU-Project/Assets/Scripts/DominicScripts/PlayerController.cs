@@ -261,12 +261,10 @@ public class PlayerController : MonoBehaviour, IDamage
 
                 isClimbing = true;
                 playerVelocity.y = climbSpeed;
-                gravity = 0;
 
             }
 
             isClimbing = false;
-            gravity = origGravity;
 
         }
     }
