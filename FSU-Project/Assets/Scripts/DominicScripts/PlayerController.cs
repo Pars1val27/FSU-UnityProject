@@ -75,7 +75,6 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         origSpeed = playerClass.speed;
-        //origHP = playerClass.playerHP;
         origGravity = gravity;
         origFOV = FOV;
 
@@ -144,13 +143,13 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             isSprinting = true;
             playerClass.speed *= playerClass.sprintMod;
-            Camera.main.fieldOfView = Mathf.Lerp(FOV,FOVSprintMod, Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.5f * Time.deltaTime);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerClass.speed /= playerClass.sprintMod;
             isSprinting = false;
-            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.5f * Time.deltaTime);
         }
     }
 
@@ -221,9 +220,10 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         currFOV = Camera.main.fieldOfView;
+        audio.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         playerClass.speed *= playerClass.dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, Time.deltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
 
         StartCoroutine(DashDuration());
 
@@ -236,7 +236,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(dashDuration);
 
         playerClass.speed /= playerClass.dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, Time.deltaTime);           
+        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.05f * Time.deltaTime); ;          
 
     }
 
