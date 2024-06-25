@@ -9,7 +9,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] GameObject gun;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] GameObject grenadePrefab;
-    [SerializeField] float grenadeThrowForce;
+    
 
     bool isShooting;
     public bool isReloading;
@@ -72,7 +72,13 @@ public class GunScript : MonoBehaviour
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(GrenadePos.forward * grenadeThrowForce, ForceMode.VelocityChange);
+            rb.AddForce(GrenadePos.forward * Gunner.grenadeThrowForce, ForceMode.VelocityChange);
+        }
+
+        Grenade grenadeScript = grenade.GetComponent<Grenade>();
+        if (grenadeScript != null)
+        {
+            grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
         }
 
         isGrenadeReady = false;

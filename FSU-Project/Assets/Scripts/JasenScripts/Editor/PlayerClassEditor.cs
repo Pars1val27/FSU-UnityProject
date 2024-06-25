@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -22,6 +20,8 @@ public class PlayerClassEditor : Editor
     SerializedProperty currAmmo;
     SerializedProperty shootRate;
     SerializedProperty reloadTime;
+    SerializedProperty delay;
+    SerializedProperty grenadeThrowForce;
     SerializedProperty explosionRadius;
     SerializedProperty explosionForce;
     SerializedProperty explosionDamage;
@@ -40,10 +40,13 @@ public class PlayerClassEditor : Editor
         damage = serializedObject.FindProperty("damage");
         attackSpeed = serializedObject.FindProperty("attackSpeed");
 
+        showGunnerAttributes = serializedObject.FindProperty("showGunnerAttributes");
         maxAmmo = serializedObject.FindProperty("maxAmmo");
         currAmmo = serializedObject.FindProperty("currAmmo");
         shootRate = serializedObject.FindProperty("shootRate");
         reloadTime = serializedObject.FindProperty("reloadTime");
+        delay = serializedObject.FindProperty("delay");
+        grenadeThrowForce = serializedObject.FindProperty("grenadeThrowForce");
         explosionRadius = serializedObject.FindProperty("explosionRadius");
         explosionForce = serializedObject.FindProperty("explosionForce");
         explosionDamage = serializedObject.FindProperty("explosionDamage");
@@ -78,6 +81,8 @@ public class PlayerClassEditor : Editor
             EditorGUILayout.PropertyField(currAmmo);
             EditorGUILayout.PropertyField(shootRate);
             EditorGUILayout.PropertyField(reloadTime);
+            EditorGUILayout.PropertyField(delay);
+            EditorGUILayout.PropertyField(grenadeThrowForce);
             EditorGUILayout.PropertyField(explosionRadius);
             EditorGUILayout.PropertyField(explosionForce);
             EditorGUILayout.PropertyField(explosionDamage);

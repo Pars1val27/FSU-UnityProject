@@ -6,12 +6,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerClass", menuName = "Player Class")]
 public class PlayerClass : ScriptableObject
 {
-
     [SerializeField] public GameObject classWeapon;
 
-
     [Header("Base Attributes")]
-
     [Range(1, 100)]
     [SerializeField] public int playerHP;
 
@@ -40,6 +37,8 @@ public class PlayerClass : ScriptableObject
     [SerializeField] public int attackSpeed;
 
     [Header("Gunner Attributes")]
+    [SerializeField] public bool showGunnerAttributes;
+
     [Range(1, 500)]
     [SerializeField] public int maxAmmo;
     public int currAmmo;
@@ -49,6 +48,12 @@ public class PlayerClass : ScriptableObject
 
     [Range(0.5f, 5f)]
     [SerializeField] public float reloadTime;
+
+    [Range(1, 5)]
+    [SerializeField] public int delay;
+
+    [Range(3,25)]
+    [SerializeField] public float grenadeThrowForce;
 
     [Range(1f, 20f)]
     [SerializeField] public float explosionRadius = 5f;
@@ -60,6 +65,5 @@ public class PlayerClass : ScriptableObject
     [SerializeField] public int explosionDamage = 5;
 
     [Range(0.1f, 60f)]
-    [SerializeField, HideInInspector] public float grenadeRechargeRate = 5f;
+    [SerializeField] public float grenadeRechargeRate = 5f;
 }
-
