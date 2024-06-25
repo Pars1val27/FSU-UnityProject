@@ -8,7 +8,7 @@ public class PlayerClass : ScriptableObject
 {
 
     [SerializeField] public GameObject classWeapon;
-    
+
 
     [Header("Base Attributes")]
 
@@ -20,6 +20,12 @@ public class PlayerClass : ScriptableObject
 
     [Range(1, 5)]
     [SerializeField] public int sprintMod;
+
+    [Range(1, 10)]
+    [SerializeField] public float dashCD;
+
+    [Range(1, 10)]
+    [SerializeField] public int dashMod;
 
     [Range(1, 3)]
     [SerializeField] public int jumpMax;
@@ -52,5 +58,8 @@ public class PlayerClass : ScriptableObject
 
     [Range(1, 100)]
     [SerializeField] public int explosionDamage = 5;
+
+    [Range(0.1f, 60f)]
+    [SerializeField, HideInInspector] public float grenadeRechargeRate = 5f;
 }
 

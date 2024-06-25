@@ -12,7 +12,8 @@ public class GunScript : MonoBehaviour
     [SerializeField] float grenadeThrowForce;
 
     bool isShooting;
-    bool isReloading;
+    public bool isReloading;
+    public bool isGrenadeReady = true;
 
     void Start()
     {
@@ -27,7 +28,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButtonDown("Fire1"))
         {
-           StartCoroutine(Shoot());
+            StartCoroutine(Shoot());
 
         }
         if (Input.GetButtonDown("Fire3") && !isShooting)
@@ -41,7 +42,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    
+
 
     IEnumerator Shoot()
     {
@@ -73,6 +74,9 @@ public class GunScript : MonoBehaviour
         {
             rb.AddForce(GrenadePos.forward * grenadeThrowForce, ForceMode.VelocityChange);
         }
+
+        isGrenadeReady = false;
+        StartCoroutine(RechargeGrenade());
     }
 
     IEnumerator Reload()
@@ -94,5 +98,11 @@ public class GunScript : MonoBehaviour
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
+    }
+
+    IEnumerator RechargeGrenade()
+    {
+        yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
+        isGrenadeReady = true;
     }
 }

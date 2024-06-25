@@ -11,14 +11,14 @@ public class PlayerController : MonoBehaviour, IDamage
     //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
-    [SerializeField] public float dashCD;
+    //[SerializeField] public float dashCD;
 
     //[SerializeField] int PlayerHP;
     //[SerializeField] int speed;
     //[SerializeField] int sprintMod;
-    [SerializeField] int dashMod;
+    //[SerializeField] int dashMod;
     //[SerializeField] int jumpMax;
-    [SerializeField] int jumpSpeed;
+    //[SerializeField] int jumpSpeed;
     [SerializeField] int climbSpeed;
     [SerializeField] int gravity;
 
@@ -66,7 +66,8 @@ public class PlayerController : MonoBehaviour, IDamage
         Movement();
         Sprint();
         wallClimb();
-
+        
+        //handled in gun.cs
         /* if (Input.GetButtonDown("Fire1"))
         {
             //StartCoroutine(shoot());
@@ -96,13 +97,13 @@ public class PlayerController : MonoBehaviour, IDamage
             if (jumpCount == 0)
             {
                 jumpCount++;
-                playerVelocity.y = jumpSpeed;
+                playerVelocity.y = playerClass.jumpSpeed;
             }
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
                 jumpCount++;
-                playerVelocity.y = (jumpSpeed * 1.5f);
+                playerVelocity.y = (playerClass.jumpSpeed * 1.5f);
             }
         }
         playerVelocity.y -= gravity * Time.deltaTime;
@@ -166,11 +167,11 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         isDashing = true;
-        playerClass.speed *= dashMod;
+        playerClass.speed *= playerClass.dashMod;
 
         StartCoroutine(DashDuration());
 
-        yield return new WaitForSeconds(dashCD);
+        yield return new WaitForSeconds(playerClass.dashCD);
         isDashing = false;
     }
 
@@ -178,7 +179,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(dashDuration);
 
-        playerClass.speed /= dashMod;
+        playerClass.speed /= playerClass.dashMod;
 
     }
 
