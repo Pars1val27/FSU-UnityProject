@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.StartDashCD(); 
+        UIManager.instance.DashCDRemaining = UIManager.instance.dashingTime;
 
         speed *= dashMod;
         StartCoroutine(DashDuration());

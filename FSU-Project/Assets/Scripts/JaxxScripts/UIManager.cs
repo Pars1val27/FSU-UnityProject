@@ -34,6 +34,8 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        dashingTime = PlayerController.playerInstance.dashCD + PlayerController.playerInstance.dashDuration;
+        DashCDRemaining = dashingTime;
     }
 
     // Update is called once per frame
@@ -52,7 +54,10 @@ public class UIManager : MonoBehaviour
                 stateUnpause();
             }
         }
-        
+        if(DashCDRemaining >= 0)
+        {
+            DashCD();
+        }
         
     }
 
@@ -102,14 +107,10 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
     
-    public void StartDashCD()
+    public void DashCD()
     {
-        dashingTime = PlayerController.playerInstance.dashCD + PlayerController.playerInstance.dashDuration;
-        DashCDRemaining = dashingTime;
-            while (DashCDRemaining >= 0)
-            {
+        DashCDRemaining -= Time.deltaTime;
                 DashCDRemaining -= DashCDRemaining;
                 DashCoolDownFill.fillAmount = DashCDRemaining / dashingTime;
-            }
     }
 }
