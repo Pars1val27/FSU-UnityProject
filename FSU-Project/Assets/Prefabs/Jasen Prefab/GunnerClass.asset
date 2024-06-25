@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: GunnerClass
   m_EditorClassIdentifier: 
   classWeapon: {fileID: 789420410420548932, guid: 9d7666b64e4bdee4aaedf4f9dbc690a8, type: 3}
-  playerHP: 22
-  speed: 8
+  playerHP: 20
+  speed: 14
   sprintMod: 2
-  dashCD: 1
-  dashMod: 3
+  dashCD: 5
+  dashMod: 4
   jumpMax: 2
-  jumpSpeed: 7
+  jumpSpeed: 14
   damage: 17
   attackSpeed: 4
   showGunnerAttributes: 1
   maxAmmo: 111
-  currAmmo: 102
+  currAmmo: 109
   shootRate: 0.1
   reloadTime: 0.5
   delay: 4

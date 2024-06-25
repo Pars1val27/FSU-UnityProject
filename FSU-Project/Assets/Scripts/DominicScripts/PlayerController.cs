@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerClass playerClass;
+    [SerializeField] AudioSource audio;
     //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
@@ -24,6 +25,20 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int climbSpeed;
     [SerializeField] int gravity;
 
+    [SerializeField] AudioClip[] audSteps;
+    [SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audJump;
+    [SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audHurt;
+    [SerializeField] float audHurtVol;
+    [SerializeField] AudioClip[] audJumpBoost;
+    [SerializeField] float audJumpBoostVol;
+    [SerializeField] AudioClip[] audDash;
+    [SerializeField] float audDashVol;
+
+    [SerializeField] float FOV;
+    [SerializeField] float FOVSprintMod;
+    [SerializeField] float FOVDashMod;
 
 
     // [SerializeField] int shootDmg;
@@ -31,17 +46,21 @@ public class PlayerController : MonoBehaviour, IDamage
     // [SerializeField] int shootDist;
 
 
-
     int jumpCount;
     int origSpeed;
     int origHP;
     int origGravity;
 
-    bool isShooting;
     bool isClimbing;
+
+    bool isPlayingSteps;
+    bool isPlayingHurt;
 
     public bool isSprinting;
     public bool isDashing;
+
+    float origFOV;
+    public float currFOV;
 
     public float dashDuration = 0.2f;
 
@@ -58,6 +77,7 @@ public class PlayerController : MonoBehaviour, IDamage
         origSpeed = playerClass.speed;
         origHP = playerClass.playerHP;
         origGravity = gravity;
+        origFOV = FOV;
 
         EquipClassWeapon();
     }
@@ -100,16 +120,22 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 jumpCount++;
                 playerVelocity.y = playerClass.jumpSpeed;
+                audio.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             }
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
                 jumpCount++;
                 playerVelocity.y = (playerClass.jumpSpeed * 1.5f);
+                audio.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
             }
         }
         playerVelocity.y -= gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (controller.isGrounded && moveDirection.magnitude > .03f && !isPlayingSteps)
+            StartCoroutine(playSteps());
+
     }
 
     void Sprint()
@@ -118,12 +144,25 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             isSprinting = true;
             playerClass.speed *= playerClass.sprintMod;
+            Camera.main.fieldOfView = Mathf.Lerp(FOV,FOVSprintMod, Time.deltaTime);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerClass.speed /= playerClass.sprintMod;
             isSprinting = false;
+            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, Time.deltaTime);
         }
+    }
+
+    IEnumerator playSteps()
+    {
+        isPlayingSteps = true;
+        audio.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+            yield return new WaitForSeconds(0.3f);
+        else
+            yield return new WaitForSeconds(0.15f);
+        isPlayingSteps = false;
     }
 
     //moveed to Gun.cs
@@ -160,16 +199,31 @@ public class PlayerController : MonoBehaviour, IDamage
         playerClass.playerHP -= dmg;
         UpdatePlayerUI();
 
+        if (!isPlayingHurt)
+        {
+            StartCoroutine(isHurtAud());
+        }
+
         if (playerClass.playerHP <= 0)
         {
             UIManager.instance.onLose();
         }
     }
 
+    IEnumerator isHurtAud()
+    {
+        isPlayingHurt = true;
+        audio.PlayOneShot(audHurt[Random.Range(0,audHurt.Length)], audHurtVol);
+        yield return new WaitForSeconds(0.15f);
+        isPlayingHurt = false;
+    }
+
     IEnumerator Dash()
     {
+        currFOV = Camera.main.fieldOfView;
         isDashing = true;
         playerClass.speed *= playerClass.dashMod;
+        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, Time.deltaTime);
 
         StartCoroutine(DashDuration());
 
@@ -182,6 +236,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(dashDuration);
 
         playerClass.speed /= playerClass.dashMod;
+        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, Time.deltaTime);           
 
     }
 
