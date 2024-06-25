@@ -20,24 +20,30 @@ public class gameManager : MonoBehaviour
         instance = this;
     }
 
+ 
+
     // Update is called once per frame
     void Update()
     {
-        
+        SavePlayerClass();
     }
 
     public void SavePlayerClass()
     {
-    //should save all attributes listed in PlayerSaveData.CS will need updated after melees class is complete
+        playerClass.Save();
+        Debug.Log("Player class saved");
     }
 
     public void LoadPlayerClass()
     {
-
+        playerClass.Load();
+        Debug.Log("Player class loaded");
     }
 
     public void ResetToDefault()
     {
-
+        PlayerPrefs.DeleteAll();
+        playerClass.Load();
+        Debug.Log("Player class reset to default values");
     }
 }
