@@ -31,6 +31,12 @@ public class PlayerClassEditor : Editor
     SerializedProperty explosionDamage;
     SerializedProperty grenadeRechargeRate;
 
+
+    SerializedProperty showMeleeAttributes;
+    SerializedProperty meleeBlock;
+    SerializedProperty meleeAttackRate;
+    SerializedProperty meleeRange;
+
     void OnEnable()
     {
         classWeapon = serializedObject.FindProperty("classWeapon");
@@ -55,6 +61,11 @@ public class PlayerClassEditor : Editor
         explosionForce = serializedObject.FindProperty("explosionForce");
         explosionDamage = serializedObject.FindProperty("explosionDamage");
         grenadeRechargeRate = serializedObject.FindProperty("grenadeRechargeRate");
+
+        showMeleeAttributes = serializedObject.FindProperty("showMeleeAttributes");
+        meleeBlock = serializedObject.FindProperty("meleeBlock");
+        meleeAttackRate = serializedObject.FindProperty("meleeAttackRate");
+        meleeRange = serializedObject.FindProperty("meleeRange");
     }
 
     public override void OnInspectorGUI()
@@ -74,7 +85,7 @@ public class PlayerClassEditor : Editor
         EditorGUILayout.PropertyField(attackSpeed);
         EditorGUILayout.PropertyField(showGunnerAttributes);
 
-        
+        EditorGUILayout.PropertyField(showGunnerAttributes);
         if (showGunnerAttributes.boolValue)
         {
             EditorGUILayout.PropertyField(maxAmmo);
@@ -87,6 +98,14 @@ public class PlayerClassEditor : Editor
             EditorGUILayout.PropertyField(explosionForce);
             EditorGUILayout.PropertyField(explosionDamage);
             EditorGUILayout.PropertyField(grenadeRechargeRate);
+        }
+
+        EditorGUILayout.PropertyField(showMeleeAttributes);
+        if (showMeleeAttributes.boolValue)
+        {
+            EditorGUILayout.PropertyField(meleeBlock);
+            EditorGUILayout.PropertyField(meleeAttackRate);
+            EditorGUILayout.PropertyField(meleeRange);
         }
 
         serializedObject.ApplyModifiedProperties();

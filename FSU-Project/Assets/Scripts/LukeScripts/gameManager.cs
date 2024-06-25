@@ -18,26 +18,32 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        playerClass.SaveDefault();
+        LoadPlayerClass();
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnApplicationQuit()
     {
-        
+        ResetPlayerClass();
     }
 
     public void SavePlayerClass()
     {
-    //should save all attributes listed in PlayerSaveData.CS will need updated after melees class is complete
+        playerClass.Save();
+        Debug.Log("Player class saved");
     }
 
     public void LoadPlayerClass()
     {
-
+        playerClass.Load();
+        Debug.Log("Player class loaded");
     }
 
-    public void ResetToDefault()
+    public void ResetPlayerClass()
     {
-
+        playerClass.ResetToDefault();
+        Debug.Log("Player class reset to default values");
     }
+
+
 }
