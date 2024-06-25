@@ -9,6 +9,7 @@ public class PlayerClassEditor : Editor
 
 
     SerializedProperty classWeapon;
+    SerializedProperty origHP;
     SerializedProperty playerHP;
     SerializedProperty speed;
     SerializedProperty sprintMod;
@@ -40,6 +41,7 @@ public class PlayerClassEditor : Editor
     void OnEnable()
     {
         classWeapon = serializedObject.FindProperty("classWeapon");
+        origHP = serializedObject.FindProperty("origHP");
         playerHP = serializedObject.FindProperty("playerHP");
         speed = serializedObject.FindProperty("speed");
         sprintMod = serializedObject.FindProperty("sprintMod");
@@ -74,6 +76,7 @@ public class PlayerClassEditor : Editor
 
     
         EditorGUILayout.PropertyField(classWeapon);
+        EditorGUILayout.PropertyField(origHP);
         EditorGUILayout.PropertyField(playerHP);
         EditorGUILayout.PropertyField(speed);
         EditorGUILayout.PropertyField(sprintMod);

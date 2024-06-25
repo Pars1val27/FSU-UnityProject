@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     int jumpCount;
     int origSpeed;
-    int origHP;
+    //public int origHP;
     int origGravity;
 
     bool isClimbing;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour, IDamage
     void Start()
     {
         origSpeed = playerClass.speed;
-        origHP = playerClass.playerHP;
+        //origHP = playerClass.playerHP;
         origGravity = gravity;
         origFOV = FOV;
 

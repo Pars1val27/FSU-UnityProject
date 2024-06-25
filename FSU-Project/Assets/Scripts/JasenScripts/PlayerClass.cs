@@ -12,7 +12,8 @@ public class PlayerClass : ScriptableObject
 
     [Header("Base Attributes")]
     [Range(1, 100)]
-    [SerializeField] public int playerHP;
+    [SerializeField] public int origHP;
+    public int playerHP;
 
     [Range(1, 20)]
     [SerializeField] public int speed;
@@ -82,7 +83,7 @@ public class PlayerClass : ScriptableObject
 
     public void Save()
     {
-        PlayerPrefs.SetInt("PlayerHP", playerHP);
+        PlayerPrefs.SetInt("PlayerHP", origHP);
         PlayerPrefs.SetInt("Speed", speed);
         PlayerPrefs.SetInt("SprintMod", sprintMod);
         PlayerPrefs.SetFloat("DashCD", dashCD);
@@ -111,7 +112,7 @@ public class PlayerClass : ScriptableObject
 
     public void Load()
     {
-        playerHP = PlayerPrefs.GetInt("PlayerHP", playerHP);
+        playerHP = PlayerPrefs.GetInt("PlayerHP", origHP);
         speed = PlayerPrefs.GetInt("Speed", speed);
         sprintMod = PlayerPrefs.GetInt("SprintMod", sprintMod);
         dashCD = PlayerPrefs.GetFloat("DashCD", dashCD);

@@ -22,6 +22,7 @@ public class GunScript : MonoBehaviour
     {
         Gunner.currAmmo = Gunner.maxAmmo;
         audioSource = GetComponent<AudioSource>();
+        Gunner.playerHP = Gunner.origHP;
     }
 
     void Update()

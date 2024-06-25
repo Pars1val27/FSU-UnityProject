@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
     {
         instance = this;
         Gunner.SaveDefault();
+        LoadPlayerClass();
         
     }
 
