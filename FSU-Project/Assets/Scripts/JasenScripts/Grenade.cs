@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -11,6 +12,7 @@ public class Grenade : MonoBehaviour
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip explosionSound;
 
+    private AudioSource audioSource;
     bool hasExploded = false;
     float countdown;
 
@@ -23,6 +25,11 @@ public class Grenade : MonoBehaviour
         countdown = delay;
     }
 
+    void Start()
+    {
+        countdown = delay;
+        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
+    }
     void Update()
     {
         countdown -= Time.deltaTime;
@@ -37,6 +44,11 @@ public class Grenade : MonoBehaviour
     {
         ParticleSystem effect = Instantiate(explosionEffect, transform.position, transform.rotation);
         effect.Play();
+
+        if (audioSource != null && explosionSound != null)
+        {
+            audioSource.PlayOneShot(explosionSound); 
+        }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearbyObject in colliders)

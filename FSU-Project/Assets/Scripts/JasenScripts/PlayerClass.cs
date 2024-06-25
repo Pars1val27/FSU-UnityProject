@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewPlayerClass", menuName = "Player Class")]
 public class PlayerClass : ScriptableObject
 {
+    //Any updates to the playerClass needs to be implemented in PlayerClassEditor.cs aswell
+
     [SerializeField] public GameObject classWeapon;
 
     [Header("Base Attributes")]
@@ -52,7 +54,7 @@ public class PlayerClass : ScriptableObject
     [Range(1, 5)]
     [SerializeField] public int delay;
 
-    [Range(3,25)]
+    [Range(3, 25)]
     [SerializeField] public float grenadeThrowForce;
 
     [Range(1f, 20f)]
@@ -66,4 +68,6 @@ public class PlayerClass : ScriptableObject
 
     [Range(0.1f, 60f)]
     [SerializeField] public float grenadeRechargeRate = 5f;
+
+
 }

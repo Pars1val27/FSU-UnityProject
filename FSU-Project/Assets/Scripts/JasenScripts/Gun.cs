@@ -8,10 +8,10 @@ public class GunScript : MonoBehaviour
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject muzzleFlash;
-    [SerializeField] AudioClip ShotSound;
+    [SerializeField] AudioClip shootSound;
     [SerializeField] GameObject grenadePrefab;
-    
 
+    private AudioSource audioSource;
     bool isShooting;
     public bool isReloading;
     public bool isGrenadeReady = true;
@@ -19,6 +19,7 @@ public class GunScript : MonoBehaviour
     void Start()
     {
         Gunner.currAmmo = Gunner.maxAmmo;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -103,6 +104,10 @@ public class GunScript : MonoBehaviour
     IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
+        if (audioSource != null && shootSound != null)
+        {
+            audioSource.PlayOneShot(shootSound); // Play shooting sound
+        }
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
     }

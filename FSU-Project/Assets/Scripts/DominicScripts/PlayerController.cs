@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
 {
-
+    // all the the applyed edits and commented out code are handled in playerClass.cs 
+    // this shouldn't change any of the prestablished funcionality of the code only changing the veriable location
+     
 
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerClass playerClass;
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     GameObject classWeaponInstance;
     GunScript gunScript;
-
+    SwordScript swordScript;
     // Start is called before the first frame update
     void Start()
     {

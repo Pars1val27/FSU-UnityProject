@@ -102,7 +102,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowUpgradeMenu()
     {
-
+        //UI for upgrade menu display  this should be called in the win condition
+        //We will also need to add another canvus to the UI Handeling with 3 buttons in order to assign the random Upgrades
+        //relvent scripts are PlayerStatUpgrade and Upgrade.cs
     }
 
     public void HideUpgradeMenu()

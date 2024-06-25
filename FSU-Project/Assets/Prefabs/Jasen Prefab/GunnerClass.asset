@@ -24,10 +24,10 @@ MonoBehaviour:
   attackSpeed: 4
   showGunnerAttributes: 1
   maxAmmo: 111
-  currAmmo: 110
+  currAmmo: 102
   shootRate: 0.1
   reloadTime: 0.5
-  delay: 1
+  delay: 4
   grenadeThrowForce: 19.35
   explosionRadius: 4.52
   explosionForce: 50

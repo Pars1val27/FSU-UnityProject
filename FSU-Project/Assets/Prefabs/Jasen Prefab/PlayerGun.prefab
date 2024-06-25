@@ -102,8 +102,10 @@ MonoBehaviour:
   GrenadePos: {fileID: 3404024799275723205}
   gun: {fileID: 789420410420548932}
   muzzleFlash: {fileID: 6571646373147575441}
+  shootSound: {fileID: 8300000, guid: b609e86a902f9ef43a35e5f23ba9a386, type: 3}
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
-  grenadeThrowForce: 10
+  isReloading: 0
+  isGrenadeReady: 1
 --- !u!1 &7444405770865779781
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,12 +23,12 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     public void SavePlayerClass()
     {
-
+    //should save all attributes listed in PlayerSaveData.CS will need updated after melees class is complete
     }
 
     public void LoadPlayerClass()

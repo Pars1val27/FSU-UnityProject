@@ -4,6 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(PlayerClass))]
 public class PlayerClassEditor : Editor
 {
+    // you must declare  as SerializedProperty  for ally added components to PlayerClass.cs 
+    // and Follow the patten below  until the end of the script
+
+
     SerializedProperty classWeapon;
     SerializedProperty playerHP;
     SerializedProperty speed;
@@ -70,7 +74,7 @@ public class PlayerClassEditor : Editor
         EditorGUILayout.PropertyField(attackSpeed);
         EditorGUILayout.PropertyField(showGunnerAttributes);
 
-        // Conditionally show the gunner attributes based on the toggle
+        
         if (showGunnerAttributes.boolValue)
         {
             EditorGUILayout.PropertyField(maxAmmo);
