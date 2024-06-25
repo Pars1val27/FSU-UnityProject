@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject inerface;
+    [SerializeField] GameObject bossHealth;
 
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
@@ -22,10 +23,12 @@ public class UIManager : MonoBehaviour
 
     public Image playerHPBar;
     public Image DashCoolDownFill;
+    public Image bossHealthBar;
 
 
 
     public bool gamePause;
+    bool bossBattle;
     public float DashCDRemaining;
     public float dashingTime;
 
@@ -34,8 +37,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        dashingTime = PlayerController.playerInstance.dashCD + PlayerController.playerInstance.dashDuration;
-        DashCDRemaining = dashingTime;
+        
     }
 
     // Update is called once per frame
@@ -54,7 +56,7 @@ public class UIManager : MonoBehaviour
                 stateUnpause();
             }
         }
-        if(DashCDRemaining >= 0)
+        if(PlayerController.playerInstance.isCoolDown)
         {
             DashCD();
         }
@@ -100,17 +102,29 @@ public class UIManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-    public void MainMenu()
+    public void StartMenu()
     {
         menuActive = menuMain;
         statePause();
         menuActive.SetActive(gamePause);
+        inerface.SetActive(false);
     }
     
     public void DashCD()
     {
         DashCDRemaining -= Time.deltaTime;
-                DashCDRemaining -= DashCDRemaining;
-                DashCoolDownFill.fillAmount = DashCDRemaining / dashingTime;
+        if( DashCDRemaining <= 0 ) 
+        {
+            DashCoolDownFill.fillAmount = 1;
+        }
+        else
+        {
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
+        }
+    }
+
+    public void StartBoss()
+    {
+       bossHealth.SetActive(true);
     }
 }

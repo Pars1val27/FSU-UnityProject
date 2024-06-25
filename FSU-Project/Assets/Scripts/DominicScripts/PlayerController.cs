@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage
     int origHP;
 
     public bool isDashing;
+    public bool isCoolDown;
 
     public float dashDuration = 0.2f;
 
@@ -34,6 +35,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         playerInstance = this;
         origHP = PlayerHP;
+        UIManager.instance.dashingTime = dashCD + dashDuration;
+       
     }
 
     // Update is called once per frame
@@ -102,12 +105,13 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining = UIManager.instance.dashingTime;
+        UIManager.instance.DashCDRemaining = dashCD;
 
         speed *= dashMod;
         StartCoroutine(DashDuration());
-
+        isCoolDown = true;
         yield return new WaitForSeconds(dashCD);
+        isCoolDown = false;
         isDashing = false;
     }
 
