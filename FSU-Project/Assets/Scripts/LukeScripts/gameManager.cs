@@ -18,14 +18,13 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        playerClass.SaveDefault();
+        LoadPlayerClass();
     }
 
- 
-
-    // Update is called once per frame
-    void Update()
+    void OnApplicationQuit()
     {
-        SavePlayerClass();
+        ResetPlayerClass();
     }
 
     public void SavePlayerClass()
@@ -40,10 +39,11 @@ public class gameManager : MonoBehaviour
         Debug.Log("Player class loaded");
     }
 
-    public void ResetToDefault()
+    public void ResetPlayerClass()
     {
-        PlayerPrefs.DeleteAll();
-        playerClass.Load();
+        playerClass.ResetToDefault();
         Debug.Log("Player class reset to default values");
     }
+
+
 }

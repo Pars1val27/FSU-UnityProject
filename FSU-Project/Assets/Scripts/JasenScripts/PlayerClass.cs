@@ -73,7 +73,6 @@ public class PlayerClass : ScriptableObject
     [Header("Melee Attributes")]
     [SerializeField] public bool showMeleeAttributes;
 
-    [SerializeField] public GameObject meleeWeapon;
     [Range(1, 100)]
     [SerializeField] public int meleeBlock;
     [Range(0.1f, 10f)]
@@ -136,4 +135,21 @@ public class PlayerClass : ScriptableObject
         meleeAttackRate = PlayerPrefs.GetFloat("MeleeAttackRate", meleeAttackRate);
         meleeRange = PlayerPrefs.GetFloat("MeleeRange", meleeRange);
     }
+
+    public void SaveDefault()
+    {
+        if (!PlayerPrefs.HasKey("DefaultSaved"))
+        {
+            Save();
+            PlayerPrefs.SetInt("DefaultSaved", 1);
+        }
+    }
+
+    public void ResetToDefault()
+    {
+        PlayerPrefs.DeleteAll();
+        SaveDefault();
+        Load();
+    }
 }
+
