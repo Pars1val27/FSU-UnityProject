@@ -161,7 +161,7 @@ public class PlayerController : MonoBehaviour, IDamage
         if (!isSprinting)
             yield return new WaitForSeconds(0.3f);
         else
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
 
