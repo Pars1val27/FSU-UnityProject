@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5498234965670311190}
   damage: 1
-  speed: 15
-  destroyTime: 2
+  speed: 40
+  destroyTime: 0.5
 --- !u!54 &5498234965670311190
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.01
+  m_Time: 0.05
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -129,23 +129,14 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 0.13756561
+        time: 0.014354706
+        value: 0.21332979
         inSlope: 0
         outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.5539988
-        value: 0.24338639
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

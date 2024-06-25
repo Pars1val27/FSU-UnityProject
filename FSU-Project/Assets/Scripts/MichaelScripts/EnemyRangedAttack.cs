@@ -6,32 +6,29 @@ public class EnemyRangedAttack : MonoBehaviour
 {
     //Michael
     [SerializeField] Transform shootPos;
-
-    [SerializeField] float shootRate;
+    [SerializeField] Animator anim;
     [SerializeField] GameObject projectile;
 
-    bool isShooting;
+    // the name of animation for another attack of the enemy(if it doesnt have an alt attack leave blank)
+    [SerializeField] string altAttack;
 
-    void Start()
-    {
-        
-    }
-
+    [SerializeField] float shootRate;
+ 
+    float SavedTime = 0;
     
     void Update()
     {
-        if (isShooting == false)
+        if ((Time.time - SavedTime) > shootRate && !anim.GetCurrentAnimatorStateInfo(0).IsName(altAttack))
         {
-            StartCoroutine(shoot());
+            
+            SavedTime = Time.time;
+            anim.SetTrigger("Shoot");
         }
     }
 
-    IEnumerator shoot()
+    
+    public void shoot()
     {
-       
-        isShooting = true;
         Instantiate(projectile, shootPos.position, transform.rotation);
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
     }
 }

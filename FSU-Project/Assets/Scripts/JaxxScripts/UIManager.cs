@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
 
     int enemyCount;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
     }
@@ -81,6 +81,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateEnemyDisplay(int amount)
     {
+  
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
 
