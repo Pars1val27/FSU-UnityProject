@@ -57,10 +57,8 @@ public class PlayerClassEditor : Editor
     {
         serializedObject.Update();
 
-        // Draw the class weapon field
+    
         EditorGUILayout.PropertyField(classWeapon);
-
-        // Draw the base attributes
         EditorGUILayout.PropertyField(playerHP);
         EditorGUILayout.PropertyField(speed);
         EditorGUILayout.PropertyField(sprintMod);
@@ -70,8 +68,6 @@ public class PlayerClassEditor : Editor
         EditorGUILayout.PropertyField(jumpSpeed);
         EditorGUILayout.PropertyField(damage);
         EditorGUILayout.PropertyField(attackSpeed);
-
-        // Always show the toggle for gunner attributes
         EditorGUILayout.PropertyField(showGunnerAttributes);
 
         // Conditionally show the gunner attributes based on the toggle

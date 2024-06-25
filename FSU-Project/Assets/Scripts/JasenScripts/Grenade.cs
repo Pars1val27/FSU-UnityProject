@@ -9,6 +9,7 @@ public class Grenade : MonoBehaviour
     private float explosionForce;
     private int damage;
     [SerializeField] ParticleSystem explosionEffect;
+    [SerializeField] AudioClip explosionSound;
 
     bool hasExploded = false;
     float countdown;

@@ -8,6 +8,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject muzzleFlash;
+    [SerializeField] AudioClip ShotSound;
     [SerializeField] GameObject grenadePrefab;
     
 

@@ -35,15 +35,15 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
-            if(menuActive == null)
+            if (menuActive == null)
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(gamePause);
             }
-            else if(menuActive == menuPause)
+            else if (menuActive == menuPause)
             {
                 stateUnpause();
             }
@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
     public void statePause()
     {
         gamePause = !gamePause;
-        crosshairActive = !crosshairActive; 
+        crosshairActive = !crosshairActive;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -84,13 +84,13 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
 
-        if(enemyCount <= 0)
+        if (enemyCount <= 0)
         {
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
         }
-        
+
     }
 
     public void onLose()
@@ -99,5 +99,15 @@ public class UIManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-   
+
+    public void ShowUpgradeMenu()
+    {
+
+    }
+
+    public void HideUpgradeMenu()
+    {
+
+    }
+
 }
