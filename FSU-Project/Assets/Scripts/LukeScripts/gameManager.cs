@@ -6,10 +6,7 @@ using UnityEngine.AI;
 
 public class gameManager : MonoBehaviour
 {
-    public PlayerClass playerClass;
-
-    private string saveFilePath;
-
+    public PlayerClass Gunner;
 
     public static gameManager instance;
 
@@ -18,8 +15,8 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        playerClass.SaveDefault();
-        LoadPlayerClass();
+        Gunner.SaveDefault();
+        
     }
 
     void OnApplicationQuit()
@@ -29,19 +26,19 @@ public class gameManager : MonoBehaviour
 
     public void SavePlayerClass()
     {
-        playerClass.Save();
+        Gunner.Save();
         Debug.Log("Player class saved");
     }
 
     public void LoadPlayerClass()
     {
-        playerClass.Load();
+        Gunner.Load();
         Debug.Log("Player class loaded");
     }
 
     public void ResetPlayerClass()
     {
-        playerClass.ResetToDefault();
+        Gunner.ResetToDefault();
         Debug.Log("Player class reset to default values");
     }
 
