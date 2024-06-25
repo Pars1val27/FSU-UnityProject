@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public bool isSprinting;
     public bool isDashing;
+    public bool isCoolDown;
 
     float origFOV;
     public float currFOV;
@@ -222,12 +223,15 @@ public class PlayerController : MonoBehaviour, IDamage
         currFOV = Camera.main.fieldOfView;
         audio.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
+        UIManager.instance.DashCoolDownFill.fillAmount = 0;
+        UIManager.instance.DashCDRemaining = playerClass.dashCD;
         playerClass.speed *= playerClass.dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
 
         StartCoroutine(DashDuration());
-
+        isCoolDown = true;
         yield return new WaitForSeconds(playerClass.dashCD);
+        isCoolDown = false;
         isDashing = false;
     }
 
