@@ -2,93 +2,74 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GunScript : MonoBehaviour
+public class Gun : MonoBehaviour
 {
-    public PlayerClass Gunner;
-    [SerializeField] Transform GrenadePos;
+    [SerializeField] Transform shootPos;
+    [SerializeField] GameObject bullet;
     [SerializeField] GameObject gun;
-    [SerializeField] GameObject muzzleFlash;
-    [SerializeField] AudioClip[] shootSound;
-    [SerializeField] float shootSoundVol;
     [SerializeField] GameObject grenadePrefab;
+    [SerializeField] int maxAmmoCount;
+    [SerializeField] float shootRate;
+    [SerializeField] float reloadTime;
+    [SerializeField] float grenadeThrowForce;
 
+    
 
-    private AudioSource audioSource;
+    int currentAmmoCount;
     bool isShooting;
-    public bool isReloading;
-    public bool isGrenadeReady = true;
+    bool isReloading;
 
+    // Start is called before the first frame update
     void Start()
     {
-        Gunner.currAmmo = Gunner.maxAmmo;
-        audioSource = GetComponent<AudioSource>();
-        Gunner.playerHP = Gunner.origHP;
+        currentAmmoCount = maxAmmoCount;
+        UpdateGunUI();
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (isReloading)
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+            
+
+        if (Input.GetButtonDown("Fire1") && !isShooting && currentAmmoCount > 0)
         {
             StartCoroutine(Shoot());
-
         }
+
         if (Input.GetButtonDown("Fire3") && !isShooting)
         {
             ThrowGrenade();
         }
 
-        if (Gunner.currAmmo <= 0 && !isReloading)
+        if (currentAmmoCount <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
     }
 
-
-
     IEnumerator Shoot()
     {
         isShooting = true;
-        
-        RaycastHit hit;
-        StartCoroutine(flashMuzzle());
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.damage))
-        {
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if (hit.transform != transform && dmg != null)
-            {
-                dmg.TakeDamage(Gunner.damage);
-            }
-        }
-
-        Gunner.currAmmo--;
-
-        yield return new WaitForSeconds(Gunner.shootRate);
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        currentAmmoCount--;
+        UpdateGunUI();
+        yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }
 
     void ThrowGrenade()
     {
-        GameObject grenade = Instantiate(grenadePrefab, GrenadePos.position, GrenadePos.rotation);
+        GameObject grenade = Instantiate(grenadePrefab, shootPos.position, shootPos.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(GrenadePos.forward * Gunner.grenadeThrowForce, ForceMode.VelocityChange);
+            rb.AddForce(shootPos.forward * grenadeThrowForce, ForceMode.VelocityChange);
         }
-
-        Grenade grenadeScript = grenade.GetComponent<Grenade>();
-        if (grenadeScript != null)
-        {
-            grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
-        }
-
-        isGrenadeReady = false;
-        StartCoroutine(RechargeGrenade());
     }
 
     IEnumerator Reload()
@@ -98,27 +79,17 @@ public class GunScript : MonoBehaviour
         Vector3 pos;
         gun.transform.GetLocalPositionAndRotation(out pos, out rot);
         gun.transform.Rotate(new Vector3(300, 0, 0));
-        yield return new WaitForSeconds(Gunner.reloadTime);
-        Gunner.currAmmo = Gunner.maxAmmo;
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmoCount = maxAmmoCount;
+        UpdateGunUI();
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;
         isReloading = false;
     }
-    IEnumerator flashMuzzle()
+    public void UpdateGunUI()
     {
-        muzzleFlash.SetActive(true);
-        if (audioSource != null && shootSound != null)
-        {
-            audioSource.PlayOneShot(shootSound[Random.Range(0, shootSound.Length)], shootSoundVol);
-        }
-        yield return new WaitForSeconds(0.1f);
-        muzzleFlash.SetActive(false);
-    }
-
-    IEnumerator RechargeGrenade()
-    {
-        yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
-        isGrenadeReady = true;
+        UIManager.instance.ammoCur.text = currentAmmoCount.ToString("F0");
+        UIManager.instance.ammoMax.text = maxAmmoCount.ToString("F0");
     }
 }

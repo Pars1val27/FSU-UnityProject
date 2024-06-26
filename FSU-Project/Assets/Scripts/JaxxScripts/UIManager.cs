@@ -125,6 +125,8 @@ public class UIManager : MonoBehaviour
 
     public void StartBoss()
     {
+        bossBattle = true;
        bossHealth.SetActive(true);
     }
+
 }
