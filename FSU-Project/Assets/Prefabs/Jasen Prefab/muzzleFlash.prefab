@@ -1,10 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
 --- !u!1 &3298076334517568183
-========
---- !u!1 &2745089511743265139
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,82 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
   - component: {fileID: 4678769754033970999}
   - component: {fileID: 6304791316032775680}
   - component: {fileID: 46847430451134423}
   - component: {fileID: 5246411402909433550}
   m_Layer: 0
   m_Name: muzzleFlash
-========
-  - component: {fileID: 8341591827942921979}
-  - component: {fileID: 508498223622147555}
-  - component: {fileID: 6488576371776715105}
-  - component: {fileID: 8800061340518766296}
-  m_Layer: 0
-  m_Name: Wall
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
 --- !u!4 &4678769754033970999
-========
---- !u!4 &8341591827942921979
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
   m_GameObject: {fileID: 3298076334517568183}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.0056666285, y: 2.3706675, z: 0.7262546}
   m_LocalScale: {x: 0.46540222, y: 0.49246618, z: 1}
-========
-  m_GameObject: {fileID: 2745089511743265139}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30, y: 50, z: 52}
-  m_LocalScale: {x: 200, y: 100, z: 1}
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
 --- !u!33 &6304791316032775680
-========
---- !u!33 &508498223622147555
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
   m_GameObject: {fileID: 3298076334517568183}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &46847430451134423
-========
-  m_GameObject: {fileID: 2745089511743265139}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6488576371776715105
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
   m_GameObject: {fileID: 3298076334517568183}
-========
-  m_GameObject: {fileID: 2745089511743265139}
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -123,22 +84,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
 --- !u!64 &5246411402909433550
 MeshCollider:
-========
---- !u!65 &8800061340518766296
-BoxCollider:
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Jasen Prefab/muzzleFlash.prefab
   m_GameObject: {fileID: 3298076334517568183}
-========
-  m_GameObject: {fileID: 2745089511743265139}
->>>>>>>> ShaleyTest:FSU-Project/Assets/Prefabs/Wall.prefab
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
