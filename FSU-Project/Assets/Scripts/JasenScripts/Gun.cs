@@ -16,7 +16,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] ParticleSystem hitEffect;
 
 
-    bool isShooting;
+    //bool isShooting;
 
     public bool isReloading;
     public bool isGrenadeReady = true;
