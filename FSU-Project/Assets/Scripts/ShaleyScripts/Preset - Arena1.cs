@@ -13,25 +13,13 @@ public class PresetArena1 : MonoBehaviour
     {
         StartArenaEnemy();
     }
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
+        yield return new WaitForSeconds(1);
         Instantiate(RandEnemy(), spawnPos.transform);
     }
 
-    void SpawnPlayer()
-    {
-        GameObject player = GameObject.FindWithTag("Player");
-
-        //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-        //CharacterController characterCtrl = FindObjectOfType<CharacterController>();
-        //playerCtrl.enabled = false;
-        //characterCtrl.enabled = false;
-        player.transform.position = spawnPos.transform.position;
-
-        Arena2Script.isPlayerSpawned = true;
-        //characterCtrl.enabled = true;
-        //playerCtrl.enabled = true;
-    }
+    
 
     GameObject RandEnemy()
     {
@@ -41,13 +29,21 @@ public class PresetArena1 : MonoBehaviour
 
     public void StartArenaEnemy()
     {
-        if (Arena2Script.isPlayerSpawned)
+        if (!Arena2Script.isPlayerSpawned)
         {
-            SpawnEnemy();
+            StartCoroutine(SpawnPlayer());
         }
         else
         {
-            SpawnPlayer();
+            StartCoroutine(SpawnEnemy());
         }
+    }
+
+    IEnumerator SpawnPlayer()
+    {
+        Arena2Script.isPlayerSpawned = true;
+        GameObject player = GameObject.FindWithTag("Player");
+        yield return new WaitForSeconds(0.1f);
+        player.transform.position = new UnityEngine.Vector3(spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z);
     }
 }
