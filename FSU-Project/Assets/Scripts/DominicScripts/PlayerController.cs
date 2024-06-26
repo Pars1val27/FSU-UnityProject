@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     [SerializeField] CharacterController controller;
     [SerializeField] public PlayerClass playerClass;
-    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource aud;
     //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
@@ -40,11 +40,14 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
 
+    [Range(1, 10)]
+    [SerializeField] int shootDmg;
+    [Range(.1f, 10)]
+    [SerializeField] float shootRate;
+    [Range(1, 1000)]
+    [SerializeField] int shootDist;
 
-    // [SerializeField] int shootDmg;
-    // [SerializeField] int shootRate;
-    // [SerializeField] int shootDist;
-
+    bool isShooting;
 
     int jumpCount;
     int origSpeed;
@@ -90,12 +93,12 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         
         //handled in gun.cs
-        /* if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
-            //StartCoroutine(shoot());
+            StartCoroutine(shoot());
             
             
-        }*/
+        }
 
         if (Input.GetButton("Dash") && !isDashing)
         {
@@ -120,14 +123,14 @@ public class PlayerController : MonoBehaviour, IDamage
             {
                 jumpCount++;
                 playerVelocity.y = playerClass.jumpSpeed;
-                audio.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+                aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             }
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
                 jumpCount++;
                 playerVelocity.y = (playerClass.jumpSpeed * 1.5f);
-                audio.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
+                aud.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
             }
         }
         playerVelocity.y -= gravity * Time.deltaTime;
@@ -157,22 +160,23 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator playSteps()
     {
         isPlayingSteps = true;
-        audio.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
         if (!isSprinting)
             yield return new WaitForSeconds(0.3f);
         else
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
 
     //moveed to Gun.cs
-    /*IEnumerator shoot()
+    IEnumerator shoot()
     {
         isShooting = true;
-        StartCoroutine(flashMuzzle());
+        //StartCoroutine(flashMuzzle());
         RaycastHit hit;
         if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
         {
+            Debug.Log(hit);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
@@ -183,9 +187,9 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
-    }*/
+    }
 
-    /*IEnumerator flashMuzzle()
+/*    IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
@@ -213,7 +217,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator isHurtAud()
     {
         isPlayingHurt = true;
-        audio.PlayOneShot(audHurt[Random.Range(0,audHurt.Length)], audHurtVol);
+        aud.PlayOneShot(audHurt[Random.Range(0,audHurt.Length)], audHurtVol);
         yield return new WaitForSeconds(0.15f);
         isPlayingHurt = false;
     }
@@ -221,7 +225,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator Dash()
     {
         currFOV = Camera.main.fieldOfView;
-        audio.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
+        aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
         UIManager.instance.DashCDRemaining = playerClass.dashCD;

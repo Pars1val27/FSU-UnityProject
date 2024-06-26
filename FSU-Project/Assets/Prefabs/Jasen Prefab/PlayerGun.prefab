@@ -105,7 +105,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
   - {fileID: 8300000, guid: b609e86a902f9ef43a35e5f23ba9a386, type: 3}
-  shootSoundVol: 0.5
+  shootSoundVol: 0.2
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 0}

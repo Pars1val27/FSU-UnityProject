@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GunnerClass
   m_EditorClassIdentifier: 
   classWeapon: {fileID: 789420410420548932, guid: 9d7666b64e4bdee4aaedf4f9dbc690a8, type: 3}
+  origHP: 20
   playerHP: 20
   speed: 14
   sprintMod: 2
@@ -20,16 +21,21 @@ MonoBehaviour:
   dashMod: 4
   jumpMax: 2
   jumpSpeed: 14
-  damage: 17
+  damage: 50
   attackSpeed: 4
   showGunnerAttributes: 1
-  maxAmmo: 111
-  currAmmo: 109
+  maxAmmo: 25
+  currAmmo: 25
   shootRate: 0.1
-  reloadTime: 0.5
+  shootDist: 1000
+  reloadTime: 2
   delay: 4
   grenadeThrowForce: 19.35
   explosionRadius: 4.52
   explosionForce: 50
   explosionDamage: 5
   grenadeRechargeRate: 5
+  showMeleeAttributes: 0
+  meleeBlock: 0
+  meleeAttackRate: 0
+  meleeRange: 0

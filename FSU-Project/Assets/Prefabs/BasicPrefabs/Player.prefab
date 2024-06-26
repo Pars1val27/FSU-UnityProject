@@ -1,111 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &340918056257458649
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8631077382656301432}
-  - component: {fileID: 3692012613727966862}
-  - component: {fileID: 8210308785087897544}
-  - component: {fileID: 5857860597208732076}
-  m_Layer: 0
-  m_Name: Muzzle Flash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8631077382656301432
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340918056257458649}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.137, z: 0.687}
-  m_LocalScale: {x: 0.5577, y: 0.5577, z: 0.5577}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 4377413321258789308}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3692012613727966862
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340918056257458649}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8210308785087897544
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340918056257458649}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 02317e064b8d3374bbdcf811bdd5fb8f, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5857860597208732076
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 340918056257458649}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &2390288603650390000
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,8 +30,7 @@ Transform:
   m_LocalPosition: {x: 0.16666663, y: -0.338, z: 0.491}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 8345385464023887631}
+  m_Children: []
   m_Father: {fileID: 6619240389275628810}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5673175544709436489
@@ -221,112 +114,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4377413321258789308}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5563397590287243730
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8345385464023887631}
-  - component: {fileID: 4958036120519745943}
-  - component: {fileID: 5051141047242633118}
-  - component: {fileID: 31358282721877938}
-  m_Layer: 0
-  m_Name: muzzleFlash
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &8345385464023887631
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563397590287243730}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.008726558, y: -0, z: -0, w: 0.999962}
-  m_LocalPosition: {x: -0.0112, y: 0.1423, z: 0.6819}
-  m_LocalScale: {x: 0.46540222, y: 0.49246615, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2799739320527782561}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4958036120519745943
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563397590287243730}
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5051141047242633118
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563397590287243730}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 02317e064b8d3374bbdcf811bdd5fb8f, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &31358282721877938
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5563397590287243730}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &6097438681835920303
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,7 +260,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6619240389275628810}
-  - {fileID: 8631077382656301432}
   - {fileID: 4949162200189842116}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -492,7 +278,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9107036256956263201}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -564,13 +350,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7497294410605451640}
   playerClass: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
-  audio: {fileID: 8507070171164364275}
+  aud: {fileID: 8507070171164364275}
   weaponPos: {fileID: 2799739320527782561}
   climbPos: {fileID: 4949162200189842116}
   climbSpeed: 15
   gravity: 35
-  audSteps: []
-  audStepsVol: 0.3
+  audSteps:
+  - {fileID: 8300000, guid: 65e443630e8b8994faae72b77afe5af0, type: 3}
+  - {fileID: 8300000, guid: 1e3c1973407d42943b46a6b88f91093a, type: 3}
+  - {fileID: 8300000, guid: 6a94ad3d9bcf194489f7c8b63f5fb183, type: 3}
+  - {fileID: 8300000, guid: d98896730b7c4704db5d8613c91668f8, type: 3}
+  - {fileID: 8300000, guid: 2df9d87c3f468df428def01bfd2cdc96, type: 3}
+  - {fileID: 8300000, guid: 6d746ee26f31d4c43a4c80d16e427c1c, type: 3}
+  - {fileID: 8300000, guid: c6a0d9662eeff6943b389faa0072ff23, type: 3}
+  - {fileID: 8300000, guid: 4e1bb71db676f3340bdd1366287f7bd4, type: 3}
+  - {fileID: 8300000, guid: 04e0f923c7155874181aa9083df1aadc, type: 3}
+  - {fileID: 8300000, guid: 74cc0886efbc2aa47b5839c9ed8ce919, type: 3}
+  audStepsVol: 0.1
   audJump:
   - {fileID: 8300000, guid: 0f82a1ff58e5c144d96ffc36ea74b8c2, type: 3}
   - {fileID: 8300000, guid: ef4d8a537fd5179459a61afa2a869322, type: 3}
@@ -578,7 +374,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 08fb5defe1e63df4fa49c16960cb44bc, type: 3}
   - {fileID: 8300000, guid: 93dad9d28be23bf4cae16e72236afc19, type: 3}
   - {fileID: 8300000, guid: 0f5e5b5f8205bef4bac484e50b8effa5, type: 3}
-  audJumpVol: 0.4
+  audJumpVol: 0.3
   audHurt:
   - {fileID: 8300000, guid: 4d26abd9772819f43b32b79f3d9121a3, type: 3}
   - {fileID: 8300000, guid: 037623b778c4b654dbca5b02960d72c0, type: 3}
@@ -596,16 +392,25 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2bdde243f9a7eae44a91ffc8107e3997, type: 3}
   audHurtVol: 0.25
   audJumpBoost:
-  - {fileID: 8300000, guid: 0be83054472dc9f459572cd73078a6ee, type: 3}
-  audJumpBoostVol: 0.4
+  - {fileID: 8300000, guid: dfe49a0ce9faf814a876081732864bc9, type: 3}
+  - {fileID: 8300000, guid: 8644931a79eee1542a97897b40f545d1, type: 3}
+  - {fileID: 8300000, guid: d1df2b36bca96ab4eab94c85550457b7, type: 3}
+  - {fileID: 8300000, guid: a2046520d490fe24a9d9627f619bf251, type: 3}
+  - {fileID: 8300000, guid: 89f2a710563f1d24aaefb24e2e05ffd4, type: 3}
+  - {fileID: 8300000, guid: a0ce307ecb076fb468ffc408d6686862, type: 3}
+  audJumpBoostVol: 0.15
   audDash:
   - {fileID: 8300000, guid: f01afe41e5c564c4a84c4aa245c1fb95, type: 3}
   audDashVol: 0.4
   FOV: 60
   FOVSprintMod: 70
   FOVDashMod: 75
+  shootDmg: 1
+  shootRate: 0.1
+  shootDist: 300
   isSprinting: 0
   isDashing: 0
+  isCoolDown: 0
   currFOV: 0
   dashDuration: 0.2
 --- !u!143 &7497294410605451640

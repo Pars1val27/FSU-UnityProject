@@ -98,6 +98,7 @@ public class PlayerClass : ScriptableObject
 
         PlayerPrefs.SetInt("MaxAmmo", maxAmmo);
         PlayerPrefs.SetFloat("ShootRate", shootRate);
+        PlayerPrefs.SetFloat("ShootDist", shootDist);
         PlayerPrefs.SetFloat("ReloadTime", reloadTime);
         PlayerPrefs.SetInt("Delay", delay);
         PlayerPrefs.SetFloat("GrenadeThrowForce", grenadeThrowForce);
@@ -121,12 +122,13 @@ public class PlayerClass : ScriptableObject
         dashCD = PlayerPrefs.GetFloat("DashCD", dashCD);
         dashMod = PlayerPrefs.GetInt("DashMod", dashMod);
         jumpMax = PlayerPrefs.GetInt("JumpMax", jumpMax);
-        jumpSpeed = PlayerPrefs.GetInt("JumpSpeed", jumpSpeed);
+        jumpSpeed = PlayerPrefs.GetInt("JumpSpeed", jumpSpeed); 
         damage = PlayerPrefs.GetInt("Damage", damage);
         attackSpeed = PlayerPrefs.GetInt("AttackSpeed", attackSpeed);
 
         maxAmmo = PlayerPrefs.GetInt("MaxAmmo", maxAmmo);
         shootRate = PlayerPrefs.GetFloat("ShootRate", shootRate);
+        shootDist = PlayerPrefs.GetFloat("ShootDist", shootDist);
         reloadTime = PlayerPrefs.GetFloat("ReloadTime", reloadTime);
         delay = PlayerPrefs.GetInt("Delay", delay);
         grenadeThrowForce = PlayerPrefs.GetFloat("GrenadeThrowForce", grenadeThrowForce);
