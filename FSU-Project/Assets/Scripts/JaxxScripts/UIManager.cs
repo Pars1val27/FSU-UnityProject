@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //StartMenu();
+        
     }
 
     // Update is called once per frame
