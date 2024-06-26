@@ -6,36 +6,52 @@ using UnityEngine;
 public class EnemyMeleeAttack : MonoBehaviour
 {
     //Michael
-    [SerializeField] int Dmg;
+    [Header("----- Attack -----")]
     [SerializeField] float AttackRate;
+    [SerializeField] GameObject MeleeAttack;
+    [SerializeField] Transform ImpactPoint;
+
+    [Header("----- Animation -----")]
+    [SerializeField] Animator anim;
+
 
     float SavedTime = 0;
+
+    bool playerInRange;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerInRange && (Time.time - SavedTime) > AttackRate)
+        {
+            Debug.Log("Melee Hit");
+            SavedTime = Time.time;
+            anim.SetTrigger("Melee");
+        }
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     { 
-        if ((Time.time - SavedTime) > AttackRate && other.tag == "Player")
+        if(other.CompareTag("Player"))
         {
-            SavedTime = Time.time;
-
-            IDamage dmg = other.GetComponent<IDamage>();
-           
-            if (dmg != null)
-            {
-
-                dmg.TakeDamage(Dmg);
-            }
+            playerInRange = true;
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = false;
+        }
+    }
+
+    public void punch()
+    {
+        Instantiate(MeleeAttack, ImpactPoint.position, transform.rotation);
     }
 
 }

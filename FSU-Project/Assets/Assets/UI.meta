@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:FSU-Project/Assets/Assets/UI.meta
 guid: 41e01073831436549b6d9a086c75332c
+========
+guid: ee3bb5fdab6dea54387290524ffb789a
+>>>>>>>> EnemyAI(Michaels'Branch):FSU-Project/Assets/Prefabs/BasicPrefabs.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
