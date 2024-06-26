@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2715464760919658580}
   - component: {fileID: 3761172355698206283}
   - component: {fileID: 2864118193884686145}
+  - component: {fileID: 1492563096712884332}
   m_Layer: 0
   m_Name: PlayerGun
   m_TagString: Untagged
@@ -106,8 +107,106 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b609e86a902f9ef43a35e5f23ba9a386, type: 3}
   shootSoundVol: 0.2
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
+  gunAudio: {fileID: 1492563096712884332}
+  hitEffect: {fileID: 0}
   isReloading: 0
   isGrenadeReady: 1
+--- !u!82 &1492563096712884332
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 789420410420548932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7444405770865779781
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,8 +255,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4678769754033970999, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.26529688
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678769754033970999, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2838526
+      objectReference: {fileID: 0}
+    - target: {fileID: 4678769754033970999, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0042
+      value: -0.006
       objectReference: {fileID: 0}
     - target: {fileID: 4678769754033970999, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
       propertyPath: m_LocalPosition.y
@@ -193,6 +300,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4678769754033970999, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5246411402909433550, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

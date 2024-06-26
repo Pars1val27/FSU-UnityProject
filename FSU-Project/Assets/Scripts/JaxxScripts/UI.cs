@@ -25,4 +25,15 @@ public class UI : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void ClassSetMele()
+    {
+        Resume();
+    }
+
+    public void ClassSetGunner()
+    {
+        Resume();
+    }
+   
 }

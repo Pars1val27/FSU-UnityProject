@@ -6,8 +6,8 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     // all the the applyed edits and commented out code are handled in playerClass.cs 
     // this shouldn't change any of the prestablished funcionality of the code only changing the veriable location
-     
 
+    public static PlayerController playerInstance;
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerClass playerClass;
     [SerializeField] AudioSource aud;

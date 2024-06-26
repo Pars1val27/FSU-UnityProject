@@ -23,6 +23,7 @@ public class PlayerClassEditor : Editor
     SerializedProperty showGunnerAttributes;
     SerializedProperty maxAmmo;
     SerializedProperty currAmmo;
+    SerializedProperty shootDist;
     SerializedProperty shootRate;
     SerializedProperty shootDist;
     SerializedProperty reloadTime;
@@ -56,6 +57,7 @@ public class PlayerClassEditor : Editor
         showGunnerAttributes = serializedObject.FindProperty("showGunnerAttributes");
         maxAmmo = serializedObject.FindProperty("maxAmmo");
         currAmmo = serializedObject.FindProperty("currAmmo");
+        shootDist = serializedObject.FindProperty("shootDist");
         shootRate = serializedObject.FindProperty("shootRate");
         shootDist = serializedObject.FindProperty("shootDist");
         reloadTime = serializedObject.FindProperty("reloadTime");
@@ -88,13 +90,14 @@ public class PlayerClassEditor : Editor
         EditorGUILayout.PropertyField(jumpSpeed);
         EditorGUILayout.PropertyField(damage);
         EditorGUILayout.PropertyField(attackSpeed);
-        EditorGUILayout.PropertyField(showGunnerAttributes);
+        
 
         EditorGUILayout.PropertyField(showGunnerAttributes);
         if (showGunnerAttributes.boolValue)
         {
             EditorGUILayout.PropertyField(maxAmmo);
             EditorGUILayout.PropertyField(currAmmo);
+            EditorGUILayout.PropertyField(shootDist);
             EditorGUILayout.PropertyField(shootRate);
             EditorGUILayout.PropertyField(shootDist);
             EditorGUILayout.PropertyField(reloadTime);
