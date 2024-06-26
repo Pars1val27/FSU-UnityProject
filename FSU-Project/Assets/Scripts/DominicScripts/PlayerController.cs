@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] public PlayerClass playerClass;
     [SerializeField] AudioSource aud;
-    //[SerializeField] GameObject muzzleFlash;
+    [SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
     //[SerializeField] public float dashCD;
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-        //StartCoroutine(flashMuzzle());
+        StartCoroutine(flashMuzzle());
         RaycastHit hit;
         if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
         {
@@ -189,12 +189,12 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
     }
 
-/*    IEnumerator flashMuzzle()
+    IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
-    }*/
+    }
 
 
 
