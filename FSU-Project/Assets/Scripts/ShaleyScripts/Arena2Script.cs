@@ -12,7 +12,6 @@ public class Arena2Script : MonoBehaviour
 
     int lastDir;
     int lastPreset;
-    //int numPresets;
     public static bool isPlayerSpawned;
 
     public void StartArena()
@@ -38,25 +37,12 @@ public class Arena2Script : MonoBehaviour
 
     }
 
-    //void RandEnemies()
-    //{
-
-    //    Instantiate(EnemyManager.instance.enemies[0], SpawnPos[0].transform);
-    //    for (int i = 1; i < SpawnPos.Length; ++i)
-    //    {
-    //        Instantiate(RandEnemy(), SpawnPos[i].transform);
-    //    }
-    //}
-
     void CreateRandQuad(float x, float z)
     {
         int dir = RandDir();
         GameObject Quad = Instantiate(RandPreset());
         Quad.transform.localPosition = new Vector3(x, 0, z);
         Quad.transform.localEulerAngles = new Vector3(0, dir, 0);
-        //numPresets++;
-        //spawnPos = new Vector3(x, 0, z);
-        //spawnDir = new Vector3(0, dir, 0);
     }
     GameObject RandPreset()
     {

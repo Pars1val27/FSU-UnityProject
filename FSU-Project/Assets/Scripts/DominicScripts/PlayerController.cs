@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         Movement();
         Sprint();
-        if(Input.GetButton("Dash") && !isDashing)   
+        if (Input.GetButton("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
         }

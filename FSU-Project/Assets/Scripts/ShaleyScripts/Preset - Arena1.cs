@@ -6,9 +6,8 @@ using UnityEngine.UIElements;
 
 public class PresetArena1 : MonoBehaviour
 {
-    [SerializeField] GameObject player;
     [SerializeField] GameObject spawnPos;
-
+    [SerializeField] CharacterController CharacterCtrl;
 
     private void Start()
     {
@@ -21,8 +20,34 @@ public class PresetArena1 : MonoBehaviour
 
     void SpawnPlayer()
     {
+        //PlayerController.canMove = false;
+        //player.transform.position = spawnPos.transform.position;
+        //Arena2Script.isPlayerSpawned = true;
+        //StartCoroutine(movementDelay());
+
+        GameObject player = GameObject.FindWithTag("Player");
+
+        Debug.Log("Player position before teleport: " + player.transform.position);
+        Debug.Log("spawnPos reference: " + spawnPos.name);
+        Debug.Log("Spawn position: " + spawnPos.transform.position);
+
+        CharacterCtrl.enabled = false;
+        PlayerController playerCtrl = FindObjectOfType<PlayerController>();
+        playerCtrl.enabled = false;
         player.transform.position = spawnPos.transform.position;
+        
+        Debug.Log("Player position after teleport: " + player.transform.position);
+
         Arena2Script.isPlayerSpawned = true;
+        StartCoroutine(movementDelay());
+    }
+
+    IEnumerator movementDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        CharacterCtrl.enabled = true;
+        PlayerController playerCtrl = FindObjectOfType<PlayerController>();
+        playerCtrl.enabled = true;
     }
     GameObject RandEnemy()
     {

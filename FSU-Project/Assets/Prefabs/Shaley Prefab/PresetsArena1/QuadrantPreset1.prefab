@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1422934129803484529, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
   spawnPos: {fileID: 6718694958935127687}
+  CharacterCtrl: {fileID: 877574397350160705, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
 --- !u!1 &6718694958935127687
 GameObject:
   m_ObjectHideFlags: 0

@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2924186944363845857, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: m_CookingOptions
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2948477570116705585, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
       propertyPath: m_Name
       value: Arena2.0
@@ -178,10 +182,33 @@ PrefabInstance:
       propertyPath: QuadPresetScript
       value: 
       objectReference: {fileID: 2355913707648228728, guid: 5f7f08869612a0343a92a35883d06d1d, type: 3}
+    - target: {fileID: 3756876225139022354, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: QuadPresets.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756876225139022354, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: QuadPresets.Array.data[1]
+      value: 
+      objectReference: {fileID: 2587100189705838034, guid: 8911747d770114043b28c5946b2aa401, type: 3}
+    - target: {fileID: 3756876225139022354, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: QuadPresets.Array.data[2]
+      value: 
+      objectReference: {fileID: 670559891876075552, guid: 17e77de3fbd46dc4488159fb91e5ecad, type: 3}
+    - target: {fileID: 3756876225139022354, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: QuadPresets.Array.data[3]
+      value: 
+      objectReference: {fileID: 7289234619955648525, guid: 312e019db28db0740a43a1647bdb6ee4, type: 3}
+    - target: {fileID: 3756876225139022354, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      propertyPath: QuadPresets.Array.data[4]
+      value: 
+      objectReference: {fileID: 5890661170444857827, guid: 3a9baefe91ac426488828ef5c6f0eb5d, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9173444154910776886, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1769122511}
   m_SourcePrefab: {fileID: 100100000, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
 --- !u!1001 &982144942
 PrefabInstance:
@@ -394,6 +421,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06151b26c0fa9074e944cbba158cc9d8, type: 3}
+--- !u!1 &1769122506 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9173444154910776886, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
+  m_PrefabInstance: {fileID: 644733306}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1769122511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1769122506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
