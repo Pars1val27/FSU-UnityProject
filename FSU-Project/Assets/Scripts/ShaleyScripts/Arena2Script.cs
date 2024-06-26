@@ -8,27 +8,22 @@ using UnityEngine;
 public class Arena2Script : MonoBehaviour
 {
     [SerializeField] GameObject[] QuadPresets;
-    [SerializeField] GameObject[] SpawnPos;
+    //make direction same as portal direction
 
     int lastDir;
     int lastPreset;
-    int lastEnemy;
+    //int numPresets;
+    public static bool isPlayerSpawned;
 
-    void Start()
+    public void StartArena()
     {
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
         lastDir = 0;
         lastPreset = -1;
         RandArena();
         gameManager.instance.surface.BuildNavMesh();
-        RandEnemies();
     }
 
-    void Update()
-    {
-        
-    }
-    
     void RandArena()
     {
         CreateRandQuad(0, 0); //top left
@@ -43,15 +38,15 @@ public class Arena2Script : MonoBehaviour
 
     }
 
-    void RandEnemies()
-    {
+    //void RandEnemies()
+    //{
 
-        Instantiate(EnemyManager.instance.enemies[0], SpawnPos[0].transform);
-        for (int i = 1; i < SpawnPos.Length; ++i)
-        {
-            Instantiate(RandEnemy(), SpawnPos[i].transform);
-        }
-    }
+    //    Instantiate(EnemyManager.instance.enemies[0], SpawnPos[0].transform);
+    //    for (int i = 1; i < SpawnPos.Length; ++i)
+    //    {
+    //        Instantiate(RandEnemy(), SpawnPos[i].transform);
+    //    }
+    //}
 
     void CreateRandQuad(float x, float z)
     {
@@ -59,6 +54,9 @@ public class Arena2Script : MonoBehaviour
         GameObject Quad = Instantiate(RandPreset());
         Quad.transform.localPosition = new Vector3(x, 0, z);
         Quad.transform.localEulerAngles = new Vector3(0, dir, 0);
+        //numPresets++;
+        //spawnPos = new Vector3(x, 0, z);
+        //spawnDir = new Vector3(0, dir, 0);
     }
     GameObject RandPreset()
     {
@@ -80,16 +78,5 @@ public class Arena2Script : MonoBehaviour
         }
         lastDir = dir;
         return dir * 90;
-    }
-
-    GameObject RandEnemy()
-    {
-        int enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
-        if(lastEnemy == enemy)
-        {
-            enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
-        }
-        lastEnemy = enemy;
-        return EnemyManager.instance.enemies[enemy];
     }
 }
