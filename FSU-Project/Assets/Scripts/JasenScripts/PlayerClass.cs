@@ -46,8 +46,8 @@ public class PlayerClass : ScriptableObject
     [SerializeField] public int maxAmmo;
     public int currAmmo;
 
-    [Range(1, 100)]
-    [SerializeField] public float shootDist = 100;
+/*    [Range(1, 100)]
+    [SerializeField] public float shootDist = 100;*/
 
     [Range(0.1f, 10f)]
     [SerializeField] public float shootRate;
