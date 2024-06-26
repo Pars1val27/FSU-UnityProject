@@ -10,14 +10,14 @@ public class PresetBoss1 : MonoBehaviour
     {
         StartArenaEnemy();
     }
-    IEnumerator SpawnEnemy()
+    void SpawnEnemy()
     {
-        yield return new WaitForSeconds(0.1f);
         Instantiate(RandEnemy(), this.transform);
     }
 
     IEnumerator SpawnPlayer()
     {
+        //Michael
         GameObject player = GameObject.FindWithTag("Player");
         yield return new WaitForSeconds(0.1f);
         player.transform.position = new UnityEngine.Vector3(0, 0, 0);
@@ -31,7 +31,7 @@ public class PresetBoss1 : MonoBehaviour
 
     public void StartArenaEnemy()
     {
-        StartCoroutine(SpawnEnemy());
+        SpawnEnemy();
         StartCoroutine(SpawnPlayer());
     }
 }
