@@ -285,4 +285,4 @@ public class PlayerController : MonoBehaviour, IDamage
             gunScript.Gunner = playerClass; 
         }
     }
-}
+} 
