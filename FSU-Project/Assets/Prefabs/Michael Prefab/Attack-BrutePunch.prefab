@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7514318624172891045}
   - component: {fileID: -8360382300524365863}
   m_Layer: 0
-  m_Name: BrutePunch
+  m_Name: Attack-BrutePunch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

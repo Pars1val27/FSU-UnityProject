@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 4083442258784724825}
   - component: {fileID: 7764598650618861331}
   m_Layer: 0
-  m_Name: Lobbed Bomb Enemy
+  m_Name: Enemy-BombThrower(WIP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

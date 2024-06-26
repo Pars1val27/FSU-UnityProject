@@ -6,13 +6,13 @@ using UnityEngine;
 public class EnemyMeleeAttack : MonoBehaviour
 {
     //Michael
+    [Header("----- Attack -----")]
     [SerializeField] float AttackRate;
-    [SerializeField] Animator anim;
     [SerializeField] GameObject MeleeAttack;
     [SerializeField] Transform ImpactPoint;
 
-    // the name of animation for another attack of the enemy(if it doesnt have an alt attack leave blank)
-    [SerializeField] string altAttack;
+    [Header("----- Animation -----")]
+    [SerializeField] Animator anim;
 
 
     float SavedTime = 0;
@@ -21,16 +21,12 @@ public class EnemyMeleeAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(altAttack == null)
-        {
-            altAttack = "Empty";
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerInRange && !anim.GetCurrentAnimatorStateInfo(0).IsName(altAttack) && (Time.time - SavedTime) > AttackRate)
+        if (playerInRange && (Time.time - SavedTime) > AttackRate)
         {
             Debug.Log("Melee Hit");
             SavedTime = Time.time;

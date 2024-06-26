@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2951673905663100484}
   - component: {fileID: 8080369994375019144}
   m_Layer: 0
-  m_Name: Short range Projectile
+  m_Name: Attack- Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 8048136264307098328}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15139, y: 0, z: 0}
-  m_LocalScale: {x: 0.012201, y: 0.012201, z: 0.012201}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 5498234965670311190}
   damage: 1
-  speed: 10
-  destroyTime: 1
+  speed: 60
+  destroyTime: 2
 --- !u!54 &5498234965670311190
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -120,7 +120,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.01
+  m_Time: 0.1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -210,5 +210,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.0001
+  m_Radius: 0.5
   m_Center: {x: -1.7242455, y: 0, z: 0}

@@ -13,6 +13,7 @@ public class Dragon : MonoBehaviour , IDamage
     [Header("Animations")]
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] Renderer[] model;
     [Header("Attack")]
     [SerializeField] float flyIntervalMin;
     [SerializeField] float flyIntervalMax;
@@ -24,6 +25,8 @@ public class Dragon : MonoBehaviour , IDamage
 
     [SerializeField] GameObject fireAttackAir;
     [SerializeField] GameObject fireAttackGround;
+    [SerializeField] GameObject biteObject;
+    [SerializeField] Transform BitePos;
 
 
     Vector3 playerDir;
@@ -53,14 +56,14 @@ public class Dragon : MonoBehaviour , IDamage
     }
     void Update()
     {
-        if ((Time.time - SavedTimeFly) > flyInterval && !isFire && !isFly && !isBite && !isDying)
+        if ((Time.time - SavedTimeFly) > flyInterval && !isFire && !isFly && !isBite && !isDying && !playerInRange)
         {
             isFly = true;
             SavedTimeFly += flyInterval;
             flyInterval = Random.Range(flyIntervalMin, flyIntervalMax);
             anim.SetTrigger("Fly");
         }
-        if((Time.time - SavedTimeFire) > fireInterval && !isFire && !isFly && !isBite && !isDying)
+        if((Time.time - SavedTimeFire) > fireInterval && !isFire && !isFly && !isBite && !isDying && !playerInRange)
         {
             isFire = true;
             SavedTimeFire += fireInterval;
@@ -83,6 +86,8 @@ public class Dragon : MonoBehaviour , IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
+
+        StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
@@ -122,20 +127,16 @@ public class Dragon : MonoBehaviour , IDamage
     }
     public void Fly()
     {
-        BoxCollider boxPos = gameObject.GetComponent<BoxCollider>();
-        boxPos.transform.position = new Vector3(boxPos.transform.position.x, boxPos.transform.position.y + 5, boxPos.transform.position.z);
       isFly = true;
     }
 
     public void Land()
     {
-        BoxCollider boxPos = gameObject.GetComponent<BoxCollider>();
-        boxPos.transform.position = new Vector3(boxPos.transform.position.x, boxPos.transform.position.y - 5, boxPos.transform.position.z);
         isFly = false;
     }
     public void Bite()
     {
-        
+        Instantiate(biteObject, BitePos.position,transform.rotation);
         isBite = false;
     }
 
@@ -152,5 +153,20 @@ public class Dragon : MonoBehaviour , IDamage
         {
             playerInRange = false;
         }
+    }
+    IEnumerator flashDamage()
+    {
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.white;
+        }
+
     }
 }

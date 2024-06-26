@@ -5,20 +5,24 @@ using UnityEngine;
 public class EnemyRangedAttack : MonoBehaviour
 {
     //Michael
+    [Header("----- Attack -----")]
     [SerializeField] Transform shootPos;
-    [SerializeField] Animator anim;
     [SerializeField] GameObject projectile;
-
-    // the name of animation for another attack of the enemy(if it doesnt have an alt attack leave blank)
-    [SerializeField] string altAttack;
-
+    [SerializeField] int shootAngle;
     [SerializeField] float shootRate;
- 
+
+    [Header("----- Animation -----")]
+     [SerializeField] Animator anim;
+
+    float angleToPlayer;
     float SavedTime = 0;
-    
+
+    Vector3 playerDir;
     void Update()
     {
-        if ((Time.time - SavedTime) > shootRate && !anim.GetCurrentAnimatorStateInfo(0).IsName(altAttack))
+        playerDir = new Vector3 (playerDir.x, playerDir.y +1, playerDir.z) - transform.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        if ((Time.time - SavedTime) > shootRate && angleToPlayer < shootAngle)
         {
             
             SavedTime = Time.time;

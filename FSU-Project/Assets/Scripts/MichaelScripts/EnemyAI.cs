@@ -7,11 +7,19 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour, IDamage
 {
     //Michael
+
+    [Header("----- Health -----")]
     [SerializeField] int HP;
+
+    [Header("----- AI -----")]
+    [SerializeField] int faceTaregtSpeed; 
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] int faceTaregtSpeed;
+    
+    [Header("----- Animation's -----")] 
+    [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    
 
     int currHP;
     bool playerInRange;
@@ -42,7 +50,9 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        if(HP <= 0)
+        StartCoroutine(flashDamage());
+
+        if (HP <= 0)
         {
             anim.StopPlayback();
             anim.SetTrigger("Death");
@@ -59,5 +69,20 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
+    }
+    IEnumerator flashDamage()
+    {
+        for(int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.red;
+        }
+      
+        yield return new WaitForSeconds(0.1f);
+
+        for(int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.white;
+        }
+       
     }
 }

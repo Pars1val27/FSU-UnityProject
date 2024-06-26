@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8368071416456174757}
   - component: {fileID: 2289204962433511477}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: Attack-RockExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

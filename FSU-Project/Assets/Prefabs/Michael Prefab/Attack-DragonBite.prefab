@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1220392383094623791
+--- !u!1 &4588350530101317651
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 187555815149263106}
-  - component: {fileID: 3999444196584839833}
-  - component: {fileID: -7557047207631729778}
+  - component: {fileID: 5633595590716407634}
+  - component: {fileID: 3450389354514717105}
+  - component: {fileID: 9105680618701320689}
+  - component: {fileID: 1513823380559199885}
   m_Layer: 0
-  m_Name: Attack Area sword
+  m_Name: Attack-DragonBite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &187555815149263106
+--- !u!4 &5633595590716407634
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220392383094623791}
+  m_GameObject: {fileID: 4588350530101317651}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.008726558, y: 0, z: 0, w: 0.999962}
-  m_LocalPosition: {x: 1, y: 1, z: 3.59}
-  m_LocalScale: {x: 3.7299604, y: 2.9697928, z: 2.3580225}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -331.49, y: 12.3410425, z: 260.74}
+  m_LocalScale: {x: 3.6636, y: 3.6636, z: 3.6636}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 1, y: 0, z: 0}
---- !u!65 &3999444196584839833
-BoxCollider:
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &3450389354514717105
+MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220392383094623791}
+  m_GameObject: {fileID: 4588350530101317651}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!135 &9105680618701320689
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4588350530101317651}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -52,18 +61,18 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7557047207631729778
+--- !u!114 &1513823380559199885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220392383094623791}
+  m_GameObject: {fileID: 4588350530101317651}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65d296108317cd649bce3e3e24c83c2f, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ef7684721eb63543b15f0d5e276afe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
