@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuLose;
 
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] public TMP_Text ammoMax;
+    [SerializeField] public TMP_Text ammoCur;
 
     public Image playerHPBar;
     public Image DashCoolDownFill;

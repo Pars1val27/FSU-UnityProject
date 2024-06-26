@@ -293,11 +293,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39ae34d0a48464b4eb42ba9b914b339b, type: 3}
---- !u!1 &1364694669 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5563397590287243730, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-  m_PrefabInstance: {fileID: 1913534700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1476201778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -614,26 +609,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-      propertyPath: aud
-      value: 
-      objectReference: {fileID: 1913534702}
-    - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-      propertyPath: shootDmg
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-      propertyPath: shootDist
-      value: 1000
-      objectReference: {fileID: 0}
-    - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-      propertyPath: shootRate
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-      propertyPath: muzzleFlash
-      value: 
-      objectReference: {fileID: 1364694669}
     - target: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: m_Name
       value: Player
@@ -643,11 +618,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
---- !u!82 &1913534702 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 8507070171164364275, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-  m_PrefabInstance: {fileID: 1913534700}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2049346937
 PrefabInstance:
   m_ObjectHideFlags: 0

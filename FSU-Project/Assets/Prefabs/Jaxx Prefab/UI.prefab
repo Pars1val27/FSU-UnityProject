@@ -3303,6 +3303,8 @@ MonoBehaviour:
   menuWin: {fileID: 3705936247690706651}
   menuLose: {fileID: 2516139484577717482}
   enemyCountText: {fileID: 466015343465251383}
+  ammoMax: {fileID: 0}
+  ammoCur: {fileID: 0}
   playerHPBar: {fileID: 6170626603963774699}
   DashCoolDownFill: {fileID: 5120144865327902661}
   gamePause: 0

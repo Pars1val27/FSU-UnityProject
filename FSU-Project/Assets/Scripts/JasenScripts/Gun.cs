@@ -8,6 +8,9 @@ public class GunScript : MonoBehaviour
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
     [SerializeField] GameObject grenadePrefab;
+    [SerializeField] GameObject muzzleFlash;
+    [SerializeField] AudioClip[] shootSound;
+    [SerializeField] float shootSoundVol;
 
 
     private AudioSource audioSource;
@@ -19,6 +22,7 @@ public class GunScript : MonoBehaviour
         Gunner.currAmmo = Gunner.maxAmmo;
         audioSource = GetComponent<AudioSource>();
         Gunner.playerHP = Gunner.origHP;
+        UpdateGunUI();
     }
 
     void Update()
@@ -32,10 +36,10 @@ public class GunScript : MonoBehaviour
             StartCoroutine(Shoot());
 
         }*/
-        if (Input.GetButtonDown("Fire3"))
+/*        if (Input.GetButtonDown("Fire3"))
         {
             ThrowGrenade();
-        }
+        }*/
 
         if (Gunner.currAmmo <= 0 && !isReloading)
         {
@@ -68,6 +72,11 @@ public class GunScript : MonoBehaviour
         Gunner.currAmmo--;
 
         yield return new WaitForSeconds(Gunner.shootRate);
+
+        Instantiate(bullet, shootPos.position, transform.rotation);
+        currentAmmoCount--;
+        UpdateGunUI();
+        yield return new WaitForSeconds(shootRate);
         isShooting = false;
     }*/
 
@@ -87,6 +96,7 @@ public class GunScript : MonoBehaviour
         }
         isGrenadeReady = false;
         StartCoroutine(RechargeGrenade());
+    
     }
 
     IEnumerator Reload()
@@ -98,6 +108,7 @@ public class GunScript : MonoBehaviour
         gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(Gunner.reloadTime);
         Gunner.currAmmo = Gunner.maxAmmo;
+        UpdateGunUI();
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;
@@ -118,5 +129,10 @@ public class GunScript : MonoBehaviour
     {
         yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
         isGrenadeReady = true;
+    }
+    public void UpdateGunUI()
+    {
+        UIManager.instance.ammoCur.text = Gunner.currAmmo.ToString("F0");
+        UIManager.instance.ammoMax.text = Gunner.maxAmmo.ToString("F0");
     }
 }
