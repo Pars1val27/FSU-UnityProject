@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Numerics;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class PresetArena1 : MonoBehaviour
+public class PresetBoss1 : MonoBehaviour
 {
-    [SerializeField] GameObject spawnPos;
     //[SerializeField] CharacterController characterCtrl;
 
     private void Start()
@@ -15,21 +12,16 @@ public class PresetArena1 : MonoBehaviour
     }
     void SpawnEnemy()
     {
-        Instantiate(RandEnemy(), spawnPos.transform);
+        Instantiate(RandEnemy(), this.transform);
     }
 
     void SpawnPlayer()
     {
         GameObject player = GameObject.FindWithTag("Player");
-
         //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-        //CharacterController characterCtrl = FindObjectOfType<CharacterController>();
         //playerCtrl.enabled = false;
-        //characterCtrl.enabled = false;
-        player.transform.position = spawnPos.transform.position;
-
-        Arena2Script.isPlayerSpawned = true;
-        //characterCtrl.enabled = true;
+        player.transform.position = new Vector3(0, 0, -4);
+        //BossArena1.isPlayerSpawned = true;
         //playerCtrl.enabled = true;
     }
 
@@ -41,13 +33,7 @@ public class PresetArena1 : MonoBehaviour
 
     public void StartArenaEnemy()
     {
-        if (Arena2Script.isPlayerSpawned)
-        {
-            SpawnEnemy();
-        }
-        else
-        {
-            SpawnPlayer();
-        }
+        SpawnEnemy();
+        SpawnPlayer();
     }
 }
