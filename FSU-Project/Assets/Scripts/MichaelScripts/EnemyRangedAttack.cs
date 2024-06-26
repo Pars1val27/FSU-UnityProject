@@ -5,33 +5,34 @@ using UnityEngine;
 public class EnemyRangedAttack : MonoBehaviour
 {
     //Michael
+    [Header("----- Attack -----")]
     [SerializeField] Transform shootPos;
-
-    [SerializeField] float shootRate;
     [SerializeField] GameObject projectile;
+    [SerializeField] int shootAngle;
+    [SerializeField] float shootRate;
 
-    bool isShooting;
+    [Header("----- Animation -----")]
+     [SerializeField] Animator anim;
 
-    void Start()
-    {
-        
-    }
+    float angleToPlayer;
+    float SavedTime = 0;
 
-    
+    Vector3 playerDir;
     void Update()
     {
-        if (isShooting == false)
+        playerDir = new Vector3 (playerDir.x, playerDir.y +1, playerDir.z) - transform.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        if ((Time.time - SavedTime) > shootRate && angleToPlayer < shootAngle)
         {
-            StartCoroutine(shoot());
+            
+            SavedTime = Time.time;
+            anim.SetTrigger("Shoot");
         }
     }
 
-    IEnumerator shoot()
+    
+    public void shoot()
     {
-       
-        isShooting = true;
         Instantiate(projectile, shootPos.position, transform.rotation);
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
     }
 }
