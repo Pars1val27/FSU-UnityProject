@@ -26,7 +26,7 @@ public class GunScript : MonoBehaviour
 
         Gunner.currAmmo = Gunner.maxAmmo;
         Gunner.playerHP = Gunner.origHP;
-        UpdateAmmoCount();
+        //UpdateAmmoCount();
     }
 
     void Update()
