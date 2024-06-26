@@ -122,57 +122,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &552457081
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 552457082}
-  - component: {fileID: 552457083}
-  m_Layer: 5
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &552457082
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552457081}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1492754700}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &552457083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 552457081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c16b7f1dba8eb74d8e63226b516557c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Gunner: {fileID: 0}
-  surface: {fileID: 0}
---- !u!1001 &766778948
+--- !u!1001 &936656202
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -266,17 +216,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2673186199858476667, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 552457082}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
---- !u!224 &1492754700 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2673186199858476667, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-  m_PrefabInstance: {fileID: 766778948}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1569013380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -295,15 +237,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4377413321258789308, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 208.7
+      value: 201.9
       objectReference: {fileID: 0}
     - target: {fileID: 4377413321258789308, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.8
+      value: 9.3
       objectReference: {fileID: 0}
     - target: {fileID: 4377413321258789308, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 82
+      value: 80.7
       objectReference: {fileID: 0}
     - target: {fileID: 4399157211463977879, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -358,10 +300,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 618603675479648443, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
-      propertyPath: Gunner
-      value: 
-      objectReference: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
     - target: {fileID: 1915740922991162683, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -474,5 +412,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 3295616190524894370}
   - {fileID: 1569013380}
-  - {fileID: 766778948}
   - {fileID: 3292923057115515908}
+  - {fileID: 936656202}

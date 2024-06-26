@@ -102,11 +102,11 @@ MonoBehaviour:
   Gunner: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
   GrenadePos: {fileID: 3404024799275723205}
   gun: {fileID: 789420410420548932}
+  grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
   - {fileID: 8300000, guid: b609e86a902f9ef43a35e5f23ba9a386, type: 3}
-  shootSoundVol: 0.5
-  grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
+  shootSoundVol: 0.2
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 0}
   isReloading: 0
@@ -306,7 +306,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5246411402909433550, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

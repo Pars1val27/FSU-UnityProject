@@ -36,8 +36,8 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-       // instance = this;
-        //StartMenu();
+        instance = this;
+        
     }
 
     // Update is called once per frame
@@ -60,7 +60,6 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        StartBoss();
         
     }
 

@@ -9,7 +9,7 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] int damage;
     [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    [SerializeField] float destroyTime;
     // Start is called before the first frame update
     void Start()
     {
