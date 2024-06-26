@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] ParticleSystem hitEffect;
 
 
-    bool isShooting;
+    //bool isShooting;
 
     public bool isReloading;
     public bool isGrenadeReady = true;
