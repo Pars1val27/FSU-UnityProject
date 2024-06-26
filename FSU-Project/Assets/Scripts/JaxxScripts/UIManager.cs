@@ -60,8 +60,6 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        StartBoss();
-        
     }
 
     public void statePause()
