@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public static PlayerController playerInstance;
     [SerializeField] CharacterController controller;
-    [SerializeField] PlayerClass playerClass;
+    [SerializeField] public PlayerClass playerClass;
     [SerializeField] AudioSource aud;
     //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;

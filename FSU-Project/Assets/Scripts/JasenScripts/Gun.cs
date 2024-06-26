@@ -11,7 +11,6 @@ public class GunScript : MonoBehaviour
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;
     [SerializeField] float shootSoundVol;
-    [SerializeField] GameObject grenadePrefab;
     [SerializeField] AudioSource gunAudio;
 
     [SerializeField] ParticleSystem hitEffect;

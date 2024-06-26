@@ -52,9 +52,6 @@ public class PlayerClass : ScriptableObject
     [Range(0.1f, 10f)]
     [SerializeField] public float shootRate;
 
-    [Range(1f, 1000f)]
-    [SerializeField] public float shootDist;
-
     [Range(0.5f, 5f)]
     [SerializeField] public float reloadTime;
 

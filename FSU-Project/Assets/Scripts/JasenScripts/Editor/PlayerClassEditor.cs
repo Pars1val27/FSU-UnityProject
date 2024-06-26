@@ -25,7 +25,6 @@ public class PlayerClassEditor : Editor
     SerializedProperty currAmmo;
     SerializedProperty shootDist;
     SerializedProperty shootRate;
-    SerializedProperty shootDist;
     SerializedProperty reloadTime;
     SerializedProperty delay;
     SerializedProperty grenadeThrowForce;
