@@ -13,56 +13,60 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject inerface;
+    [SerializeField] GameObject bossHealth;
 
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] public TMP_Text ammoMax;
+    [SerializeField] public TMP_Text ammoCur;
 
     public Image playerHPBar;
     public Image DashCoolDownFill;
-    static PlayerController playerInstance;
+    public Image bossHealthBar;
+
 
 
     public bool gamePause;
-    public bool crosshairActive;
+    bool bossBattle;
     public float DashCDRemaining;
+    public float dashingTime;
 
     int enemyCount;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         instance = this;
+        //StartMenu();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if(Input.GetButtonDown("Cancel"))
         {
-            if (menuActive == null)
+            if(menuActive == null)
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(gamePause);
             }
-            else if (menuActive == menuPause)
+            else if(menuActive == menuPause)
             {
                 stateUnpause();
             }
-        }/*
-        if(playerInstance.isDashing)
+        }
+        if(PlayerController.playerInstance.isCoolDown)
         {
-            DashCDRemaining = playerInstance.dashCD;
-            while(DashCDRemaining > 0)
-            {
-                DashCDRemaining -= DashCDRemaining;
-                DashCoolDownFill.fillAmount = DashCDRemaining/ playerInstance.dashCD;
-            }
-        }*/
+            DashCD();
+        }
+        StartBoss();
+        
     }
 
     public void statePause()
     {
-        gamePause = !gamePause;
-        crosshairActive = !crosshairActive;
+        gamePause = !gamePause; 
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -71,12 +75,12 @@ public class UIManager : MonoBehaviour
     public void stateUnpause()
     {
         gamePause = !gamePause;
-        crosshairActive = !crosshairActive;
         Time.timeScale = 1;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(gamePause);
-        menuActive = null;
+        inerface.SetActive(true);
+        menuActive = null;  
     }
 
     public void UpdateEnemyDisplay(int amount)
@@ -84,13 +88,13 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
 
-        if (enemyCount <= 0)
+        if(enemyCount <= 0)
         {
             statePause();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
         }
-
+        
     }
 
     public void onLose()
@@ -99,17 +103,28 @@ public class UIManager : MonoBehaviour
         menuActive = menuLose;
         menuActive.SetActive(true);
     }
-
-    public void ShowUpgradeMenu()
+    public void StartMenu()
     {
-        //UI for upgrade menu display  this should be called in the win condition
-        //We will also need to add another canvus to the UI Handeling with 3 buttons in order to assign the random Upgrades
-        //relvent scripts are PlayerStatUpgrade and Upgrade.cs
+        menuActive = menuMain;
+        stateUnpause();   
+        menuActive.SetActive(gamePause);
     }
 
-    public void HideUpgradeMenu()
+    public void DashCD()
     {
-
+        DashCDRemaining -= Time.deltaTime;
+        if( DashCDRemaining <= 0 ) 
+        {
+            DashCoolDownFill.fillAmount = 1;
+        }
+        else
+        {
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
+        }
     }
 
+    public void StartBoss()
+    {
+       bossHealth.SetActive(true);
+    }
 }
