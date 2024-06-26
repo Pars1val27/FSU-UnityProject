@@ -14,7 +14,6 @@ public class GunScript : MonoBehaviour
 
 
     private AudioSource audioSource;
-    bool isShooting;
     public bool isReloading;
     public bool isGrenadeReady = true;
 
@@ -31,12 +30,12 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+/*        if (Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(Shoot());
 
-        }
-        if (Input.GetButtonDown("Fire3") && !isShooting)
+        }*/
+        if (Input.GetButtonDown("Fire3"))
         {
             ThrowGrenade();
         }
@@ -49,15 +48,18 @@ public class GunScript : MonoBehaviour
 
 
 
-    IEnumerator Shoot()
+    /*IEnumerator Shoot()
     {
         isShooting = true;
         
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.damage))
+        Debug.DrawRay(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
+
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (hit.transform != transform && dmg != null)
@@ -70,7 +72,7 @@ public class GunScript : MonoBehaviour
 
         yield return new WaitForSeconds(Gunner.shootRate);
         isShooting = false;
-    }
+    }*/
 
     void ThrowGrenade()
     {
@@ -105,7 +107,7 @@ public class GunScript : MonoBehaviour
         gun.transform.localRotation = rot;
         isReloading = false;
     }
-    IEnumerator flashMuzzle()
+   /* IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         if (audioSource != null && shootSound != null)
@@ -114,7 +116,7 @@ public class GunScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
-    }
+    }*/
 
     IEnumerator RechargeGrenade()
     {

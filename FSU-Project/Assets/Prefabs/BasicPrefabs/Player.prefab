@@ -564,7 +564,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7497294410605451640}
   playerClass: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
-  audio: {fileID: 8507070171164364275}
+  aud: {fileID: 8507070171164364275}
+  muzzleFlash: {fileID: 5563397590287243730}
   weaponPos: {fileID: 2799739320527782561}
   climbPos: {fileID: 4949162200189842116}
   climbSpeed: 15
@@ -619,6 +620,9 @@ MonoBehaviour:
   FOV: 60
   FOVSprintMod: 70
   FOVDashMod: 75
+  shootDmg: 10
+  shootRate: 0.1
+  shootDist: 1000
   isSprinting: 0
   isDashing: 0
   isCoolDown: 0
