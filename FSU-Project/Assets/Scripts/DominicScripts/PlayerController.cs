@@ -272,7 +272,6 @@ public class PlayerController : MonoBehaviour, IDamage
 
             }
 
-            isClimbing = false;
 
         }
     }

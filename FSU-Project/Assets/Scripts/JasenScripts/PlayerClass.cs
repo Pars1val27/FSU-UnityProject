@@ -46,11 +46,14 @@ public class PlayerClass : ScriptableObject
     [SerializeField] public int maxAmmo;
     public int currAmmo;
 
-    [Range(1, 100)]
-    [SerializeField] public float shootDist = 100;
+/*    [Range(1, 100)]
+    [SerializeField] public float shootDist = 100;*/
 
     [Range(0.1f, 10f)]
     [SerializeField] public float shootRate;
+
+/*    [Range(1f, 1000f)]
+    [SerializeField] public float shootDist;*/
 
     [Range(0.5f, 5f)]
     [SerializeField] public float reloadTime;
@@ -98,7 +101,7 @@ public class PlayerClass : ScriptableObject
 
         PlayerPrefs.SetInt("MaxAmmo", maxAmmo);
         PlayerPrefs.SetFloat("ShootRate", shootRate);
-        PlayerPrefs.SetFloat("ShootDist", shootDist);
+        //PlayerPrefs.SetFloat("ShootDist", shootDist);
         PlayerPrefs.SetFloat("ReloadTime", reloadTime);
         PlayerPrefs.SetInt("Delay", delay);
         PlayerPrefs.SetFloat("GrenadeThrowForce", grenadeThrowForce);
@@ -128,7 +131,7 @@ public class PlayerClass : ScriptableObject
 
         maxAmmo = PlayerPrefs.GetInt("MaxAmmo", maxAmmo);
         shootRate = PlayerPrefs.GetFloat("ShootRate", shootRate);
-        shootDist = PlayerPrefs.GetFloat("ShootDist", shootDist);
+        //shootDist = PlayerPrefs.GetFloat("ShootDist", shootDist);
         reloadTime = PlayerPrefs.GetFloat("ReloadTime", reloadTime);
         delay = PlayerPrefs.GetInt("Delay", delay);
         grenadeThrowForce = PlayerPrefs.GetFloat("GrenadeThrowForce", grenadeThrowForce);
