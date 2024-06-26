@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class gameManager : MonoBehaviour
 {
-    public PlayerClass Gunner;
+    //public PlayerClass Gunner;
 
     public static gameManager instance;
 
@@ -15,10 +15,10 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        Gunner.SaveDefault();
-        LoadPlayerClass();
+        /*Gunner.SaveDefault();
+        LoadPlayerClass();*/
         
-    }
+    }/*
 
     void OnApplicationQuit()
     {
@@ -41,7 +41,7 @@ public class gameManager : MonoBehaviour
     {
         Gunner.ResetToDefault();
         Debug.Log("Player class reset to default values");
-    }
+    }*/
 
 
 }

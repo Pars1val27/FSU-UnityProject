@@ -60,6 +60,7 @@ public class GunScript : MonoBehaviour
     IEnumerator Shoot()
     {
         isShooting = true;
+        Gunner.currAmmo--;
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
@@ -78,8 +79,6 @@ public class GunScript : MonoBehaviour
                 Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
         }
-
-        Gunner.currAmmo--;
 
         yield return new WaitForSeconds(Gunner.shootRate);
         isShooting = false;
@@ -113,6 +112,7 @@ public class GunScript : MonoBehaviour
         gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(Gunner.reloadTime);
         Gunner.currAmmo = Gunner.maxAmmo;
+        UpdateAmmoCount();
         gun.transform.Rotate(new Vector3(0, 0, 0));
         gun.transform.localPosition = pos;
         gun.transform.localRotation = rot;
