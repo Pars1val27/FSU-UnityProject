@@ -10,6 +10,7 @@ public class ArenaTP : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             arena.StartArena();
+            Arena2Script.isPlayerSpawned = false;
         }
     }
 }

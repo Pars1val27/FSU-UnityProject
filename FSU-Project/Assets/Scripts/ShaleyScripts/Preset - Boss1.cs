@@ -15,14 +15,12 @@ public class PresetBoss1 : MonoBehaviour
         Instantiate(RandEnemy(), this.transform);
     }
 
-    void SpawnPlayer()
+    IEnumerator SpawnPlayer()
     {
+        //Michael
         GameObject player = GameObject.FindWithTag("Player");
-        //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-        //playerCtrl.enabled = false;
-        player.transform.position = new Vector3(0, 0, -4);
-        //BossArena1.isPlayerSpawned = true;
-        //playerCtrl.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        player.transform.position = new UnityEngine.Vector3(0, 0, 0);
     }
 
     GameObject RandEnemy()
@@ -34,6 +32,6 @@ public class PresetBoss1 : MonoBehaviour
     public void StartArenaEnemy()
     {
         SpawnEnemy();
-        SpawnPlayer();
+        StartCoroutine(SpawnPlayer());
     }
 }
