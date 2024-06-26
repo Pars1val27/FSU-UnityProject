@@ -16,7 +16,7 @@ public class PlayerStatUpgrade : MonoBehaviour
         {
             //Upgrade.cs contains the public Enum which you will need in implement new enums
             //for whatever shop perks you would like to add
-            // you all will need to expand the Case Stament in apppyUpgread
+            // you all will need to expand the Case Stament in applyUpgread
             new Upgrade("Increase HP", UpgradeType.IncreaseHP),
             new Upgrade("Increase Speed", UpgradeType.IncreaseSpeed),
             new Upgrade("Increase Damage", UpgradeType.IncreaseDamage),
@@ -54,7 +54,7 @@ public class PlayerStatUpgrade : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeType.IncreaseHP:
-                playerClass.playerHP += 10;
+                playerClass.origHP += 10;
                 break;
             case UpgradeType.IncreaseSpeed:
                 playerClass.speed += 1;

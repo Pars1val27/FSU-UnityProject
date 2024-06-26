@@ -11,18 +11,22 @@ public class GunScript : MonoBehaviour
     [SerializeField] AudioClip[] shootSound;
     [SerializeField] float shootSoundVol;
     [SerializeField] GameObject grenadePrefab;
+    [SerializeField] AudioSource gunAudio;
+
+    [SerializeField] ParticleSystem hitEffect;
 
 
-    private AudioSource audioSource;
     bool isShooting;
+
     public bool isReloading;
     public bool isGrenadeReady = true;
 
     void Start()
     {
+
         Gunner.currAmmo = Gunner.maxAmmo;
-        audioSource = GetComponent<AudioSource>();
         Gunner.playerHP = Gunner.origHP;
+        UpdateAmmoCount();
     }
 
     void Update()
@@ -47,22 +51,31 @@ public class GunScript : MonoBehaviour
         }
     }
 
-
+    void UpdateAmmoCount()
+    {
+        UIManager.instance.ammoCur.text = Gunner.currAmmo.ToString();
+        UIManager.instance.ammoMax.text = Gunner.maxAmmo.ToString();
+    }
 
     IEnumerator Shoot()
     {
         isShooting = true;
-        
+        UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.damage))
+        
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
+            Debug.Log("Raycast hit: " + hit.collider.name);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(Gunner.damage);
+            }
+            else
+            {
+                Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
         }
 
@@ -108,9 +121,9 @@ public class GunScript : MonoBehaviour
     IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
-        if (audioSource != null && shootSound != null)
+        if (gunAudio != null && shootSound != null)
         {
-            audioSource.PlayOneShot(shootSound[Random.Range(0, shootSound.Length)], shootSoundVol);
+            gunAudio.PlayOneShot(shootSound[Random.Range(0, shootSound.Length)], shootSoundVol);
         }
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);

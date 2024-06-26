@@ -42,9 +42,12 @@ public class PlayerClass : ScriptableObject
     [Header("Gunner Attributes")]
     [SerializeField] public bool showGunnerAttributes;
 
-    [Range(1, 500)]
+    [Range(1, 99)]
     [SerializeField] public int maxAmmo;
     public int currAmmo;
+
+    [Range(1, 100)]
+    [SerializeField] public float shootDist = 100;
 
     [Range(0.1f, 10f)]
     [SerializeField] public float shootRate;
