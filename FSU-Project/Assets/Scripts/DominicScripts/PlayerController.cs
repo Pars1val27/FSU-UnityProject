@@ -35,7 +35,6 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         playerInstance = this;
         origHP = PlayerHP;
-        UIManager.instance.dashingTime = dashCD + dashDuration;
        
     }
 

@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        
+        //StartMenu();
     }
 
     // Update is called once per frame
@@ -60,6 +60,7 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
+        StartBoss();
         
     }
 
@@ -105,11 +106,10 @@ public class UIManager : MonoBehaviour
     public void StartMenu()
     {
         menuActive = menuMain;
-        statePause();
+        stateUnpause();   
         menuActive.SetActive(gamePause);
-        inerface.SetActive(false);
     }
-    
+
     public void DashCD()
     {
         DashCDRemaining -= Time.deltaTime;
