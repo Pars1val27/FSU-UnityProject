@@ -7,9 +7,6 @@ public class GunScript : MonoBehaviour
     public PlayerClass Gunner;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
-    [SerializeField] GameObject muzzleFlash;
-    [SerializeField] AudioClip[] shootSound;
-    [SerializeField] float shootSoundVol;
     [SerializeField] GameObject grenadePrefab;
 
 
@@ -88,7 +85,6 @@ public class GunScript : MonoBehaviour
         {
             grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
         }
-
         isGrenadeReady = false;
         StartCoroutine(RechargeGrenade());
     }
