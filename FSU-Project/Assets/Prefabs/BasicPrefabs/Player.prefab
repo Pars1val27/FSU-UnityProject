@@ -405,9 +405,6 @@ MonoBehaviour:
   FOV: 60
   FOVSprintMod: 70
   FOVDashMod: 75
-  shootDmg: 1
-  shootRate: 0.1
-  shootDist: 300
   isSprinting: 0
   isDashing: 0
   isCoolDown: 0

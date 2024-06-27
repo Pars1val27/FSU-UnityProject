@@ -37,6 +37,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause)
         {
+            
             StartCoroutine(Shoot());
 
         }
