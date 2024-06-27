@@ -121,6 +121,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1915740922991162683}
     m_Modifications:
+    - target: {fileID: 1753967984651768739, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 433629fcdb33010408811cb53c725c77, type: 2}
     - target: {fileID: 2517271132075046324, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
       propertyPath: m_Name
       value: spawnRoomWall
