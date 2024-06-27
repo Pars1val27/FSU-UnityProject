@@ -7,9 +7,8 @@ using UnityEngine.AI;
 public class gameManager : MonoBehaviour
 {
     //public PlayerClass Gunner;
-    [SerializeField] public GameObject player;
-
-    [SerializeField] GameObject spawnPos;
+    public GameObject player;
+    public PlayerController playerScript;
 
     public static gameManager instance;
 
@@ -18,14 +17,21 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        player = GameObject.FindWithTag("Player");
+        playerScript = player.GetComponent<PlayerController>();
     }
 
-    public void SpawnPlayer()
+    public void SpawnPlayer(GameObject spawnPos)
     {
-        Instantiate(gameManager.instance.player, new UnityEngine.Vector3(
-            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
-            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
-            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
+        //Instantiate(gameManager.instance.player, new UnityEngine.Vector3(
+        //    spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
+        //    new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
+        //    spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
+
+        gameManager.instance.playerScript.controller.enabled = false;
+        gameManager.instance.player.transform.position = spawnPos.transform.position;
+        gameManager.instance.playerScript.controller.enabled = true;
+
     }
 
 }

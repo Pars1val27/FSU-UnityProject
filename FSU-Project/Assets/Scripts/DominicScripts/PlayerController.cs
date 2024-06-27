@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // this shouldn't change any of the prestablished funcionality of the code only changing the veriable location
 
     public static PlayerController playerInstance;
-    [SerializeField] CharacterController controller;
+    public CharacterController controller;
     [SerializeField] public PlayerClass playerClass;
     [SerializeField] AudioSource aud;
     //[SerializeField] GameObject muzzleFlash;

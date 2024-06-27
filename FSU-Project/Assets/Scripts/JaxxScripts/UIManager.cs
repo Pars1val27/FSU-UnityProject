@@ -93,10 +93,10 @@ public class UIManager : MonoBehaviour
         if(enemyCount <= 0)
         {
             statePause();
-            PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
+            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
-            PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
+            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
         }
 
     }
