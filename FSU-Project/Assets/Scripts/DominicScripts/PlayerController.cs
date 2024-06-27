@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] public PlayerClass playerClass;
     [SerializeField] AudioSource aud;
-    [SerializeField] GameObject muzzleFlash;
+    //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
     //[SerializeField] public float dashCD;
@@ -35,17 +35,19 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float audJumpBoostVol;
     [SerializeField] AudioClip[] audDash;
     [SerializeField] float audDashVol;
+    //[SerializeField] AudioClip[] audGun;
+    //[SerializeField] float audGunVol;
 
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
 
-    [Range(1, 10)]
+    /*[Range(1, 10)]
     [SerializeField] int shootDmg;
     [Range(.1f, 10)]
     [SerializeField] float shootRate;
     [Range(1, 1000)]
-    [SerializeField] int shootDist;
+    [SerializeField] int shootDist;*/
 
     //bool isShooting;
 
@@ -81,8 +83,11 @@ public class PlayerController : MonoBehaviour, IDamage
         origSpeed = playerClass.speed;
         origGravity = gravity;
         origFOV = FOV;
-
+        isDashing = false;
+        isClimbing = false;
         EquipClassWeapon();
+        isDashing = false;
+
     }
 
     // Update is called once per frame
@@ -192,9 +197,11 @@ public class PlayerController : MonoBehaviour, IDamage
     /*IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
+        aud.PlayOneShot(audGun[Random.Range(0, audGun.Length)], audGunVol);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
     }*/
+   
 
 
 

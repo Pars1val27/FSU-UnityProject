@@ -1790,15 +1790,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 5
+  faceTaregtSpeed: 300
+  agent: {fileID: 5439088260469296567}
   model:
   - {fileID: 628756737119799082}
   - {fileID: 5153058939340584249}
   - {fileID: 8931398224700706498}
   - {fileID: 315394917697089809}
   - {fileID: 6017560768600747291}
-  HP: 5
-  agent: {fileID: 5439088260469296567}
-  faceTaregtSpeed: 300
   anim: {fileID: 7820320962231266268}
   animTranSpeed: 30
 --- !u!114 &5704613802112828725
@@ -1814,10 +1814,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 4175054255908537402}
-  anim: {fileID: 7820320962231266268}
   projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
   shootAngle: 90
   shootRate: 5
+  anim: {fileID: 7820320962231266268}
 --- !u!195 &5439088260469296567
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1832,7 +1832,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 20
+  m_StoppingDistance: 80
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1

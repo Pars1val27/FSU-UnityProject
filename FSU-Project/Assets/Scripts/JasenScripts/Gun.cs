@@ -31,24 +31,18 @@ public class GunScript : MonoBehaviour
 
     void Update()
     {
-
-        if (UIManager.instance.gamePause)
-        {
-            return;
-        }
-
         if (isReloading)
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause)
         {
+            
             StartCoroutine(Shoot());
 
         }
-        if (Input.GetButtonDown("Fire3")  && isGrenadeReady)
+        if (Input.GetButtonDown("Fire3") && isGrenadeReady)
         {
-            Debug.Log("ThrowGrenade method called");
             ThrowGrenade();
         }
 
@@ -71,12 +65,10 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
            
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(Gunner.damage);
@@ -86,14 +78,12 @@ public class GunScript : MonoBehaviour
                 //Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
         }
-
         yield return new WaitForSeconds(Gunner.shootRate);
         isShooting = false;
     }
 
     void ThrowGrenade()
     {
-        Debug.Log("ThrowGrenade method called");
         GameObject grenade = Instantiate(grenadePrefab, GrenadePos.position, GrenadePos.rotation);
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
@@ -141,7 +131,6 @@ public class GunScript : MonoBehaviour
     {
         isGrenadeReady = false;
         yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
-        Debug.Log("Grenade recharged");
         isGrenadeReady = true;
     }
 }

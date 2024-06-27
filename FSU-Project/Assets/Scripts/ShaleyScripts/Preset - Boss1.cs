@@ -5,15 +5,21 @@ using UnityEngine;
 public class PresetBoss1 : MonoBehaviour
 {
     //[SerializeField] CharacterController characterCtrl;
+    [SerializeField] GameObject bossPos;
     [SerializeField] GameObject spawnPos;
 
     private void Start()
     {
         StartArenaEnemy();
     }
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
-        Instantiate(RandEnemy(), new Vector3(0,0,0), new Quaternion(0,0,0,0));
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(RandEnemy(), new UnityEngine.Vector3(
+            bossPos.transform.position.x, bossPos.transform.position.y, bossPos.transform.position.z),
+            new UnityEngine.Quaternion(bossPos.transform.rotation.x, bossPos.transform.rotation.y,
+            bossPos.transform.rotation.z, bossPos.transform.rotation.w));
+        EnemyManager.instance.FindPlayer();
     }
 
     IEnumerator SpawnPlayer()
@@ -37,7 +43,10 @@ public class PresetBoss1 : MonoBehaviour
 
     public void StartArenaEnemy()
     {
-        SpawnEnemy();
         StartCoroutine(SpawnPlayer());
+        
+        StartCoroutine(SpawnEnemy());
+
+        UIManager.instance.StartBoss();
     }
 }

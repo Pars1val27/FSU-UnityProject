@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1621358744589595555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8921735228189027722}
+  m_Layer: 0
+  m_Name: spawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8921735228189027722
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621358744589595555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 6.24, z: -3.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8500886136784493374}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2948477570116705585
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,6 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c16b7f1dba8eb74d8e63226b516557c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
+  spawnPos: {fileID: 1621358744589595555}
   surface: {fileID: 4747072440536508959}
 --- !u!114 &4747072440536508959
 MonoBehaviour:
@@ -121,6 +154,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1915740922991162683}
     m_Modifications:
+    - target: {fileID: 1753967984651768739, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 433629fcdb33010408811cb53c725c77, type: 2}
     - target: {fileID: 2517271132075046324, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
       propertyPath: m_Name
       value: spawnRoomWall
@@ -129,6 +166,10 @@ PrefabInstance:
       propertyPath: m_CookingOptions
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 5058094000503071755, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
+      propertyPath: arena
+      value: 
+      objectReference: {fileID: 3756876225139022354}
     - target: {fileID: 6924742324952350317, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
       propertyPath: m_Name
       value: spawnRoomWall (1)
@@ -196,6 +237,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7135787541184056427, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8401720162824449538}
+    - targetCorrespondingSourceObject: {fileID: 7135787541184056427, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8921735228189027722}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7615798952149715299, guid: 80ace7884f6d5574cb20f1f18bd68e50, type: 3}
       insertIndex: -1
@@ -238,6 +282,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1915740922991162683}
     m_Modifications:
+    - target: {fileID: 2604770297957786468, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a62cc74b12333f04cb06d13bf35a05be, type: 2}
+    - target: {fileID: 3384311948477322580, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a62cc74b12333f04cb06d13bf35a05be, type: 2}
     - target: {fileID: 4640388605339880383, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -343.10184
@@ -278,10 +330,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5285297033050513948, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a62cc74b12333f04cb06d13bf35a05be, type: 2}
     - target: {fileID: 6441698543694003542, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
       propertyPath: m_Name
       value: Arena2.0Walls
       objectReference: {fileID: 0}
+    - target: {fileID: 7618786073002754920, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a62cc74b12333f04cb06d13bf35a05be, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: -2912252464814915019, guid: 6bcde06746e7df54c8b224da25729bf4, type: 3}

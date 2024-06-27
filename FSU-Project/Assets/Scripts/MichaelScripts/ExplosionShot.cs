@@ -30,6 +30,10 @@ public class ExplosiveShot : MonoBehaviour
         {
             dmg.TakeDamage(damage);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         Instantiate(explosion, transform.position, transform.rotation);
 

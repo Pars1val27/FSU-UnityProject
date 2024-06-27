@@ -31,6 +31,8 @@ public class Dragon : MonoBehaviour , IDamage
 
     Vector3 playerDir;
 
+    int maxHP;
+
     bool isFly;
     bool isFire;
     bool isBite;
@@ -53,6 +55,7 @@ public class Dragon : MonoBehaviour , IDamage
         fireInterval = SavedTimeFire;
         SavedTimeFly = Random.Range(flyIntervalMin, flyIntervalMax);
         flyInterval = SavedTimeFly;
+        maxHP = HP;
     }
     void Update()
     {
@@ -86,7 +89,7 @@ public class Dragon : MonoBehaviour , IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        UIManager.instance.bossHealthBar.fillAmount = (float)HP / maxHP;
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -94,6 +97,7 @@ public class Dragon : MonoBehaviour , IDamage
             isDying = true;
             anim.StopPlayback();
             anim.SetTrigger("Death");
+            UIManager.instance.BossWin();
         }
     }
 
