@@ -16,7 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
-    [SerializeField] public GameObject bossHealth;
+    [SerializeField] GameObject bossHealth;
+    public PlayerStatUpgrade playerStatUp;
 
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
@@ -25,10 +26,12 @@ public class UIManager : MonoBehaviour
     public Image playerHPBar;
     public Image DashCoolDownFill;
     public Image bossHealthBar;
+   
 
 
 
     public bool gamePause;
+    bool bossBattle;
     public float DashCDRemaining;
     public float dashingTime;
 
@@ -38,6 +41,11 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         //StartMenu();
+    }
+
+    void Start()
+    {
+        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
     }
 
     // Update is called once per frame
@@ -87,14 +95,18 @@ public class UIManager : MonoBehaviour
     {
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
-
+        
         if(enemyCount <= 0)
         {
+            
             statePause();
+            playerStatUp.GenerateRandomUpgrades();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
+            playerStatUp.GenerateRandomUpgrades();
+            
         }
-        
+
     }
 
     public void onLose()

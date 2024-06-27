@@ -19,8 +19,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
-    
-
+ 
     int currHP;
     bool playerInRange;
 
