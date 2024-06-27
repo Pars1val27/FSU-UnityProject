@@ -49,9 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdc735c2d7e3784d8695d5e5a91cebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1422934129803484529, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
   spawnPos: {fileID: 7282085101376375937}
-  CharacterCtrl: {fileID: 877574397350160705, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
 --- !u!1 &7282085101376375937
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,18 +155,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8047472505863108538}
     m_Modifications:
-    - target: {fileID: 5260974419707349852, guid: c19a92d0f0237f548842bd260f37cc71, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5260974419707349852, guid: c19a92d0f0237f548842bd260f37cc71, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5260974419707349852, guid: c19a92d0f0237f548842bd260f37cc71, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 5260974419707349852, guid: c19a92d0f0237f548842bd260f37cc71, type: 3}
       propertyPath: m_LocalPosition.x
       value: 75

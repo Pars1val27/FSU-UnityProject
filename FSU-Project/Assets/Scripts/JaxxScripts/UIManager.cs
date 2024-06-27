@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.playerClass.dashCD;
         }
     }
 
