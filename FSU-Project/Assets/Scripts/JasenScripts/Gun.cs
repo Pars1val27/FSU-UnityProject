@@ -16,7 +16,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] ParticleSystem hitEffect;
 
 
-    //bool isShooting;
+    bool isShooting;
 
     public bool isReloading;
     public bool isGrenadeReady = true;
@@ -40,7 +40,7 @@ public class GunScript : MonoBehaviour
             StartCoroutine(Shoot());
 
         }
-        if (Input.GetButtonDown("Fire3") && !isShooting)
+        if (Input.GetButtonDown("Fire3") && !isShooting && isGrenadeReady)
         {
             ThrowGrenade();
         }
@@ -65,7 +65,7 @@ public class GunScript : MonoBehaviour
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Gunner.shootDist))
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
            
             IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -99,7 +99,7 @@ public class GunScript : MonoBehaviour
             grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
         }
 
-        isGrenadeReady = false;
+        
         StartCoroutine(RechargeGrenade());
     }
 
@@ -131,6 +131,7 @@ public class GunScript : MonoBehaviour
 
     IEnumerator RechargeGrenade()
     {
+        isGrenadeReady = false;
         yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
         isGrenadeReady = true;
     }

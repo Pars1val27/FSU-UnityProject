@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 1000)]
     [SerializeField] int shootDist;
 
-    bool isShooting;
+    //bool isShooting;
 
     int jumpCount;
     int origSpeed;
@@ -93,13 +93,13 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         
         //handled in gun.cs
-        if (Input.GetButtonDown("Fire1"))
+        /*if (Input.GetButtonDown("Fire1"))
         {
-            StartCoroutine(shoot());
+            //StartCoroutine(shoot());
             
             
         }
-
+        */
         if (Input.GetButton("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
@@ -169,7 +169,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
 
     //moveed to Gun.cs
-    IEnumerator shoot()
+   /* IEnumerator shoot()
     {
         isShooting = true;
         StartCoroutine(flashMuzzle());
@@ -187,14 +187,14 @@ public class PlayerController : MonoBehaviour, IDamage
         }
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
-    }
+    }*/
 
-    IEnumerator flashMuzzle()
+    /*IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
-    }
+    }*/
 
 
 
