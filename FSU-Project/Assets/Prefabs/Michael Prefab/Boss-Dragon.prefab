@@ -430,10 +430,10 @@ MonoBehaviour:
   anim: {fileID: 79752198690169732}
   animTranSpeed: 30
   model: []
-  flyIntervalMin: 5
-  flyIntervalMax: 10
-  FireIntervalMin: 5
-  FireIntervalMax: 10
+  flyIntervalMin: 10
+  flyIntervalMax: 15
+  FireIntervalMin: 0
+  FireIntervalMax: 0
   BiteRate: 3
   fireAttackAir: {fileID: 2199543063159097310}
   fireAttackGround: {fileID: 7279412247634223613}
