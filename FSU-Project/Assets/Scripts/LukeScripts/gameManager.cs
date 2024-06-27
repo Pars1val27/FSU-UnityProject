@@ -15,12 +15,12 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        /*Gunner.SaveDefault();
-        LoadPlayerClass();*/
+      //  Gunner.SaveDefault();
+       // LoadPlayerClass();
         
-    }/*
+    }
 
-    void OnApplicationQuit()
+  /*  void OnApplicationQuit()
     {
         ResetPlayerClass();
     }
@@ -38,10 +38,10 @@ public class gameManager : MonoBehaviour
     }
 
     public void ResetPlayerClass()
-    {
+    { 
         Gunner.ResetToDefault();
         Debug.Log("Player class reset to default values");
-    }*/
+    }
 
-
+    */
 }

@@ -253,11 +253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 3
+  faceTaregtSpeed: 30
+  agent: {fileID: 7280939693323179582}
   model:
   - {fileID: 8028279669154879417}
-  HP: 3
-  agent: {fileID: 7280939693323179582}
-  faceTaregtSpeed: 30
   anim: {fileID: 8028279669150607737}
   animTranSpeed: 30
 --- !u!114 &1723038193657446405
@@ -278,7 +278,7 @@ MonoBehaviour:
   shootPos4: {fileID: 29081119339649799}
   shootRate: 5
   projectile: {fileID: 8048136264307098328, guid: 1c3f0525bdd4c6f4c865d86cc9b8a38c, type: 3}
-  anim: {fileID: 0}
+  anim: {fileID: 8028279669150607737}
   altAttack: 
 --- !u!195 &7280939693323179582
 NavMeshAgent:

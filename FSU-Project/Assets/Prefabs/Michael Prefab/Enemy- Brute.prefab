@@ -604,10 +604,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPos: {fileID: 4959807112645143095}
-  anim: {fileID: 7371573635700173029}
-  projectile: {fileID: 122231006637389524, guid: 7d4c7ef50add29c4bab798a57d3a7e30, type: 3}
-  shootAngle: 0
+  projectile: {fileID: 122231006637389524, guid: 667ce7a3106593d439033bdaf21416bd, type: 3}
+  shootAngle: 90
   shootRate: 10
+  anim: {fileID: 7371573635700173029}
 --- !u!114 &4722006240755589099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,10 +621,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRate: 4
-  anim: {fileID: 7371573635700173029}
   MeleeAttack: {fileID: 2663911715152874773, guid: 532dadf7e98579742a7518d0622991d5, type: 3}
   ImpactPoint: {fileID: 4097364268322239721}
-  altAttack: Attack01
+  anim: {fileID: 7371573635700173029}
 --- !u!114 &3935096963050099906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,11 +636,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 5
+  faceTaregtSpeed: 10
+  agent: {fileID: 6050995354911396130}
   model:
   - {fileID: 6297995791095230021}
-  HP: 5
-  agent: {fileID: 6050995354911396130}
-  faceTaregtSpeed: 10
   anim: {fileID: 7371573635700173029}
   animTranSpeed: 10
 --- !u!95 &7371573635700173029

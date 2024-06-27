@@ -10,6 +10,7 @@ public class BossTP : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             arena.StartArena();
+            Arena2Script.isPlayerSpawned = false;
         }
     }
 }
