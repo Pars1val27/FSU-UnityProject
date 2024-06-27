@@ -26,13 +26,8 @@ public class PresetBoss1 : MonoBehaviour
     {
         Arena2Script.isPlayerSpawned = true;
         GameObject player = GameObject.FindWithTag("Player");
-        GameObject temp = player;
         yield return new WaitForSeconds(0.1f);
-        Instantiate(player, new UnityEngine.Vector3(
-            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
-            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
-            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
-        Destroy(temp);
+        player.transform.position = spawnPos.transform.position;
     }
 
     GameObject RandEnemy()
