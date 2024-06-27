@@ -31,7 +31,7 @@ public class Dragon : MonoBehaviour , IDamage
 
     Vector3 playerDir;
 
-    int maxHP;
+    float maxHP;
 
     bool isFly;
     bool isFire;
