@@ -7,6 +7,9 @@ using UnityEngine.AI;
 public class gameManager : MonoBehaviour
 {
     //public PlayerClass Gunner;
+    [SerializeField] public GameObject player;
+
+    [SerializeField] GameObject spawnPos;
 
     public static gameManager instance;
 
@@ -15,33 +18,14 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-      //  Gunner.SaveDefault();
-       // LoadPlayerClass();
-        
     }
 
-  /*  void OnApplicationQuit()
+    public void SpawnPlayer()
     {
-        ResetPlayerClass();
+        Instantiate(gameManager.instance.player, new UnityEngine.Vector3(
+            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
+            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
+            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
     }
 
-    public void SavePlayerClass()
-    {
-        Gunner.Save();
-        Debug.Log("Player class saved");
-    }
-
-    public void LoadPlayerClass()
-    {
-        Gunner.Load();
-        Debug.Log("Player class loaded");
-    }
-
-    public void ResetPlayerClass()
-    { 
-        Gunner.ResetToDefault();
-        Debug.Log("Player class reset to default values");
-    }
-
-    */
 }
