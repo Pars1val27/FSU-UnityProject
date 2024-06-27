@@ -16,14 +16,12 @@ public class PresetArena1 : MonoBehaviour
     {
         StartArenaEnemy();
     }
-    IEnumerator SpawnEnemy()
+    void SpawnEnemy()
     {
-        yield return new WaitForSeconds(0.3f);
         Instantiate(RandEnemy(), new UnityEngine.Vector3(
             spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z), 
             new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
             spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
-        EnemyManager.instance.FindPlayer();
     }
 
     //void SpawnPlayer()
@@ -53,27 +51,13 @@ public class PresetArena1 : MonoBehaviour
     {
         if (!Arena2Script.isPlayerSpawned)
         {
-            StartCoroutine(SpawnPlayer());
+            gameManager.instance.SpawnPlayer(spawnPos);
+            Arena2Script.isPlayerSpawned = true;
             
         }
         else
         {
-            StartCoroutine(SpawnEnemy());
+            SpawnEnemy();
         }
-    }
-
-    IEnumerator SpawnPlayer()
-    {
-        Arena2Script.isPlayerSpawned = true;
-        GameObject player = GameObject.FindWithTag("Player");
-        GameObject gun = GameObject.FindWithTag("Gun");
-        Destroy(gun);
-        GameObject temp = player;
-        yield return new WaitForSeconds(0.1f);
-        Instantiate(player, new UnityEngine.Vector3(
-            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
-            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
-            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
-        Destroy(temp);
     }
 }
