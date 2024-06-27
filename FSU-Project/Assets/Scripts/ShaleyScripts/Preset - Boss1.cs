@@ -5,35 +5,46 @@ using UnityEngine;
 public class PresetBoss1 : MonoBehaviour
 {
     //[SerializeField] CharacterController characterCtrl;
+    [SerializeField] GameObject bossPos;
+    [SerializeField] GameObject spawnPos;
 
     private void Start()
     {
         StartArenaEnemy();
     }
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
-        Instantiate(RandEnemy(), this.transform);
+        yield return new WaitForSeconds(0.3f);
+        Instantiate(RandEnemy(), new UnityEngine.Vector3(
+            bossPos.transform.position.x, bossPos.transform.position.y, bossPos.transform.position.z),
+            new UnityEngine.Quaternion(bossPos.transform.rotation.x, bossPos.transform.rotation.y,
+            bossPos.transform.rotation.z, bossPos.transform.rotation.w));
+        EnemyManager.instance.FindPlayer();
     }
 
-    void SpawnPlayer()
+    IEnumerator SpawnPlayer()
     {
+        Arena2Script.isPlayerSpawned = true;
         GameObject player = GameObject.FindWithTag("Player");
-        //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-        //playerCtrl.enabled = false;
-        player.transform.position = new Vector3(0, 0, -4);
-        //BossArena1.isPlayerSpawned = true;
-        //playerCtrl.enabled = true;
+        GameObject temp = player;
+        yield return new WaitForSeconds(0.1f);
+        Instantiate(player, new UnityEngine.Vector3(
+            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
+            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
+            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
+        Destroy(temp);
     }
 
     GameObject RandEnemy()
     {
-        int enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
-        return EnemyManager.instance.enemies[enemy];
+        int enemy = UnityEngine.Random.Range(0, EnemyManager.instance.bosses.Length);
+        return EnemyManager.instance.bosses[enemy];
     }
 
     public void StartArenaEnemy()
     {
-        SpawnEnemy();
-        SpawnPlayer();
+        StartCoroutine(SpawnPlayer());
+        
+        StartCoroutine(SpawnEnemy());
     }
 }

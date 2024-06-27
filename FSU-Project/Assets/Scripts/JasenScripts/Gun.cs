@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,10 +7,10 @@ public class GunScript : MonoBehaviour
     public PlayerClass Gunner;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject gun;
-    [SerializeField] GameObject grenadePrefab;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;
     [SerializeField] float shootSoundVol;
+    [SerializeField] GameObject grenadePrefab;
     [SerializeField] AudioSource gunAudio;
 
     [SerializeField] ParticleSystem hitEffect;
@@ -35,15 +35,15 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-/*        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             StartCoroutine(Shoot());
 
-        }*/
-/*        if (Input.GetButtonDown("Fire3"))
+        }
+        if (Input.GetButtonDown("Fire3") && !isShooting && isGrenadeReady)
         {
             ThrowGrenade();
-        }*/
+        }
 
         if (Gunner.currAmmo <= 0 && !isReloading)
         {
@@ -57,8 +57,7 @@ public class GunScript : MonoBehaviour
         UIManager.instance.ammoMax.text = Gunner.maxAmmo.ToString();
     }
 
-
-    /*IEnumerator Shoot()
+    IEnumerator Shoot()
     {
         isShooting = true;
         Gunner.currAmmo--;
@@ -66,11 +65,9 @@ public class GunScript : MonoBehaviour
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
 
-        Debug.DrawRay(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
-
+           
             IDamage dmg = hit.collider.GetComponent<IDamage>();
 
             if (hit.transform != transform && dmg != null)
@@ -84,13 +81,8 @@ public class GunScript : MonoBehaviour
         }
 
         yield return new WaitForSeconds(Gunner.shootRate);
-
-        Instantiate(bullet, shootPos.position, transform.rotation);
-        currentAmmoCount--;
-        UpdateGunUI();
-        yield return new WaitForSeconds(shootRate);
         isShooting = false;
-    }*/
+    }
 
     void ThrowGrenade()
     {
@@ -106,9 +98,9 @@ public class GunScript : MonoBehaviour
         {
             grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
         }
-        isGrenadeReady = false;
+
+        
         StartCoroutine(RechargeGrenade());
-    
     }
 
     IEnumerator Reload()
@@ -126,7 +118,7 @@ public class GunScript : MonoBehaviour
         gun.transform.localRotation = rot;
         isReloading = false;
     }
-   /* IEnumerator flashMuzzle()
+    IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
         if (gunAudio != null && shootSound != null)
@@ -135,16 +127,12 @@ public class GunScript : MonoBehaviour
         }
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
-    }*/
+    }
 
     IEnumerator RechargeGrenade()
     {
+        isGrenadeReady = false;
         yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
         isGrenadeReady = true;
-    }
-    public void UpdateGunUI()
-    {
-        UIManager.instance.ammoCur.text = Gunner.currAmmo.ToString("F0");
-        UIManager.instance.ammoMax.text = Gunner.maxAmmo.ToString("F0");
     }
 }

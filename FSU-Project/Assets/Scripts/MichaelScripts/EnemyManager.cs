@@ -11,11 +11,18 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject player;
 
+    public GameObject[] bosses;
+
     public GameObject[] enemies;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
+        FindPlayer();
+    }
+
+    public void FindPlayer()
+    {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
