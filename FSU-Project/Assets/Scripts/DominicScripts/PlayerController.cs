@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float audJumpBoostVol;
     [SerializeField] AudioClip[] audDash;
     [SerializeField] float audDashVol;
+    [SerializeField] AudioClip[] audGun;
+    [SerializeField] float audGunVol;
 
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
@@ -192,6 +194,7 @@ public class PlayerController : MonoBehaviour, IDamage
     IEnumerator flashMuzzle()
     {
         muzzleFlash.SetActive(true);
+        aud.PlayOneShot(audGun[Random.Range(0, audGun.Length)], audGunVol);
         yield return new WaitForSeconds(0.1f);
         muzzleFlash.SetActive(false);
     }
