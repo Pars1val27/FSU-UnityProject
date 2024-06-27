@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamage
     //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
+    public PlayerStatUpgrade playerStatUp;
     //[SerializeField] public float dashCD;
 
     //[SerializeField] int PlayerHP;
@@ -80,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        playerInstance = this;
         origSpeed = playerClass.speed;
         origGravity = gravity;
         origFOV = FOV;
@@ -87,6 +89,7 @@ public class PlayerController : MonoBehaviour, IDamage
         isClimbing = false;
         EquipClassWeapon();
         isDashing = false;
+        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
     }
 
     // Update is called once per frame

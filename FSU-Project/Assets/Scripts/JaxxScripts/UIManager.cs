@@ -16,8 +16,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
-    [SerializeField] GameObject bossHealth;
-    public PlayerStatUpgrade playerStatUp;
+    [SerializeField] public GameObject bossHealth;
+    
 
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
@@ -31,9 +31,9 @@ public class UIManager : MonoBehaviour
 
 
     public bool gamePause;
-    bool bossBattle;
     public float DashCDRemaining;
     public float dashingTime;
+    bool onStart;
 
     int enemyCount;
     // Start is called before the first frame update
@@ -43,15 +43,10 @@ public class UIManager : MonoBehaviour
         //StartMenu();
     }
 
-    void Start()
-    {
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel"))
         {
             if(menuActive == null)
             {
@@ -64,12 +59,11 @@ public class UIManager : MonoBehaviour
                 stateUnpause();
             }
         }
-        if(PlayerController.playerInstance.isCoolDown)
+
+        if (PlayerController.playerInstance.isCoolDown)
         {
             DashCD();
         }
-        
-        
     }
 
     public void statePause()
@@ -98,13 +92,11 @@ public class UIManager : MonoBehaviour
         
         if(enemyCount <= 0)
         {
-            
             statePause();
-            playerStatUp.GenerateRandomUpgrades();
+            PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
-            playerStatUp.GenerateRandomUpgrades();
-            
+            PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
         }
 
     }
