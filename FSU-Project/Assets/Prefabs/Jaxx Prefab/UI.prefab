@@ -75,7 +75,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1603,6 +1603,7 @@ GameObject:
   - component: {fileID: 4988952198770274446}
   - component: {fileID: 8099912276338524726}
   - component: {fileID: 8209078707155062884}
+  - component: {fileID: 4617049235941066730}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1666,6 +1667,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1064004b5d40f4bac7dba3ffee3a4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4617049235941066730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2398459766224480949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bc1813284cd1934a8aa205bc07ed72c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerClass: {fileID: 11400000, guid: e6bbc8de4bb9fb34ca5aba7fbea84623, type: 2}
+  upgradeButtons:
+  - {fileID: 3815810692011103109}
+  - {fileID: 5891646059732220622}
+  - {fileID: 6429402021497058610}
+  buttonLabels:
+  - {fileID: 1630380888764257480}
+  - {fileID: 6972396766947008429}
+  - {fileID: 3937391025375225221}
 --- !u!1 &2569851706778428864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1319390252637393788
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2331,7 +2353,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2842,7 +2864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8278942246683822711
 RectTransform:
   m_ObjectHideFlags: 0

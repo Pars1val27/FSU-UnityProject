@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6043c376c3995e64faca62b4e7fe95cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRate: 1
+  AttackRate: 0.5
   MeleeAttack: {fileID: 1220392383094623791, guid: a15f68341d847e04c8a1269d6e420593, type: 3}
   ImpactPoint: {fileID: 5978825643508752807}
   anim: {fileID: 1788414880351922207}
@@ -187,7 +187,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 15
+  m_Speed: 40
   m_Acceleration: 32
   avoidancePriority: 50
   m_AngularSpeed: 120

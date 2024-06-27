@@ -432,8 +432,8 @@ MonoBehaviour:
   model: []
   flyIntervalMin: 5
   flyIntervalMax: 10
-  FireIntervalMin: 2
-  FireIntervalMax: 5
+  FireIntervalMin: 5
+  FireIntervalMax: 10
   BiteRate: 3
   fireAttackAir: {fileID: 2199543063159097310}
   fireAttackGround: {fileID: 7279412247634223613}
