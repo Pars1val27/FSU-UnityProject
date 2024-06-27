@@ -14,6 +14,7 @@ public class UI : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UIManager.instance.bossHealth.SetActive(false);
         UIManager.instance.stateUnpause();
     }
 
@@ -25,4 +26,15 @@ public class UI : MonoBehaviour
         Application.Quit();
 #endif
     }
+
+    public void ClassSetMele()
+    {
+        Resume();
+    }
+
+    public void ClassSetGunner()
+    {
+        Resume();
+    }
+   
 }

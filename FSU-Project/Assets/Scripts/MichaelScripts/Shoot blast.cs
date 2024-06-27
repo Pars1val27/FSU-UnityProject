@@ -12,34 +12,35 @@ public class Shootblast : MonoBehaviour
 
     [SerializeField] float shootRate;
     [SerializeField] GameObject projectile;
+    [SerializeField] Animator anim;
+
+    // the name of animation for another attack of the enemy(if it doesnt have an alt attack leave blank)
+    [SerializeField] string altAttack;
 
     bool isShooting;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float SavedTime = 0;
 
     // Update is called once per frame
     void Update()
     {
-        if (isShooting == false )
+        if ((Time.time - SavedTime) > shootRate && !anim.GetCurrentAnimatorStateInfo(0).IsName(altAttack))
         {
-            
-            StartCoroutine(shoot());
+
+            SavedTime = Time.time;
+            anim.SetTrigger("Shoot");
         }
     }
 
  
-    IEnumerator shoot()
-    {
+    
 
-        isShooting = true;
+    public void shoot()
+    {
         Instantiate(projectile, shootPos1.position, shootPos1.rotation);
         Instantiate(projectile, shootPos2.position, shootPos2.rotation);
         Instantiate(projectile, shootPos3.position, shootPos3.rotation);
         Instantiate(projectile, shootPos4.position, shootPos4.rotation);
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
     }
+
+
 }

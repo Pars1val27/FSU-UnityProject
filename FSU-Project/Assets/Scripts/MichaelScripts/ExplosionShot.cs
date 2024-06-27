@@ -8,14 +8,15 @@ public class ExplosiveShot : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [SerializeField] int damage;
-    [SerializeField] int speed;
+    [SerializeField] float speed;
     [SerializeField] int destroyTime;
+    [SerializeField] float angle;
 
     [SerializeField] GameObject explosion;
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
+        rb.velocity = (EnemyManager.instance.player.transform.position - transform.position) + new Vector3(0,angle,0) * speed;
         Destroy(gameObject, destroyTime);
     }
     private void OnTriggerEnter(Collider other)
@@ -28,6 +29,10 @@ public class ExplosiveShot : MonoBehaviour
         if (dmg != null && other.tag == "Player")
         {
             dmg.TakeDamage(damage);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
         Instantiate(explosion, transform.position, transform.rotation);

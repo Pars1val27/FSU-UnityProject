@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83c7b73d6da2b65408331ca1dc9ef95d, type: 3}
+  m_Name: GunnerClass
+  m_EditorClassIdentifier: 
+  classWeapon: {fileID: 789420410420548932, guid: 9d7666b64e4bdee4aaedf4f9dbc690a8, type: 3}
+  origHP: 20
+  playerHP: 18
+  speed: 14
+  sprintMod: 2
+  dashCD: 5
+  dashMod: 4
+  jumpMax: 2
+  jumpSpeed: 14
+  damage: 1
+  attackSpeed: 4
+  showGunnerAttributes: 1
+  maxAmmo: 25
+  currAmmo: 25
+  shootRate: 0.45
+  shootDist: 1000
+  reloadTime: 2
+  delay: 4
+  grenadeThrowForce: 19.35
+  explosionRadius: 4.52
+  explosionForce: 50
+  explosionDamage: 5
+  grenadeRechargeRate: 5
+  showMeleeAttributes: 0
+  meleeBlock: 0
+  meleeAttackRate: 0
+  meleeRange: 0

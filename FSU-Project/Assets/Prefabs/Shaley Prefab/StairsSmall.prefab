@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8880824781287158246}
   m_Layer: 0
   m_Name: StairsSmall
-  m_TagString: Untagged
+  m_TagString: Not Climbable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
