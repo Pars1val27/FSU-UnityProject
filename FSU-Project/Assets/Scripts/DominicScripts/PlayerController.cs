@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] CharacterController controller;
     [SerializeField] public PlayerClass playerClass;
     [SerializeField] AudioSource aud;
-    [SerializeField] GameObject muzzleFlash;
+    //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
     //[SerializeField] public float dashCD;
@@ -35,19 +35,19 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float audJumpBoostVol;
     [SerializeField] AudioClip[] audDash;
     [SerializeField] float audDashVol;
-    [SerializeField] AudioClip[] audGun;
-    [SerializeField] float audGunVol;
+    //[SerializeField] AudioClip[] audGun;
+    //[SerializeField] float audGunVol;
 
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
 
-    [Range(1, 10)]
+    /*[Range(1, 10)]
     [SerializeField] int shootDmg;
     [Range(.1f, 10)]
     [SerializeField] float shootRate;
     [Range(1, 1000)]
-    [SerializeField] int shootDist;
+    [SerializeField] int shootDist;*/
 
     //bool isShooting;
 
