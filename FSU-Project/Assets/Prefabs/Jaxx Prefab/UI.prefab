@@ -3988,7 +3988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3, y: -204}
+  m_AnchoredPosition: {x: -10, y: -328}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3580739433412039435
@@ -6836,12 +6836,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
+  bosses:
+  - {fileID: 1651909575848334336, guid: 0aaf9900b42b0134eaf66b26e8bae298, type: 3}
   enemies:
-  - {fileID: 5788263070341835923, guid: 46aa9a3b1ef05b440b72c711163ac264, type: 3}
-  - {fileID: 5788263070341835923, guid: 75ae6253004a5944cb89567cdd81714f, type: 3}
-  - {fileID: 5788263070341835923, guid: 7ed1229ce7a0403488fda3a1175991d2, type: 3}
-  - {fileID: 5788263070341835923, guid: ccc45713891ee2948be5dc1f10fcc629, type: 3}
-  - {fileID: 5788263070341835923, guid: 73e2facc44986494fa4311819d9485b1, type: 3}
+  - {fileID: 5549604000314979092, guid: 4427761c5e262634c9e9079f1289e670, type: 3}
+  - {fileID: 5764395668723536644, guid: 2f46914c2447c0d44be195e652279dad, type: 3}
+  - {fileID: 1788414880361438125, guid: c56ebb650d07d5c468204c8c29ee6686, type: 3}
+  - {fileID: 8028279669157993157, guid: 6c87df22928a7c445bb9e83ea57a938f, type: 3}
 --- !u!1 &8779178994058226100
 GameObject:
   m_ObjectHideFlags: 0

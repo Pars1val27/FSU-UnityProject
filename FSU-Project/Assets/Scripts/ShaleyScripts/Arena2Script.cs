@@ -14,6 +14,13 @@ public class Arena2Script : MonoBehaviour
     int lastPreset;
     public static bool isPlayerSpawned;
 
+    private void Start()
+    {
+        gameManager.instance.SpawnPlayer();
+    }
+
+   
+
     public void StartArena()
     {
         UnityEngine.Random.InitState((int)DateTime.Now.Ticks);
