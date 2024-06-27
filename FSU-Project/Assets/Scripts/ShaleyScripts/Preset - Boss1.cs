@@ -46,5 +46,7 @@ public class PresetBoss1 : MonoBehaviour
         StartCoroutine(SpawnPlayer());
         
         StartCoroutine(SpawnEnemy());
+
+        UIManager.instance.StartBoss();
     }
 }
