@@ -22,6 +22,7 @@ public class PresetArena1 : MonoBehaviour
             spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z), 
             new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
             spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
+        EnemyManager.instance.FindPlayer();
     }
 
     //void SpawnPlayer()
@@ -52,7 +53,7 @@ public class PresetArena1 : MonoBehaviour
         if (!Arena2Script.isPlayerSpawned)
         {
             StartCoroutine(SpawnPlayer());
-            EnemyManager.instance.FindPlayer();
+            
         }
         else
         {
