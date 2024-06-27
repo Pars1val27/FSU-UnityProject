@@ -35,12 +35,12 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause)
         {
             StartCoroutine(Shoot());
 
         }
-        if (Input.GetButtonDown("Fire3") && !isShooting && isGrenadeReady)
+        if (Input.GetButtonDown("Fire3") && isGrenadeReady)
         {
             ThrowGrenade();
         }
@@ -64,22 +64,19 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist))
         {
            
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(Gunner.damage);
             }
             else
             {
-                Instantiate(hitEffect, hit.point, Quaternion.identity);
+                //Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
         }
-
         yield return new WaitForSeconds(Gunner.shootRate);
         isShooting = false;
     }

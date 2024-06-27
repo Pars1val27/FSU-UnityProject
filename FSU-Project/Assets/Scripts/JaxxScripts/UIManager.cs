@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
     public void DashCD()
     {
         DashCDRemaining -= Time.deltaTime;
-        if( DashCDRemaining <= 0 ) 
+        if(DashCDRemaining <= 0) 
         {
             DashCoolDownFill.fillAmount = 1;
         }

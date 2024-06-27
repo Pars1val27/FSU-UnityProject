@@ -83,6 +83,8 @@ public class PlayerController : MonoBehaviour, IDamage
         origFOV = FOV;
 
         EquipClassWeapon();
+        isDashing = false;
+
     }
 
     // Update is called once per frame
