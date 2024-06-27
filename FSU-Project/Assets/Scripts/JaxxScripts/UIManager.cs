@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
-    [SerializeField] GameObject bossHealth;
+    [SerializeField] public GameObject bossHealth;
     public PlayerStatUpgrade playerStatUp;
 
     [SerializeField] TMP_Text enemyCountText;
@@ -31,7 +31,6 @@ public class UIManager : MonoBehaviour
 
 
     public bool gamePause;
-    bool bossBattle;
     public float DashCDRemaining;
     public float dashingTime;
 
@@ -43,15 +42,12 @@ public class UIManager : MonoBehaviour
         //StartMenu();
     }
 
-    void Start()
-    {
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if(playerStatUp = null)
+            playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
+        if (Input.GetButtonDown("Cancel"))
         {
             if(menuActive == null)
             {
@@ -64,12 +60,11 @@ public class UIManager : MonoBehaviour
                 stateUnpause();
             }
         }
-        if(PlayerController.playerInstance.isCoolDown)
+
+        if (PlayerController.playerInstance.isCoolDown)
         {
             DashCD();
         }
-        
-        
     }
 
     public void statePause()

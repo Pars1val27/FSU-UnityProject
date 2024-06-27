@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        playerInstance = this;
         origSpeed = playerClass.speed;
         origGravity = gravity;
         origFOV = FOV;
