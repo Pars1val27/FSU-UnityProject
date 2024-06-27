@@ -7,8 +7,10 @@ public class PlayerStatUpgrade : MonoBehaviour
 {
     public PlayerClass playerClass;
     public List<Button> upgradeButtons;
+    public List<TextMeshProUGUI> buttonLabels;
 
     private List<Upgrade> availableUpgrades;
+    
 
     void Start()
     {
@@ -29,7 +31,6 @@ public class PlayerStatUpgrade : MonoBehaviour
     public void GenerateRandomUpgrades()
     {
         List<Upgrade> randomUpgrades = new List<Upgrade>();
-
         while (randomUpgrades.Count < 3)
         {
             int index = UnityEngine.Random.Range(0, availableUpgrades.Count);
@@ -39,17 +40,31 @@ public class PlayerStatUpgrade : MonoBehaviour
             {
                 randomUpgrades.Add(selectedUpgrade);
             }
+            
         }
-
         DisplayUpgrades(randomUpgrades);
     }
 
-    void DisplayUpgrades(List<Upgrade> upgrades)
+    public void DisplayUpgrades(List<Upgrade> upgrades)
     {
-       //jex Ui code 
+        for (int i = 0; i < upgradeButtons.Count; i++)
+        {
+            if (i < upgrades.Count)
+            {
+                Upgrade upgrade = upgrades[i];
+                buttonLabels[i].text = upgrade.upgradeName;
+                upgradeButtons[i].onClick.RemoveAllListeners(); 
+                upgradeButtons[i].onClick.AddListener(() => ApplyUpgrade(upgrade));
+                upgradeButtons[i].gameObject.SetActive(true);
+            }
+            else
+            {
+                upgradeButtons[i].gameObject.SetActive(false);
+            }
+        }
     }
 
-    void ApplyUpgrade(Upgrade upgrade)
+    public void ApplyUpgrade(Upgrade upgrade)
     {
         switch (upgrade.upgradeType)
         {
@@ -68,12 +83,16 @@ public class PlayerStatUpgrade : MonoBehaviour
             case UpgradeType.IncreaseMaxAmmo:
                 playerClass.maxAmmo += 10;
                 break;
-                
+
         }
 
         Debug.Log("Applied Upgrade: " + upgrade.upgradeName);
+        HideUpgradeMenu();
+    }
+    void HideUpgradeMenu()
+    {
+        UIManager.instance.stateUnpause();
 
-       //Jex Ui code
         
     }
 }

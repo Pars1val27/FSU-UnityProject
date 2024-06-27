@@ -18,7 +18,7 @@ public class PresetArena1 : MonoBehaviour
     }
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         Instantiate(RandEnemy(), new UnityEngine.Vector3(
             spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z), 
             new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
