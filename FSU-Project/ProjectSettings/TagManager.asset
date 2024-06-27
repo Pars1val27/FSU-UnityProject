@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Not Climbable
+  - Climbable
+  - Gun
+  - ArenaSpawns
   layers:
   - Default
   - TransparentFX
