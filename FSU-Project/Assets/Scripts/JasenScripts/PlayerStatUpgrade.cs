@@ -30,8 +30,8 @@ public class PlayerStatUpgrade : MonoBehaviour
 
     public void GenerateRandomUpgrades()
     {
+        Debug.Log("5");
         List<Upgrade> randomUpgrades = new List<Upgrade>();
-
         while (randomUpgrades.Count < 3)
         {
             int index = UnityEngine.Random.Range(0, availableUpgrades.Count);
@@ -41,8 +41,8 @@ public class PlayerStatUpgrade : MonoBehaviour
             {
                 randomUpgrades.Add(selectedUpgrade);
             }
+            
         }
-
         DisplayUpgrades(randomUpgrades);
     }
 

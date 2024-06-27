@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
     [SerializeField] GameObject bossHealth;
+    public PlayerStatUpgrade playerStatUp;
 
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
@@ -25,7 +26,7 @@ public class UIManager : MonoBehaviour
     public Image playerHPBar;
     public Image DashCoolDownFill;
     public Image bossHealthBar;
-    PlayerStatUpgrade playerStatUp;
+   
 
 
 
@@ -40,6 +41,11 @@ public class UIManager : MonoBehaviour
     {
         instance = this;
         //StartMenu();
+    }
+
+    void Start()
+    {
+        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
     }
 
     // Update is called once per frame
@@ -89,14 +95,16 @@ public class UIManager : MonoBehaviour
     {
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
-
+        
         if(enemyCount <= 0)
         {
-            statePause();
             
+            statePause();
+            playerStatUp.GenerateRandomUpgrades();
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
             playerStatUp.GenerateRandomUpgrades();
+            
         }
 
     }
