@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
     [SerializeField] GameObject bossHealth;
 
@@ -126,5 +127,11 @@ public class UIManager : MonoBehaviour
     public void StartBoss()
     {
        bossHealth.SetActive(true);
+    }
+    public void BossWin()
+    {
+        menuActive = menuBossWin;
+        statePause();
+        menuActive.SetActive(gamePause);
     }
 }
