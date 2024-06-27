@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 5
+  HP: 4
   faceTaregtSpeed: 300
   agent: {fileID: 5439088260469296567}
   model:
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   shootPos: {fileID: 4175054255908537402}
   projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
   shootAngle: 90
-  shootRate: 20
+  shootRate: 8
   anim: {fileID: 7820320962231266268}
 --- !u!195 &5439088260469296567
 NavMeshAgent:
