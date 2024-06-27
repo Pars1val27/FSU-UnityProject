@@ -214,78 +214,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357319863253566904, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: surface
-      value: 
-      objectReference: {fileID: 975560617}
-    - target: {fileID: 4357319863253566904, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: spawnPos
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080561844778588239, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: enemies.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5080561844778588239, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: enemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 5549604000314979092, guid: 4427761c5e262634c9e9079f1289e670, type: 3}
-    - target: {fileID: 5080561844778588239, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: enemies.Array.data[1]
-      value: 
-      objectReference: {fileID: 5764395668723536644, guid: 2f46914c2447c0d44be195e652279dad, type: 3}
-    - target: {fileID: 5080561844778588239, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: enemies.Array.data[2]
-      value: 
-      objectReference: {fileID: 1788414880361438125, guid: c56ebb650d07d5c468204c8c29ee6686, type: 3}
-    - target: {fileID: 5080561844778588239, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      propertyPath: enemies.Array.data[3]
-      value: 
-      objectReference: {fileID: 8028279669157993157, guid: 6c87df22928a7c445bb9e83ea57a938f, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4818629992811347259, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 975560617}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
---- !u!1 &975560614 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4818629992811347259, guid: 9cbd748402be8e54883a7635957ed13f, type: 3}
-  m_PrefabInstance: {fileID: 936656202}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &975560617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 975560614}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
-  m_BuildHeightMesh: 0
 --- !u!1001 &1248493014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -394,10 +327,6 @@ PrefabInstance:
     - target: {fileID: 2948477570116705585, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
       propertyPath: m_Name
       value: Arena2.0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2948477570116705585, guid: 9691770b7fec50e46875189e3a80dc90, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

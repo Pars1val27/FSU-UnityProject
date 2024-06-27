@@ -24,23 +24,6 @@ public class PresetArena1 : MonoBehaviour
             spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
     }
 
-    //void SpawnPlayer()
-    //{
-    //    /*  GameObject player = GameObject.FindWithTag("Player");*/
-
-    //    //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-    //    //CharacterController characterCtrl = FindObjectOfType<CharacterController>();
-    //    //playerCtrl.enabled = false;
-    //    //characterCtrl.enabled = false;
-
-    //    /*  Debug.Log("Player reference: " + player);*/
-    //    /*    player.transform.position = new UnityEngine.Vector3(spawnPos.transform.position.x,spawnPos.transform.position.y,spawnPos.transform.position.z);*/
-    //    StartCoroutine(Spawn());
-    //    Arena2Script.isPlayerSpawned = true;
-    //    //characterCtrl.enabled = true;
-    //    //playerCtrl.enabled = true;
-    //}
-
     GameObject RandEnemy()
     {
         int enemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies.Length);
