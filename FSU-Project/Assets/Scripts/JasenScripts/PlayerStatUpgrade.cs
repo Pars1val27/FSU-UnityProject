@@ -70,19 +70,19 @@ public class PlayerStatUpgrade : MonoBehaviour
         switch (upgrade.upgradeType)
         {
             case UpgradeType.IncreaseHP:
-                playerClass.origHP += 10;
+                playerClass.origHP = playerClass.origHP + 10;
                 break;
             case UpgradeType.IncreaseSpeed:
-                playerClass.speed += 1;
+                playerClass.speed = playerClass.speed + 1;
                 break;
             case UpgradeType.IncreaseDamage:
-                playerClass.damage += 5;
+                playerClass.damage = playerClass.damage + 5;
                 break;
             case UpgradeType.IncreaseJumpSpeed:
-                playerClass.jumpSpeed += 2;
+                playerClass.jumpSpeed = playerClass.jumpSpeed + 2;
                 break;
             case UpgradeType.IncreaseMaxAmmo:
-                playerClass.maxAmmo += 10;
+                playerClass.maxAmmo = playerClass.maxAmmo + 10;
                 break;
 
         }
