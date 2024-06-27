@@ -220,18 +220,6 @@ PrefabInstance:
       value: RampBig
       objectReference: {fileID: 0}
     - target: {fileID: 4297820231574911323, guid: c8a39b8f8784579428ee202e586c5ba3, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297820231574911323, guid: c8a39b8f8784579428ee202e586c5ba3, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297820231574911323, guid: c8a39b8f8784579428ee202e586c5ba3, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4297820231574911323, guid: c8a39b8f8784579428ee202e586c5ba3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100.00003
       objectReference: {fileID: 0}
@@ -290,14 +278,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1397482271665508126}
     m_Modifications:
     - target: {fileID: 2636583823386594983, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636583823386594983, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 2636583823386594983, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -337,10 +317,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2882967842705351339, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: e24ec3fc918a4a541a08bd95fbf5c2d4, type: 2}
     - target: {fileID: 6209711766292385993, guid: 20e755724c95e9e4390cb157b7cdc709, type: 3}
       propertyPath: m_Name
       value: QuadrantFloor
@@ -428,10 +404,6 @@ PrefabInstance:
     - target: {fileID: 1149165933438250745, guid: c4b40a43d654073498f3aa5ee36eeed2, type: 3}
       propertyPath: m_Name
       value: RampSmall
-      objectReference: {fileID: 0}
-    - target: {fileID: 4173841046194090001, guid: c4b40a43d654073498f3aa5ee36eeed2, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 12.500001
       objectReference: {fileID: 0}
     - target: {fileID: 4173841046194090001, guid: c4b40a43d654073498f3aa5ee36eeed2, type: 3}
       propertyPath: m_LocalPosition.x
