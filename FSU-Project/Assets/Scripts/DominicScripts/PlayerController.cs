@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour, IDamage
         origSpeed = playerClass.speed;
         origGravity = gravity;
         origFOV = FOV;
-
+        isDashing = false;
+        isClimbing = false;
         EquipClassWeapon();
     }
 
