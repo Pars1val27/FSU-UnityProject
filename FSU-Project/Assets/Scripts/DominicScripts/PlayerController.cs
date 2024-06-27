@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        playerInstance = this;
         origSpeed = playerClass.speed;
         origGravity = gravity;
         origFOV = FOV;
@@ -87,7 +88,6 @@ public class PlayerController : MonoBehaviour, IDamage
         isClimbing = false;
         EquipClassWeapon();
         isDashing = false;
-
     }
 
     // Update is called once per frame
@@ -289,7 +289,8 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             classWeaponInstance = Instantiate(playerClass.classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
-            gunScript.Gunner = playerClass; 
+            gunScript.Gunner = playerClass;
+
         }
     }
 } 

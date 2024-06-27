@@ -9,6 +9,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 public class PresetArena1 : MonoBehaviour
 {
     [SerializeField] GameObject spawnPos;
+
     //[SerializeField] CharacterController characterCtrl;
 
     private void Start()
@@ -17,7 +18,7 @@ public class PresetArena1 : MonoBehaviour
     }
     IEnumerator SpawnEnemy()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.3f);
         Instantiate(RandEnemy(), new UnityEngine.Vector3(
             spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z), 
             new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
@@ -65,6 +66,8 @@ public class PresetArena1 : MonoBehaviour
     {
         Arena2Script.isPlayerSpawned = true;
         GameObject player = GameObject.FindWithTag("Player");
+        GameObject gun = GameObject.FindWithTag("Gun");
+        Destroy(gun);
         GameObject temp = player;
         yield return new WaitForSeconds(0.1f);
         Instantiate(player, new UnityEngine.Vector3(

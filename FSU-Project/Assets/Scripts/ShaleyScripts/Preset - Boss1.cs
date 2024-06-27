@@ -26,6 +26,8 @@ public class PresetBoss1 : MonoBehaviour
     {
         Arena2Script.isPlayerSpawned = true;
         GameObject player = GameObject.FindWithTag("Player");
+        GameObject gun = GameObject.FindWithTag("Gun");
+        Destroy(gun);
         GameObject temp = player;
         yield return new WaitForSeconds(0.1f);
         Instantiate(player, new UnityEngine.Vector3(

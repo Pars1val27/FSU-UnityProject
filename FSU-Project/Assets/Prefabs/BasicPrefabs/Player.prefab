@@ -350,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7497294410605451640}
   playerClass: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
+  mainCamera: {fileID: 8226128753397758541}
   aud: {fileID: 8507070171164364275}
   weaponPos: {fileID: 2799739320527782561}
   climbPos: {fileID: 4949162200189842116}
