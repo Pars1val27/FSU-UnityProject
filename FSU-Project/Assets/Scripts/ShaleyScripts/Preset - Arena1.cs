@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static UnityEditor.Experimental.GraphView.GraphView;
@@ -14,9 +15,13 @@ public class PresetArena1 : MonoBehaviour
     {
         StartArenaEnemy();
     }
-    void SpawnEnemy()
+    IEnumerator SpawnEnemy()
     {
-        Instantiate(RandEnemy(), spawnPos.transform);
+        yield return new WaitForSeconds(1);
+        Instantiate(RandEnemy(), new UnityEngine.Vector3(
+            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z), 
+            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
+            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
     }
 
     //void SpawnPlayer()
@@ -38,7 +43,7 @@ public class PresetArena1 : MonoBehaviour
 
     GameObject RandEnemy()
     {
-        int enemy = UnityEngine.Random.Range(1, EnemyManager.instance.enemies.Length);
+        int enemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies.Length);
         return EnemyManager.instance.enemies[enemy];
     }
 
@@ -47,19 +52,24 @@ public class PresetArena1 : MonoBehaviour
         if (!Arena2Script.isPlayerSpawned)
         {
             StartCoroutine(SpawnPlayer());
+            EnemyManager.instance.FindPlayer();
         }
         else
         {
-            SpawnEnemy();
+            StartCoroutine(SpawnEnemy());
         }
     }
 
     IEnumerator SpawnPlayer()
     {
-        //Michael
         Arena2Script.isPlayerSpawned = true;
         GameObject player = GameObject.FindWithTag("Player");
+        GameObject temp = player;
         yield return new WaitForSeconds(0.1f);
-        player.transform.position = new UnityEngine.Vector3(spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z);
+        Instantiate(player, new UnityEngine.Vector3(
+            spawnPos.transform.position.x, spawnPos.transform.position.y, spawnPos.transform.position.z),
+            new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y,
+            spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
+        Destroy(temp);
     }
 }

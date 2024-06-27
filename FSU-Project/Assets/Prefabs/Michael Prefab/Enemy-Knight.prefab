@@ -155,10 +155,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRate: 1
-  anim: {fileID: 1788414880351922207}
-  MeleeAttack: {fileID: 1220392383094623791, guid: 46c03d89cb76add47823f962893a8fc0, type: 3}
+  MeleeAttack: {fileID: 1220392383094623791, guid: a15f68341d847e04c8a1269d6e420593, type: 3}
   ImpactPoint: {fileID: 5978825643508752807}
-  altAttack: 
+  anim: {fileID: 1788414880351922207}
 --- !u!114 &8734736771166986094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,11 +170,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HP: 2
+  faceTaregtSpeed: 30
+  agent: {fileID: 7260814468224261897}
   model:
   - {fileID: 1788414880347838175}
-  HP: 2
-  agent: {fileID: 7260814468224261897}
-  faceTaregtSpeed: 30
   anim: {fileID: 1788414880351922207}
   animTranSpeed: 30
 --- !u!195 &7260814468224261897
