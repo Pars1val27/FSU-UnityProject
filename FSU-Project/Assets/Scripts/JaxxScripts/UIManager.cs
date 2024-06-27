@@ -16,7 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
-    [SerializeField] GameObject bossHealth;
+    [SerializeField] public GameObject bossHealth;
 
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
