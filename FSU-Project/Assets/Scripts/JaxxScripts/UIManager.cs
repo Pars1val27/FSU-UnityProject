@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public Image playerHPBar;
     public Image DashCoolDownFill;
     public Image bossHealthBar;
+    PlayerStatUpgrade playerStatUp;
 
 
 
@@ -90,10 +91,12 @@ public class UIManager : MonoBehaviour
         if(enemyCount <= 0)
         {
             statePause();
+            
             menuActive = menuWin;
             menuActive.SetActive(gamePause);
+            playerStatUp.GenerateRandomUpgrades();
         }
-        
+
     }
 
     public void onLose()
