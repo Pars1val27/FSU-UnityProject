@@ -29,7 +29,6 @@ public class UIManager : MonoBehaviour
 
 
     public bool gamePause;
-    bool bossBattle;
     public float DashCDRemaining;
     public float dashingTime;
 
