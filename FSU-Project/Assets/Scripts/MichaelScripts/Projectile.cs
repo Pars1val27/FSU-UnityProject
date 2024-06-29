@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerDir = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - 1, Camera.main.transform.position.y) - transform.position;
+        playerDir = gameManager.instance.player.transform.position - transform.position;
         angle = Vector3.Angle(playerDir, transform.forward);
         rb.velocity = (EnemyManager.instance.player.transform.position - transform.position) + playerDir.normalized * speed;
        
