@@ -1816,7 +1816,7 @@ MonoBehaviour:
   shootPos: {fileID: 4175054255908537402}
   projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
   shootAngle: 180
-  shootRate: 8
+  shootRate: 3
   anim: {fileID: 7820320962231266268}
 --- !u!195 &5439088260469296567
 NavMeshAgent:

@@ -20,7 +20,7 @@ public class EnemyRangedAttack : MonoBehaviour
     Vector3 playerDir;
     void Update()
     {
-        playerDir = new Vector3 (playerDir.x, playerDir.y +1, playerDir.z) - transform.position;
+        playerDir = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y -1, Camera.main.transform.position.y) - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
         if ((Time.time - SavedTime) > shootRate && angleToPlayer < shootAngle)
         {

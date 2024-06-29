@@ -10,10 +10,16 @@ public class Projectile : MonoBehaviour
     [SerializeField] int damage;
     [SerializeField] int speed;
     [SerializeField] float destroyTime;
+    float angle;
+
+    Vector3 playerDir;
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.forward * speed;
+        playerDir = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y - 1, Camera.main.transform.position.y) - transform.position;
+        angle = Vector3.Angle(playerDir, transform.forward);
+        rb.velocity = (EnemyManager.instance.player.transform.position - transform.position) + playerDir.normalized * speed;
+       
         Destroy(gameObject, destroyTime);
     }
     private void OnTriggerEnter(Collider other)
