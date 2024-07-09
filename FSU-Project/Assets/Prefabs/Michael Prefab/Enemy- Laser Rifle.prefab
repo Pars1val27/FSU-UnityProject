@@ -1724,10 +1724,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4538978081963304395}
   - component: {fileID: 7820320962231266268}
-  - component: {fileID: 7241511272478945243}
-  - component: {fileID: 5704613802112828725}
+  - component: {fileID: 6160702587938936156}
   - component: {fileID: 5439088260469296567}
   - component: {fileID: 726822526103047462}
+  - component: {fileID: 9023798301893792716}
   m_Layer: 0
   m_Name: Enemy- Laser Rifle
   m_TagString: Untagged
@@ -1778,7 +1778,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &7241511272478945243
+--- !u!114 &6160702587938936156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1787,11 +1787,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5764395668723536644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f514547cf174442896fe0dca6ba8a9, type: 3}
+  m_Script: {fileID: 11500000, guid: 15487254074dd6f419f89a2af548fbbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 5
-  faceTaregtSpeed: 300
+  faceTaregtSpeed: 180
   agent: {fileID: 5439088260469296567}
   model:
   - {fileID: 628756737119799082}
@@ -1800,24 +1800,12 @@ MonoBehaviour:
   - {fileID: 315394917697089809}
   - {fileID: 6017560768600747291}
   anim: {fileID: 7820320962231266268}
-  animTranSpeed: 30
---- !u!114 &5704613802112828725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5764395668723536644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62ddea1ed65cef842bba3ab923798332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootPos: {fileID: 4175054255908537402}
+  animTranSpeed: 90
+  shootPos:
+  - {fileID: 4175054255908537402}
   projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
-  shootAngle: 180
-  shootRate: 3
-  anim: {fileID: 7820320962231266268}
+  shootAngle: 90
+  shootRate: 5
 --- !u!195 &5439088260469296567
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1832,7 +1820,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 300
-  m_StoppingDistance: 80
+  m_StoppingDistance: 40
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1863,6 +1851,27 @@ CapsuleCollider:
   m_Height: 1.9455969
   m_Direction: 1
   m_Center: {x: 0, y: 1.0823346, z: 0}
+--- !u!135 &9023798301893792716
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5764395668723536644}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 40
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5997293085504740792
 GameObject:
   m_ObjectHideFlags: 0
