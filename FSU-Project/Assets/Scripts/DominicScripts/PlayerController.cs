@@ -12,11 +12,14 @@ public class PlayerController : MonoBehaviour, IDamage
     
     public CharacterController controller;
     public PlayerStatUpgrade playerStatUp;
-    [SerializeField] public GameObject classWeapon;
 
     [SerializeField] AudioSource aud;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
+
+    [Header("Class Weapons")]
+    [SerializeField] public GameObject gun;
+    [SerializeField] public GameObject sword;
 
     [Header("Attributes")]
     [Range(1, 100)]
@@ -283,11 +286,28 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
+/*    public void getGun(GameObject gun)
+    {
+        if (UIManager.instance.classGunner == true)
+        {
+            weapons.Add(gun);
+        }
+    }
+
+    public void getSword(GameObject sword)
+    {
+        if (UIManager.instance.classMele == true)
+        {
+            weapons.Add(sword);
+        }
+    }*/
+
     void EquipClassWeapon()
     {
         if (UIManager.instance.classGunner == true)
         {
-            classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
+            //classWeapon = gun;
+            classWeaponInstance = Instantiate(gun, weaponPos.position, weaponPos.rotation, weaponPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
             playerHP = 20;
             speed = 14;
@@ -296,7 +316,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (UIManager.instance.classMele == true)
         {
-            classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
+            //classWeapon = sword;
+            classWeaponInstance = Instantiate(sword, weaponPos.position, weaponPos.rotation, weaponPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
             playerHP = 30;
             speed = 20;

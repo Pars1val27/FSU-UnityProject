@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
-    [SerializeField] GameObject sword;
+    //[SerializeField] public GameObject sword;
     [SerializeField] Collider SwordCollider;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private float attackSoundVol;

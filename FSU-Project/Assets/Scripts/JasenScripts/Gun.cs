@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GunScript : MonoBehaviour
 {
-
+    //[SerializeField] public GameObject gun;
     [SerializeField] Transform GrenadePos;
-    [SerializeField] GameObject gun;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;
     [SerializeField] float shootSoundVol;
@@ -114,14 +113,14 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Quaternion rot;
         Vector3 pos;
-        gun.transform.GetLocalPositionAndRotation(out pos, out rot);
-        gun.transform.Rotate(new Vector3(300, 0, 0));
+        PlayerController.playerInstance.gun.transform.GetLocalPositionAndRotation(out pos, out rot);
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
         UpdateAmmoCount();
-        gun.transform.Rotate(new Vector3(0, 0, 0));
-        gun.transform.localPosition = pos;
-        gun.transform.localRotation = rot;
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(0, 0, 0));
+        PlayerController.playerInstance.gun.transform.localPosition = pos;
+        PlayerController.playerInstance.gun.transform.localRotation = rot;
         isReloading = false;
     }
     IEnumerator flashMuzzle()
