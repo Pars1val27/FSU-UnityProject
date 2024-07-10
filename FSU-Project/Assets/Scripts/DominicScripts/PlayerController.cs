@@ -72,9 +72,6 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isDashing;
     public bool isCoolDown;
 
-    public bool playerClassMelee;
-    public bool playerClassGunner;
-
     float origFOV;
     public float currFOV;
 
@@ -288,7 +285,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void EquipClassWeapon()
     {
-        if (playerClassGunner == true)
+        if (UIManager.instance.classGunner == true)
         {
             classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
@@ -297,7 +294,7 @@ public class PlayerController : MonoBehaviour, IDamage
             attackSpeed = 0.25f;
         }
 
-        if (playerClassMelee == true)
+        if (UIManager.instance.classMele == true)
         {
             classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
