@@ -10,8 +10,6 @@ public class PresetArena1 : MonoBehaviour
 {
     [SerializeField] GameObject spawnPos;
 
-    //[SerializeField] CharacterController characterCtrl;
-
     private void Start()
     {
         StartArenaEnemy();
@@ -23,23 +21,6 @@ public class PresetArena1 : MonoBehaviour
             new UnityEngine.Quaternion(spawnPos.transform.rotation.x, spawnPos.transform.rotation.y, 
             spawnPos.transform.rotation.z, spawnPos.transform.rotation.w));
     }
-
-    //void SpawnPlayer()
-    //{
-    //    /*  GameObject player = GameObject.FindWithTag("Player");*/
-
-    //    //PlayerController playerCtrl = FindObjectOfType<PlayerController>();
-    //    //CharacterController characterCtrl = FindObjectOfType<CharacterController>();
-    //    //playerCtrl.enabled = false;
-    //    //characterCtrl.enabled = false;
-
-    //    /*  Debug.Log("Player reference: " + player);*/
-    //    /*    player.transform.position = new UnityEngine.Vector3(spawnPos.transform.position.x,spawnPos.transform.position.y,spawnPos.transform.position.z);*/
-    //    StartCoroutine(Spawn());
-    //    Arena2Script.isPlayerSpawned = true;
-    //    //characterCtrl.enabled = true;
-    //    //playerCtrl.enabled = true;
-    //}
 
     GameObject RandEnemy()
     {
