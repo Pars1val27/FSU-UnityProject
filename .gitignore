@@ -1,0 +1,16 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FSU-Project/Assets/Prefabs/Michael Prefab
+/FSU-Project/Assets/Scenes
+/FSU-Project/Assets/Sci Fi Gun Light
+/FSU-Project/Assets/Scripts/MichaelScripts
+/FSU-Project/Assets/WONILMAX
+/FSU-Project/ProjectSettings/Packages/com.unity.probuilder
+/FSU-Project/Assets/Prefabs/prefabs Jasen/bullet.prefab
+/FSU-Project/Assets/Prefabs/prefabs Jasen/bullet.prefab.meta
+/FSU-Project/Assets/Prefabs/prefabs Jasen
+/FSU-Project/Assets/Prefabs/Cube.prefab
+/FSU-Project/Assets/Prefabs/Cube.prefab.meta
+/FSU-Project/Assets/Prefabs/prefabs Jasen.meta
