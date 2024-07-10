@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         playerInstance = this;
         origHP = PlayerHP;
+        isCoolDown = false;
        
     }
 
