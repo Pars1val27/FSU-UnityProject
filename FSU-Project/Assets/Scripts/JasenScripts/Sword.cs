@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
-    public PlayerClass Melee;
     [SerializeField] Collider SwordCollider;
     [SerializeField] private AudioClip attackSound;
     [SerializeField] private float attackSoundVol;
@@ -19,9 +18,9 @@ public class SwordScript : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        damage = Melee.damage;
-        attackRate = Melee.meleeAttackRate;
-        range = Melee.meleeRange;
+        damage = PlayerController.playerInstance.damage;
+        attackRate = PlayerController.playerInstance.attackSpeed;
+        range = PlayerController.playerInstance.shootDist;
     }
 
     void Update()
