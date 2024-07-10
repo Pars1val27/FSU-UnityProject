@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PresetBoss1 : MonoBehaviour
 {
-    //[SerializeField] CharacterController characterCtrl;
     [SerializeField] GameObject bossPos;
     [SerializeField] GameObject spawnPos;
 

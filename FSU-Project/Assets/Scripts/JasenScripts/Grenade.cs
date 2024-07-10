@@ -10,9 +10,10 @@ public class Grenade : MonoBehaviour
     private float explosionForce;
     private int damage;
     [SerializeField] ParticleSystem explosionEffect;
-    [SerializeField] AudioClip explosionSound;
+    [SerializeField] AudioClip[] explosionSound;
+    [SerializeField] float explosionSpeedVol;
 
-    private AudioSource audioSource;
+    private AudioSource grenadeAudio;
     bool hasExploded = false;
     float countdown;
 
@@ -28,7 +29,6 @@ public class Grenade : MonoBehaviour
     void Start()
     {
         countdown = delay;
-        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
     }
     void Update()
     {
@@ -45,9 +45,9 @@ public class Grenade : MonoBehaviour
         ParticleSystem effect = Instantiate(explosionEffect, transform.position, transform.rotation);
         effect.Play();
 
-        if (audioSource != null && explosionSound != null)
+        if (grenadeAudio != null && explosionSound != null)
         {
-            audioSource.PlayOneShot(explosionSound); 
+            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSpeedVol); 
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
