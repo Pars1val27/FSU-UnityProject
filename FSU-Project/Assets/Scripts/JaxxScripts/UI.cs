@@ -29,27 +29,18 @@ public class UI : MonoBehaviour
 
     public void ClassSetMele()
     {
+        UIManager.instance.classMele = true;
+        UIManager.instance.classGunner = false;
         Resume();
     }
 
     public void ClassSetGunner()
     {
+        UIManager.instance.classMele = false;
+        UIManager.instance.classGunner = true;
         Resume();
     }
 
-    public void StartTime()
-    {
-
-    }
-
-    public void StopTime()
-    {
-
-    }
-
-    public void EditTime(float time)
-    {
-
-    }
+    
    
 }
