@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789420410420548932}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008726558, y: -0, z: -0, w: 0.999962}
+  m_LocalRotation: {x: -0.8703557, y: 0, z: 0, w: 0.49242344}
   m_LocalPosition: {x: 0.161, y: 0.336, z: 0.48488748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -99,9 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8510b687581b74ba0bc2eef5c311b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gunner: {fileID: 11400000, guid: 60f790f4f0c0fa94f942e603b07b9fa0, type: 2}
   GrenadePos: {fileID: 3404024799275723205}
-  gun: {fileID: 789420410420548932}
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
   - {fileID: 8300000, guid: b609e86a902f9ef43a35e5f23ba9a386, type: 3}
@@ -109,6 +107,15 @@ MonoBehaviour:
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 0}
+  currAmmo: 0
+  maxAmmo: 0
+  reloadTime: 0
+  grenadeThrowForce: 0
+  delay: 0
+  explosionRadius: 0
+  explosionForce: 0
+  explosionDamage: 0
+  grenadeRechargeRate: 0
   isReloading: 0
   isGrenadeReady: 1
 --- !u!82 &1492563096712884332
