@@ -4,8 +4,8 @@ using UnityEngine;
 
 public abstract class Ability : ScriptableObject
 {
-    public GameObject modelPrefab; // 3D model for the ability
-    //public Sprite uiSprite; // UI sprite for the ability
+    public GameObject modelPrefab;
+    //public Sprite uiSprite; 
 
     public abstract void Activate(GameObject target);
 }

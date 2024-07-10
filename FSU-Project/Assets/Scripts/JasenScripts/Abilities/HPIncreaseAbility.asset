@@ -12,7 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c187c572b67c9fc4faeb240c6bb3a476, type: 3}
   m_Name: HPIncreaseAbility
   m_EditorClassIdentifier: 
-  tier: 0
-  maxTier: 0
   modelPrefab: {fileID: 0}
-  hpIncreaseAmount: 0
+  hpIncreaseAmount: 1

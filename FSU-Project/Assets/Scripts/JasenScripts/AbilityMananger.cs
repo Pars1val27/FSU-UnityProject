@@ -7,35 +7,36 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance;
     private Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
     private List<string> spawnableAbilities = new List<string>();
-    void Awake()
+   
+    void Start()
     {
         Instance = this;
         
     }
 
-    public void RegisterAbility(string name, Ability ability)
+    public void RegisterAbility(string abilityName, Ability ability)
     {
-        if (!abilities.ContainsKey(name))
+        if (!abilities.ContainsKey(abilityName))
         {
-            abilities[name] = ability;
-            spawnableAbilities.Add(name);
+            abilities[abilityName] = ability;
+            spawnableAbilities.Add(abilityName);
         }
     }
 
-    public void ActivateAbility(string name, GameObject target)
+    public void ActivateAbility(string abilityName, GameObject target)
     {
-        if (abilities.ContainsKey(name))
+        if (abilities.ContainsKey(abilityName))
         {
-            abilities[name].Activate(target);
-            RemoveSpawnableAbility(name);
+            abilities[abilityName].Activate(target);
+            RemoveSpawnableAbility(abilityName);
         }
     }
 
-    public void RemoveSpawnableAbility(string name)
+    public void RemoveSpawnableAbility(string abilityName)
     {
-        if (spawnableAbilities.Contains(name))
+        if (spawnableAbilities.Contains(abilityName))
         {
-            spawnableAbilities.Remove(name);
+            spawnableAbilities.Remove(abilityName);
         }
     }
 
@@ -49,11 +50,11 @@ public class AbilityManager : MonoBehaviour
         return null;
     }
 
-    public Ability GetAbility(string name)
+    public Ability GetAbility(string abilityName)
     {
-        if (abilities.ContainsKey(name))
+        if (abilities.ContainsKey(abilityName))
         {
-            return abilities[name];
+            return abilities[abilityName];
         }
         return null;
     }
