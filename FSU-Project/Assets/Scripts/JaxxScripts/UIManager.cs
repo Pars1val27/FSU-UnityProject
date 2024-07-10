@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
     public bool gamePause;
     public float DashCDRemaining;
     public float dashingTime;
+    public bool classMele;
+    public bool classGunner;
     bool onStart;
 
     int enemyCount;
@@ -123,7 +125,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.playerClass.dashCD;
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
         }
     }
 
