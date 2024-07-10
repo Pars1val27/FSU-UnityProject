@@ -18,7 +18,7 @@ public class PlayerStatUpgrade : MonoBehaviour
         {
             //Upgrade.cs contains the public Enum which you will need in implement new enums
             //for whatever shop perks you would like to add
-            // you all will need to expand the Case Stament in applyUpgread
+            // you all will need to expand the Case Statement in applyUpgrade
             new Upgrade("Increase HP", UpgradeType.IncreaseHP),
             new Upgrade("Increase Speed", UpgradeType.IncreaseSpeed),
             new Upgrade("Increase Damage", UpgradeType.IncreaseDamage),
