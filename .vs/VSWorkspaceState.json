@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\FSU-Project\\Assets",
+    "\\FSU-Project\\Assets\\Scripts",
+    "\\FSU-Project\\Assets\\Scripts\\JaxxScripts"
   ],
-  "SelectedNode": "\\FSU-Project.sln",
   "PreviewInSolutionExplorer": false
 }
