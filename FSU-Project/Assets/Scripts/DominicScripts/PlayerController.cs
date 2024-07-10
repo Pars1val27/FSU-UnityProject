@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         playerInstance = this;
         origFOV = FOV;
+        playerHP = origHP;
         EquipClassWeapon();
         playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
     }

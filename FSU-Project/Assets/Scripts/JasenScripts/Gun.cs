@@ -33,9 +33,7 @@ public class GunScript : MonoBehaviour
 
     void Start()
     {
-
         currAmmo = maxAmmo;
-        PlayerController.playerInstance.playerHP = PlayerController.playerInstance.origHP;
         UpdateAmmoCount();
     }
 
