@@ -42,12 +42,15 @@ public class AlphaBrute : MonoBehaviour , IDamage
     bool isAttacking;
     bool isSecondPhase;
     bool hasStartedRocks;
+
+    Color initColor;
     // Start is called before the first frame update
     void Start()
     {
        
         UIManager.instance.UpdateEnemyDisplay(1);
         MaxHP = HP;
+        initColor = model[0].GetComponent<Color>();
 
     }
 
@@ -62,23 +65,27 @@ public class AlphaBrute : MonoBehaviour , IDamage
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
 
-if(HP < MaxHP/2 && !isSecondPhase)
+        if(HP < MaxHP/2 && !isSecondPhase)
             {
                 isSecondPhase = true;
             }
-        
+
+        if (!isAttacking)
+        {
+            faceTarget();
+        }
 
 
         if ((Time.time - SavedTime) > attackRate)
         {
             SavedTime = Time.time;
             
-            if (distance < 10 && !isAttacking)
+            if (playerInRange && !isAttacking)
             {
                 isAttacking = false;
                 anim.SetTrigger("Melee");
             }
-            if (isSecondPhase && !hasStartedRocks)
+            else if(isSecondPhase && !hasStartedRocks)
             {
                 hasStartedRocks = false;
             }
@@ -128,7 +135,7 @@ if(HP < MaxHP/2 && !isSecondPhase)
 
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.white;
+            model[i].material.color = initColor;
         }
 
     }
