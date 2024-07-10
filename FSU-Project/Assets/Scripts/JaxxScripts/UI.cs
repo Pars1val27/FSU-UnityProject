@@ -36,5 +36,20 @@ public class UI : MonoBehaviour
     {
         Resume();
     }
+
+    public void StartTime()
+    {
+
+    }
+
+    public void StopTime()
+    {
+
+    }
+
+    public void EditTime(float time)
+    {
+
+    }
    
 }

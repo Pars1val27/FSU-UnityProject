@@ -29,22 +29,31 @@ public class Timer : MonoBehaviour
         {
             remainingTime -= Time.deltaTime;
             UpdateTimer();
+            if(remainingTime <= 0)
+            {
+                timerRunning = false;
+
+                Debug.Log("Timer End");
+            }
         }
     }
 
     public void StartTimer()
     {
         timerRunning = true;
+        Debug.Log("Timer Start");
     }
 
     public void StopTimer()
     {
         timerRunning = false;
+        Debug.Log("Timer Stop");
     }
 
     public void EditTIme(int seconds)
     {
         remainingTime += seconds;
+        Debug.Log("Time Changed");
     }
 
     public void UpdateTimer()
