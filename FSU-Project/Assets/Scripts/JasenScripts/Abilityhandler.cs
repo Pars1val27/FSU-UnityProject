@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Abilityhandler : MonoBehaviour
 {
-    private PlayerController playerController;
-    private GunScript gunScript;
-    private SwordScript swordScript;
-    private Grenade grenade;
-    private List<Ability> abilities = new List<Ability>();
+    public PlayerController playerController;
+    public GunScript gunScript;
+    public SwordScript swordScript;
+    public Grenade grenade;
+    public List<Ability> abilities = new List<Ability>();
 
     void Start()
     {
@@ -20,8 +20,8 @@ public class Abilityhandler : MonoBehaviour
     {
         if (playerController != null)
         {
-            //playerController.maxHP += amount;
-            //playerController.currHP = playerController.maxHP;
+            playerController.origHP += amount;
+            //playerController.playerHP = playerController.origHP;
             // Update UI or other logic to reflect new HP value
         }
     }
@@ -32,6 +32,7 @@ public class Abilityhandler : MonoBehaviour
         if (!abilities.Contains(ability))
         {
             abilities.Add(ability);
+            
             ability.Activate(gameObject);
         }
     }

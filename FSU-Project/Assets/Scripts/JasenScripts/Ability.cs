@@ -4,8 +4,10 @@ using UnityEngine;
 
 public abstract class Ability : ScriptableObject
 {
-    public GameObject modelPrefab;
-    //public Sprite uiSprite; 
+    [SerializeField] public GameObject modelPrefab;
+    [SerializeField] public Sprite uiSprite;
+    [SerializeField] public string abilityName;
+    [SerializeField] public string ablitiyDisctriptions;
 
     public abstract void Activate(GameObject target);
 }

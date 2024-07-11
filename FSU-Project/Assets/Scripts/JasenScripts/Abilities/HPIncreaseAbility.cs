@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HPIncreaseAbility", menuName = "Abilities/HPIncrease")]
 public class HPIncreaseAbility : Ability
 {
-    public int hpIncreaseAmount;
+    [SerializeField]public int hpIncreaseAmount;
 
     public override void Activate(GameObject target)
     {

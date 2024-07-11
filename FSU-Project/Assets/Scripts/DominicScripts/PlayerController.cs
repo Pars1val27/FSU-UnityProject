@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
     GameObject classWeaponInstance;
+   
     GunScript gunScript;
     SwordScript swordScript;
 
