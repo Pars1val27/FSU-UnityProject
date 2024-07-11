@@ -33,6 +33,8 @@ public class UIManager : MonoBehaviour
     public bool gamePause;
     public float DashCDRemaining;
     public float dashingTime;
+    public bool classMele;
+    public bool classGunner;
     bool onStart;
 
     int enemyCount;
@@ -40,7 +42,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //StartMenu();
+        StartCoroutine(StartingMenu());
     }
 
     // Update is called once per frame
@@ -110,7 +112,7 @@ public class UIManager : MonoBehaviour
     public void StartMenu()
     {
         menuActive = menuMain;
-        stateUnpause();   
+        statePause();   
         menuActive.SetActive(gamePause);
     }
 
@@ -123,7 +125,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.playerClass.dashCD;
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
         }
     }
 
@@ -136,5 +138,11 @@ public class UIManager : MonoBehaviour
         menuActive = menuBossWin;
         statePause();
         menuActive.SetActive(gamePause);
+    }
+
+    IEnumerator StartingMenu()
+    {
+        yield return new WaitForSeconds(0.2f);
+        StartMenu();
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -8,24 +9,46 @@ public class PlayerController : MonoBehaviour, IDamage
     // this shouldn't change any of the prestablished funcionality of the code only changing the veriable location
 
     public static PlayerController playerInstance;
+    
     public CharacterController controller;
-    [SerializeField] public PlayerClass playerClass;
+    public PlayerStatUpgrade playerStatUp;
+
     [SerializeField] AudioSource aud;
-    //[SerializeField] GameObject muzzleFlash;
     [SerializeField] Transform weaponPos;
     [SerializeField] Transform climbPos;
-    public PlayerStatUpgrade playerStatUp;
-    //[SerializeField] public float dashCD;
 
-    //[SerializeField] int PlayerHP;
-    //[SerializeField] int speed;
-    //[SerializeField] int sprintMod;
-    //[SerializeField] int dashMod;
-    //[SerializeField] int jumpMax;
-    //[SerializeField] int jumpSpeed;
+    [Header("Class Weapons")]
+    [SerializeField] public GameObject gun;
+    [SerializeField] public GameObject sword;
+
+    [Header("Attributes")]
+    [Range(1, 100)]
+    [SerializeField] public int origHP;
+    public int playerHP;
+    [Range(1, 50)]
+    [SerializeField] public int damage;
+    [Range(0, 10)]
+    [SerializeField] public float attackSpeed;
+    [Range(1f, 1000f)]
+    [SerializeField] public float shootDist;
+    [Range(1, 20)]
+    [SerializeField] int speed;
+    [Range(1, 5)]
+    [SerializeField] int sprintMod;
+    [Range(1, 3)]
+    [SerializeField] public int jumpMax;
+    [Range(1, 20)]
+    [SerializeField] public int jumpSpeed;
+    [Range(1, 10)]
+    [SerializeField] public float dashCD;
+    [Range(1, 10)]
+    [SerializeField] public int dashMod;
+    [Range(1,20)]
     [SerializeField] int climbSpeed;
+    [Range(1,50)]
     [SerializeField] int gravity;
 
+    [Header("Audio")]
     [SerializeField] AudioClip[] audSteps;
     [SerializeField] float audStepsVol;
     [SerializeField] AudioClip[] audJump;
@@ -36,33 +59,19 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float audJumpBoostVol;
     [SerializeField] AudioClip[] audDash;
     [SerializeField] float audDashVol;
-    //[SerializeField] AudioClip[] audGun;
-    //[SerializeField] float audGunVol;
 
+    [Header("Field of View")]
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
 
-    /*[Range(1, 10)]
-    [SerializeField] int shootDmg;
-    [Range(.1f, 10)]
-    [SerializeField] float shootRate;
-    [Range(1, 1000)]
-    [SerializeField] int shootDist;*/
-
-    //bool isShooting;
-
     int jumpCount;
-    int origSpeed;
-    //public int origHP;
-    int origGravity;
-
-    bool isClimbing;
 
     bool isPlayingSteps;
     bool isPlayingHurt;
 
     public bool isSprinting;
+    public bool isClimbing;
     public bool isDashing;
     public bool isCoolDown;
 
@@ -78,17 +87,13 @@ public class PlayerController : MonoBehaviour, IDamage
     GameObject classWeaponInstance;
     GunScript gunScript;
     SwordScript swordScript;
+
     // Start is called before the first frame update
     void Start()
     {
         playerInstance = this;
-        origSpeed = playerClass.speed;
-        origGravity = gravity;
         origFOV = FOV;
-        isDashing = false;
-        isClimbing = false;
-        EquipClassWeapon();
-        isDashing = false;
+        playerHP = origHP;
         playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
     }
 
@@ -98,7 +103,8 @@ public class PlayerController : MonoBehaviour, IDamage
         Movement();
         Sprint();
         wallClimb();
-        
+        EquipClassWeapon();
+
         //handled in gun.cs
         /*if (Input.GetButtonDown("Fire1"))
         {
@@ -122,21 +128,21 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDirection * playerClass.speed * Time.deltaTime);
+        controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < playerClass.jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             if (jumpCount == 0)
             {
                 jumpCount++;
-                playerVelocity.y = playerClass.jumpSpeed;
+                playerVelocity.y = jumpSpeed;
                 aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             }
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
                 jumpCount++;
-                playerVelocity.y = (playerClass.jumpSpeed * 1.5f);
+                playerVelocity.y = (jumpSpeed * 1.5f);
                 aud.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
             }
         }
@@ -153,12 +159,12 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             isSprinting = true;
-            playerClass.speed *= playerClass.sprintMod;
+            speed *= sprintMod;
             Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.5f * Time.deltaTime);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
-            playerClass.speed /= playerClass.sprintMod;
+            speed /= sprintMod;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.5f * Time.deltaTime);
         }
@@ -205,11 +211,9 @@ public class PlayerController : MonoBehaviour, IDamage
     }*/
    
 
-
-
     public void TakeDamage(int dmg)
     {
-        playerClass.playerHP -= dmg;
+        playerHP -= dmg;
         UpdatePlayerUI();
 
         if (!isPlayingHurt)
@@ -217,7 +221,7 @@ public class PlayerController : MonoBehaviour, IDamage
             StartCoroutine(isHurtAud());
         }
 
-        if (playerClass.playerHP <= 0)
+        if (playerHP <= 0)
         {
             UIManager.instance.onLose();
         }
@@ -237,13 +241,13 @@ public class PlayerController : MonoBehaviour, IDamage
         aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining = playerClass.dashCD;
-        playerClass.speed *= playerClass.dashMod;
+        UIManager.instance.DashCDRemaining =dashCD;
+        speed *= dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
 
         StartCoroutine(DashDuration());
         isCoolDown = true;
-        yield return new WaitForSeconds(playerClass.dashCD);
+        yield return new WaitForSeconds(dashCD);
         isCoolDown = false;
         isDashing = false;
     }
@@ -252,14 +256,14 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(dashDuration);
 
-        playerClass.speed /= playerClass.dashMod;
+        speed /= dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.05f * Time.deltaTime); ;          
 
     }
 
     void UpdatePlayerUI()
     {
-        UIManager.instance.playerHPBar.fillAmount = (float)playerClass.playerHP / playerClass.origHP;
+        UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
     }
 
     void wallClimb()
@@ -267,7 +271,6 @@ public class PlayerController : MonoBehaviour, IDamage
         isClimbing = false;
 
         Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
 
         RaycastHit hit;
         if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2))
@@ -280,19 +283,45 @@ public class PlayerController : MonoBehaviour, IDamage
                 playerVelocity.y = climbSpeed;
 
             }
-
-
         }
     }
+
+/*    public void getGun(GameObject gun)
+    {
+        if (UIManager.instance.classGunner == true)
+        {
+            weapons.Add(gun);
+        }
+    }
+
+    public void getSword(GameObject sword)
+    {
+        if (UIManager.instance.classMele == true)
+        {
+            weapons.Add(sword);
+        }
+    }*/
 
     void EquipClassWeapon()
     {
-        if (playerClass.classWeapon != null)
+        if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
-            classWeaponInstance = Instantiate(playerClass.classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
+            playerHP = 20;
+            speed = 14;
+            attackSpeed = 0.25f;
+            classWeaponInstance = Instantiate(gun, weaponPos.position, weaponPos.rotation, weaponPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
-            gunScript.Gunner = playerClass;
+        }
 
+        if (UIManager.instance.classMele == true && classWeaponInstance == null)
+        {
+            playerHP = 30;
+            speed = 20;
+            attackSpeed = 1;
+            shootDist = 2;
+            classWeaponInstance = Instantiate(sword, weaponPos.position, weaponPos.rotation, weaponPos);
+            swordScript = classWeaponInstance.GetComponent<SwordScript>();
         }
     }
+
 } 
