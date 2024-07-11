@@ -26,6 +26,9 @@ public class AlphaBrute : MonoBehaviour , IDamage
     [SerializeField] GameObject attack;
     [SerializeField] float attackRate;
 
+    [SerializeField] Transform[] fallingRockPos;
+    [SerializeField] GameObject fallingRock;
+
     Vector3 playerDir;
     Vector3 playerPos;
     Vector3 prevNavPos;
@@ -50,7 +53,10 @@ public class AlphaBrute : MonoBehaviour , IDamage
        
         UIManager.instance.UpdateEnemyDisplay(1);
         MaxHP = HP;
-        initColor = model[0].GetComponent<Color>();
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.black;
+        }
 
     }
 
@@ -65,9 +71,11 @@ public class AlphaBrute : MonoBehaviour , IDamage
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
 
-        if(HP < MaxHP/2 && !isSecondPhase)
+        if (isSecondPhase && !hasStartedRocks)
             {
-                isSecondPhase = true;
+            int Rand = Random.Range(0,fallingRockPos.Length);
+            StartCoroutine(RockFalling());
+                
             }
 
         if (!isAttacking)
@@ -85,9 +93,11 @@ public class AlphaBrute : MonoBehaviour , IDamage
                 isAttacking = false;
                 anim.SetTrigger("Melee");
             }
-            else if(isSecondPhase && !hasStartedRocks)
+            else if(HP < MaxHP / 2 && !isSecondPhase)
             {
-                hasStartedRocks = false;
+                
+                isSecondPhase = true;
+                anim.SetTrigger("Scream");
             }
             else if (!isAttacking)
             {
@@ -135,9 +145,19 @@ public class AlphaBrute : MonoBehaviour , IDamage
 
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = initColor;
+            model[i].material.color = Color.black;
         }
 
+    }
+
+    IEnumerator RockFalling()
+    {
+        hasStartedRocks = true;
+       
+        int Rand = Random.Range(0, fallingRockPos.Length);
+        Instantiate(fallingRock, fallingRockPos[Rand]); 
+        yield return new WaitForSeconds(1f);
+        hasStartedRocks = false;
     }
     public void OnTriggerEnter(Collider other)
     {
