@@ -42,7 +42,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //StartMenu();
+        StartCoroutine(StartingMenu());
     }
 
     // Update is called once per frame
@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
     public void StartMenu()
     {
         menuActive = menuMain;
-        stateUnpause();   
+        statePause();   
         menuActive.SetActive(gamePause);
     }
 
@@ -138,5 +138,11 @@ public class UIManager : MonoBehaviour
         menuActive = menuBossWin;
         statePause();
         menuActive.SetActive(gamePause);
+    }
+
+    IEnumerator StartingMenu()
+    {
+        yield return new WaitForSeconds(0.2f);
+        StartMenu();
     }
 }
