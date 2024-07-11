@@ -51,9 +51,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SwordCollider: {fileID: 4821672371264454631}
-  attackSound: {fileID: 0}
+  aud: {fileID: 0}
+  attackSound:
+  - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
+  - {fileID: 8300000, guid: 690993e4cf4504d44b5c45ef3088e15e, type: 3}
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
+  isAttacking: 0
 --- !u!33 &2715464760919658580
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -115,7 +119,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

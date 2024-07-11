@@ -6,20 +6,18 @@ public class SwordScript : MonoBehaviour
 {
     //[SerializeField] public GameObject sword;
     [SerializeField] Collider SwordCollider;
-    [SerializeField] private AudioClip attackSound;
-    [SerializeField] private float attackSoundVol;
-    [SerializeField] private ParticleSystem attackEffect;
-    private Animator anim;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] attackSound;
+    [SerializeField] float attackSoundVol;
+    [SerializeField] ParticleSystem attackEffect;
 
-    private float nextAttackTime = 0f;
-    private AudioSource audioSource;
+    private Animator anim;
 
     public bool isAttacking;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -37,6 +35,7 @@ public class SwordScript : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
+        //aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
 
         if (PlayerController.playerInstance.attackSpeed < 1)
         {
