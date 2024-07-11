@@ -12,5 +12,6 @@ public class HPIncreaseAbility : Ability
         {
             abilityhandler.IncreaseMaxHP(hpIncreaseAmount);
         }
+
     }
 }

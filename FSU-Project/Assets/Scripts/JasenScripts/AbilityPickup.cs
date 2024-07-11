@@ -16,11 +16,12 @@ public class AbilityPickup : MonoBehaviour
             if (abilityHandler != null && ability != null)
             {
                 abilityHandler.AddAbility(ability);
-                Debug.Log(" activate " + ability.abilityName);
-                Debug.Log(ability.abilityName + " removed for spawnable");
+                //Debug.Log(" activate " + ability.abilityName);
+                //Debug.Log(ability.abilityName + " removed for spawnable");
                 AbilityManager.Instance.ActivateAbility(ability.abilityName, other.gameObject);
 
                 Destroy(gameObject);
+                //Debug.Log("ability destroyed");
             }
         }
     }

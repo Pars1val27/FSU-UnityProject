@@ -7,13 +7,16 @@ public class AbilityManager : MonoBehaviour
     public static AbilityManager Instance;
     public Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
     [SerializeField] public List<string> spawnableAbilities = new List<string>();
-
-    public Ability hpIncreaseAbility;
     void Start()
     {
         Instance = this;
-        RegisterAbility("HPIncrease", hpIncreaseAbility);
-        
+        InitializeAbilities();
+    }
+
+    public void InitializeAbilities()
+    {
+       
+        AbilityInitializer.Instance?.Initialize();
     }
 
     public void RegisterAbility(string abilityName, Ability ability)

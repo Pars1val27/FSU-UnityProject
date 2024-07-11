@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Abilityhandler : MonoBehaviour
 {
+    //public GameObject player;
     public PlayerController playerController;
     public GunScript gunScript;
     public SwordScript swordScript;
@@ -12,8 +13,9 @@ public class Abilityhandler : MonoBehaviour
 
     void Start()
     {
+        //player = GameObject.FindWithTag("Player");
         playerController = GetComponent<PlayerController>();
-
+        
     }
 
     public void IncreaseMaxHP(int amount)
@@ -31,6 +33,7 @@ public class Abilityhandler : MonoBehaviour
     {
         if (!abilities.Contains(ability))
         {
+            Debug.Log(ability + " added tolist");
             abilities.Add(ability);
             
             ability.Activate(gameObject);

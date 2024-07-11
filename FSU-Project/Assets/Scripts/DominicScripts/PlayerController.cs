@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     
     public CharacterController controller;
-    public PlayerStatUpgrade playerStatUp;
+    
+
 
     [SerializeField] AudioSource aud;
     [SerializeField] Transform weaponPos;
@@ -95,7 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
+        
     }
 
     // Update is called once per frame
