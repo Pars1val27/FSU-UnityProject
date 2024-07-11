@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HPIncreaseAbility
   m_EditorClassIdentifier: 
   modelPrefab: {fileID: 0}
-  hpIncreaseAmount: 1
+  hpIncreaseAmount: 13

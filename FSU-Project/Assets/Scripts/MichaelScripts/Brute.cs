@@ -46,6 +46,10 @@ public class Brute : MonoBehaviour , IDamage
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
 
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.white;
+        }
     }
 
     // Update is called once per frame
