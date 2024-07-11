@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class AbilitySpawner : MonoBehaviour
 {
+    public static AbilitySpawner Instance;
     public Transform[] spawnPoints;
      
 
     void Start()
     {
+        Instance = this;
         SpawnPickups();
     }
 
@@ -24,13 +26,17 @@ public class AbilitySpawner : MonoBehaviour
                 {
                     GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation);
                     AbilityPickup pickupScript = pickup.AddComponent<AbilityPickup>();
-                    pickupScript.ability = ability;
+                    pickupScript.ability = ability; 
+                    Collider pickupCollider = pickup.AddComponent<SphereCollider>();
+                    pickupCollider.isTrigger = true;
+                    pickup.name = abilityName + "Pickup";
                 }
                 else
                 {
-                    Debug.LogError("Ability or modelPrefab is null for ability: " + abilityName);
+                    Debug.Log("Ability or modelPrefab is null for ability: " + abilityName);
                 }
             }
+            else { Debug.Log("no Spawnable Abilitys"); }
         }
     }
 }

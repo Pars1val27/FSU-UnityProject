@@ -16,7 +16,7 @@ public class AbilityManager : MonoBehaviour
     public void InitializeAbilities()
     {
        
-        AbilityInitializer.Instance?.Initialize();
+        AbilityInitializer.Instance.Initialize();
     }
 
     public void RegisterAbility(string abilityName, Ability ability)
@@ -32,7 +32,7 @@ public class AbilityManager : MonoBehaviour
     {
         if (abilities.ContainsKey(abilityName))
         {
-            abilities[abilityName].Activate(target);
+            //abilities[abilityName].Activate(target);
             RemoveSpawnableAbility(abilityName);
         }
     }
