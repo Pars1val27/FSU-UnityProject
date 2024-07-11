@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public PlayerStatUpgrade playerStatUp;
 
     [SerializeField] AudioSource aud;
-    [SerializeField] Transform weaponPos;
+    [SerializeField] Transform gunPos;
+    [SerializeField] Transform swordPos;
     [SerializeField] Transform climbPos;
 
     [Header("Class Weapons")]
@@ -160,13 +161,13 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             isSprinting = true;
             speed *= sprintMod;
-            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.5f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
             isSprinting = false;
-            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.5f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
         }
     }
 
@@ -243,7 +244,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
         UIManager.instance.DashCDRemaining =dashCD;
         speed *= dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
 
         StartCoroutine(DashDuration());
         isCoolDown = true;
@@ -257,7 +258,7 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(dashDuration);
 
         speed /= dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.05f * Time.deltaTime); ;          
+        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.2f); ;          
 
     }
 
@@ -309,7 +310,7 @@ public class PlayerController : MonoBehaviour, IDamage
             playerHP = 20;
             speed = 14;
             attackSpeed = 0.25f;
-            classWeaponInstance = Instantiate(gun, weaponPos.position, weaponPos.rotation, weaponPos);
+            classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
         }
 
@@ -319,7 +320,7 @@ public class PlayerController : MonoBehaviour, IDamage
             speed = 20;
             attackSpeed = 1;
             shootDist = 2;
-            classWeaponInstance = Instantiate(sword, weaponPos.position, weaponPos.rotation, weaponPos);
+            classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
         }
     }
