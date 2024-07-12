@@ -93,7 +93,7 @@ public class AlphaBrute : MonoBehaviour , IDamage
                 isAttacking = false;
                 anim.SetTrigger("Melee");
             }
-            else if(HP < MaxHP / 2 && !isSecondPhase)
+            else if(HP <= MaxHP / 2 && !isSecondPhase)
             {
                 
                 isSecondPhase = true;
