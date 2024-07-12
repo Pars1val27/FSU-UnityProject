@@ -6,14 +6,19 @@ public class SwordScript : MonoBehaviour
 {
     //[SerializeField] public GameObject sword;
     [SerializeField] Collider SwordCollider;
+    [SerializeField] Collider blockCollider;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] attackSound;
     [SerializeField] float attackSoundVol;
     [SerializeField] ParticleSystem attackEffect;
 
+    [SerializeField] float blockCooldown;
+
     private Animator anim;
 
     public bool isAttacking;
+    public bool isBlocking;
+    public bool isBlockReady;
 
     void Start()
     {
@@ -30,6 +35,11 @@ public class SwordScript : MonoBehaviour
                 //nextAttackTime = Time.time + 1f / PlayerController.playerInstance.attackSpeed;
             }
         //}
+
+        if (Input.GetButtonDown("Fire3") && !isBlocking && isBlockReady)
+        {
+            Block();
+        }
     }
 
     IEnumerator Attack()
@@ -70,6 +80,24 @@ public class SwordScript : MonoBehaviour
         {
             other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
         }
+    }
+    void Block()
+    {
+        isBlocking = true;
+        anim.SetBool("Block", true);
+        if (Input.GetButtonUp("Fire3"))
+        {
+            isBlocking = false;
+            anim.SetBool("Block", false);
+            StartCoroutine(BlockCooldown());
+        }
+    }
+
+    IEnumerator BlockCooldown()
+    {
+        isBlockReady = false;
+        yield return new WaitForSeconds(blockCooldown);
+        isBlockReady = true;
     }
 
     /*void OnDrawGizmosSelected()
