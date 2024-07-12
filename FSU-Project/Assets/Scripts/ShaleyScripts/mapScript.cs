@@ -29,7 +29,7 @@ public class mapScript : MonoBehaviour
 
     void NextPos(maps mapLevel)
     {
-        float moveDist = GetRoomWidth(mapLevel) * 2.5f;
+        float moveDist = GetRoomWidth(mapLevel) * 2;
         int dir = RandDir();
         Vector3 newPos = pos;
         if(dir == 0)
