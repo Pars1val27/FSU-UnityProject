@@ -12,7 +12,6 @@ namespace AbilitySystem
         [SerializeField] public GameObject modelPrefab;
         [SerializeField] public Image uiIcon;
 
-
         public abstract void Activate(GameObject target);
     }
 }
