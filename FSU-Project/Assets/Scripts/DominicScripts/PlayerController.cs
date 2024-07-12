@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 150)]
     [SerializeField] public int origHP;
     public int playerHP;
+    [Range(1, 150)]
+    [SerializeField] public int baseGunnerHP;
+    [Range(1, 150)]
+    [SerializeField] public int baseSwordHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
     [Range(0, 10)]
@@ -308,7 +312,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
-            playerHP = 20;
+            origHP = 20;
+            playerHP = origHP;
             speed = 14;
             attackSpeed = 0.25f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
@@ -317,7 +322,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (UIManager.instance.classMele == true && classWeaponInstance == null)
         {
-            playerHP = 30;
+            origHP = 30;
+            playerHP = origHP;
             speed = 20;
             attackSpeed = 1;
             shootDist = 2;
