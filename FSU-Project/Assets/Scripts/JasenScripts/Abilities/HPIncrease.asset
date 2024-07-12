@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c187c572b67c9fc4faeb240c6bb3a476, type: 3}
   m_Name: HPIncrease
   m_EditorClassIdentifier: 
-  modelPrefab: {fileID: 0}
-  uiSprite: {fileID: 0}
   abilityName: HPIncrease
   ablitiyDisctriptions: 
+  modelPrefab: {fileID: 6560024532416312084, guid: 95fbaa96dc0723048887218ccfce89cc, type: 3}
+  uiIcon: {fileID: 0}
   hpIncreaseAmount: 19
