@@ -29,30 +29,39 @@ public class Timer : MonoBehaviour
         {
             remainingTime -= Time.deltaTime;
             UpdateTimer();
+            if(remainingTime <= 0)
+            {
+                timerRunning = false;
+
+                Debug.Log("Timer End");
+            }
         }
     }
 
     public void StartTimer()
     {
         timerRunning = true;
+        Debug.Log("Timer Start");
     }
 
     public void StopTimer()
     {
         timerRunning = false;
+        Debug.Log("Timer Stop");
     }
 
     public void EditTIme(int seconds)
     {
         remainingTime += seconds;
+        Debug.Log("Time Changed");
     }
 
     public void UpdateTimer()
     {
-        minRemaining = (remainingTime / 60);
-        secRemaining = (remainingTime % 60);
-        minText.text = minRemaining.ToString("f0");
-        secText.text = secRemaining.ToString("f0");
+        minRemaining = ((int)remainingTime / 60);
+        secRemaining = ((int)remainingTime % 60);
+        minText.text = minRemaining.ToString("00");
+        secText.text = secRemaining.ToString("00");
        
     }
 }

@@ -9,30 +9,41 @@ public class UIManager : MonoBehaviour
 
     public static UIManager instance;
 
-    [SerializeField] GameObject menuPause;
+    [Header("----Menus----")]
     [SerializeField] GameObject menuActive;
+    [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
+    [SerializeField] GameObject menuSettings;
+    [SerializeField] GameObject menuAbilities;
+    [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
-    
 
+    [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
     [SerializeField] public TMP_Text ammoMax;
     [SerializeField] public TMP_Text ammoCur;
+    [SerializeField] public TMP_Text maxPlayerHP;
+    [SerializeField] public TMP_Text currPlayerMP;
 
+    [Header("----Image----")]
     public Image playerHPBar;
     public Image DashCoolDownFill;
     public Image bossHealthBar;
-   
 
 
-
-    public bool gamePause;
+    [Header("----CoolDowns")]
     public float DashCDRemaining;
     public float dashingTime;
+
+    [Header("----Bools----")]
+    public bool gamePause;
+    public bool classMele;
+    public bool classGunner;
     bool onStart;
 
     int enemyCount;
@@ -40,7 +51,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //StartMenu();
+        StartCoroutine(StartingMenu());
     }
 
     // Update is called once per frame
@@ -63,6 +74,10 @@ public class UIManager : MonoBehaviour
         if (PlayerController.playerInstance.isCoolDown)
         {
             DashCD();
+        }
+        if (playerHPBar.fillAmount == .1f ) 
+        {
+            SetMenu(lowHealthIndi);
         }
     }
 
@@ -110,7 +125,7 @@ public class UIManager : MonoBehaviour
     public void StartMenu()
     {
         menuActive = menuMain;
-        stateUnpause();   
+        statePause();   
         menuActive.SetActive(gamePause);
     }
 
@@ -123,7 +138,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.playerClass.dashCD;
+            DashCoolDownFill.fillAmount = DashCDRemaining / PlayerController.playerInstance.dashCD;
         }
     }
 
@@ -137,4 +152,18 @@ public class UIManager : MonoBehaviour
         statePause();
         menuActive.SetActive(gamePause);
     }
+
+    IEnumerator StartingMenu()
+    {
+        yield return new WaitForSeconds(0.2f);
+        StartMenu();
+    }
+
+    public void SetMenu(GameObject menu)
+    {
+        menuActive.SetActive(false);
+        menuActive = menu;
+        menuActive.SetActive(gamePause);
+    }
+     
 }

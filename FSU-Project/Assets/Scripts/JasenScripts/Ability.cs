@@ -1,11 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public abstract class Ability : ScriptableObject
+namespace AbilitySystem
 {
-    public GameObject modelPrefab;
-    //public Sprite uiSprite; 
+    public abstract class Ability : ScriptableObject
+    {
+        [SerializeField] public string abilityName;
+        [SerializeField] public string ablitiyDisctriptions;
+        [SerializeField] public GameObject modelPrefab;
+        [SerializeField] public Image uiIcon;
 
-    public abstract void Activate(GameObject target);
+
+        public abstract void Activate(GameObject target);
+    }
 }

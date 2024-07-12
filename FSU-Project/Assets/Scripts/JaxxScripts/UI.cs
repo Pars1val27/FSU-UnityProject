@@ -29,12 +29,26 @@ public class UI : MonoBehaviour
 
     public void ClassSetMele()
     {
+        UIManager.instance.classMele = true;
+        UIManager.instance.classGunner = false;
         Resume();
     }
 
     public void ClassSetGunner()
     {
+        UIManager.instance.classMele = false;
+        UIManager.instance.classGunner = true;
         Resume();
+    }
+
+    public void TurnOnUI(GameObject ui)
+    {
+        ui.SetActive(true);
+    }
+
+    public void TurnOffUI(GameObject ui)
+    {
+        ui.SetActive(false);
     }
    
 }
