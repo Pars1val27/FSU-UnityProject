@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AbilitySystem;
 
 public class SwordScript : MonoBehaviour
 {
+    public AbilityHandler abilityHandler;
     //[SerializeField] public GameObject sword;
     [SerializeField] Collider SwordCollider;
-    [SerializeField] Collider blockCollider;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] attackSound;
     [SerializeField] float attackSoundVol;
@@ -17,7 +18,6 @@ public class SwordScript : MonoBehaviour
     private Animator anim;
 
     public bool isAttacking;
-    public bool isBlocking;
     public bool isBlockReady;
 
     void Start()
@@ -36,9 +36,18 @@ public class SwordScript : MonoBehaviour
             }
         //}
 
-        if (Input.GetButtonDown("Fire3") && !isBlocking && isBlockReady)
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady)
         {
-            Block();
+            //Block();
+
+            PlayerController.playerInstance.isBlocking = true;
+            anim.SetBool("Block", true);
+            if (Input.GetButtonUp("Fire2"))
+            {
+                PlayerController.playerInstance.isBlocking = false;
+                anim.SetBool("Block", false);
+                StartCoroutine(BlockCooldown());
+            }
         }
     }
 
@@ -81,7 +90,7 @@ public class SwordScript : MonoBehaviour
             other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
         }
     }
-    void Block()
+    /*void Block()
     {
         isBlocking = true;
         anim.SetBool("Block", true);
@@ -91,7 +100,7 @@ public class SwordScript : MonoBehaviour
             anim.SetBool("Block", false);
             StartCoroutine(BlockCooldown());
         }
-    }
+    }*/
 
     IEnumerator BlockCooldown()
     {
