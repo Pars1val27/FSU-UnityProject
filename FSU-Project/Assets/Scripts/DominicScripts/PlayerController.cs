@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
