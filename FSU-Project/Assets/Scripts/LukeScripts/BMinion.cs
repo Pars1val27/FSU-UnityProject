@@ -25,6 +25,7 @@ public class BMinion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
