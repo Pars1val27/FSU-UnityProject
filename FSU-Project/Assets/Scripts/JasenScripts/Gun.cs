@@ -1,9 +1,11 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AbilitySystem;
 
 public class GunScript : MonoBehaviour
 {
+    public AbilityHandler abilityHandler;
     //[SerializeField] public GameObject gun;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject muzzleFlash;
@@ -42,7 +44,7 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause)
+        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0)
         {
             
             StartCoroutine(Shoot());
@@ -140,4 +142,5 @@ public class GunScript : MonoBehaviour
         yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
+
 }

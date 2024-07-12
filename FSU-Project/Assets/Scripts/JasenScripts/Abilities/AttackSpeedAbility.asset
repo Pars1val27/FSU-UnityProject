@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4b3f78a04e5dbf4793d21af2829ca91, type: 3}
   m_Name: AttackSpeedAbility
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: AttackSpeedIncrease
   ablitiyDisctriptions: 
-  modelPrefab: {fileID: 0}
+  modelPrefab: {fileID: 7005894755046591571, guid: 687bf0c196f9d57458c594340bacf50c, type: 3}
   uiIcon: {fileID: 0}
-  attackSpeedIncreaseAmount: 0
+  attackSpeedIncreaseAmount: 5

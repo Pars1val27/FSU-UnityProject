@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build;
+using AbilitySystem;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     
     public CharacterController controller;
+    public AbilityHandler abilityHandler;
+
 
     [SerializeField] AudioSource aud;
     [SerializeField] Transform gunPos;
