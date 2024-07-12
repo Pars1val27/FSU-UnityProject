@@ -29,7 +29,7 @@ namespace AbilitySystem
                 playerController.origHP += amount;
                 //playerController.playerHP = playerController.origHP;
                 // Update UI or other logic to reflect new HP value
-                playerController.UpdatePlayerUI();
+                //playerController.UpdatePlayerUI();
                 //Debug.Log(playerController.origHP);
                 //Debug.Log(Equals(playerController.playerHP));
             }
