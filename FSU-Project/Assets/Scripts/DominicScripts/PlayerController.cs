@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEditor.Build;
+using AbilitySystem;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -11,7 +12,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     
     public CharacterController controller;
-    
+    public AbilityHandler abilityHandler;
 
 
     [SerializeField] AudioSource aud;
@@ -24,9 +25,13 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public GameObject sword;
 
     [Header("Attributes")]
-    [Range(1, 100)]
+    [Range(1, 150)]
     [SerializeField] public int origHP;
     public int playerHP;
+    [Range(1, 150)]
+    [SerializeField] public int baseGunnerHP;
+    [Range(1, 150)]
+    [SerializeField] public int baseSwordHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
     [Range(0, 10)]
@@ -76,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isClimbing;
     public bool isDashing;
     public bool isCoolDown;
+    public bool isBlocking;
 
     float origFOV;
     public float currFOV;
@@ -97,7 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        
+        UpdatePlayerUI();
     }
 
     // Update is called once per frame
@@ -216,17 +222,20 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
-        playerHP -= dmg;
-        UpdatePlayerUI();
-
-        if (!isPlayingHurt)
+        if (!isBlocking)
         {
-            StartCoroutine(isHurtAud());
-        }
+            playerHP -= dmg;
+            UpdatePlayerUI();
 
-        if (playerHP <= 0)
-        {
-            UIManager.instance.onLose();
+            if (!isPlayingHurt)
+            {
+                StartCoroutine(isHurtAud());
+            }
+
+            if (playerHP <= 0)
+            {
+                UIManager.instance.onLose();
+            }
         }
     }
 
@@ -311,7 +320,8 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
-            playerHP = 20;
+            origHP = 20;
+            playerHP = origHP;
             speed = 14;
             attackSpeed = 0.25f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
@@ -320,7 +330,8 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (UIManager.instance.classMele == true && classWeaponInstance == null)
         {
-            playerHP = 30;
+            origHP = 30;
+            playerHP = origHP;
             speed = 20;
             attackSpeed = 1;
             shootDist = 2;

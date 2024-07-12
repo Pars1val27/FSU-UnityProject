@@ -41,6 +41,14 @@ public class UI : MonoBehaviour
         Resume();
     }
 
-    
+    public void TurnOnUI(GameObject ui)
+    {
+        ui.SetActive(true);
+    }
+
+    public void TurnOffUI(GameObject ui)
+    {
+        ui.SetActive(false);
+    }
    
 }

@@ -50,14 +50,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be889633bd2e9eb42b3fe8ccc4bd8d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityHandler: {fileID: 0}
   SwordCollider: {fileID: 4821672371264454631}
+  blockCollider: {fileID: 0}
   aud: {fileID: 0}
   attackSound:
   - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
   - {fileID: 8300000, guid: 690993e4cf4504d44b5c45ef3088e15e, type: 3}
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
+  blockCooldown: 5
   isAttacking: 0
+  isBlocking: 0
+  isBlockReady: 0
 --- !u!33 &2715464760919658580
 MeshFilter:
   m_ObjectHideFlags: 0
