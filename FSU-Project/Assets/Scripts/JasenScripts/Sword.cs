@@ -4,46 +4,52 @@ using UnityEngine;
 
 public class SwordScript : MonoBehaviour
 {
-    [SerializeField] GameObject sword;
+    //[SerializeField] public GameObject sword;
     [SerializeField] Collider SwordCollider;
-    [SerializeField] private AudioClip attackSound;
-    [SerializeField] private float attackSoundVol;
-    [SerializeField] private ParticleSystem attackEffect;
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] attackSound;
+    [SerializeField] float attackSoundVol;
+    [SerializeField] ParticleSystem attackEffect;
 
-    private float nextAttackTime = 0f;
-    private AudioSource audioSource;
-    int damage;
-    float attackRate;
-    float range;
+    private Animator anim;
+
+    public bool isAttacking;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        damage = PlayerController.playerInstance.damage;
-        attackRate = PlayerController.playerInstance.attackSpeed;
-        range = PlayerController.playerInstance.shootDist;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if (Time.time >= nextAttackTime)
-        {
-            if (Input.GetButtonDown("Fire1"))
+        //if (Time.time >= nextAttackTime)
+        //{
+            if (Input.GetButtonDown("Fire1") && !isAttacking)
             {
                 StartCoroutine(Attack());
-                nextAttackTime = Time.time + 1f / attackRate;
+                //nextAttackTime = Time.time + 1f / PlayerController.playerInstance.attackSpeed;
             }
-        }
+        //}
     }
 
     IEnumerator Attack()
     {
+        isAttacking = true;
+        //aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
+
+        if (PlayerController.playerInstance.attackSpeed < 1)
+        {
+            anim.speed = (1 + (1 - PlayerController.playerInstance.attackSpeed));
+        }
+
+        anim.SetTrigger("Attack");
+
         if (attackEffect != null)
         {
             attackEffect.Play();
         }
 
-        RaycastHit hit;
+        /*RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.forward, out hit, range))
         {
             IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -51,14 +57,24 @@ public class SwordScript : MonoBehaviour
             {
                 dmg.TakeDamage(damage);
             }
-        }
+        }*/
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
+
+        isAttacking = false;
     }
 
-    void OnDrawGizmosSelected()
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.name != "Player" && !other.isTrigger)
+        {
+            other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
+        }
+    }
+
+    /*void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);
-    }
+    }*/
 }

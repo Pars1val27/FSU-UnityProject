@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     
     public CharacterController controller;
-    public PlayerStatUpgrade playerStatUp;
-    [SerializeField] public GameObject classWeapon;
+    
+
 
     [SerializeField] AudioSource aud;
-    [SerializeField] Transform weaponPos;
+    [SerializeField] Transform gunPos;
+    [SerializeField] Transform swordPos;
     [SerializeField] Transform climbPos;
+
+    [Header("Class Weapons")]
+    [SerializeField] public GameObject gun;
+    [SerializeField] public GameObject sword;
 
     [Header("Attributes")]
     [Range(1, 100)]
@@ -24,14 +29,14 @@ public class PlayerController : MonoBehaviour, IDamage
     public int playerHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
-    [Range(1, 10)]
+    [Range(0, 10)]
     [SerializeField] public float attackSpeed;
     [Range(1f, 1000f)]
     [SerializeField] public float shootDist;
     [Range(1, 20)]
-    [SerializeField] int speed;
+    [SerializeField] public int speed;
     [Range(1, 5)]
-    [SerializeField] int sprintMod;
+    [SerializeField] public int sprintMod;
     [Range(1, 3)]
     [SerializeField] public int jumpMax;
     [Range(1, 20)]
@@ -82,8 +87,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
     GameObject classWeaponInstance;
-    GunScript gunScript;
-    SwordScript swordScript;
+   
+    public GunScript gunScript;
+    public SwordScript swordScript;
 
     // Start is called before the first frame update
     void Start()
@@ -91,8 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        EquipClassWeapon();
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
+        
     }
 
     // Update is called once per frame
@@ -101,7 +106,8 @@ public class PlayerController : MonoBehaviour, IDamage
         Movement();
         Sprint();
         wallClimb();
-        
+        EquipClassWeapon();
+
         //handled in gun.cs
         /*if (Input.GetButtonDown("Fire1"))
         {
@@ -157,13 +163,13 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             isSprinting = true;
             speed *= sprintMod;
-            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.5f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
             speed /= sprintMod;
             isSprinting = false;
-            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.5f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
         }
     }
 
@@ -240,7 +246,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
         UIManager.instance.DashCDRemaining =dashCD;
         speed *= dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
+        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
 
         StartCoroutine(DashDuration());
         isCoolDown = true;
@@ -254,11 +260,11 @@ public class PlayerController : MonoBehaviour, IDamage
         yield return new WaitForSeconds(dashDuration);
 
         speed /= dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.05f * Time.deltaTime); ;          
+        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.2f); ;          
 
     }
 
-    void UpdatePlayerUI()
+    public void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
         UIManager.instance.maxPlayerHP.text = origHP.ToString();
@@ -285,25 +291,41 @@ public class PlayerController : MonoBehaviour, IDamage
         }
     }
 
-    void EquipClassWeapon()
+/*    public void getGun(GameObject gun)
     {
         if (UIManager.instance.classGunner == true)
         {
-            classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
-            gunScript = classWeaponInstance.GetComponent<GunScript>();
+            weapons.Add(gun);
+        }
+    }
+
+    public void getSword(GameObject sword)
+    {
+        if (UIManager.instance.classMele == true)
+        {
+            weapons.Add(sword);
+        }
+    }*/
+
+    void EquipClassWeapon()
+    {
+        if (UIManager.instance.classGunner == true && classWeaponInstance == null)
+        {
             playerHP = 20;
             speed = 14;
             attackSpeed = 0.25f;
+            classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
+            gunScript = classWeaponInstance.GetComponent<GunScript>();
         }
 
-        if (UIManager.instance.classMele == true)
+        if (UIManager.instance.classMele == true && classWeaponInstance == null)
         {
-            classWeaponInstance = Instantiate(classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
-            swordScript = classWeaponInstance.GetComponent<SwordScript>();
             playerHP = 30;
             speed = 20;
             attackSpeed = 1;
             shootDist = 2;
+            classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
+            swordScript = classWeaponInstance.GetComponent<SwordScript>();
         }
     }
 
