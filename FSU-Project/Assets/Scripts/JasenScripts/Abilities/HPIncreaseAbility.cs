@@ -1,17 +1,21 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HPIncreaseAbility", menuName = "Abilities/HPIncrease")]
-public class HPIncreaseAbility : Ability
+namespace AbilitySystem
 {
-    [SerializeField]public int hpIncreaseAmount;
-
-    public override void Activate(GameObject target)
+    [CreateAssetMenu(fileName = "HPIncreaseAbility", menuName = "Abilities/HPIncrease")]
+    public class HPIncreaseAbility : Ability
     {
-        var abilityhandler = target.GetComponent<Abilityhandler>();
-        if (abilityhandler != null)
-        {
-            abilityhandler.IncreaseMaxHP(hpIncreaseAmount);
-        }
+        [SerializeField] public int hpIncreaseAmount;
 
+        public override void Activate(GameObject target)
+        {
+            var abilityhandler = target.GetComponent<AbilityHandler>();
+            if (abilityhandler != null)
+            {
+                abilityhandler.IncreaseMaxHP(hpIncreaseAmount);
+
+            }
+
+        }
     }
 }

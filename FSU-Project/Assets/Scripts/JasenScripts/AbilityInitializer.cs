@@ -2,21 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityInitializer : MonoBehaviour
+namespace AbilitySystem
 {
-    public static AbilityInitializer Instance;
-
-    public Ability hpIncreaseAbility;
-
-    void Start()
+    public class AbilityInitializer : MonoBehaviour
     {
-        Instance = this;
+        public static AbilityInitializer Instance;
 
-    }
+        public Ability[] abilities;
 
-    public void Initialize()
-    {
-        AbilityManager.Instance.RegisterAbility(hpIncreaseAbility.abilityName, hpIncreaseAbility);
-        AbilityManager.Instance.ResetSpawnableAbilities();
+        void Start()
+        {
+            Instance = this;
+
+        }
+
+        public void Initialize()
+        {
+            foreach (var ability in abilities)
+            {
+                if (ability != null)
+                {
+                    AbilityManager.Instance.RegisterAbility(ability.abilityName, ability);
+                }
+            }
+            AbilityManager.Instance.ResetSpawnableAbilities();
+        }
     }
 }

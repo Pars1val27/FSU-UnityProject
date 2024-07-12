@@ -2,70 +2,73 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityManager : MonoBehaviour
+namespace AbilitySystem
 {
-    public static AbilityManager Instance;
-    public Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
-    [SerializeField] public List<string> spawnableAbilities = new List<string>();
-    void Start()
+    public class AbilityManager : MonoBehaviour
     {
-        Instance = this;
-        InitializeAbilities();
-    }
-
-    public void InitializeAbilities()
-    {
-       
-        AbilityInitializer.Instance.Initialize();
-    }
-
-    public void RegisterAbility(string abilityName, Ability ability)
-    {
-        if (!abilities.ContainsKey(abilityName))
+        public static AbilityManager Instance;
+        public Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
+        [SerializeField] public List<string> spawnableAbilities = new List<string>();
+        void Start()
         {
-            abilities[abilityName] = ability;
-            spawnableAbilities.Add(abilityName);
+            Instance = this;
+            InitializeAbilities();
         }
-    }
 
-    public void ActivateAbility(string abilityName, GameObject target)
-    {
-        if (abilities.ContainsKey(abilityName))
+        public void InitializeAbilities()
         {
-            //abilities[abilityName].Activate(target);
-            RemoveSpawnableAbility(abilityName);
-        }
-    }
 
-    public void RemoveSpawnableAbility(string abilityName)
-    {
-        if (spawnableAbilities.Contains(abilityName))
+            AbilityInitializer.Instance.Initialize();
+        }
+
+        public void RegisterAbility(string abilityName, Ability ability)
         {
-            spawnableAbilities.Remove(abilityName);
+            if (!abilities.ContainsKey(abilityName))
+            {
+                abilities[abilityName] = ability;
+                spawnableAbilities.Add(abilityName);
+            }
         }
-    }
 
-    public string GetRandomSpawnableAbility()
-    {
-        if (spawnableAbilities.Count > 0)
+        public void ActivateAbility(string abilityName, GameObject target)
         {
-            int randomIndex = Random.Range(0, spawnableAbilities.Count);
-            return spawnableAbilities[randomIndex];
+            if (abilities.ContainsKey(abilityName))
+            {
+                abilities[abilityName].Activate(target);
+                RemoveSpawnableAbility(abilityName);
+            }
         }
-        return null;
-    }
 
-    public Ability GetAbility(string abilityName)
-    {
-        if (abilities.ContainsKey(abilityName))
+        public void RemoveSpawnableAbility(string abilityName)
         {
-            return abilities[abilityName];
+            if (spawnableAbilities.Contains(abilityName))
+            {
+                spawnableAbilities.Remove(abilityName);
+            }
         }
-        return null;
-    }
 
-    public void ResetSpawnableAbilities()
-    {
-        spawnableAbilities = new List<string>(abilities.Keys);
+        public string GetRandomSpawnableAbility()
+        {
+            if (spawnableAbilities.Count > 0)
+            {
+                int randomIndex = Random.Range(0, spawnableAbilities.Count);
+                return spawnableAbilities[randomIndex];
+            }
+            return null;
+        }
+
+        public Ability GetAbility(string abilityName)
+        {
+            if (abilities.ContainsKey(abilityName))
+            {
+                return abilities[abilityName];
+            }
+            return null;
+        }
+
+        public void ResetSpawnableAbilities()
+        {
+            spawnableAbilities = new List<string>(abilities.Keys);
+        }
     }
 }
