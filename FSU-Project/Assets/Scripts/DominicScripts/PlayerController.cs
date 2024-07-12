@@ -261,6 +261,8 @@ public class PlayerController : MonoBehaviour, IDamage
     void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
+        UIManager.instance.maxPlayerHP.text = origHP.ToString();
+        UIManager.instance.currPlayerMP.text = playerHP.ToString();
     }
 
     void wallClimb()
