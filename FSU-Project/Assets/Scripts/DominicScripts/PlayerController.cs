@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isClimbing;
     public bool isDashing;
     public bool isCoolDown;
+    public bool isBlocking;
 
     float origFOV;
     public float currFOV;
@@ -221,17 +222,20 @@ public class PlayerController : MonoBehaviour, IDamage
 
     public void TakeDamage(int dmg)
     {
-        playerHP -= dmg;
-        UpdatePlayerUI();
-
-        if (!isPlayingHurt)
+        if (!isBlocking)
         {
-            StartCoroutine(isHurtAud());
-        }
+            playerHP -= dmg;
+            UpdatePlayerUI();
 
-        if (playerHP <= 0)
-        {
-            UIManager.instance.onLose();
+            if (!isPlayingHurt)
+            {
+                StartCoroutine(isHurtAud());
+            }
+
+            if (playerHP <= 0)
+            {
+                UIManager.instance.onLose();
+            }
         }
     }
 

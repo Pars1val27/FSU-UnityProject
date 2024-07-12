@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8510b687581b74ba0bc2eef5c311b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityHandler: {fileID: 0}
   GrenadePos: {fileID: 3404024799275723205}
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
@@ -58,14 +59,14 @@ MonoBehaviour:
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 0}
   currAmmo: 0
-  maxAmmo: 0
-  reloadTime: 0
-  grenadeThrowForce: 0
-  delay: 0
-  explosionRadius: 0
-  explosionForce: 0
-  explosionDamage: 0
-  grenadeRechargeRate: 0
+  maxAmmo: 25
+  reloadTime: 5
+  grenadeThrowForce: 20
+  delay: 1.5
+  explosionRadius: 3
+  explosionForce: 5
+  explosionDamage: 5
+  grenadeRechargeRate: 2
   isReloading: 0
   isGrenadeReady: 1
 --- !u!33 &2715464760919658580

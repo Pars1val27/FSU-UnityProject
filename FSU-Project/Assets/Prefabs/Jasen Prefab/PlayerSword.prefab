@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 4821672371264454631}
   - component: {fileID: 5019358854610152489}
   - component: {fileID: -2331808413558290830}
-  - component: {fileID: 9094780292831172134}
   m_Layer: 0
   m_Name: PlayerSword
   m_TagString: Untagged
@@ -51,8 +50,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be889633bd2e9eb42b3fe8ccc4bd8d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityHandler: {fileID: 0}
   SwordCollider: {fileID: 4821672371264454631}
-  blockCollider: {fileID: 9094780292831172134}
+  blockCollider: {fileID: 0}
   aud: {fileID: 0}
   attackSound:
   - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
@@ -280,24 +280,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &9094780292831172134
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789420410420548932}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 12, y: 10, z: 0.1}
-  m_Center: {x: 0, y: 1.5, z: 0}
