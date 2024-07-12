@@ -9,22 +9,16 @@ public class mapScript : MonoBehaviour
 
     int lastDir;
     int lastRoom;
+    int roomCount = 0;
+    //wallScript currRoom;
+    GameObject[] roomWalls;
     Vector3 pos;
 
     void Start()
     {
         GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
-        GenerateRoomWalls(maps[0]);
-        GenerateRoom(maps[0]);
-        NextPos(maps[0]);
-        GenerateRoomWalls(maps[0]);
-        GenerateRoom(maps[0]);
-    }
-
-    void Update()
-    {
-
+        GenerateMap(maps[0]);
     }
 
     void NextPos(maps mapLevel)
@@ -57,7 +51,35 @@ public class mapScript : MonoBehaviour
     }
     void GenerateMap(maps mapLevel)
     {
-
+        Vector3[] usedPos = new Vector3[mapLevel.maxRooms];
+        while (roomCount < mapLevel.maxRooms)
+        {
+            bool isTaken = false;
+            for(int posIndex = 0; posIndex < usedPos.Length; posIndex++)
+            {
+                if(pos == usedPos[posIndex])
+                {
+                    isTaken = true;
+                    break;
+                }
+                else
+                {
+                    //do nothing
+                }
+            }
+            if (isTaken)
+            {
+                //do Nothing
+            }
+            else
+            {
+                GenerateRoom(mapLevel);
+                GenerateRoomWalls(mapLevel);
+                roomCount++;
+                usedPos[roomCount - 1] = pos;
+            }
+            NextPos(mapLevel);
+        }
     }
 
     void GenerateRoomWalls(maps mapLevel)
@@ -65,27 +87,30 @@ public class mapScript : MonoBehaviour
         float roomWidth = GetRoomWidth(mapLevel);
         float wallPos = roomWidth;
         //sides
-        GenerateWall(mapLevel, 90, wallPos, 0);
-        GenerateWall(mapLevel, 90, -wallPos, 0);
+        roomWalls[0] = GenerateWall(mapLevel, 90, wallPos, 0);
+        roomWalls[1] = GenerateWall(mapLevel, 90, -wallPos, 0);
         //top/bottom
-        GenerateWall(mapLevel, 0, 0, wallPos);
-        GenerateWall(mapLevel, 0, 0, -wallPos);
+        roomWalls[2] = GenerateWall(mapLevel, 0, 0, wallPos);
+        roomWalls[3] = GenerateWall(mapLevel, 0, 0, -wallPos);
     }
 
-    void GenerateWall(maps mapLevel, int dir, float x, float z)
+    GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
         float wallHeight = (mapLevel.wall.transform.localScale.y) / 2;
         GameObject wall = Instantiate(mapLevel.wall);
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
+        return wall;
     }
 
-    void GenerateRoom(maps mapLevel)
+    wallScript GenerateRoom(maps mapLevel)
     {
         GameObject room = Instantiate(RandRoom(mapLevel));
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        wallScript newRoom = new wallScript();
+        return newRoom;
     }
 
     //normal room
@@ -109,5 +134,11 @@ public class mapScript : MonoBehaviour
         }
         lastDir = dir;
         return dir * 90;
+    }
+
+    void UpdateDoors(maps mapLevel)
+    {
+        int doorCount = 0;
+
     }
 }

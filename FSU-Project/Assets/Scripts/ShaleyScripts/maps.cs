@@ -9,6 +9,7 @@ public class maps : ScriptableObject
     [SerializeField] public GameObject roomShop;
     [SerializeField] public GameObject[] rooms;
     [SerializeField] public GameObject[] roomBosses;
+    [SerializeField] public int maxRooms;
 
     [SerializeField] public GameObject wall;
     [SerializeField] public GameObject door;
