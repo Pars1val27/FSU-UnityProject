@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
+
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public static PlayerController playerInstance;
     
     public CharacterController controller;
-    public PlayerStatUpgrade playerStatUp;
+    
+
 
     [SerializeField] AudioSource aud;
     [SerializeField] Transform gunPos;
@@ -33,9 +34,9 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1f, 1000f)]
     [SerializeField] public float shootDist;
     [Range(1, 20)]
-    [SerializeField] int speed;
+    [SerializeField] public int speed;
     [Range(1, 5)]
-    [SerializeField] int sprintMod;
+    [SerializeField] public int sprintMod;
     [Range(1, 3)]
     [SerializeField] public int jumpMax;
     [Range(1, 20)]
@@ -86,8 +87,9 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
     GameObject classWeaponInstance;
-    GunScript gunScript;
-    SwordScript swordScript;
+   
+    public GunScript gunScript;
+    public SwordScript swordScript;
 
     // Start is called before the first frame update
     void Start()
@@ -95,7 +97,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
+        
     }
 
     // Update is called once per frame
@@ -262,7 +264,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
     }
 
-    void UpdatePlayerUI()
+    public void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
     }
