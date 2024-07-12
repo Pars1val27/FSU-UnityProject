@@ -13,12 +13,15 @@ public class gameManager : MonoBehaviour
     public static gameManager instance;
 
     public NavMeshSurface surface;
+    
+
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
+         
     }
 
     public void SpawnPlayer(GameObject spawnPos)
