@@ -11,7 +11,8 @@ namespace AbilitySystem
 
         public override void Activate(GameObject target)
         {
-            //var statusEffectable = target.GetComponent<StatusEffectable>();
+            var GunFreezeEffect = target.GetComponent<GunScript>();
+            var SwordFreezeEffecte = target.GetComponent<SwordScript>();
             //if (statusEffectable != null)
             //{
             //    statusEffectable.ApplyStatusEffect(StatusEffectType.Freeze, 0, duration);

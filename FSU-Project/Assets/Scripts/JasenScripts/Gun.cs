@@ -46,7 +46,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0)
         {
-            
+
             StartCoroutine(Shoot());
 
         }
@@ -76,8 +76,10 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
         {
-           
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
+            
+
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
@@ -106,7 +108,7 @@ public class GunScript : MonoBehaviour
             grenadeScript.Initialize(delay, explosionRadius, explosionForce, explosionDamage);
         }
 
-        
+
         StartCoroutine(RechargeGrenade());
     }
 
@@ -142,5 +144,18 @@ public class GunScript : MonoBehaviour
         yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
+
+    void ApplyStatusEffect(string abilityName, GameObject target)
+    {
+        if (abilityHandler.HasAbility(abilityName))
+        {
+            var ability = abilityHandler.GetAbility(abilityName);
+            if (ability != null)
+            {
+                ability.Activate(target);
+            }
+        }
+    }
+
 
 }

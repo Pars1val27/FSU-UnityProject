@@ -62,10 +62,7 @@ namespace AbilitySystem
             playerController.speed += amount;    
         }
 
-        //public void IncreaseRateOfFire(float amount)
-        //{
-        //    playerController.attackSpeed -= amount; 
-        //}
+        
 
         public void IncreaseStamina(int amount)
         {

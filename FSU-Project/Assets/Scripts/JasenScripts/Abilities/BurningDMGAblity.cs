@@ -4,16 +4,19 @@ using UnityEngine;
 
 namespace AbilitySystem
 {
-    [CreateAssetMenu(fileName = "BurningEffect", menuName = "Abilities/Burning Effect")]
-    public class BurningEffect : Ability
+    [CreateAssetMenu(fileName = "FireEffect", menuName = "Abilities/FireEffect")]
+    public class FireEffect : Ability
     {
-        public float burnDamage;
+        public float fireDamage;
         public float duration;
 
         public override void Activate(GameObject target)
         {
-           
-            
+            var flammable = target.GetComponent<IFireDamage>();
+            if (flammable != null)
+            {
+                flammable.ApplyFireDamage(fireDamage, duration);
+            }
         }
     }
 }

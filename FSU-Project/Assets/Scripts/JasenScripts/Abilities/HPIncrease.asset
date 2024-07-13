@@ -16,4 +16,4 @@ MonoBehaviour:
   ablitiyDisctriptions: 
   modelPrefab: {fileID: 6560024532416312084, guid: 95fbaa96dc0723048887218ccfce89cc, type: 3}
   uiIcon: {fileID: 0}
-  hpIncreaseAmount: 19
+  hpIncreaseAmount: 1920
