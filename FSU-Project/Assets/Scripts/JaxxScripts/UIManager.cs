@@ -44,7 +44,6 @@ public class UIManager : MonoBehaviour
     public bool gamePause;
     public bool classMele;
     public bool classGunner;
-    bool onStart;
 
     int enemyCount;
     // Start is called before the first frame update

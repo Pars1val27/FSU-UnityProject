@@ -103,6 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage
         origFOV = FOV;
         playerHP = origHP;
         UpdatePlayerUI();
+        isCoolDown = false;
     }
 
     // Update is called once per frame

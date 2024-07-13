@@ -25,7 +25,16 @@ public class Audio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (PlayerPrefs.HasKey("MasterVolume") || PlayerPrefs.HasKey("MusicVolume") || PlayerPrefs.HasKey("SFXVolume"))
+        {
+            LoadVolume();
+        }
+        else
+        {
+            SetMasterVol();
+            SetMusicVol();
+            SetPlayerVol();
+        }
     }
 
     // Update is called once per frame
@@ -38,18 +47,32 @@ public class Audio : MonoBehaviour
     {
         masterVol = masterSlider.value;
         audioMixer.SetFloat("Master", Mathf.Log10(masterVol)*20);
+        PlayerPrefs.SetFloat("MasterVolume", masterVol);
     }
 
     public void SetMusicVol()
     {
         musicVol = musicSlider.value;
         audioMixer.SetFloat("Music", Mathf.Log10(musicVol)*20);
+        PlayerPrefs.SetFloat("MusicVolume", musicVol);
     }
 
     public void SetPlayerVol()
     {
         sfxVol = sfxSlider.value;
         audioMixer.SetFloat("Player", Mathf.Log10(sfxVol)*20);
+        PlayerPrefs.SetFloat("SFXVolume", sfxVol);
+    }
+
+    void LoadVolume()
+    {
+        masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        SetMasterVol();
+        SetMusicVol();
+        SetPlayerVol();
+
     }
 
     public void PlayClicks()
