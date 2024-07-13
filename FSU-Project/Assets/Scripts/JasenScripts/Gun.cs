@@ -46,7 +46,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0)
         {
-            
+
             StartCoroutine(Shoot());
 
         }
@@ -77,11 +77,14 @@ public class GunScript : MonoBehaviour
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward);
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
         {
-            Debug.Log(hit);
+           
             IDamage dmg = hit.collider.GetComponent<IDamage>();
+            
+
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
+                ApplyStatusEffects(hit.collider.gameObject);
             }
             else
             {
@@ -107,7 +110,7 @@ public class GunScript : MonoBehaviour
             grenadeScript.Initialize(delay, explosionRadius, explosionForce, explosionDamage);
         }
 
-        
+
         StartCoroutine(RechargeGrenade());
     }
 
@@ -143,5 +146,33 @@ public class GunScript : MonoBehaviour
         yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
-
+    void ApplyStatusEffects(GameObject target)
+    {
+        if (abilityHandler.HasAbility("FireEffect"))
+        {
+            var fireAbility = abilityHandler.GetAbility("FireEffect");
+            if (fireAbility != null)
+            {
+                fireAbility.Activate(target);
+            }
+        }
+        if (abilityHandler.HasAbility("PoisonEffect"))
+        {
+            var poisonAbility = abilityHandler.GetAbility("PoisonEffect");
+            if (poisonAbility != null)
+            {
+                poisonAbility.Activate(target);
+            }
+        }
+        if (abilityHandler.HasAbility("SlowedEffect"))
+        {
+            var slowAbility = abilityHandler.GetAbility("SlowedEffect");
+            if (slowAbility != null)
+            {
+                slowAbility.Activate(target);
+            }
+        }
+    
+    }
+   
 }

@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ba110e04bf5d374fa7f60ce2b4745ec, type: 3}
-  m_Name: RateOfFireAbility
+  m_Script: {fileID: 11500000, guid: 1a0dfd74f5de4d543adee7d9fb94ecbe, type: 3}
+  m_Name: PoisonEffect
   m_EditorClassIdentifier: 
-  abilityName: FireReteIncrease
+  abilityName: 
   ablitiyDisctriptions: 
-  modelPrefab: {fileID: 8637166288670415014, guid: 8bb8728f68d12ab40b4b42cc6863df5d, type: 3}
+  ablitiyCost: 0
   uiIcon: {fileID: 0}
-  rateOfFireIncreaseAmount: 5
+  modelPrefab: {fileID: 0}
+  damageOverTime: 0
+  duration: 0
