@@ -16,16 +16,20 @@ public class BMinion : MonoBehaviour
 
 
     [Header("----- Attack -----")]
-    [SerializeField] Transform attackPos;
-    [SerializeField] GameObject attack;
+    [SerializeField] int damage;
+    [SerializeField] int attackRate;
 
+    bool hit;
+    bool isAttacking;
+    bool playerInRange;
+    float angleToPlayer;
+    float SavedTime = 0;
     Vector3 playerDir;
     Vector3 playerPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -34,12 +38,36 @@ public class BMinion : MonoBehaviour
     {
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
+        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+
+        agent.SetDestination(playerPos);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+
+            IDamage dmg = other.GetComponent<IDamage>();
+
+            if (dmg != null)
+            {
+                dmg.TakeDamage(damage);
+                Death();
+            }
+        }
     }
 
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+    }
+
+    public void TakeDamage(int amount)
+    {
+        Debug.Log("got hit");
+        StartCoroutine(flashDamage());
+        Death();
     }
 
     public void Death()
@@ -62,11 +90,5 @@ public class BMinion : MonoBehaviour
             model[i].material.color = Color.white;
         }
 
-    }
-
-    public void punch()
-    {
-        Instantiate(attack, attackPos.position, transform.rotation);
-        Death();
     }
 }

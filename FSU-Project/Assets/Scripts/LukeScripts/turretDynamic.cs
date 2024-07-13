@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class turretDynamic : MonoBehaviour
 {
-    //Michael & Luke
+    //Luke
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
