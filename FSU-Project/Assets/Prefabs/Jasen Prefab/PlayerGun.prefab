@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789420410420548932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.999962, y: 0, z: 0, w: 0.008727434}
+  m_LocalRotation: {x: -0.87035614, y: 0, z: 0, w: 0.49242285}
   m_LocalPosition: {x: 0.161, y: 0.336, z: 0.48488748}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58,15 +58,15 @@ MonoBehaviour:
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 0}
-  currAmmo: 100
-  maxAmmo: 100
-  reloadTime: 0
-  grenadeThrowForce: 0
-  delay: 0
-  explosionRadius: 0
-  explosionForce: 0
-  explosionDamage: 0
-  grenadeRechargeRate: 0
+  currAmmo: 0
+  maxAmmo: 25
+  reloadTime: 5
+  grenadeThrowForce: 20
+  delay: 1.5
+  explosionRadius: 3
+  explosionForce: 5
+  explosionDamage: 5
+  grenadeRechargeRate: 2
   isReloading: 0
   isGrenadeReady: 1
 --- !u!33 &2715464760919658580
