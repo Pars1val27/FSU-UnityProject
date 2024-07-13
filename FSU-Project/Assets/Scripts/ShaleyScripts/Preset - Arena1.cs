@@ -10,8 +10,6 @@ public class PresetArena1 : MonoBehaviour
 {
     [SerializeField] GameObject spawnPos;
 
-    //[SerializeField] CharacterController characterCtrl;
-
     private void Start()
     {
         StartArenaEnemy();

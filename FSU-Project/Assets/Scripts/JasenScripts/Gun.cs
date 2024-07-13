@@ -1,12 +1,13 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AbilitySystem;
 
 public class GunScript : MonoBehaviour
 {
-    public PlayerClass Gunner;
+    public AbilityHandler abilityHandler;
+    //[SerializeField] public GameObject gun;
     [SerializeField] Transform GrenadePos;
-    [SerializeField] GameObject gun;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;
     [SerializeField] float shootSoundVol;
@@ -15,6 +16,16 @@ public class GunScript : MonoBehaviour
 
     [SerializeField] ParticleSystem hitEffect;
 
+    public int currAmmo;
+    public int maxAmmo;
+    public float reloadTime;
+
+    public float grenadeThrowForce;
+    public float delay;
+    public float explosionRadius;
+    public float explosionForce;
+    public int explosionDamage;
+    public float grenadeRechargeRate;
 
     bool isShooting;
 
@@ -23,9 +34,7 @@ public class GunScript : MonoBehaviour
 
     void Start()
     {
-
-        Gunner.currAmmo = Gunner.maxAmmo;
-        Gunner.playerHP = Gunner.origHP;
+        currAmmo = maxAmmo;
         UpdateAmmoCount();
     }
 
@@ -35,7 +44,7 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause)
+        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0)
         {
             
             StartCoroutine(Shoot());
@@ -46,7 +55,7 @@ public class GunScript : MonoBehaviour
             ThrowGrenade();
         }
 
-        if (Gunner.currAmmo <= 0 && !isReloading)
+        if (currAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
         }
@@ -54,31 +63,31 @@ public class GunScript : MonoBehaviour
 
     void UpdateAmmoCount()
     {
-        UIManager.instance.ammoCur.text = Gunner.currAmmo.ToString();
-        UIManager.instance.ammoMax.text = Gunner.maxAmmo.ToString();
+        UIManager.instance.ammoCur.text = currAmmo.ToString();
+        UIManager.instance.ammoMax.text = maxAmmo.ToString();
     }
 
     IEnumerator Shoot()
     {
         isShooting = true;
-        Gunner.currAmmo--;
+        currAmmo--;
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, Gunner.shootDist, 1, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
         {
            
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             if (hit.transform != transform && dmg != null)
             {
-                dmg.TakeDamage(Gunner.damage);
+                dmg.TakeDamage(PlayerController.playerInstance.damage);
             }
             else
             {
                 //Instantiate(hitEffect, hit.point, Quaternion.identity);
             }
         }
-        yield return new WaitForSeconds(Gunner.shootRate);
+        yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
         isShooting = false;
     }
 
@@ -88,13 +97,13 @@ public class GunScript : MonoBehaviour
         Rigidbody rb = grenade.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.AddForce(GrenadePos.forward * Gunner.grenadeThrowForce, ForceMode.VelocityChange);
+            rb.AddForce(GrenadePos.forward * grenadeThrowForce, ForceMode.VelocityChange);
         }
 
         Grenade grenadeScript = grenade.GetComponent<Grenade>();
         if (grenadeScript != null)
         {
-            grenadeScript.Initialize(Gunner.delay, Gunner.explosionRadius, Gunner.explosionForce, Gunner.explosionDamage);
+            grenadeScript.Initialize(delay, explosionRadius, explosionForce, explosionDamage);
         }
 
         
@@ -106,14 +115,14 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Quaternion rot;
         Vector3 pos;
-        gun.transform.GetLocalPositionAndRotation(out pos, out rot);
-        gun.transform.Rotate(new Vector3(300, 0, 0));
-        yield return new WaitForSeconds(Gunner.reloadTime);
-        Gunner.currAmmo = Gunner.maxAmmo;
+        PlayerController.playerInstance.gun.transform.GetLocalPositionAndRotation(out pos, out rot);
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(300, 0, 0));
+        yield return new WaitForSeconds(reloadTime);
+        currAmmo = maxAmmo;
         UpdateAmmoCount();
-        gun.transform.Rotate(new Vector3(0, 0, 0));
-        gun.transform.localPosition = pos;
-        gun.transform.localRotation = rot;
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(0, 0, 0));
+        PlayerController.playerInstance.gun.transform.localPosition = pos;
+        PlayerController.playerInstance.gun.transform.localRotation = rot;
         isReloading = false;
     }
     IEnumerator flashMuzzle()
@@ -130,7 +139,8 @@ public class GunScript : MonoBehaviour
     IEnumerator RechargeGrenade()
     {
         isGrenadeReady = false;
-        yield return new WaitForSeconds(Gunner.grenadeRechargeRate);
+        yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
+
 }
