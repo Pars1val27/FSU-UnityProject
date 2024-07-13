@@ -11,11 +11,11 @@ namespace AbilitySystem
 
         public override void Activate(GameObject target)
         {
-            //var statusEffectable = target.GetComponent<StatusEffectable>();
-            //if (statusEffectable != null)
-            //{
-            //    statusEffectable.ApplyStatusEffect(StatusEffectType.Freeze, 0, duration);
-            //}
+            var freeze = target.GetComponent<IFreeze>();
+            if (freeze != null)
+            {
+                freeze.ApplyFreeze(duration);
+            }
         }
     }
 }
