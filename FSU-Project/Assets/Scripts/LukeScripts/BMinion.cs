@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BMinion : MonoBehaviour
+public class BMinion : MonoBehaviour, IDamage
 {
     //Luke
 
@@ -65,7 +65,7 @@ public class BMinion : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("got hit");
+        Debug.Log("BMinion got hit");
         StartCoroutine(flashDamage());
         Death();
     }
