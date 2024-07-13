@@ -40,7 +40,6 @@ public class turretDynamic : MonoBehaviour, IDamage
     {
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
-        Debug.Log("Xdir: " + playerDir.x + "Ydir: " + playerDir.y + "Zdir: " + playerDir.z);
         if (!isshooting)
         {
             StartCoroutine(shoot());

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BMinion : MonoBehaviour, IDamage
+public class BMother : MonoBehaviour, IDamage
 {
     //Luke
+
+    [Header("----- Health -----")]
+    [SerializeField] int HP;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
@@ -16,40 +19,33 @@ public class BMinion : MonoBehaviour, IDamage
 
 
     [Header("----- Attack -----")]
-    [SerializeField] int damage;
-    [SerializeField] int attackRate;
+    [SerializeField] Transform spawnPos;
+    [SerializeField] GameObject spawn;
+    [SerializeField] float spawnRate;
 
-    bool isAttacking;
-    bool playerInRange;
     Vector3 playerDir;
     Vector3 playerPos;
+    Vector3 dest;
 
-    // Start is called before the first frame update
+    bool isshooting;
+    bool canSeePlayer;
+    bool playerInRange;
+
     void Start()
     {
+        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
-
-        agent.SetDestination(playerPos);
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        dest = transform.position + playerDir;
+        agent.SetDestination(dest);
+        if (!isshooting)
         {
-
-            IDamage dmg = other.GetComponent<IDamage>();
-
-            if (dmg != null)
-            {
-                dmg.TakeDamage(damage);
-                Death();
-            }
+            StartCoroutine(Spawn());
         }
     }
 
@@ -59,17 +55,25 @@ public class BMinion : MonoBehaviour, IDamage
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
-    public void TakeDamage(int amount)
+    IEnumerator Spawn()
     {
-        Debug.Log("BMinion got hit");
-        StartCoroutine(flashDamage());
-        Death();
+        isshooting = true;
+        yield return new WaitForSeconds(spawnRate);
+        faceTarget();
+        Instantiate(spawn, spawnPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        isshooting = false;
     }
 
-    public void Death()
+    public void TakeDamage(int amount)
     {
-        Destroy(gameObject);
-        UIManager.instance.UpdateEnemyDisplay(-1);
+        HP -= amount;
+
+        StartCoroutine(flashDamage());
+
+        if (HP <= 0)
+        {
+            Death();
+        }
     }
 
     IEnumerator flashDamage()
@@ -86,5 +90,11 @@ public class BMinion : MonoBehaviour, IDamage
             model[i].material.color = Color.white;
         }
 
+    }
+
+    public void Death()
+    {
+        Destroy(gameObject);
+        UIManager.instance.UpdateEnemyDisplay(-1);
     }
 }
