@@ -539,7 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7497294410605451640}
-  playerStatUp: {fileID: 0}
+  abilityHandler: {fileID: 0}
   aud: {fileID: 8507070171164364275}
   gunPos: {fileID: 2799739320527782561}
   swordPos: {fileID: 6262692753185020929}
@@ -548,6 +548,8 @@ MonoBehaviour:
   sword: {fileID: 789420410420548932, guid: 0c2d8cd48fd2a474d94784ff35b0bf79, type: 3}
   origHP: 20
   playerHP: 1
+  baseGunnerHP: 1
+  baseSwordHP: 1
   damage: 1
   attackSpeed: 0.5
   shootDist: 100
@@ -613,8 +615,11 @@ MonoBehaviour:
   isClimbing: 0
   isDashing: 0
   isCoolDown: 0
+  isBlocking: 0
   currFOV: 0
   dashDuration: 0.2
+  gunScript: {fileID: 0}
+  swordScript: {fileID: 0}
 --- !u!143 &7497294410605451640
 CharacterController:
   m_ObjectHideFlags: 0
@@ -650,7 +655,7 @@ AudioSource:
   m_GameObject: {fileID: 9107036256956263201}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1419196096453051702, guid: 30f2f92d7b8f94045a97ba8b1cd75581, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
