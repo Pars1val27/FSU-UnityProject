@@ -107,10 +107,8 @@ public class UIManager : MonoBehaviour
         
         if(enemyCount <= 0)
         {
-            statePause();
+            onWin();
             //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-            menuActive = menuWin;
-            menuActive.SetActive(gamePause);
             //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
         }
 
@@ -121,6 +119,13 @@ public class UIManager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void onWin()
+    {
+        statePause();
+        menuActive = menuWin;
+        menuActive.SetActive(gamePause);
     }
     public void StartMenu()
     {
@@ -166,4 +171,8 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
      
+    public void AudioControls()
+    {
+
+    }
 }
