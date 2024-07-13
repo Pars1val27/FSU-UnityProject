@@ -18,5 +18,6 @@ MonoBehaviour:
   - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
   roomBosses:
   - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  maxRooms: 10
   wall: {fileID: 667212295717866849, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
   door: {fileID: 4946934125015250609, guid: d3f433571d552d04089131004a93cfb4, type: 3}

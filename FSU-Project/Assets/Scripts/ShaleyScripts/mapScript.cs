@@ -53,7 +53,8 @@ public class mapScript : MonoBehaviour
     void GenerateMap(maps mapLevel)
     {
         Vector3[] usedPos = new Vector3[mapLevel.maxRooms];
-        while (roomCount < mapLevel.maxRooms)
+        //-3 for mandatory rooms
+        while (roomCount < mapLevel.maxRooms - 3)
         {
             bool isTaken = false;
             for(int posIndex = 0; posIndex < usedPos.Length; posIndex++)
@@ -82,6 +83,7 @@ public class mapScript : MonoBehaviour
             }
             NextPos(mapLevel);
         }
+        //While less than maxRooms(for adding mandatory rooms, pick rand used pos
     }
 
     void GenerateRoomWalls(maps mapLevel)
@@ -89,21 +91,27 @@ public class mapScript : MonoBehaviour
         float roomWidth = GetRoomWidth(mapLevel);
         float wallPos = roomWidth;
         //sides
-        roomWalls[0].wall = GenerateWall(mapLevel, 90, wallPos, 0);
-        //Debug.Log("Wall object: " + roomWalls[0].wall);
-        roomWalls[1].wall = GenerateWall(mapLevel, 90, -wallPos, 0);
+        Debug.Log("Method runs");
+        roomWalls[0].wall = GenerateWall(mapLevel, 90, wallPos, 0f);
+        Debug.Log("Wall object 1: " + roomWalls[0].wall);
+        roomWalls[1].wall = GenerateWall(mapLevel, 90, -wallPos, 0f);
         //top/bottom
-        roomWalls[2].wall = GenerateWall(mapLevel, 0, 0, wallPos);
-        roomWalls[3].wall = GenerateWall(mapLevel, 0, 0, -wallPos);
+        roomWalls[2].wall = GenerateWall(mapLevel, 0, 0f, wallPos);
+        Debug.Log("Wall object 3: " + roomWalls[2].wall);
+        roomWalls[3].wall = GenerateWall(mapLevel, 0, 0f, -wallPos);
+        Debug.Log("Method end");
     }
 
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
-        float wallHeight = (mapLevel.wall.transform.localScale.y) / 2;
+        Debug.Log("GenerateWall start");
         GameObject wall = Instantiate(mapLevel.wall);
+        Debug.Log("Wall object: " + wall);
+        float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
-        return wall;
+        Debug.Log("GenerateWall end");
+         return wall;
     }
 
     void GenerateRoom(maps mapLevel)

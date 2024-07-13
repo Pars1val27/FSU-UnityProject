@@ -9,7 +9,6 @@ TagManager:
   - Not Climbable
   - Gun
   - ArenaSpawns
-  - Floor
   - Wall
   layers:
   - Default
@@ -21,7 +20,7 @@ TagManager:
   - Climbable
   - Not Climbable
   - Player
-  - 
+  - Wall
   - 
   - 
   - 
