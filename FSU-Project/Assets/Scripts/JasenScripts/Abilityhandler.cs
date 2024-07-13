@@ -51,7 +51,7 @@ namespace AbilitySystem
                 playerController.origHP += amount;
                 //playerController.playerHP = playerController.origHP;
                 // Update UI or other logic to reflect new HP value
-                //playerController.UpdatePlayerUI();
+                playerController.UpdatePlayerUI();
                 //Debug.Log(playerController.origHP);
                 //Debug.Log(Equals(playerController.playerHP));
             }
@@ -62,10 +62,7 @@ namespace AbilitySystem
             playerController.speed += amount;    
         }
 
-        public void IncreaseRateOfFire(float amount)
-        {
-            playerController.attackSpeed -= amount; 
-        }
+        
 
         public void IncreaseStamina(int amount)
         {
