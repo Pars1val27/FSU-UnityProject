@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuAbilities;
     [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
 
     [Header("----Text----")]
@@ -73,6 +74,10 @@ public class UIManager : MonoBehaviour
         if (PlayerController.playerInstance.isCoolDown)
         {
             DashCD();
+        }
+        if (playerHPBar.fillAmount == .1f ) 
+        {
+            SetMenu(lowHealthIndi);
         }
     }
 
