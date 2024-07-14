@@ -9,7 +9,7 @@ namespace AbilitySystem
     {
         [SerializeField] public string abilityName;
         [SerializeField] public string ablitiyDisctriptions;
-        [SerializeField] public int ablitiyCost;
+        [SerializeField] public int abilityCost;
         [SerializeField] public Image uiIcon;
         [SerializeField] public GameObject modelPrefab;
         

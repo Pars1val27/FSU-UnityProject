@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     [Header("----Menus----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
@@ -123,7 +122,7 @@ public class UIManager : MonoBehaviour
     public void onWin()
     {
         statePause();
-        menuActive = menuWin;
+        menuActive = menuBossWin;
         menuActive.SetActive(gamePause);
     }
     public void StartMenu()
@@ -170,8 +169,4 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
      
-    public void AudioControls()
-    {
-
-    }
 }
