@@ -27,10 +27,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 150)]
     [SerializeField] public int origHP;
     public int playerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseGunnerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseSwordHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
     [Range(0, 10)]
@@ -102,13 +98,13 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        UpdatePlayerUI();
         isCoolDown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdatePlayerUI();
         Movement();
         Sprint();
         wallClimb();
@@ -321,11 +317,14 @@ public class PlayerController : MonoBehaviour, IDamage
         if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
             origHP = 20;
-            playerHP = origHP;
+            playerHP = origHP; 
+            UpdatePlayerUI();
+
             speed = 14;
             attackSpeed = 0.25f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
+            NotifyAbilityHandler();
         }
 
         if (UIManager.instance.classMele == true && classWeaponInstance == null)
@@ -337,7 +336,24 @@ public class PlayerController : MonoBehaviour, IDamage
             shootDist = 2;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
+            AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
+            NotifyAbilityHandler();
         }
     }
-
-} 
+    private void NotifyAbilityHandler()
+    {
+        AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
+        if (abilityHandler != null)
+        {
+            if (gunScript != null)
+            {
+                abilityHandler.gunScript = gunScript;
+            }
+            if (swordScript != null)
+            {
+                abilityHandler.swordScript = swordScript;
+                
+            }
+        }
+    }
+}

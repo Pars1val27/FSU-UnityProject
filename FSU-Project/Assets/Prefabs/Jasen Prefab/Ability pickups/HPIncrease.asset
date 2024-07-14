@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: HPIncrease
   ablitiyDisctriptions: 
-  modelPrefab: {fileID: 6560024532416312084, guid: 95fbaa96dc0723048887218ccfce89cc, type: 3}
+  ablitiyCost: 0
   uiIcon: {fileID: 0}
-  hpIncreaseAmount: 1920
+  modelPrefab: {fileID: 6560024532416312084, guid: 95fbaa96dc0723048887218ccfce89cc, type: 3}
+  hpIncreaseAmount: 20

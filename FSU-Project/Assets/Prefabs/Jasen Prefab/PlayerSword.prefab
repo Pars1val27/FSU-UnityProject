@@ -59,6 +59,7 @@ MonoBehaviour:
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
   blockCooldown: 5
+  blockDuration: 3
   isAttacking: 0
   isBlockReady: 0
 --- !u!33 &2715464760919658580
