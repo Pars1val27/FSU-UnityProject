@@ -1,3 +1,4 @@
+using AbilitySystem;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -20,12 +21,17 @@ public class AbilitiesUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetButtonDown("Inventory"))
+        {
+
+        }
     }
 
-    public void ShowAbilityItem()
+    public void ShowAbilityItem(Ability abil)
     {
-
+        icon = abil.uiIcon;
+        Name.text = abil.abilityName;
+        description.text = abil.ablitiyDisctriptions;
     }
 
     public void ShowAbilityInventory()
