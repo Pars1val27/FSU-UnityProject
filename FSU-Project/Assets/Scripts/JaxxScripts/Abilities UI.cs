@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class AbilitiesUI : MonoBehaviour
 {
+    AbilitiesUI abilitiesUI; 
     [SerializeField] GameObject purchaseButton;
     [SerializeField] GameObject shownPrice;
     public Image icon;
@@ -20,13 +21,16 @@ public class AbilitiesUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
+        abilitiesUI = this;
+    }  
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetButtonDown("Inventory"))
+        {
+            ShowAbilityInventory();
+        }
     }
 
     public void ShowAbilityItem(Ability abil)
@@ -35,19 +39,22 @@ public class AbilitiesUI : MonoBehaviour
         {
         purchaseButton.SetActive(false);
         shownPrice.SetActive(false);
+            UIManager.instance.statePause();
+            icon = abil.uiIcon;
+            Name.text = abil.abilityName;
+            description.text = abil.ablitiyDisctriptions;
         }
         UIManager.instance.statePause();
         icon = abil.uiIcon;
         Name.text = abil.abilityName;
         description.text = abil.ablitiyDisctriptions;
-        //price = abil.price
+        price.text = abil.ablitiyCost.ToString();
+        purchaseButton.SetActive(true);
+        shownPrice.SetActive(true);
     }
 
     public void ShowAbilityInventory()
     {
-        if(Input.GetButtonDown("B"))
-        {
-
-        }
+        
     }
 }
