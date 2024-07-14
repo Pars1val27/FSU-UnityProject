@@ -19,6 +19,10 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public GameObject[] floor1Enemies;
     [SerializeField] public GameObject[] floor2Enemies;
 
+    public List<GameObject[]> enemiesHard;
+    [SerializeField] public GameObject[] floor1EnemiesHard;
+    [SerializeField] public GameObject[] floor2EnemiesHard;
+
     public List<GameObject[]> stationaryEnemies;
     [SerializeField] public GameObject[] floor1StationaryEnemies;
     [SerializeField] public GameObject[] floor2StationaryEnemies;
@@ -31,6 +35,8 @@ public class EnemyManager : MonoBehaviour
         bosses.Add(floor2Bosses);
         enemies.Add(floor1Enemies);
         enemies.Add(floor2Enemies);
+        enemiesHard.Add(floor1EnemiesHard);
+        enemiesHard.Add(floor2EnemiesHard);
         stationaryEnemies.Add(floor1StationaryEnemies);
         stationaryEnemies.Add(floor2StationaryEnemies);
     }
