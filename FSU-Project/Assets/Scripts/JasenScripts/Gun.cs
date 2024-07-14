@@ -118,14 +118,14 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Quaternion rot;
         Vector3 pos;
-        PlayerController.playerInstance.gun.transform.GetLocalPositionAndRotation(out pos, out rot);
-        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(300, 0, 0));
+        PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
+        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
         UpdateAmmoCount();
-        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(0, 0, 0));
-        PlayerController.playerInstance.gun.transform.localPosition = pos;
-        PlayerController.playerInstance.gun.transform.localRotation = rot;
+        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(0, 0, 0));
+        PlayerController.playerInstance.classWeaponInstance.transform.localPosition = pos;
+        PlayerController.playerInstance.classWeaponInstance.transform.localRotation = rot;
         isReloading = false;
     }
     IEnumerator flashMuzzle()
