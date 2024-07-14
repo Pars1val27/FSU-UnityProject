@@ -43,13 +43,13 @@ public class BMother : MonoBehaviour, IDamage
         playerDir = playerPos - transform.position;
         faceTarget();
         agent.SetDestination(transform.position -= transform.forward * Time.deltaTime * agent.speed);
-        if (playerInRange)
+        if (!playerInRange)
         {
-            agent.isStopped = false;
+            agent.SetDestination(playerPos);
         }
         else
         {
-            agent.isStopped = true;
+            agent.SetDestination(transform.position -= transform.forward * Time.deltaTime * agent.speed);
         }
         if (!isshooting)
         {

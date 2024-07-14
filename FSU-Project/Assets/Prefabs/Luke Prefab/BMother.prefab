@@ -350,7 +350,7 @@ MonoBehaviour:
   faceTargetSpeed: 40
   agent: {fileID: 4628449139277670524}
   model: []
-  spawnPos: {fileID: 0}
+  spawnPos: {fileID: 503830441581353817}
   spawn: {fileID: 8604646411082340350, guid: 1855253eb757c7f41baa37efdffdfcbf, type: 3}
   spawnRate: 3
 --- !u!136 &7527020526749846485
