@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] Transform swordPos;
     [SerializeField] Transform climbPos;
 
+    [SerializeField] GameObject deathCam;
+
     [Header("Class Weapons")]
     [SerializeField] public GameObject gun;
     [SerializeField] public GameObject sword;
@@ -98,13 +100,14 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        isCoolDown = false;
+        isCoolDown = false; 
+        deathCam.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        UpdatePlayerUI();
+        UpdatePlayerUI();   
         Movement();
         Sprint();
         wallClimb();
@@ -230,6 +233,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (playerHP <= 0)
             {
+                deathCam.SetActive(true);
                 UIManager.instance.onLose();
             }
         }
