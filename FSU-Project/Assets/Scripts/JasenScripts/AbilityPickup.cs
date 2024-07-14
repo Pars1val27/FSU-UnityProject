@@ -37,7 +37,7 @@ namespace AbilitySystem
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Player left ability pickup radius.");
+                
                 HidePickupUI();
             }
         }
@@ -74,11 +74,11 @@ namespace AbilitySystem
                             AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
                             Debug.Log("Ability " + ability.abilityName + " activated.");
                             Destroy(gameObject);
-                            Debug.Log("Ability pickup destroyed.");
+                            //Debug.Log("Ability pickup destroyed.");
                         }
                         else
                         {
-                            Debug.Log("Not enough resources to pick up " + ability.abilityName);
+                            Debug.Log("Not enough time to buy " + ability.abilityName);
                         }
                     }
                     else
@@ -87,7 +87,7 @@ namespace AbilitySystem
                         AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
                         Debug.Log("Ability " + ability.abilityName + " activated.");
                         Destroy(gameObject);
-                        Debug.Log("Ability pickup destroyed.");
+                        //Debug.Log("Ability pickup destroyed.");
                     }
                 }
                 else
@@ -98,18 +98,23 @@ namespace AbilitySystem
             }
         }
 
-
+        //make time remaining public and change edit time to a float
 
         private bool HasEnoughTime(GameObject player)
         {
-            return true;
+            var timer = player.GetComponent<Timer>();
+            return timer != null && timer.remainingTime >= ability.abilityCost; 
         }
 
         private void RemoveTime(GameObject player)
         {
-           
+            var timer = player.GetComponent<Timer>();
+            if (timer != null)
+            {
+                timer.EditTime(-ability.abilityCost);
+            }
         }
 
-
+        
     }
 }
