@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using AbilitySystem;
 
 public class Grenade : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class Grenade : MonoBehaviour
     bool hasExploded = false;
     float countdown;
 
+    public AbilityHandler abilityHandler;
+
     public void Initialize(float delay, float explosionRadius, float explosionForce, int damage)
     {
         this.delay = delay;
@@ -28,8 +31,10 @@ public class Grenade : MonoBehaviour
 
     void Start()
     {
+        grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
     }
+
     void Update()
     {
         countdown -= Time.deltaTime;
@@ -47,7 +52,7 @@ public class Grenade : MonoBehaviour
 
         if (grenadeAudio != null && explosionSound != null)
         {
-            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSpeedVol); 
+            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSpeedVol);
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -63,13 +68,28 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
+                ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
         Destroy(effect.gameObject, effect.main.duration);
-
         Destroy(gameObject);
     }
+
+    void ApplyFreezeEffect(GameObject target)
+    {
+        
+        if (abilityHandler.HasAbility("FreezeEffect"))
+        {
+            var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
+            if (FreezeAbility != null)
+            {
+                FreezeAbility.Activate(target);
+            }
+        }
+    }
+
+    
 
     void OnDrawGizmosSelected()
     {

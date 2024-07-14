@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuAbilities;
     [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
 
     [Header("----Text----")]
@@ -43,7 +44,6 @@ public class UIManager : MonoBehaviour
     public bool gamePause;
     public bool classMele;
     public bool classGunner;
-    bool onStart;
 
     int enemyCount;
     // Start is called before the first frame update
@@ -74,6 +74,10 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
+        if (playerHPBar.fillAmount == .1f ) 
+        {
+            SetMenu(lowHealthIndi);
+        }
     }
 
     public void statePause()
@@ -102,10 +106,8 @@ public class UIManager : MonoBehaviour
         
         if(enemyCount <= 0)
         {
-            statePause();
+            onWin();
             //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-            menuActive = menuWin;
-            menuActive.SetActive(gamePause);
             //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
         }
 
@@ -116,6 +118,13 @@ public class UIManager : MonoBehaviour
         statePause();
         menuActive = menuLose;
         menuActive.SetActive(true);
+    }
+
+    public void onWin()
+    {
+        statePause();
+        menuActive = menuWin;
+        menuActive.SetActive(gamePause);
     }
     public void StartMenu()
     {
@@ -161,4 +170,8 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
      
+    public void AudioControls()
+    {
+
+    }
 }
