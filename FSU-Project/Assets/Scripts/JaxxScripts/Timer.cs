@@ -6,18 +6,19 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-
+    Timer timeInstance;
     [SerializeField] int startingTime;
     [SerializeField] public TMP_Text minText;
     [SerializeField] public TMP_Text secText;
 
-    float remainingTime;
+    public float remainingTime;
     float secRemaining;
     float minRemaining;
     bool timerRunning;
     // Start is called before the first frame update
     void Start()
     {
+        timeInstance = this;
         remainingTime = startingTime;
         StartTimer();
     }

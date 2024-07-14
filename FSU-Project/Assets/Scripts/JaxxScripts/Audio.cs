@@ -77,7 +77,8 @@ public class Audio : MonoBehaviour
 
     public void PlayClicks()
     {
-        aud.PlayOneShot(clickSounds[Random.Range(0, clickSounds.Length)], masterVol);
+        aud.PlayOneShot(clickSounds[0/*Random.Range(0, clickSounds.Length)*/], musicVol);
+        Debug.Log("Click Sound Played");
     }
 
     public void PlayBackground()

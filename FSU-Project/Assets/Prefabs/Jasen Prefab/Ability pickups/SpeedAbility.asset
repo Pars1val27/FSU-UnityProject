@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: SpeedIncrease
   ablitiyDisctriptions: 
-  modelPrefab: {fileID: 3953768525008260369, guid: 4079575f32ab8b14490dd456964cfd79, type: 3}
+  abilityCost: 0
   uiIcon: {fileID: 0}
-  speedIncreaseAmount: 0
+  modelPrefab: {fileID: 3953768525008260369, guid: 4079575f32ab8b14490dd456964cfd79, type: 3}
+  speedIncreaseAmount: 5
