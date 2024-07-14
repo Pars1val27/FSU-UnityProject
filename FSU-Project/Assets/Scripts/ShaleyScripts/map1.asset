@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomSpawn: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
   roomShop: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  roomItem: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
   rooms:
   - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
   roomBosses:

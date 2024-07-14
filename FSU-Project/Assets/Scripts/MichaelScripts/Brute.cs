@@ -83,11 +83,13 @@ public class Brute : MonoBehaviour , IDamage
             }
         }
 
+        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir);
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir, out hit))
         {
+            Debug.Log(hit.collider.tag);
             if (hit.collider.CompareTag("Player") && playerInRange)
             {
-
+                
                 canSeePlayer = true;
                 agent.SetDestination(transform.position);
                 faceTarget();

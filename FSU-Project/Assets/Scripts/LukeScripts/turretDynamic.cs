@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class turretDynamic : MonoBehaviour
+public class turretDynamic : MonoBehaviour, IDamage
 {
-    //Michael & Luke
+    //Luke
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
@@ -40,7 +40,6 @@ public class turretDynamic : MonoBehaviour
     {
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
-        Debug.Log("Xdir: " + playerDir.x + "Ydir: " + playerDir.y + "Zdir: " + playerDir.z);
         if (!isshooting)
         {
             StartCoroutine(shoot());
