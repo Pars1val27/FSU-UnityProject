@@ -75,9 +75,9 @@ public class GunScript : MonoBehaviour
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
         Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward);
-        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist, default, QueryTriggerInteraction.Ignore))
         {
-           
+            Debug.Log(hit);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
 

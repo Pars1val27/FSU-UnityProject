@@ -31,7 +31,7 @@ public class AlphaBrute : MonoBehaviour , IDamage
 
     Vector3 playerDir;
     Vector3 playerPos;
-    Vector3 prevNavPos;
+   
 
 
 
