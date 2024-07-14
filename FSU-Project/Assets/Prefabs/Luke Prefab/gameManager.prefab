@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerScript: {fileID: 0}
-  surface: {fileID: 0}
+  surface: {fileID: 6362342952283923856}
 --- !u!114 &6362342952283923856
 MonoBehaviour:
   m_ObjectHideFlags: 0
