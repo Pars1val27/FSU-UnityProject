@@ -8,6 +8,8 @@ TagManager:
   - Climbable
   - Not Climbable
   - Gun
+  - ArenaSpawns
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - Climbable
   - Not Climbable
   - Player
-  - 
+  - Wall
   - 
   - 
   - 
