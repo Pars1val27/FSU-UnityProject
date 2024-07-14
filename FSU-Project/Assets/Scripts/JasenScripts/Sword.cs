@@ -14,6 +14,7 @@ public class SwordScript : MonoBehaviour
     [SerializeField] ParticleSystem attackEffect;
 
     [SerializeField] float blockCooldown;
+    [SerializeField] float blockDuration;
 
     private Animator anim;
 
@@ -23,6 +24,7 @@ public class SwordScript : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        isBlockReady = true;
     }
 
     void Update()
@@ -38,16 +40,10 @@ public class SwordScript : MonoBehaviour
 
         if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady)
         {
-            //Block();
-
             PlayerController.playerInstance.isBlocking = true;
             anim.SetBool("Block", true);
-            if (Input.GetButtonUp("Fire2"))
-            {
-                PlayerController.playerInstance.isBlocking = false;
-                anim.SetBool("Block", false);
-                StartCoroutine(BlockCooldown());
-            }
+            StartCoroutine(BlockDuration());
+            StartCoroutine(BlockCooldown());
         }
     }
 
@@ -90,17 +86,19 @@ public class SwordScript : MonoBehaviour
             other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
         }
     }
-    /*void Block()
+
+    IEnumerator BlockDuration()
     {
-        isBlocking = true;
-        anim.SetBool("Block", true);
-        if (Input.GetButtonUp("Fire3"))
-        {
-            isBlocking = false;
+        /*if (Input.GetButtonUp("Fire2")) {
+            yield return new WaitForSeconds(0);
+            PlayerController.playerInstance.isBlocking = false;
             anim.SetBool("Block", false);
-            StartCoroutine(BlockCooldown());
-        }
-    }*/
+        }*/
+        yield return new WaitForSeconds(blockDuration);
+        PlayerController.playerInstance.isBlocking = false;
+        anim.SetBool("Block", false);
+
+    }
 
     IEnumerator BlockCooldown()
     {

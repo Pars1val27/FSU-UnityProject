@@ -84,7 +84,7 @@ public class GunScript : MonoBehaviour
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
-                ApplyStatusEffects(hit.collider.gameObject);
+                //ApplyStatusEffects(hit.collider.gameObject);
             }
             else
             {
