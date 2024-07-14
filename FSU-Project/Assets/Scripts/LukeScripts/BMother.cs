@@ -13,7 +13,6 @@ public class BMother : MonoBehaviour, IDamage
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
-    [SerializeField] Rigidbody rb;
 
     [Header("----- Animation's -----")]
     [SerializeField] Renderer[] model;
