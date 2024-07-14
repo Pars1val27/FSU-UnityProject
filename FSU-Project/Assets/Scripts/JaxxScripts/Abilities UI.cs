@@ -2,7 +2,9 @@ using AbilitySystem;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 
 public class AbilitiesUI : MonoBehaviour
@@ -15,7 +17,7 @@ public class AbilitiesUI : MonoBehaviour
     public TMP_Text price;
 
     public Image[] ownedAbil;
-    public bool isItemRoom;
+   public bool isItemRoom;
     
     // Start is called before the first frame update
     void Start()
@@ -29,19 +31,31 @@ public class AbilitiesUI : MonoBehaviour
         
     }
 
-    public void ShowAbilityItem(Ability abil)
+
+        public void ShowAbilityItem(Ability abil,bool isItemRoom)
     {
         if(isItemRoom) 
         {
         purchaseButton.SetActive(false);
         shownPrice.SetActive(false);
+        }else{
+            purchaseButton.SetActive(true);
+            shownPrice.SetActive(true);
+            price.text = "Cost: " + abil.abilityCost.ToString();
+
         }
+
         UIManager.instance.statePause();
-        icon = abil.uiIcon;
+        if (abil.uiIcon != null)
+        {
+            icon.sprite = abil.uiIcon;
+        }
+        
         Name.text = abil.abilityName;
         description.text = abil.ablitiyDisctriptions;
         //price = abil.price
     }
+
 
     public void ShowAbilityInventory()
     {

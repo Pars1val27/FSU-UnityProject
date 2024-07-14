@@ -11,7 +11,7 @@ namespace AbilitySystem
         public Ability ability;
         public AbilitiesUI abilitiesUI;
 
-        public bool isStorePickup;
+        public bool isItemPickup;
         public bool IsDebugAbility = false;
 
         void Start()
@@ -21,7 +21,7 @@ namespace AbilitySystem
 
         void OnTriggerEnter(Collider other)
         {
-            {
+            
                 if (other.CompareTag("Player"))
                     if (IsDebugAbility)
                     {
@@ -31,7 +31,7 @@ namespace AbilitySystem
                     {
                         ShowPickupUI(other.gameObject);
                     }
-            }
+            
         }
         void OnTriggerExit(Collider other)
         {
@@ -43,19 +43,14 @@ namespace AbilitySystem
         }
         private void ShowPickupUI(GameObject player)
         {
-            if (isStorePickup)
-            {
-                
-            }
-            else
-            {
-
-            }
+            
+                abilitiesUI.ShowAbilityItem(ability, isItemPickup);
+            
         }
 
-            private void HidePickupUI()
+        private void HidePickupUI()
         {
-           
+            
         }
 
         void ConfirmPickup(GameObject player)
@@ -65,7 +60,7 @@ namespace AbilitySystem
             {
                 if (!abilityHandler.HasAbility(ability.abilityName))
                 {
-                    if (isStorePickup)
+                    if (isItemPickup)
                     {
                         if (HasEnoughTime(player))
                         {

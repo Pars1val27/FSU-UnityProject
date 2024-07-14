@@ -98,7 +98,7 @@ namespace AbilitySystem
                         GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation);
                         AbilityPickup pickupScript = pickup.AddComponent<AbilityPickup>();
                         pickupScript.ability = ability;
-                        pickupScript.isStorePickup = isStore;
+                        pickupScript.isItemPickup = isStore;
                         pickupScript.IsDebugAbility = IsDebugAbility;
 
                         SphereCollider pickupCollider = pickup.AddComponent<SphereCollider>();
