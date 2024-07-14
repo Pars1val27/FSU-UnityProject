@@ -12,7 +12,6 @@ public class UIManager : MonoBehaviour
     [Header("----Menus----")]
     [SerializeField] GameObject menuActive;
     [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuWin;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
     [SerializeField] GameObject menuBossWin;
@@ -20,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuAbilities;
     [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject itemMenu;
     [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
 
@@ -123,7 +123,7 @@ public class UIManager : MonoBehaviour
     public void onWin()
     {
         statePause();
-        menuActive = menuWin;
+        menuActive = menuBossWin;
         menuActive.SetActive(gamePause);
     }
     public void StartMenu()
@@ -169,9 +169,20 @@ public class UIManager : MonoBehaviour
         menuActive = menu;
         menuActive.SetActive(gamePause);
     }
-     
-    public void AudioControls()
-    {
 
+    public void AbilityMenuOn()
+    {
+        menuActive = itemMenu;
+        menuActive.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    public void AbilityMenuOff() 
+    {
+        menuActive.SetActive(false);
+        menuActive = null;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }
