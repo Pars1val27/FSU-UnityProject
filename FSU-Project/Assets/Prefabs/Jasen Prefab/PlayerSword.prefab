@@ -52,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityHandler: {fileID: 0}
   SwordCollider: {fileID: 4821672371264454631}
-  blockCollider: {fileID: 0}
   aud: {fileID: 0}
   attackSound:
   - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
@@ -60,8 +59,8 @@ MonoBehaviour:
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
   blockCooldown: 5
+  blockDuration: 3
   isAttacking: 0
-  isBlocking: 0
   isBlockReady: 0
 --- !u!33 &2715464760919658580
 MeshFilter:
