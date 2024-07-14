@@ -13,19 +13,29 @@ namespace AbilitySystem
         {
             if (other.CompareTag("Player"))
             {
-                // Debug.Log(" pick up ");
+                Debug.Log("Player triggered ability pickup.");
                 var abilityHandler = other.GetComponent<AbilityHandler>();
                 if (abilityHandler != null && ability != null)
                 {
-                    abilityHandler.AddAbility(ability);
-                    //Debug.Log(" activate " + ability.abilityName);
-                    //Debug.Log(ability.abilityName + " removed for spawnable");
-                    AbilityManager.Instance.ActivateAbility(ability.abilityName, other.gameObject);
-
-                    Destroy(gameObject);
-                    //Debug.Log("ability destroyed");
+                   
+                    if (!abilityHandler.HasAbility(ability.abilityName))
+                    {
+                        abilityHandler.AddAbility(ability);
+                        //Debug.Log("Ability " + ability.abilityName + " added to handler.");
+                        AbilityManager.Instance.ActivateAbility(ability.abilityName, other.gameObject);
+                        Debug.Log("Ability " + ability.abilityName + " activated.");
+                        Destroy(gameObject);
+                        Debug.Log("Ability pickup destroyed.");
+                    }
+                    else
+                    {
+                        Debug.Log("Player already has ability " + ability.abilityName + ".");
+                        Destroy(gameObject);
+                    }
                 }
+                
             }
         }
+       
     }
 }

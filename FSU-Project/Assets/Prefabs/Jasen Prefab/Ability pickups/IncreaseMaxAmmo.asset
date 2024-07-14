@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b3f78a04e5dbf4793d21af2829ca91, type: 3}
-  m_Name: AttackSpeedAbility
+  m_Script: {fileID: 11500000, guid: 9d930877a7ef679479a63e1c615319a4, type: 3}
+  m_Name: IncreaseMaxAmmo
   m_EditorClassIdentifier: 
-  abilityName: AttackSpeedIncrease
+  abilityName: 
   ablitiyDisctriptions: 
   ablitiyCost: 0
   uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 7005894755046591571, guid: 687bf0c196f9d57458c594340bacf50c, type: 3}
-  attackSpeedIncreaseAmount: 0.5
+  modelPrefab: {fileID: 0}
+  ammoIncreaseAmount: 0

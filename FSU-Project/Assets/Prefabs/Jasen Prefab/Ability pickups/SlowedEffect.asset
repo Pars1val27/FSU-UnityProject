@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b807619060a250479d174cb0faaecbb, type: 3}
   m_Name: SlowedEffect
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Slowed
   ablitiyDisctriptions: 
   ablitiyCost: 0
   uiIcon: {fileID: 0}

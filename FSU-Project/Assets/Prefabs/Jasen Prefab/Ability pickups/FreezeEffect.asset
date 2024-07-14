@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9ac06de8643c6e4b8566940ead01530, type: 3}
   m_Name: FreezeEffect
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: Freeze
   ablitiyDisctriptions: 
   ablitiyCost: 0
   uiIcon: {fileID: 0}
   modelPrefab: {fileID: 0}
-  duration: 0
+  duration: 1

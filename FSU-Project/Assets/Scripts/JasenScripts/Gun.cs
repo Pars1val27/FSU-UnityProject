@@ -6,7 +6,7 @@ using AbilitySystem;
 public class GunScript : MonoBehaviour
 {
     public AbilityHandler abilityHandler;
-    //[SerializeField] public GameObject gun;
+    [SerializeField] public GameObject gun;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;
@@ -18,7 +18,7 @@ public class GunScript : MonoBehaviour
 
     public int currAmmo;
     public int maxAmmo;
-    public float reloadTime;
+    [SerializeField] public float reloadTime;
 
     public float grenadeThrowForce;
     public float delay;
@@ -61,7 +61,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    void UpdateAmmoCount()
+    public void UpdateAmmoCount()
     {
         UIManager.instance.ammoCur.text = currAmmo.ToString();
         UIManager.instance.ammoMax.text = maxAmmo.ToString();

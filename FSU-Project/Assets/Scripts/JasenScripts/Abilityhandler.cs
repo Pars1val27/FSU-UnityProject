@@ -6,19 +6,32 @@ namespace AbilitySystem
 {
     public class AbilityHandler : MonoBehaviour
     {
-        //public GameObject player;
+        
         public PlayerController playerController;
         public GunScript gunScript;
         public SwordScript swordScript;
-        public Grenade grenade;
+        
         public List<Ability> abilities = new List<Ability>();
 
         void Start()
         {
-            //player = GameObject.FindWithTag("Player");
+            
             playerController = GetComponent<PlayerController>();
             gunScript = playerController.GetComponentInChildren<GunScript>();
 
+        }
+        void Update()
+        {    
+            if (gunScript == null && playerController.gunScript != null)
+            {
+                gunScript = playerController.gunScript;
+            }
+
+            
+            if (swordScript == null && playerController.swordScript != null)
+            {
+                swordScript = playerController.swordScript;
+            }
         }
         public bool HasAbility(string abilityName)
         {
@@ -45,16 +58,10 @@ namespace AbilitySystem
 
         public void IncreaseMaxHP(int amount)
         {
-            if (playerController != null)
-            {
-                //Debug.Log(Equals(playerController.playerHP));
-                playerController.origHP += amount;
-                //playerController.playerHP = playerController.origHP;
-                // Update UI or other logic to reflect new HP value
-                playerController.UpdatePlayerUI();
-                //Debug.Log(playerController.origHP);
-                //Debug.Log(Equals(playerController.playerHP));
-            }
+             playerController.origHP += amount;
+             playerController.playerHP = playerController.origHP; 
+             playerController.UpdatePlayerUI();
+
         }
 
         public void IncreaseSpeed(int amount)
@@ -62,17 +69,17 @@ namespace AbilitySystem
             playerController.speed += amount;    
         }
 
-        
+
 
         public void IncreaseStamina(int amount)
         {
-            
+
         }
 
         public void IncreaseDamage(int amount)
         {
             playerController.damage += amount;
-            // Update UI 
+            
         }
 
         public void IncreaseAttackSpeed(float amount)
@@ -83,12 +90,12 @@ namespace AbilitySystem
         public void IncreaseMaxAmmo(int amount)
         {
             
-            if (gunScript != null)
-            {
+                Debug.Log("gunscript not null");
                 gunScript.maxAmmo += amount;
-                //gunScript.currAmmo = gunScript.maxAmmo;
-                // Update UI 
-            }
+                gunScript.currAmmo = gunScript.maxAmmo;
+                gunScript.UpdateAmmoCount();
+            
+
         }
 
 
@@ -96,10 +103,10 @@ namespace AbilitySystem
         {
             if (!abilities.Contains(ability))
             {
-                Debug.Log(ability + " added tolist");
+                Debug.Log(ability + " added to Abilities");
                 abilities.Add(ability);
 
-                ability.Activate(gameObject);
+                //ability.Activate(gameObject);
             }
         }
     }
