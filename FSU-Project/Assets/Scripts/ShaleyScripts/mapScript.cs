@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class mapScript : MonoBehaviour
@@ -16,42 +17,56 @@ public class mapScript : MonoBehaviour
     //public GameObject[] roomWalls;
     maps mapLevel;
     Vector3 pos;
+    Vector3[] usedRoomPos;
     List<GameObject[]> usedWallPosRoom;
     List<GameObject> usedWallPos;
 
 void Start()
     {
         mapLevel = maps[0];
+        usedRoomPos = new Vector3[mapLevel.maxRooms];
         usedWallPosRoom = new List<GameObject[]>();
         usedWallPos = new List<GameObject>();
         GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
         GenerateMap(mapLevel);
+        gameManager.instance.surface.BuildNavMesh();
         UpdateDoors(mapLevel);
     }
 
     void NextPos(maps mapLevel)
     {
-        float moveDist = GetRoomWidth(mapLevel) * 2;
-        int dir = RandDir();
-        Vector3 newPos = pos;
-        if(dir == 0)
+        for (int posIndex = 0; posIndex < usedRoomPos.Length; posIndex++)
         {
-            newPos = new Vector3(moveDist, 0, 0);
+            if (pos == usedRoomPos[posIndex])
+            {
+                float moveDist = GetRoomWidth(mapLevel) * 2;
+                int dir = RandDir();
+                Vector3 newPos = pos;
+                if (dir == 0)
+                {
+                    newPos = new Vector3(moveDist, 0, 0);
+                }
+                else if (dir == 90)
+                {
+                    newPos = new Vector3(0, 0, moveDist);
+                }
+                else if (dir == -90)
+                {
+                    newPos = new Vector3(0, 0, -moveDist);
+                }
+                else
+                {
+                    newPos = new Vector3(-moveDist, 0, 0);
+                }
+                pos = pos + newPos;
+                NextPos(mapLevel);
+            }
+            else
+            {
+                //do nothing
+            }
         }
-        else if(dir == 90)
-        {
-            newPos = new Vector3(0, 0, moveDist);
-        }
-        else if(dir == -90)
-        {
-            newPos = new Vector3(0, 0, -moveDist);
-        }
-        else
-        {
-            newPos = new Vector3(-moveDist, 0, 0);
-        }
-        pos = pos + newPos;
     }
 
     float GetRoomWidth(maps mapLevel)
@@ -60,37 +75,43 @@ void Start()
     }
     void GenerateMap(maps mapLevel)
     {
-        Vector3[] usedPos = new Vector3[mapLevel.maxRooms];
+        //Vector3[] usedPos = new Vector3[mapLevel.maxRooms];
         //-3 for mandatory rooms
-        while (roomCount < mapLevel.maxRooms)
+        GenerateRoomSpawn(mapLevel);
+        usedRoomPos[roomCount - 1] = pos;
+        GenerateRoomWalls(mapLevel);
+        while (roomCount < mapLevel.maxRooms - 3)
         {
-            bool isTaken = false;
-            for(int posIndex = 0; posIndex < usedPos.Length; posIndex++)
-            {
-                if(pos == usedPos[posIndex])
-                {
-                    isTaken = true;
-                    break;
-                }
-                else
-                {
-                    //do nothing
-                }
-            }
-            if (isTaken)
-            {
-                //do Nothing
-            }
-            else
-            {
-                GenerateRoom(mapLevel);
-                GenerateRoomWalls(mapLevel);
-                roomCount++;
-                usedPos[roomCount - 1] = pos;
-            }
             NextPos(mapLevel);
+            GenerateRoom(mapLevel);
+            usedRoomPos[roomCount - 1] = pos;
+            GenerateRoomWalls(mapLevel);
         }
-        //While less than maxRooms(for adding mandatory rooms, pick rand used pos
+        //While less than maxRooms(for adding mandatory rooms, pick rand used pos and nextPos
+        //spawn shop and do for each, also add code to have the first one be spawn
+        PickRandPos();
+        NextPos(mapLevel);
+        GenerateRoomShop(mapLevel);
+        usedRoomPos[roomCount - 1] = pos;
+        GenerateRoomWalls(mapLevel);
+
+        PickRandPos();
+        NextPos(mapLevel);
+        GenerateRoomItem(mapLevel);
+        usedRoomPos[roomCount - 1] = pos;
+        GenerateRoomWalls(mapLevel);
+
+        PickRandPos();
+        NextPos(mapLevel);
+        GenerateRoomBoss(mapLevel);
+        usedRoomPos[roomCount - 1] = pos;
+        GenerateRoomWalls(mapLevel);
+    }
+
+    void PickRandPos()
+    {
+        int posIndex = UnityEngine.Random.Range(0, usedRoomPos.Length);
+        pos = usedRoomPos[posIndex];
     }
 
     void GenerateRoomWalls(maps mapLevel)
@@ -124,6 +145,41 @@ void Start()
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        roomCount++;
+    }
+
+    void GenerateRoomBoss(maps mapLevel)
+    {
+        GameObject room = Instantiate(RandRoomBoss(mapLevel));
+        room.transform.localPosition = pos;
+        int dir = RandDir();
+        room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        roomCount++;
+    }
+
+    void GenerateRoomShop(maps mapLevel)
+    {
+        GameObject room = Instantiate(mapLevel.roomShop);
+        room.transform.localPosition = pos;
+        int dir = RandDir();
+        room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        roomCount++;
+    }
+    void GenerateRoomItem(maps mapLevel)
+    {
+        GameObject room = Instantiate(mapLevel.roomItem);
+        room.transform.localPosition = pos;
+        int dir = RandDir();
+        room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        roomCount++;
+    }
+    void GenerateRoomSpawn(maps mapLevel)
+    {
+        GameObject room = Instantiate(mapLevel.roomSpawn);
+        room.transform.localPosition = pos;
+        int dir = RandDir();
+        room.transform.localEulerAngles = new Vector3(0, dir, 0);
+        roomCount++;
     }
 
     //normal room
@@ -136,6 +192,16 @@ void Start()
         }
         lastRoom = room;
         return mapLevel.rooms[room];
+    }
+    GameObject RandRoomBoss(maps mapLevel)
+    {
+        int room = UnityEngine.Random.Range(0, mapLevel.roomBosses.Length);
+        if (lastRoom == room)
+        {
+            room = UnityEngine.Random.Range(0, mapLevel.roomBosses.Length);
+        }
+        lastRoom = room;
+        return mapLevel.roomBosses[room];
     }
 
     int RandDir()
@@ -175,23 +241,25 @@ void Start()
                         }
                     }
                 }
-                if(doorCount > 1)
-                {
-                    int chance = UnityEngine.Random.Range(0, 2);
-                    if(chance == 0)
-                    {
-                        int doorToDestroy = PickDoor(mapLevel, usedWallPosRoom[currRoom]);
-                        if(doorToDestroy == 5)
-                        {
-                            break;
-                        }
-                        GameObject wall = Instantiate(mapLevel.wall);
-                        wall.transform.position = usedWallPosRoom[currRoom][doorToDestroy].transform.position;
-                        wall.transform.rotation = usedWallPosRoom[currRoom][doorToDestroy].transform.rotation;
-                        Destroy(usedWallPosRoom[currRoom][doorToDestroy]);
-                        usedWallPosRoom[currRoom][doorToDestroy] = wall;
-                    }
-                }
+                //if(doorCount > 1)
+                //{
+                //    int chance = UnityEngine.Random.Range(0, 4);
+                //    if(chance > 0)
+                //    {
+                //        int doorToDestroy = PickDoor(mapLevel, usedWallPosRoom[currRoom]);
+                //        Debug.Log("doorToDestroy: " + doorToDestroy);
+                //        if(doorToDestroy == 5)
+                //        {
+                //            break;
+                //        }
+                //        GameObject wall = Instantiate(mapLevel.wall);
+                //        wall.transform.position = usedWallPosRoom[currRoom][doorToDestroy].transform.position;
+                //        wall.transform.rotation = usedWallPosRoom[currRoom][doorToDestroy].transform.rotation;
+                //        Destroy(usedWallPosRoom[currRoom][doorToDestroy]);
+                //        usedWallPosRoom[currRoom][doorToDestroy] = wall;
+                //        doorCount--;
+                //    }
+                //}
             }
             currRoom++;
         }
@@ -203,7 +271,7 @@ void Start()
         int doorSpot2 = 5;
         for(int wallIndex = 0; wallIndex < usedWallPosRoom.Length; wallIndex++)
         {
-            if (usedWallPosRoom[wallIndex] == mapLevel.door)
+            if (usedWallPosRoom[wallIndex].GetPrefabDefinition() == mapLevel.door.GetPrefabDefinition())
             {
                 if(doorSpot1 == 5)
                 {
