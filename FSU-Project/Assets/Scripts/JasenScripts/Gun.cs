@@ -74,9 +74,10 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
+        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward);
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist, default, QueryTriggerInteraction.Ignore))
         {
-
+            Debug.Log(hit);
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
 
