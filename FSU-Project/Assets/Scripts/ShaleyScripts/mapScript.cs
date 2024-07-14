@@ -22,6 +22,8 @@ public class mapScript : MonoBehaviour
 void Start()
     {
         mapLevel = maps[0];
+        usedWallPosRoom = new List<GameObject[]>();
+        usedWallPos = new List<GameObject>();
         GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
         GenerateMap(mapLevel);
@@ -108,11 +110,12 @@ void Start()
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
         GameObject wall = Instantiate(mapLevel.wall);
+        Debug.Log("Wall Object: " + wall);
         float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
         usedWallPos.Add(wall);
-         return wall;
+        return wall;
     }
 
     void GenerateRoom(maps mapLevel)
@@ -178,6 +181,10 @@ void Start()
                     if(chance == 0)
                     {
                         int doorToDestroy = PickDoor(mapLevel, usedWallPosRoom[currRoom]);
+                        if(doorToDestroy == 5)
+                        {
+                            break;
+                        }
                         GameObject wall = Instantiate(mapLevel.wall);
                         wall.transform.position = usedWallPosRoom[currRoom][doorToDestroy].transform.position;
                         wall.transform.rotation = usedWallPosRoom[currRoom][doorToDestroy].transform.rotation;
@@ -202,7 +209,7 @@ void Start()
                 {
                     doorSpot1 = wallIndex;
                 }
-                else
+                else 
                 {
                     doorSpot2 = wallIndex;
                 }
