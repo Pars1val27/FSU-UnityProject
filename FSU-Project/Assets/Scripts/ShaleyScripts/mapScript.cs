@@ -5,28 +5,27 @@ using UnityEngine;
 public class mapScript : MonoBehaviour
 {
     //the array position is map level - 1
-    [SerializeField] public maps[] maps;
-    public static mapScript instance;
+    [SerializeField] maps[] maps;
+    //public static mapScript instance;
 
     int lastDir;
     int lastRoom;
     int lastChance;
     int roomCount = 0;
     //wallScript currRoom;
-    public GameObject[] roomWalls;
+    //public GameObject[] roomWalls;
+    maps mapLevel;
     Vector3 pos;
+    List<GameObject[]> usedWallPosRoom;
+    List<GameObject> usedWallPos;
 
-    private void Awake()
-    {
-        instance = this;
-    }
 void Start()
     {
-        roomWalls = new GameObject[4];
+        mapLevel = maps[0];
         GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
-        //GenerateRoomWalls(maps[0]);
-        GenerateMap(maps[0]);
+        GenerateMap(mapLevel);
+        UpdateDoors(mapLevel);
     }
 
     void NextPos(maps mapLevel)
@@ -94,6 +93,7 @@ void Start()
 
     void GenerateRoomWalls(maps mapLevel)
     {
+        GameObject[] roomWalls = new GameObject[4];
         float roomWidth = GetRoomWidth(mapLevel);
         float wallPos = roomWidth;
         //sides
@@ -102,7 +102,7 @@ void Start()
         //top/bottom
         roomWalls[2] = GenerateWall(mapLevel, 0, 0, wallPos);
         roomWalls[3] = GenerateWall(mapLevel, 0, 0, -wallPos);
-        //UpdateDoors(mapLevel);
+        usedWallPosRoom.Add(roomWalls);
     }
 
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
@@ -111,6 +111,7 @@ void Start()
         float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
+        usedWallPos.Add(wall);
          return wall;
     }
 
@@ -145,53 +146,130 @@ void Start()
         return dir * 90;
     }
 
-    public void UpdateDoors(maps mapLevel)
+    void UpdateDoors(maps mapLevel)
     {
-        Debug.Log("Update Doors Called");
-        int doorCount = 0;
-        for (int wallIndex = 0; wallIndex < mapScript.instance.roomWalls.Length; wallIndex++)
-        {
-            //Debug.Log("Wall object: " + roomWalls[wallIndex].wall);
-            if (mapScript.instance.roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionWall)
+        int currRoom = 0;
+        while(currRoom < usedWallPosRoom.Count) {
+            int doorCount = 0;
+            for (int wallIndex = 0; wallIndex < 4; wallIndex++)
             {
-                if (doorCount == 0)
+                int matchCount = 0;
+                for (int otherWallIndex = 0; otherWallIndex < usedWallPos.Count; otherWallIndex++)
                 {
-                    wallScript.AddDoor(mapLevel, mapScript.instance.roomWalls[wallIndex]);
-                    doorCount++;
+                    if (usedWallPosRoom[currRoom][wallIndex].transform.position == usedWallPos[otherWallIndex].transform.position 
+                        && usedWallPosRoom[currRoom][wallIndex].GetInstanceID() != usedWallPos[otherWallIndex].GetInstanceID())
+                    {
+                        matchCount++;
+                        if(matchCount > 0)
+                        {
+                            GameObject door = AddDoor(mapLevel, usedWallPos[otherWallIndex]);
+                            doorCount++;
+                            Destroy(usedWallPosRoom[currRoom][wallIndex]);
+                            Destroy(usedWallPos[otherWallIndex]);
+                            usedWallPos[otherWallIndex] = door;
+                            usedWallPosRoom[currRoom][wallIndex] = door;
+                            break;
+                        }
+                    }
                 }
-                else
+                if(doorCount > 1)
                 {
-                    int chance = RandChance();
-                    if (chance == 0)
+                    int chance = UnityEngine.Random.Range(0, 2);
+                    if(chance == 0)
                     {
-                        wallScript.AddDoor(mapLevel, mapScript.instance.roomWalls[wallIndex]);
-                        doorCount++;
-                    }
-                    else
-                    {
-                        //do nothing
+                        int doorToDestroy = PickDoor(mapLevel, usedWallPosRoom[currRoom]);
+                        GameObject wall = Instantiate(mapLevel.wall);
+                        wall.transform.position = usedWallPosRoom[currRoom][doorToDestroy].transform.position;
+                        wall.transform.rotation = usedWallPosRoom[currRoom][doorToDestroy].transform.rotation;
+                        Destroy(usedWallPosRoom[currRoom][doorToDestroy]);
+                        usedWallPosRoom[currRoom][doorToDestroy] = wall;
                     }
                 }
             }
-            else if (roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionDoor)
-            {
-                doorCount++;
-                Destroy(mapScript.instance.roomWalls[wallIndex]);
-            }
-            else
-            {
-                //no collision do nothing
-            }
+            currRoom++;
         }
     }
 
-    //void AddDoor(maps mapLevel, GameObject wall)
+    int PickDoor(maps mapLevel, GameObject[] usedWallPosRoom)
+    {
+        int doorSpot1 = 5;
+        int doorSpot2 = 5;
+        for(int wallIndex = 0; wallIndex < usedWallPosRoom.Length; wallIndex++)
+        {
+            if (usedWallPosRoom[wallIndex] == mapLevel.door)
+            {
+                if(doorSpot1 == 5)
+                {
+                    doorSpot1 = wallIndex;
+                }
+                else
+                {
+                    doorSpot2 = wallIndex;
+                }
+            }
+        }
+        int chance = UnityEngine.Random.Range(0, 2);
+        if(chance == 0)
+        {
+            return doorSpot1;
+        }
+        else
+        {
+            return doorSpot2;
+        }
+    }
+    //void UpdateDoors(maps mapLevel)
     //{
-    //    GameObject door = Instantiate(mapLevel.door);
-    //    door.transform.position = wall.transform.position;
-    //    door.transform.rotation = wall.transform.rotation;
-    //    Destroy(wall);
+    //    Debug.Log("Update Doors Called");
+    //    int doorCount = 0;
+    //    for (int wallIndex = 0; wallIndex < roomWalls.Length; wallIndex++)
+    //    {
+    //        Debug.Log("hasCollisionWall = " + roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionWall);
+    //        Debug.Log("hasCollisionDoor = " + roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionDoor);
+    //        if (roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionWall)
+    //        {
+    //            if (doorCount == 0)
+    //            {
+    //                wallScript.AddDoor(mapLevel, roomWalls[wallIndex]);
+    //                Destroy(roomWalls[wallIndex]);
+    //                doorCount++;
+    //            }
+    //            else
+    //            {
+    //                int chance = RandChance();
+    //                if (chance == 0)
+    //                {
+    //                    wallScript.AddDoor(mapLevel, roomWalls[wallIndex]);
+    //                    Destroy(roomWalls[wallIndex]);
+    //                    doorCount++;
+    //                }
+    //                else
+    //                {
+    //                    //do nothing
+    //                }
+    //            }
+    //        }
+    //        else if (roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionDoor)
+    //        {
+    //            doorCount++;
+    //            Destroy(roomWalls[wallIndex]);
+    //        }
+    //        else
+    //        {
+    //            //no collision do nothing
+    //        }
+    //    }
+    //    Debug.Log("Update Doors End");
     //}
+
+    GameObject AddDoor(maps mapLevel, GameObject wall)
+    {
+        GameObject door = Instantiate(mapLevel.door);
+        door.transform.position = wall.transform.position;
+        door.transform.rotation = wall.transform.rotation;
+        return door;
+        //Destroy(wall);
+    }
 
     int RandChance()
     {
