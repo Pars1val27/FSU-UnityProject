@@ -12,6 +12,7 @@ namespace AbilitySystem
         public AbilitiesUI abilitiesUI;
 
         public bool isItemPickup;
+        public bool isStorePickup;
         public bool IsDebugAbility = false;
 
         void Start()
@@ -50,7 +51,7 @@ namespace AbilitySystem
 
         private void HidePickupUI()
         {
-            
+            UIManager.instance.AbilityMenuOff();
         }
 
         void ConfirmPickup(GameObject player)
@@ -60,7 +61,7 @@ namespace AbilitySystem
             {
                 if (!abilityHandler.HasAbility(ability.abilityName))
                 {
-                    if (isItemPickup)
+                    if (!isItemPickup)
                     {
                         if (HasEnoughTime(player))
                         {
