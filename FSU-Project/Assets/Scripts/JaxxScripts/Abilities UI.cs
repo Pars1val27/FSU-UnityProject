@@ -15,6 +15,7 @@ public class AbilitiesUI : MonoBehaviour
     public TMP_Text Name;
     public TMP_Text description;
     public TMP_Text price;
+    public TMP_Text itemComfirm;
 
     public Image[] ownedAbil;
     
@@ -46,7 +47,7 @@ public class AbilitiesUI : MonoBehaviour
         shownPrice.SetActive(true);
         if (isItemRoom)
         {
-            purchaseButton.SetActive(false);
+            itemComfirm.text = "Confirm";
             shownPrice.SetActive(false);
         }
     }

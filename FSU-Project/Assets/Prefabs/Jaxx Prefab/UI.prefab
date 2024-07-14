@@ -4291,6 +4291,7 @@ MonoBehaviour:
   Name: {fileID: 4893164850107067665}
   description: {fileID: 4777660277856655387}
   price: {fileID: 5848251098177154824}
+  itemComfirm: {fileID: 7260457561203697732}
   ownedAbil:
   - {fileID: 3809498775370177160}
   - {fileID: 886710117257909007}
@@ -12665,7 +12666,7 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 30f2f92d7b8f94045a97ba8b1cd75581, type: 2}
   aud: {fileID: 3989990512633138655}
   clickSounds:
-  - {fileID: 8300000, guid: dcda698d7070a0948b515dda9ef5445f, type: 3}
+  - {fileID: 8300000, guid: c8f5413844761854e92a4b5b545cf135, type: 3}
   Background: []
   Boss: []
   masterSlider: {fileID: 7434890694767069944}
