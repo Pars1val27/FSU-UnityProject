@@ -111,7 +111,7 @@ namespace AbilitySystem
             var timer = player.GetComponent<Timer>();
             if (timer != null)
             {
-                timer.EditTime(-ability.abilityCost);
+                //timer.EditTime(-ability.abilityCost);
             }
         }
 

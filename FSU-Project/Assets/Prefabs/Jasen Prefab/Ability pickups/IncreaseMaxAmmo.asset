@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d930877a7ef679479a63e1c615319a4, type: 3}
   m_Name: IncreaseMaxAmmo
   m_EditorClassIdentifier: 
-  abilityName: 
+  abilityName: increaseMaxAmmo
   ablitiyDisctriptions: 
-  ablitiyCost: 0
+  abilityCost: 0
   uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 0}
-  ammoIncreaseAmount: 0
+  modelPrefab: {fileID: 3953768525008260369, guid: 1a371ab99feb72c4989e4eefbe6bbccb, type: 3}
+  ammoIncreaseAmount: 50

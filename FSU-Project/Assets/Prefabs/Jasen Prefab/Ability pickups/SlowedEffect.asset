@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Slowed
   ablitiyDisctriptions: 
-  ablitiyCost: 0
+  abilityCost: 0
   uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 0}
-  slowAmount: 0
-  duration: 0
+  modelPrefab: {fileID: 3953768525008260369, guid: a8c085edb7b6090498bc0db157a33816, type: 3}
+  slowAmount: 5
+  duration: 1

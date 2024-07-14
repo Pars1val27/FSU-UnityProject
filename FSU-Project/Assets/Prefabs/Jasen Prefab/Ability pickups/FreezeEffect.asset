@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: Freeze
   ablitiyDisctriptions: 
-  ablitiyCost: 0
+  abilityCost: 0
   uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 0}
+  modelPrefab: {fileID: 3953768525008260369, guid: 62b82b7de17a7e34aa7d56c8e015301a, type: 3}
   duration: 1
