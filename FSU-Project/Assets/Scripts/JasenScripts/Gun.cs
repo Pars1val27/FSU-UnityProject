@@ -18,7 +18,7 @@ public class GunScript : MonoBehaviour
 
     public int currAmmo;
     public int maxAmmo;
-    public float reloadTime;
+    [SerializeField] public float reloadTime;
 
     public float grenadeThrowForce;
     public float delay;
@@ -46,7 +46,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0)
         {
-            
+
             StartCoroutine(Shoot());
 
         }
@@ -61,7 +61,7 @@ public class GunScript : MonoBehaviour
         }
     }
 
-    void UpdateAmmoCount()
+    public void UpdateAmmoCount()
     {
         UIManager.instance.ammoCur.text = currAmmo.ToString();
         UIManager.instance.ammoMax.text = maxAmmo.ToString();
@@ -76,11 +76,14 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
         {
-           
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
+            
+
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
+                //ApplyStatusEffects(hit.collider.gameObject);
             }
             else
             {
@@ -106,7 +109,7 @@ public class GunScript : MonoBehaviour
             grenadeScript.Initialize(delay, explosionRadius, explosionForce, explosionDamage);
         }
 
-        
+
         StartCoroutine(RechargeGrenade());
     }
 
@@ -142,5 +145,33 @@ public class GunScript : MonoBehaviour
         yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
+    //void ApplyStatusEffects(GameObject target)
+    //{
+    //    if (abilityHandler.HasAbility("FireEffect"))
+    //    {
+    //        var fireAbility = abilityHandler.GetAbility("FireEffect");
+    //        if (fireAbility != null)
+    //        {
+    //            fireAbility.Activate(target);
+    //        }
+    //    }
+    //    if (abilityHandler.HasAbility("PoisonEffect"))
+    //    {
+    //        var poisonAbility = abilityHandler.GetAbility("PoisonEffect");
+    //        if (poisonAbility != null)
+    //        {
+    //            poisonAbility.Activate(target);
+    //        }
+    //    }
+    //    if (abilityHandler.HasAbility("SlowedEffect"))
+    //    {
+    //        var slowAbility = abilityHandler.GetAbility("SlowedEffect");
+    //        if (slowAbility != null)
+    //        {
+    //            slowAbility.Activate(target);
+    //        }
+    //    }
+
+    //}
 
 }

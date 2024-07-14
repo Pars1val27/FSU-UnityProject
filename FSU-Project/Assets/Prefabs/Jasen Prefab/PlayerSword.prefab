@@ -52,16 +52,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityHandler: {fileID: 0}
   SwordCollider: {fileID: 4821672371264454631}
-  blockCollider: {fileID: 0}
   aud: {fileID: 0}
   attackSound:
   - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
   - {fileID: 8300000, guid: 690993e4cf4504d44b5c45ef3088e15e, type: 3}
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
-  blockCooldown: 5
+  blockCooldown: 10
+  blockDuration: 3
   isAttacking: 0
-  isBlocking: 0
   isBlockReady: 0
 --- !u!33 &2715464760919658580
 MeshFilter:
@@ -122,7 +121,7 @@ AudioSource:
   m_GameObject: {fileID: 789420410420548932}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1419196096453051702, guid: 30f2f92d7b8f94045a97ba8b1cd75581, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

@@ -9,9 +9,10 @@ namespace AbilitySystem
     {
         [SerializeField] public string abilityName;
         [SerializeField] public string ablitiyDisctriptions;
-        [SerializeField] public GameObject modelPrefab;
+        [SerializeField] public int abilityCost;
         [SerializeField] public Image uiIcon;
-
+        [SerializeField] public GameObject modelPrefab;
+        
 
         public abstract void Activate(GameObject target);
     }
