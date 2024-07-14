@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 690993e4cf4504d44b5c45ef3088e15e, type: 3}
   attackSoundVol: 0.5
   attackEffect: {fileID: 0}
-  blockCooldown: 5
+  blockCooldown: 10
   blockDuration: 3
   isAttacking: 0
   isBlockReady: 0
