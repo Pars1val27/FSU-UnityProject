@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Build;
 using AbilitySystem;
 using UnityEngine;
 
@@ -104,6 +103,7 @@ public class PlayerController : MonoBehaviour, IDamage
         origFOV = FOV;
         playerHP = origHP;
         UpdatePlayerUI();
+        isCoolDown = false;
     }
 
     // Update is called once per frame
