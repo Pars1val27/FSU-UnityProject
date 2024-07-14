@@ -6,7 +6,7 @@ using AbilitySystem;
 public class GunScript : MonoBehaviour
 {
     public AbilityHandler abilityHandler;
-    [SerializeField] public GameObject gun;
+    //[SerializeField] public GameObject gun;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;

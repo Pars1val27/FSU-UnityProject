@@ -17,7 +17,6 @@ namespace AbilitySystem
         {
             
             playerController = GetComponent<PlayerController>();
-            gunScript = playerController.GetComponentInChildren<GunScript>();
 
         }
         void Update()
@@ -31,6 +30,7 @@ namespace AbilitySystem
             if (swordScript == null && playerController.swordScript != null)
             {
                 swordScript = playerController.swordScript;
+                
             }
         }
         public bool HasAbility(string abilityName)
@@ -89,12 +89,10 @@ namespace AbilitySystem
 
         public void IncreaseMaxAmmo(int amount)
         {
-            
-                Debug.Log("gunscript not null");
+
                 gunScript.maxAmmo += amount;
                 gunScript.currAmmo = gunScript.maxAmmo;
                 gunScript.UpdateAmmoCount();
-            
 
         }
 

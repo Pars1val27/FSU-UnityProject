@@ -340,6 +340,7 @@ public class PlayerController : MonoBehaviour, IDamage
             shootDist = 2;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
+            AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
             NotifyAbilityHandler();
         }
     }
@@ -355,6 +356,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if (swordScript != null)
             {
                 abilityHandler.swordScript = swordScript;
+                
             }
         }
     }
