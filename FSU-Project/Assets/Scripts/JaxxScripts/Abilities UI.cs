@@ -48,7 +48,7 @@ public class AbilitiesUI : MonoBehaviour
         icon = abil.uiIcon;
         Name.text = abil.abilityName;
         description.text = abil.ablitiyDisctriptions;
-        price.text = abil.ablitiyCost.ToString();
+        price.text = abil.abilityCost.ToString();
         purchaseButton.SetActive(true);
         shownPrice.SetActive(true);
     }
