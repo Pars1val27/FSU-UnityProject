@@ -27,10 +27,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 150)]
     [SerializeField] public int origHP;
     public int playerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseGunnerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseSwordHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
     [Range(0, 10)]
@@ -102,13 +98,13 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        UpdatePlayerUI();
         isCoolDown = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdatePlayerUI();
         Movement();
         Sprint();
         wallClimb();
