@@ -5,20 +5,27 @@ using UnityEngine;
 public class mapScript : MonoBehaviour
 {
     //the array position is map level - 1
-    [SerializeField] maps[] maps;
+    [SerializeField] public maps[] maps;
+    public static mapScript instance;
 
     int lastDir;
     int lastRoom;
-    int roomCount = 0;
     int lastChance;
+    int roomCount = 0;
     //wallScript currRoom;
-    wallScript[] roomWalls;
+    public GameObject[] roomWalls;
     Vector3 pos;
 
-    void Start()
+    private void Awake()
     {
+        instance = this;
+    }
+void Start()
+    {
+        roomWalls = new GameObject[4];
         GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
+        //GenerateRoomWalls(maps[0]);
         GenerateMap(maps[0]);
     }
 
@@ -54,7 +61,7 @@ public class mapScript : MonoBehaviour
     {
         Vector3[] usedPos = new Vector3[mapLevel.maxRooms];
         //-3 for mandatory rooms
-        while (roomCount < mapLevel.maxRooms - 3)
+        while (roomCount < mapLevel.maxRooms)
         {
             bool isTaken = false;
             for(int posIndex = 0; posIndex < usedPos.Length; posIndex++)
@@ -77,7 +84,6 @@ public class mapScript : MonoBehaviour
             {
                 GenerateRoom(mapLevel);
                 GenerateRoomWalls(mapLevel);
-                UpdateDoors(mapLevel);
                 roomCount++;
                 usedPos[roomCount - 1] = pos;
             }
@@ -91,26 +97,20 @@ public class mapScript : MonoBehaviour
         float roomWidth = GetRoomWidth(mapLevel);
         float wallPos = roomWidth;
         //sides
-        Debug.Log("Method runs");
-        roomWalls[0].wall = GenerateWall(mapLevel, 90, wallPos, 0f);
-        Debug.Log("Wall object 1: " + roomWalls[0].wall);
-        roomWalls[1].wall = GenerateWall(mapLevel, 90, -wallPos, 0f);
+        roomWalls[0] = GenerateWall(mapLevel, 90, wallPos, 0);
+        roomWalls[1] = GenerateWall(mapLevel, 90, -wallPos, 0);
         //top/bottom
-        roomWalls[2].wall = GenerateWall(mapLevel, 0, 0f, wallPos);
-        Debug.Log("Wall object 3: " + roomWalls[2].wall);
-        roomWalls[3].wall = GenerateWall(mapLevel, 0, 0f, -wallPos);
-        Debug.Log("Method end");
+        roomWalls[2] = GenerateWall(mapLevel, 0, 0, wallPos);
+        roomWalls[3] = GenerateWall(mapLevel, 0, 0, -wallPos);
+        //UpdateDoors(mapLevel);
     }
 
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
-        Debug.Log("GenerateWall start");
         GameObject wall = Instantiate(mapLevel.wall);
-        Debug.Log("Wall object: " + wall);
         float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
-        Debug.Log("GenerateWall end");
          return wall;
     }
 
@@ -145,25 +145,26 @@ public class mapScript : MonoBehaviour
         return dir * 90;
     }
 
-    void UpdateDoors(maps mapLevel)
+    public void UpdateDoors(maps mapLevel)
     {
+        Debug.Log("Update Doors Called");
         int doorCount = 0;
-        for(int wallIndex = 0; wallIndex < 4; wallIndex++)
+        for (int wallIndex = 0; wallIndex < mapScript.instance.roomWalls.Length; wallIndex++)
         {
             //Debug.Log("Wall object: " + roomWalls[wallIndex].wall);
-            if (roomWalls[wallIndex].hasCollisionWall)
+            if (mapScript.instance.roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionWall)
             {
-                if(doorCount == 0)
+                if (doorCount == 0)
                 {
-                    AddDoor(mapLevel, roomWalls[wallIndex].wall);
+                    wallScript.AddDoor(mapLevel, mapScript.instance.roomWalls[wallIndex]);
                     doorCount++;
                 }
                 else
                 {
                     int chance = RandChance();
-                    if(chance == 0)
+                    if (chance == 0)
                     {
-                        AddDoor(mapLevel, roomWalls[wallIndex].wall);
+                        wallScript.AddDoor(mapLevel, mapScript.instance.roomWalls[wallIndex]);
                         doorCount++;
                     }
                     else
@@ -172,10 +173,10 @@ public class mapScript : MonoBehaviour
                     }
                 }
             }
-            else if (roomWalls[wallIndex].hasCollisionDoor)
+            else if (roomWalls[wallIndex].GetComponent<wallScript>().hasCollisionDoor)
             {
                 doorCount++;
-                Destroy(roomWalls[wallIndex].wall);
+                Destroy(mapScript.instance.roomWalls[wallIndex]);
             }
             else
             {
@@ -184,18 +185,18 @@ public class mapScript : MonoBehaviour
         }
     }
 
-    void AddDoor(maps mapLevel, GameObject wall)
-    {
-        GameObject door = Instantiate(mapLevel.door);
-        door.transform.position = wall.transform.position;
-        door.transform.rotation = wall.transform.rotation;
-        Destroy(wall);
-    }
+    //void AddDoor(maps mapLevel, GameObject wall)
+    //{
+    //    GameObject door = Instantiate(mapLevel.door);
+    //    door.transform.position = wall.transform.position;
+    //    door.transform.rotation = wall.transform.rotation;
+    //    Destroy(wall);
+    //}
 
     int RandChance()
     {
         int chance = UnityEngine.Random.Range(0, 2);
-        if(chance == lastChance)
+        if (chance == lastChance)
         {
             chance = UnityEngine.Random.Range(0, 2);
         }
