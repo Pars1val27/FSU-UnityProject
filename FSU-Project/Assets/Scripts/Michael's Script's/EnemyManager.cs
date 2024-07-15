@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] public GameObject[] floor1EnemiesHard;
     [SerializeField] public GameObject[] floor2EnemiesHard;
 
-    public List<GameObject[]> stationaryEnemies;
+    public List<GameObject[]> enemiesStationary;
     [SerializeField] public GameObject[] floor1StationaryEnemies;
     [SerializeField] public GameObject[] floor2StationaryEnemies;
     // Start is called before the first frame update
@@ -37,8 +37,8 @@ public class EnemyManager : MonoBehaviour
         enemies.Add(floor2Enemies);
         enemiesHard.Add(floor1EnemiesHard);
         enemiesHard.Add(floor2EnemiesHard);
-        stationaryEnemies.Add(floor1StationaryEnemies);
-        stationaryEnemies.Add(floor2StationaryEnemies);
+        enemiesStationary.Add(floor1StationaryEnemies);
+        enemiesStationary.Add(floor2StationaryEnemies);
     }
 
     public void FindPlayer()

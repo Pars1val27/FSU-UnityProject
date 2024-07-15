@@ -8,30 +8,55 @@ public class roomScript : MonoBehaviour
     [SerializeField] GameObject[] spawnPos;
     [SerializeField] GameObject[] spawnPosHard;
     [SerializeField] GameObject[] spawnPosStationary;
-    List<GameObject[]> spawnPosAll;
-    private void Start()
-    {
-        spawnPosAll.Add(spawnPos);
-        spawnPosAll.Add(spawnPosHard);
-        spawnPosAll.Add(spawnPosStationary);
-    }
+    bool collisionOccured;
+    //private void Start()
+    //{
+    //    spawnPosAll.Add(spawnPos);
+    //    spawnPosAll.Add(spawnPosHard);
+    //    spawnPosAll.Add(spawnPosStationary);
+    //}
     private void OnTriggerEnter(Collider other)
     {
+        if (collisionOccured) 
+        { 
+            return; 
+        }
         if(other == CompareTag("Player"))
         {
-            for(int arrayIndex = 0; arrayIndex < spawnPosAll.Count; arrayIndex++)
+            for (int posIndex = 0; posIndex < spawnPos.Length; posIndex++)
             {
-                for(int spawnIndex = 0; spawnIndex < spawnPosAll[arrayIndex].Length; spawnIndex++)
-                {
-
-                }
+                RandEnemy(spawnPos[posIndex]);
+            }
+            for (int posIndex = 0; posIndex < spawnPosHard.Length; posIndex++)
+            {
+                RandEnemyHard(spawnPos[posIndex]);
+            }
+            for (int posIndex = 0; posIndex < spawnPosStationary.Length; posIndex++)
+            {
+                RandEnemyStationary(spawnPos[posIndex]);
             }
         }
     }
 
     void RandEnemy(GameObject spawnPos)
     {
-        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.)
-        GameObject enemy 
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies[mapScript.mapLevel.level].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemies[mapScript.mapLevel.level][chosenEnemy]);
+        enemy.transform.position = spawnPos.transform.position;
+        enemy.transform.rotation = spawnPos.transform.rotation;
+    }
+    void RandEnemyHard(GameObject spawnPos)
+    {
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesHard[mapScript.mapLevel.level].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesHard[mapScript.mapLevel.level][chosenEnemy]);
+        enemy.transform.position = spawnPos.transform.position;
+        enemy.transform.rotation = spawnPos.transform.rotation;
+    }
+    void RandEnemyStationary(GameObject spawnPos)
+    {
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level][chosenEnemy]);
+        enemy.transform.position = spawnPos.transform.position;
+        enemy.transform.rotation = spawnPos.transform.rotation;
     }
 }

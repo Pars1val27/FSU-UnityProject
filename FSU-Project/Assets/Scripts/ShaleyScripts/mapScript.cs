@@ -15,7 +15,7 @@ public class mapScript : MonoBehaviour
     int roomCount = 0;
     //wallScript currRoom;
     //public GameObject[] roomWalls;
-    public maps mapLevel;
+    public static maps mapLevel;
     Vector3 pos;
     Vector3[] usedRoomPos;
     List<GameObject[]> usedWallPosRoom;
