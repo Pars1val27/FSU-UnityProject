@@ -31,14 +31,14 @@ public class SwordScript : MonoBehaviour
     {
         //if (Time.time >= nextAttackTime)
         //{
-            if (Input.GetButtonDown("Fire1") && !isAttacking)
+            if (Input.GetButtonDown("Fire1") && !isAttacking && UIManager.instance.abilityMenuOpen)
             {
                 StartCoroutine(Attack());
                 //nextAttackTime = Time.time + 1f / PlayerController.playerInstance.attackSpeed;
             }
         //}
 
-        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady)
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady && UIManager.instance.abilityMenuOpen)
         {
             PlayerController.playerInstance.isBlocking = true;
             anim.SetBool("Block", true);
