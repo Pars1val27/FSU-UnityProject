@@ -31,6 +31,10 @@ public class EnemyManager : MonoBehaviour
     {
         instance = this;
         FindPlayer();
+        bosses = new List<GameObject[]>();
+        enemies = new List<GameObject[]>();
+        enemiesHard = new List<GameObject[]>();
+        enemiesStationary = new List<GameObject[]>();
         bosses.Add(floor1Bosses);
         bosses.Add(floor2Bosses);
         enemies.Add(floor1Enemies);
