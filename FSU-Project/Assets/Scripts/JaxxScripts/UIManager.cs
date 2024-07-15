@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
         }
         if (playerHPBar.fillAmount <= playerHPBar.fillAmount * lowHealthPercentage) 
         {
-            SetMenu(lowHealthIndi);
+            //SetMenu(lowHealthIndi);
         }
     }
 

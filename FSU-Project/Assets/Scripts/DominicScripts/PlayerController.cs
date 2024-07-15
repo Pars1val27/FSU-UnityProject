@@ -238,7 +238,7 @@ public class PlayerController : MonoBehaviour, IDamage
         muzzleFlash.SetActive(false);
     }*/
    
-
+    
     public void TakeDamage(int dmg)
     {
         if (!isBlocking)
@@ -247,7 +247,7 @@ public class PlayerController : MonoBehaviour, IDamage
             UpdatePlayerUI();
 
             if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
-            {
+            {                  
                 abilityHandler.EnableHPRecovery(1, 5f);
             }
 
@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour, IDamage
         Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.2f); ;          
 
     }
-
+    
     public void UpdatePlayerUI()
     {
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
