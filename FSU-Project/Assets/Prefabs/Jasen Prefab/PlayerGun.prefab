@@ -61,7 +61,7 @@ MonoBehaviour:
   hitEffect: {fileID: 224850618694623197, guid: 977b2d648c8eb8342aa516156a00cdc5, type: 3}
   currAmmo: 0
   maxAmmo: 25
-  reloadTime: 5
+  reloadTime: 3
   grenadeThrowForce: 20
   delay: 1.5
   explosionRadius: 3

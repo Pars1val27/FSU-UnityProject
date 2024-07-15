@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isDashing;
     public bool isCoolDown;
     public bool isBlocking;
+    public bool isCrouching;
 
     float origFOV;
     public float currFOV;
@@ -111,6 +112,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UpdatePlayerUI();   
         Movement();
         Sprint();
+        Crouch();
         wallClimb();
         EquipClassWeapon();
 
@@ -176,6 +178,23 @@ public class PlayerController : MonoBehaviour, IDamage
             speed /= sprintMod;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+        }
+    }
+    void Crouch()
+    {
+        if (Input.GetButtonDown("Crouch"))
+        {
+            isCrouching = true;
+            speed /= 2;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(-1, -1, -1);
+
+
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            speed *= 2;
+            isCrouching = false;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(1, 1, 1);
         }
     }
 
