@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] Transform swordPos;
     [SerializeField] Transform climbPos;
 
+    [SerializeField] GameObject deathCam;
+
     [Header("Class Weapons")]
     [SerializeField] public GameObject gun;
     [SerializeField] public GameObject sword;
@@ -27,10 +29,6 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 150)]
     [SerializeField] public int origHP;
     public int playerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseGunnerHP;
-    [Range(1, 150)]
-    [SerializeField] public int baseSwordHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
     [Range(0, 10)]
@@ -81,6 +79,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isDashing;
     public bool isCoolDown;
     public bool isBlocking;
+    public bool isCrouching;
 
     float origFOV;
     public float currFOV;
@@ -91,7 +90,7 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 playerVelocity;
 
 
-    GameObject classWeaponInstance;
+    public GameObject classWeaponInstance;
    
     public GunScript gunScript;
     public SwordScript swordScript;
@@ -102,15 +101,18 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        UpdatePlayerUI();
         isCoolDown = false;
+        deathCam.SetActive(false);
+        abilityHandler = GetComponent<AbilityHandler>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdatePlayerUI();   
         Movement();
         Sprint();
+        Crouch();
         wallClimb();
         EquipClassWeapon();
 
@@ -178,6 +180,23 @@ public class PlayerController : MonoBehaviour, IDamage
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
         }
     }
+    void Crouch()
+    {
+        if (Input.GetButtonDown("Crouch"))
+        {
+            isCrouching = true;
+            speed /= 2;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(-1, -1, -1);
+
+
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            speed *= 2;
+            isCrouching = false;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(1, 1, 1);
+        }
+    }
 
     IEnumerator playSteps()
     {
@@ -227,6 +246,11 @@ public class PlayerController : MonoBehaviour, IDamage
             playerHP -= dmg;
             UpdatePlayerUI();
 
+            if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
+            {
+                abilityHandler.EnableHPRecovery(1, 5f);
+            }
+
             if (!isPlayingHurt)
             {
                 StartCoroutine(isHurtAud());
@@ -234,6 +258,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
             if (playerHP <= 0)
             {
+                deathCam.SetActive(true);
                 UIManager.instance.onLose();
             }
         }
@@ -321,11 +346,14 @@ public class PlayerController : MonoBehaviour, IDamage
         if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
             origHP = 20;
-            playerHP = origHP;
+            playerHP = origHP; 
+            UpdatePlayerUI();
+
             speed = 14;
             attackSpeed = 0.25f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
+            NotifyAbilityHandler();
         }
 
         if (UIManager.instance.classMele == true && classWeaponInstance == null)
@@ -337,7 +365,24 @@ public class PlayerController : MonoBehaviour, IDamage
             shootDist = 2;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
+            AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
+            NotifyAbilityHandler();
         }
     }
-
-} 
+    private void NotifyAbilityHandler()
+    {
+       // AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
+        if (abilityHandler != null)
+        {
+            if (gunScript != null)
+            {
+                abilityHandler.gunScript = gunScript;
+            }
+            if (swordScript != null)
+            {
+                abilityHandler.swordScript = swordScript;
+                
+            }
+        }
+    }
+}

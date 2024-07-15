@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0dfd74f5de4d543adee7d9fb94ecbe, type: 3}
   m_Name: PoisonEffect
   m_EditorClassIdentifier: 
-  abilityName: 
-  ablitiyDisctriptions: 
-  ablitiyCost: 0
+  abilityName: PosionDMG
+  ablitiyDisctriptions: discription
+  abilityCost: 3
   uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 0}
-  damageOverTime: 0
-  duration: 0
+  modelPrefab: {fileID: 3953768525008260369, guid: ac6c2eec57d797d45bd81cb9285fe798, type: 3}
+  damageOverTime: 5
+  duration: 1

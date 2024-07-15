@@ -6,19 +6,37 @@ namespace AbilitySystem
 {
     public class AbilityHandler : MonoBehaviour
     {
-        //public GameObject player;
+        
         public PlayerController playerController;
         public GunScript gunScript;
         public SwordScript swordScript;
-        public Grenade grenade;
+
         public List<Ability> abilities = new List<Ability>();
+
+        //private bool isHPRecoveryEnabled = false;
+
+         //Coroutine hpRecoveryCoroutine;
+
 
         void Start()
         {
-            //player = GameObject.FindWithTag("Player");
+            
             playerController = GetComponent<PlayerController>();
-            gunScript = playerController.GetComponentInChildren<GunScript>();
 
+        }
+        void Update()
+        {    
+            if (gunScript == null && playerController.gunScript != null)
+            {
+                gunScript = playerController.gunScript;
+            }
+
+            
+            if (swordScript == null && playerController.swordScript != null)
+            {
+                swordScript = playerController.swordScript;
+                
+            }
         }
         public bool HasAbility(string abilityName)
         {
@@ -45,16 +63,10 @@ namespace AbilitySystem
 
         public void IncreaseMaxHP(int amount)
         {
-            if (playerController != null)
-            {
-                //Debug.Log(Equals(playerController.playerHP));
-                playerController.origHP += amount;
-                //playerController.playerHP = playerController.origHP;
-                // Update UI or other logic to reflect new HP value
-                playerController.UpdatePlayerUI();
-                //Debug.Log(playerController.origHP);
-                //Debug.Log(Equals(playerController.playerHP));
-            }
+             playerController.origHP += amount;
+             playerController.playerHP = playerController.origHP; 
+             playerController.UpdatePlayerUI();
+
         }
 
         public void IncreaseSpeed(int amount)
@@ -62,41 +74,59 @@ namespace AbilitySystem
             playerController.speed += amount;    
         }
 
-        
+
 
         public void IncreaseStamina(int amount)
         {
-            
+
         }
 
         public void IncreaseDamage(int amount)
         {
             playerController.damage += amount;
-            // Update UI 
+            
         }
 
         public void IncreaseAttackSpeed(float amount)
         {
-            playerController.attackSpeed -= amount; 
+            playerController.attackSpeed -= amount;
         }
 
         public void IncreaseMaxAmmo(int amount)
         {
-            
-            if (gunScript != null)
-            {
-                gunScript.maxAmmo += amount;
-                //gunScript.currAmmo = gunScript.maxAmmo;
-                // Update UI 
-            }
+
+            gunScript.maxAmmo += amount;
+            gunScript.currAmmo = gunScript.maxAmmo;
+            gunScript.UpdateAmmoCount();
+
         }
+        public void EnableHPRecovery(int amount, float interval)
+        {
+            //StartCoroutine(HPRecoveryCoroutine(amount, interval));
+      
+        }
+
+        /*private IEnumerator HPRecoveryCoroutine(int amount, float interval)
+        {
+            while (playerController.playerHP < playerController.origHP)
+            {
+                playerController.playerHP += amount;
+                if (playerController.playerHP > playerController.origHP)
+                {
+                    playerController.playerHP = playerController.origHP;
+                }
+                playerController.UpdatePlayerUI();
+                yield return new WaitForSeconds(interval);
+            }
+            hpRecoveryCoroutine = null;
+        }*/
 
 
         public void AddAbility(Ability ability)
         {
             if (!abilities.Contains(ability))
             {
-                Debug.Log(ability + " added tolist");
+                Debug.Log(ability + " added to Abilities");
                 abilities.Add(ability);
 
                 ability.Activate(gameObject);

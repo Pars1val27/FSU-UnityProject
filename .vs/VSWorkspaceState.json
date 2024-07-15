@@ -1,9 +1,14 @@
 {
   "ExpandedNodes": [
     "",
+    "\\FSU-Project",
     "\\FSU-Project\\Assets",
     "\\FSU-Project\\Assets\\Scripts",
+    "\\FSU-Project\\Assets\\Scripts\\DominicScripts",
+    "\\FSU-Project\\Assets\\Scripts\\JasenScripts",
+    "\\FSU-Project\\Assets\\Scripts\\JasenScripts\\Abilities",
     "\\FSU-Project\\Assets\\Scripts\\JaxxScripts"
   ],
+  "SelectedNode": "\\FSU-Project\\Assets\\Scripts\\JasenScripts\\Grenade.cs",
   "PreviewInSolutionExplorer": false
 }

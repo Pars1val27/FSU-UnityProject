@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +8,8 @@ namespace AbilitySystem
     {
         [SerializeField] public string abilityName;
         [SerializeField] public string ablitiyDisctriptions;
-        [SerializeField] public int ablitiyCost;
-        [SerializeField] public Image uiIcon;
+        [SerializeField] public int abilityCost;
+        [SerializeField] public Sprite uiIcon;
         [SerializeField] public GameObject modelPrefab;
         
 

@@ -14,6 +14,7 @@ public class SwordScript : MonoBehaviour
     [SerializeField] ParticleSystem attackEffect;
 
     [SerializeField] float blockCooldown;
+    [SerializeField] float blockDuration;
 
     private Animator anim;
 
@@ -23,31 +24,26 @@ public class SwordScript : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        isBlockReady = true;
     }
 
     void Update()
     {
         //if (Time.time >= nextAttackTime)
         //{
-            if (Input.GetButtonDown("Fire1") && !isAttacking)
+            if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen)
             {
                 StartCoroutine(Attack());
                 //nextAttackTime = Time.time + 1f / PlayerController.playerInstance.attackSpeed;
             }
         //}
 
-        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady)
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady && UIManager.instance.abilityMenuOpen)
         {
-            //Block();
-
             PlayerController.playerInstance.isBlocking = true;
             anim.SetBool("Block", true);
-            if (Input.GetButtonUp("Fire2"))
-            {
-                PlayerController.playerInstance.isBlocking = false;
-                anim.SetBool("Block", false);
-                StartCoroutine(BlockCooldown());
-            }
+            StartCoroutine(BlockDuration());
+            StartCoroutine(BlockCooldown());
         }
     }
 
@@ -90,17 +86,19 @@ public class SwordScript : MonoBehaviour
             other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
         }
     }
-    /*void Block()
+
+    IEnumerator BlockDuration()
     {
-        isBlocking = true;
-        anim.SetBool("Block", true);
-        if (Input.GetButtonUp("Fire3"))
-        {
-            isBlocking = false;
+        /*if (Input.GetButtonUp("Fire2")) {
+            yield return new WaitForSeconds(0);
+            PlayerController.playerInstance.isBlocking = false;
             anim.SetBool("Block", false);
-            StartCoroutine(BlockCooldown());
-        }
-    }*/
+        }*/
+        yield return new WaitForSeconds(blockDuration);
+        PlayerController.playerInstance.isBlocking = false;
+        anim.SetBool("Block", false);
+
+    }
 
     IEnumerator BlockCooldown()
     {
