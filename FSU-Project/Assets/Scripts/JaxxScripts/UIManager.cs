@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
 
     [Header("----Menus----")]
     [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPrev;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
@@ -173,9 +174,15 @@ public class UIManager : MonoBehaviour
         {
             menuActive.SetActive(false);
         }
+            menuPrev = menuActive;
             menuActive = menu;
             statePause();
             menuActive.SetActive(gamePause);
+    }
+
+    public void SetPrevMenu()
+    {
+        SetMenu(menuPrev);
     }
 
     public void MenuOff() 
