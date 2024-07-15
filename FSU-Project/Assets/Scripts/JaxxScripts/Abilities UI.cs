@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class AbilitiesUI : MonoBehaviour
 {
     AbilitiesUI abilitiesUI;
-    [SerializeField] GameObject purchaseButton;
+    [SerializeField] Button purchaseButton;
     [SerializeField] GameObject shownPrice;
     [SerializeField] GameObject inventoryMenu;
     public Image icon;
@@ -17,12 +17,17 @@ public class AbilitiesUI : MonoBehaviour
     public TMP_Text price;
 
     public Image[] ownedAbil;
-    
+
+
+    public AbilityPickup currentPickup;
+
+
     // Start is called before the first frame update
     void Start()
     {
         abilitiesUI = this;
-    }  
+        purchaseButton.onClick.AddListener(OnButtonPressed);
+    }
 
     // Update is called once per frame
     void Update()
@@ -38,21 +43,34 @@ public class AbilitiesUI : MonoBehaviour
         
         UIManager.instance.AbilityMenuOn();
         if(abil.uiIcon != null)
-        { icon = abil.uiIcon; }
+        { icon.sprite = abil.uiIcon; }
         Name.text = abil.abilityName;
         description.text = abil.ablitiyDisctriptions;
         price.text = abil.abilityCost.ToString();
-        purchaseButton.SetActive(true);
+        purchaseButton.gameObject.SetActive(true);
+        purchaseButton.GetComponentInChildren<TMP_Text>().text = "Purchase";
         shownPrice.SetActive(true);
         if (isItemRoom)
         {
-            purchaseButton.SetActive(false);
+            purchaseButton.gameObject.SetActive(true);
+            purchaseButton.GetComponentInChildren<TMP_Text>().text = "PickUP";
             shownPrice.SetActive(false);
         }
+        purchaseButton.onClick.RemoveAllListeners();
+        purchaseButton.onClick.AddListener(OnButtonPressed);
+
     }
 
     public void ShowAbilityInventory()
     {
         UIManager.instance.SetMenu(inventoryMenu);
+    }
+    public void OnButtonPressed()
+    {
+        if (currentPickup != null)
+        {
+            currentPickup.ConfirmPickup(GameObject.FindGameObjectWithTag("Player"));
+            UIManager.instance.AbilityMenuOff();
+        }
     }
 }
