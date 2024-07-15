@@ -27,6 +27,7 @@ public class roomBossScript : MonoBehaviour
             {
                 Debug.Log("spawned enemy");
                 RandEnemyBoss(spawnPosBoss[posIndex]);
+                UIManager.instance.bossHealth.SetActive(true);
             }
             collisionOccured = true;
         }
