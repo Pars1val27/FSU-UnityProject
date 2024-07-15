@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class roomScript : MonoBehaviour
 {
-    [SerializeField] Transform[] spawnPoss;
-    [SerializeField] GameObject[] spawnPosHard;
-    [SerializeField] GameObject[] spawnPosStationary;
+    [SerializeField] Transform[] spawnPos;
+    [SerializeField] Transform[] spawnPosHard;
+    [SerializeField] Transform[] spawnPosStationary;
     bool collisionOccured;
     //private void Start()
     //{
@@ -46,23 +46,20 @@ public class roomScript : MonoBehaviour
 
     void RandEnemy(Transform spawnPos)
     {
-        int chosenEnemy = Random.Range(0, EnemyManager.instance.enemies[0].Length);
-        
-        GameObject enemy = Instantiate(EnemyManager.instance.enemies[0][chosenEnemy],spawnPos.transform);
-        
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies[mapScript.mapLevel.level].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemies[mapScript.mapLevel.level][chosenEnemy], 
+        spawnPos.transform.position, spawnPos.transform.rotation);
     }
     void RandEnemyHard(Transform spawnPos)
     {
         int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesHard[mapScript.mapLevel.level].Length);
-        GameObject enemy = Instantiate(EnemyManager.instance.enemiesHard[mapScript.mapLevel.level][chosenEnemy]);
-        enemy.transform.position = spawnPos.transform.position;
-        enemy.transform.rotation = spawnPos.transform.rotation;
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesHard[mapScript.mapLevel.level][chosenEnemy],
+        spawnPos.transform.position, spawnPos.transform.rotation);
     }
     void RandEnemyStationary(Transform spawnPos)
     {
         int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level].Length);
-        GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level][chosenEnemy]);
-        enemy.transform.position = spawnPos.transform.position;
-        enemy.transform.rotation = spawnPos.transform.rotation;
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level][chosenEnemy],
+        spawnPos.transform.position, spawnPos.transform.rotation);
     }
 }
