@@ -46,20 +46,20 @@ public class roomScript : MonoBehaviour
 
     void RandEnemy(Transform spawnPos)
     {
-        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies[mapScript.mapLevel.level].Length);
-        GameObject enemy = Instantiate(EnemyManager.instance.enemies[mapScript.mapLevel.level][chosenEnemy], 
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemies[mapScript.mapLevel.level-1].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemies[mapScript.mapLevel.level-1][chosenEnemy], 
         spawnPos.transform.position, spawnPos.transform.rotation);
     }
     void RandEnemyHard(Transform spawnPos)
     {
-        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesHard[mapScript.mapLevel.level].Length);
-        GameObject enemy = Instantiate(EnemyManager.instance.enemiesHard[mapScript.mapLevel.level][chosenEnemy],
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesHard[mapScript.mapLevel.level-1].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesHard[mapScript.mapLevel.level-1][chosenEnemy],
         spawnPos.transform.position, spawnPos.transform.rotation);
     }
     void RandEnemyStationary(Transform spawnPos)
     {
-        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level].Length);
-        GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level][chosenEnemy],
+        int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level-1].Length);
+        GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapScript.mapLevel.level-1][chosenEnemy],
         spawnPos.transform.position, spawnPos.transform.rotation);
     }
 }

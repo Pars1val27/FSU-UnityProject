@@ -6081,7 +6081,8 @@ MonoBehaviour:
   menuPrev: {fileID: 0}
   menuMain: {fileID: 7860748002462606412}
   menuPause: {fileID: 852110087072390347}
-  menuLose: {fileID: 7984742330462239972}
+  menuTimeLose: {fileID: 7984742330462239972}
+  menuHPLose: {fileID: 3085560577463404442}
   menuSelect: {fileID: 3695644787894293498}
   menuBossWin: {fileID: 469884950113561109}
   inerface: {fileID: 658448772307220397}
@@ -6107,6 +6108,7 @@ MonoBehaviour:
   classMele: 0
   classGunner: 0
   abilityMenuOpen: 0
+  lowHealthPercentage: 0.25
 --- !u!114 &8209078707155062884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6131,7 +6133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1599a8bcb601ae643a8f052a757e14af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 300
+  startingTime: 600
   minText: {fileID: 1420614067252875567}
   secText: {fileID: 4902362725184930892}
   remainingTime: 0
@@ -6981,12 +6983,12 @@ GameObject:
   - component: {fileID: 6131355191212729632}
   - component: {fileID: 1991263175087100234}
   m_Layer: 5
-  m_Name: (HP)Lose Menu (1)
+  m_Name: (HP)Lose Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7744611785786343415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9194,7 +9196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 407, y: 263}
+  m_AnchoredPosition: {x: 407, y: 334}
   m_SizeDelta: {x: 800, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2393860614790902562
@@ -15695,7 +15697,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29559743, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.67295593, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15703,10 +15705,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 9e3fd65cb9b07724abfefa702ba2d98d, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -18486,9 +18488,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  floor1Bosses: []
+  floor1Bosses:
+  - {fileID: 1651909575848334336, guid: 0aaf9900b42b0134eaf66b26e8bae298, type: 3}
   floor2Bosses: []
-  floor1Enemies: []
+  floor1Enemies:
+  - {fileID: 5764395668723536644, guid: 2f46914c2447c0d44be195e652279dad, type: 3}
+  - {fileID: 1672167307563670904, guid: cece0b75e677e8349895c490a534a698, type: 3}
+  - {fileID: 1788414880361438125, guid: c56ebb650d07d5c468204c8c29ee6686, type: 3}
+  - {fileID: 8028279669157993157, guid: 6c87df22928a7c445bb9e83ea57a938f, type: 3}
+  - {fileID: 9220460581011350205, guid: 856d97d351d45bd49b13f71c437e4478, type: 3}
   floor2Enemies: []
   floor1EnemiesHard: []
   floor2EnemiesHard: []
