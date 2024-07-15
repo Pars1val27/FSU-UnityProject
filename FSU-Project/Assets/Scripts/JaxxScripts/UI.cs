@@ -13,6 +13,9 @@ public class UI : MonoBehaviour
     
     public void Restart()
     {
+        Debug.Log("Restart");
+        StartCoroutine(UIManager.instance.StartingMenu());
+        Debug.Log("Class Select");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         //UIManager.instance.bossHealth.SetActive(false);
         UIManager.instance.stateUnpause();
@@ -32,6 +35,7 @@ public class UI : MonoBehaviour
         UIManager.instance.classMele = true;
         UIManager.instance.classGunner = false;
         Resume();
+        Debug.Log("Melee Class");
     }
 
     public void ClassSetGunner()
@@ -39,6 +43,7 @@ public class UI : MonoBehaviour
         UIManager.instance.classMele = false;
         UIManager.instance.classGunner = true;
         Resume();
+        Debug.Log("Gunner Class");
     }
 
     public void TurnOnUI(GameObject ui)

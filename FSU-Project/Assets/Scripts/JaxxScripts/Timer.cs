@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class Clock : MonoBehaviour
 {
-    Timer timeInstance;
+    Clock timeInstance;
     [SerializeField] int startingTime;
     [SerializeField] public TMP_Text minText;
     [SerializeField] public TMP_Text secText;

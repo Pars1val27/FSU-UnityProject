@@ -12,9 +12,10 @@ public class UIManager : MonoBehaviour
     [Header("----Menus----")]
     [SerializeField] public GameObject menuActive;
     [SerializeField] public GameObject menuPrev;
+    [SerializeField] public GameObject menuMain;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuSelect;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
     [SerializeField] GameObject menuSettings;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject itemMenu;
     [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
+    [SerializeField] public GameObject loadingScreen;
 
     [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
@@ -53,9 +55,13 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        StartCoroutine(StartingMenu());
     }
 
+    private void Start()
+    {
+        StartCoroutine(MainMenu());
+        Debug.Log("MainMenu Up");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -77,12 +83,18 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        if (playerHPBar.fillAmount == .1f ) 
+        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * .1) 
         {
             SetMenu(lowHealthIndi);
         }
     }
 
+    public IEnumerator MainMenu()
+    {
+        yield return new WaitForSeconds(.1f);
+        SetMenu(menuMain);
+        Debug.Log("Set Menu");
+    }
     public void statePause()
     {
         gamePause = !gamePause; 
@@ -133,7 +145,7 @@ public class UIManager : MonoBehaviour
     }
     public void StartMenu()
     {
-        menuActive = menuMain;
+        menuActive = menuSelect;
         statePause();   
         menuActive.SetActive(gamePause);
     }
@@ -162,7 +174,7 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
 
-    IEnumerator StartingMenu()
+    public IEnumerator StartingMenu()
     {
         yield return new WaitForSeconds(0.2f);
         StartMenu();
