@@ -37,6 +37,10 @@ public class Clock : MonoBehaviour
                 Debug.Log("Timer End");
             }
         }
+        if(remainingTime <= 0)
+        {
+            UIManager.instance.onTimeLose();
+        }
     }
 
     public void StartTimer()

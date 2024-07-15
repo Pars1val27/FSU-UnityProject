@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject menuPrev;
     [SerializeField] public GameObject menuMain;
     [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuTimeLose;
+    [SerializeField] GameObject menuHPLose;
     [SerializeField] GameObject menuSelect;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
@@ -130,11 +131,14 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void onTimeLose()
+    {
+        SetMenu(menuTimeLose);
+    }
+
     public void onLose()
     {
-        statePause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        SetMenu(menuHPLose);
     }
 
     public void onWin()
