@@ -14,7 +14,7 @@ public class Timer : MonoBehaviour
     public float remainingTime;
     float secRemaining;
     float minRemaining;
-    bool timerRunning;
+    public bool timerRunning;
     // Start is called before the first frame update
     void Start()
     {

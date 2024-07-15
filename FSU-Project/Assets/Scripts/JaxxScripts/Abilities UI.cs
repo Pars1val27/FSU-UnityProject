@@ -18,6 +18,7 @@ public class AbilitiesUI : MonoBehaviour
     public TMP_Text itemComfirm;
 
     public Image[] ownedAbil;
+
     
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,10 @@ public class AbilitiesUI : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            ShowAbilityInventory();
+            Debug.Log("Input accepted");
+                UIManager.instance.ShowAbilityInventory();
+                Debug.Log("Menu Open");
+           
         }
     }
 
@@ -52,8 +56,5 @@ public class AbilitiesUI : MonoBehaviour
         }
     }
 
-    public void ShowAbilityInventory()
-    {
-        UIManager.instance.SetMenu(inventoryMenu);
-    }
+    
 }

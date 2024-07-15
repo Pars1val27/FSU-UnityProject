@@ -4228,6 +4228,7 @@ MonoBehaviour:
   menuSettings: {fileID: 2652088568872942769}
   menuAbilities: {fileID: 4813685261369366866}
   menuControls: {fileID: 7118147725648733416}
+  menuInventory: {fileID: 4813685261369366866}
   itemMenu: {fileID: 2056684393195914224}
   lowHealthIndi: {fileID: 1318825719904829700}
   bossHealth: {fileID: 4341904541190205417}
@@ -4244,6 +4245,7 @@ MonoBehaviour:
   gamePause: 0
   classMele: 0
   classGunner: 0
+  abilityMenuOpen: 0
 --- !u!114 &8209078707155062884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4272,6 +4274,7 @@ MonoBehaviour:
   minText: {fileID: 1420614067252875567}
   secText: {fileID: 4902362725184930892}
   remainingTime: 0
+  timerRunning: 0
 --- !u!114 &7079492890706036762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5673,7 +5676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1319390252637393788
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12667,7 +12670,9 @@ MonoBehaviour:
   aud: {fileID: 3989990512633138655}
   clickSounds:
   - {fileID: 8300000, guid: c8f5413844761854e92a4b5b545cf135, type: 3}
-  Background: []
+  Background:
+  - {fileID: 8300000, guid: 760fc18a663b5c946844f1dac7bb9ebd, type: 3}
+  - {fileID: 8300000, guid: 443f5930e5fd86d47868a896ec199af7, type: 3}
   Boss: []
   masterSlider: {fileID: 7434890694767069944}
   musicSlider: {fileID: 388489552172353448}
