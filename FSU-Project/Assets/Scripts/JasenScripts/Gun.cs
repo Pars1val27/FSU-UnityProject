@@ -78,6 +78,7 @@ public class GunScript : MonoBehaviour
         {
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
+            
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);

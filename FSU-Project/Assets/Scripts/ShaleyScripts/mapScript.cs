@@ -59,7 +59,7 @@ void Start()
                 {
                     newPos = new Vector3(-moveDist, 0, 0);
                 }
-                pos = pos + newPos;
+                pos += newPos;
                 NextPos(mapLevel);
             }
             else

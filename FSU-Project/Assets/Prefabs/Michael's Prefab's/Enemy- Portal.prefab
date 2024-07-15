@@ -249,12 +249,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
+  model: []
   spawnPOS:
   - {fileID: 1623024040815245377}
   - {fileID: 5027406649815533112}
   - {fileID: 45298664316657627}
   - {fileID: 8198367927960492653}
-  spawnInterval: 3
+  spawnInterval: 5
   Enemys:
   - {fileID: 1672167307563670904, guid: cece0b75e677e8349895c490a534a698, type: 3}
   - {fileID: 1672167307563670904, guid: 3001a2ce2b3a43147984fe3e47d98c02, type: 3}
