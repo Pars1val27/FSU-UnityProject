@@ -10,8 +10,8 @@ public class Audio : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] clickSounds;
-    [SerializeField] Audio[] Background;
-    [SerializeField] Audio[] Boss;
+    [SerializeField] AudioClip[] Background;
+    [SerializeField] AudioClip[] Boss;
 
     [Header("----Sliders----")]
     [SerializeField] Slider masterSlider;
@@ -77,17 +77,17 @@ public class Audio : MonoBehaviour
 
     public void PlayClicks()
     {
-        aud.PlayOneShot(clickSounds[0/*Random.Range(0, clickSounds.Length)*/], musicVol);
+        aud.PlayOneShot(clickSounds[Random.Range(0, clickSounds.Length)], sfxVol);
         Debug.Log("Click Sound Played");
     }
 
     public void PlayBackground()
     {
-        
+        aud.PlayOneShot(Background[Random.Range(0, Background.Length)], musicVol);
     }
 
-    public void PlayBoss()
+    public void PlayBoss(int index)
     {
-
+        aud.PlayOneShot(Boss[index], musicVol);
     }
 }
