@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager instance;
 
     [Header("----Menus----")]
-    [SerializeField] GameObject menuActive;
+    [SerializeField] public GameObject menuActive;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
     [SerializeField] GameObject menuMain;
