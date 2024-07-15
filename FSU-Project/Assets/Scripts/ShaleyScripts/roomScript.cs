@@ -17,25 +17,31 @@ public class roomScript : MonoBehaviour
     //}
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("in room");
         if (collisionOccured) 
-        { 
+        {
+            Debug.Log("collisionOccured");
             return; 
         }
         if(other.CompareTag("Player"))
         {
-            for (int posIndex = 0; posIndex < spawnPos.Length; posIndex++)
+            Debug.Log("player entered room");
+            for (int posIndex = 0; posIndex < spawnPoss.Length; posIndex++)
             {
-                RandEnemy(spawnPos[posIndex]);
+                Debug.Log("spawned enemy");
+                RandEnemy(spawnPoss[posIndex]);
             }
             for (int posIndex = 0; posIndex < spawnPosHard.Length; posIndex++)
             {
-                RandEnemyHard(spawnPos[posIndex]);
+                RandEnemyHard(spawnPoss[posIndex]);
             }
             for (int posIndex = 0; posIndex < spawnPosStationary.Length; posIndex++)
             {
-                RandEnemyStationary(spawnPos[posIndex]);
+                RandEnemyStationary(spawnPoss[posIndex]);
             }
+            collisionOccured = true;
         }
+        Debug.Log("trigger finished");
     }
 
     void RandEnemy(Transform spawnPos)

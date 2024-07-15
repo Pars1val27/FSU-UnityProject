@@ -10,8 +10,13 @@ namespace AbilitySystem
         public PlayerController playerController;
         public GunScript gunScript;
         public SwordScript swordScript;
-        
+
         public List<Ability> abilities = new List<Ability>();
+
+        private bool isHPRecoveryEnabled = false;
+
+         Coroutine hpRecoveryCoroutine;
+
 
         void Start()
         {
@@ -84,16 +89,36 @@ namespace AbilitySystem
 
         public void IncreaseAttackSpeed(float amount)
         {
-            playerController.attackSpeed -= amount; 
+            playerController.attackSpeed -= amount;
         }
 
         public void IncreaseMaxAmmo(int amount)
         {
 
-                gunScript.maxAmmo += amount;
-                gunScript.currAmmo = gunScript.maxAmmo;
-                gunScript.UpdateAmmoCount();
+            gunScript.maxAmmo += amount;
+            gunScript.currAmmo = gunScript.maxAmmo;
+            gunScript.UpdateAmmoCount();
 
+        }
+        public void EnableHPRecovery(int amount, float interval)
+        {
+            StartCoroutine(HPRecoveryCoroutine(amount, interval));
+      
+        }
+
+        private IEnumerator HPRecoveryCoroutine(int amount, float interval)
+        {
+            while (playerController.playerHP < playerController.origHP)
+            {
+                playerController.playerHP += amount;
+                if (playerController.playerHP > playerController.origHP)
+                {
+                    playerController.playerHP = playerController.origHP;
+                }
+                playerController.UpdatePlayerUI();
+                yield return new WaitForSeconds(interval);
+            }
+            hpRecoveryCoroutine = null;
         }
 
 
@@ -104,7 +129,7 @@ namespace AbilitySystem
                 Debug.Log(ability + " added to Abilities");
                 abilities.Add(ability);
 
-                //ability.Activate(gameObject);
+                ability.Activate(gameObject);
             }
         }
     }
