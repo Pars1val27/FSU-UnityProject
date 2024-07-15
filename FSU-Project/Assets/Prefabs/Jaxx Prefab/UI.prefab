@@ -6081,8 +6081,8 @@ MonoBehaviour:
   menuPrev: {fileID: 0}
   menuMain: {fileID: 7860748002462606412}
   menuPause: {fileID: 852110087072390347}
-  menuTimeLose: {fileID: 0}
-  menuHPLose: {fileID: 0}
+  menuTimeLose: {fileID: 7984742330462239972}
+  menuHPLose: {fileID: 3085560577463404442}
   menuSelect: {fileID: 3695644787894293498}
   menuBossWin: {fileID: 469884950113561109}
   inerface: {fileID: 658448772307220397}
@@ -6108,6 +6108,7 @@ MonoBehaviour:
   classMele: 0
   classGunner: 0
   abilityMenuOpen: 0
+  lowHealthPercentage: 0.25
 --- !u!114 &8209078707155062884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6132,7 +6133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1599a8bcb601ae643a8f052a757e14af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingTime: 300
+  startingTime: 600
   minText: {fileID: 1420614067252875567}
   secText: {fileID: 4902362725184930892}
   remainingTime: 0
@@ -6982,7 +6983,7 @@ GameObject:
   - component: {fileID: 6131355191212729632}
   - component: {fileID: 1991263175087100234}
   m_Layer: 5
-  m_Name: (HP)Lose Menu (1)
+  m_Name: (HP)Lose Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

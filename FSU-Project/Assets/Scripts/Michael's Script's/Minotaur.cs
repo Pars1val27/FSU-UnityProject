@@ -22,7 +22,6 @@ public class Minotaur : MonoBehaviour
     Vector3 playerPos;
 
     float angleToPlayer;
-    float SavedTime = 0;
 
     bool isCharging;
     // Start is called before the first frame update

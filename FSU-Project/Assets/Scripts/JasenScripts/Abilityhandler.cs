@@ -13,9 +13,9 @@ namespace AbilitySystem
 
         public List<Ability> abilities = new List<Ability>();
 
-        private bool isHPRecoveryEnabled = false;
+        //private bool isHPRecoveryEnabled = false;
 
-         Coroutine hpRecoveryCoroutine;
+         //Coroutine hpRecoveryCoroutine;
 
 
         void Start()
@@ -102,11 +102,11 @@ namespace AbilitySystem
         }
         public void EnableHPRecovery(int amount, float interval)
         {
-            StartCoroutine(HPRecoveryCoroutine(amount, interval));
+            //StartCoroutine(HPRecoveryCoroutine(amount, interval));
       
         }
 
-        private IEnumerator HPRecoveryCoroutine(int amount, float interval)
+        /*private IEnumerator HPRecoveryCoroutine(int amount, float interval)
         {
             while (playerController.playerHP < playerController.origHP)
             {
@@ -119,7 +119,7 @@ namespace AbilitySystem
                 yield return new WaitForSeconds(interval);
             }
             hpRecoveryCoroutine = null;
-        }
+        }*/
 
 
         public void AddAbility(Ability ability)
