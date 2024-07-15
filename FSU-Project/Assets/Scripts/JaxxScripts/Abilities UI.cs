@@ -34,11 +34,13 @@ public class AbilitiesUI : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
-            ShowAbilityInventory();
+            Debug.Log("Input accepted");
+            UIManager.instance.ShowAbilityInventory();
+            Debug.Log("Menu Open");
         }
     }
 
-    public void ShowAbilityItem(Ability abil, bool isItemRoom)
+        public void ShowAbilityItem(Ability abil, bool isItemRoom)
     {
         
         UIManager.instance.AbilityMenuOn();
