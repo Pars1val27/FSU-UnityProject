@@ -125,18 +125,19 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
         
-        
-
     }
 
     public void onTimeLose()
     {
         SetMenu(menuTimeLose);
+        Debug.Log("Time lose Set");
     }
 
     public void onLose()
     {
-        SetMenu(menuHPLose);
+        menuActive = menuHPLose;
+        statePause();
+        Debug.Log("HP lose Set");
     }
 
     public void onWin()
