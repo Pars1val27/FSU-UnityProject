@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class roomScript : MonoBehaviour
 {
-    [SerializeField] Transform[] spawnPos;
+    [SerializeField] Transform[] spawnPoss;
     [SerializeField] Transform[] spawnPosHard;
     [SerializeField] Transform[] spawnPosStationary;
     bool collisionOccured;

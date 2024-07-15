@@ -15,7 +15,7 @@ MonoBehaviour:
   roomSpawns:
   - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
   roomShops:
-  - {fileID: 9197706017526019011, guid: 2bb52ffa56cace84697ad9ba4f0dd6f2, type: 3}
+  - {fileID: 7477869764841173441, guid: a894001310e0f554489570a15d9bad71, type: 3}
   roomItems:
   - {fileID: 7477869764841173441, guid: a894001310e0f554489570a15d9bad71, type: 3}
   rooms:

@@ -6,6 +6,7 @@ namespace AbilitySystem
 {
     public class AbilitySpawner : MonoBehaviour
     {
+        bool collisionOccured;
         public enum SpawnCondition
         {
 
@@ -142,6 +143,10 @@ namespace AbilitySystem
 
         private void OnTriggerEnter(Collider other)
         {
+            if (collisionOccured)
+            {
+                return;
+            }
             if (!spawnOnStart && other.CompareTag("Player"))
             {
 
@@ -150,8 +155,8 @@ namespace AbilitySystem
                 {
                     spawnerCollider.enabled = false;
                 }
+                collisionOccured = true;
             }
-
         }
 
     }
