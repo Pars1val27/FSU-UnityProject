@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject menuPrev;
     [SerializeField] public GameObject menuMain;
     [SerializeField] GameObject menuPause;
-    [SerializeField] GameObject menuLose;
+    [SerializeField] GameObject menuTimeLose;
+    [SerializeField] GameObject menuHPLose;
     [SerializeField] GameObject menuSelect;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
@@ -50,6 +51,9 @@ public class UIManager : MonoBehaviour
     public bool classGunner;
     public bool abilityMenuOpen;
 
+    [Header("----Values----")]
+    [SerializeField] float lowHealthPercentage;
+
     int enemyCount;
     // Start is called before the first frame update
     void Awake()
@@ -83,7 +87,7 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * .1) 
+        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * lowHealthPercentage) 
         {
             SetMenu(lowHealthIndi);
         }
@@ -121,20 +125,18 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
         
-        if(enemyCount <= 0)
-        {
-            onWin();
-            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-        }
+        
 
+    }
+
+    public void onTimeLose()
+    {
+        SetMenu(menuTimeLose);
     }
 
     public void onLose()
     {
-        statePause();
-        menuActive = menuLose;
-        menuActive.SetActive(true);
+        SetMenu(menuHPLose);
     }
 
     public void onWin()
@@ -189,7 +191,7 @@ public class UIManager : MonoBehaviour
             menuPrev = menuActive;
             menuActive = menu;
             statePause();
-            menuActive.SetActive(gamePause);
+            menuActive.SetActive(true);
     }
 
     public void SetPrevMenu()
@@ -233,4 +235,6 @@ public class UIManager : MonoBehaviour
             stateUnpause();
         }
     }
+
+    
 }

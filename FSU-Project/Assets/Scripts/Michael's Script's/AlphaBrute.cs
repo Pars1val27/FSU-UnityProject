@@ -120,6 +120,7 @@ public class AlphaBrute : MonoBehaviour , IDamage
         {
             anim.StopPlayback();
             anim.SetTrigger("Death");
+            UIManager.instance.BossWin();
         }
     }
 

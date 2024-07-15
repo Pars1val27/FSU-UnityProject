@@ -18,7 +18,6 @@ public class AbilitiesUI : MonoBehaviour
 
     public Image[] ownedAbil;
 
-
     public AbilityPickup currentPickup;
 
 

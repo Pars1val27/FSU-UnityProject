@@ -12,7 +12,7 @@ public class Grenade : MonoBehaviour
     private int damage;
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip[] explosionSound;
-    [SerializeField] float explosionSpeedVol;
+    [SerializeField] float explosionSoundVol;
 
     private AudioSource grenadeAudio;
     bool hasExploded = false;
@@ -52,7 +52,7 @@ public class Grenade : MonoBehaviour
 
         if (grenadeAudio != null && explosionSound != null)
         {
-            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSpeedVol);
+            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSoundVol);
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -68,7 +68,7 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
-                ApplyFreezeEffect(nearbyObject.gameObject);
+                //ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
@@ -76,18 +76,18 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void ApplyFreezeEffect(GameObject target)
-    {
+    //void ApplyFreezeEffect(GameObject target)
+    //{
         
-        if (abilityHandler.HasAbility("FreezeEffect"))
-        {
-            var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
-            if (FreezeAbility != null)
-            {
-                FreezeAbility.Activate(target);
-            }
-        }
-    }
+    //    if (abilityHandler.HasAbility("FreezeEffect"))
+    //    {
+    //        var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
+    //        if (FreezeAbility != null)
+    //        {
+    //            FreezeAbility.Activate(target);
+    //        }
+    //    }
+    //}
 
     
 

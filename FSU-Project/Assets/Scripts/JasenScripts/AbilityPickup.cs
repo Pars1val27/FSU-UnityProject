@@ -15,13 +15,13 @@ namespace AbilitySystem
         public bool IsDebugAbility = false;
 
         void Start()
-        {
+        {      
             abilitiesUI = FindObjectOfType<AbilitiesUI>();
         }
 
         void OnTriggerEnter(Collider other)
         {
-            
+           
                 if (other.CompareTag("Player"))
                     if (IsDebugAbility)
                     {
@@ -34,7 +34,7 @@ namespace AbilitySystem
             
         }
         void OnTriggerExit(Collider other)
-        {
+        {      
             if (other.CompareTag("Player"))
             {
                 
@@ -71,7 +71,7 @@ namespace AbilitySystem
                         {
                             RemoveTime(player);
                             abilityHandler.AddAbility(ability);
-                            AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
+                            //AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
                             Debug.Log("Ability " + ability.abilityName + " activated.");
                             Destroy(gameObject);
                         }

@@ -246,6 +246,11 @@ public class PlayerController : MonoBehaviour, IDamage
             playerHP -= dmg;
             UpdatePlayerUI();
 
+            if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
+            {
+                abilityHandler.EnableHPRecovery(1, 5f);
+            }
+
             if (!isPlayingHurt)
             {
                 StartCoroutine(isHurtAud());
