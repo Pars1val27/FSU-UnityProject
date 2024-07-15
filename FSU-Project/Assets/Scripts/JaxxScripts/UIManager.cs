@@ -11,17 +11,21 @@ public class UIManager : MonoBehaviour
 
     [Header("----Menus----")]
     [SerializeField] public GameObject menuActive;
+    [SerializeField] public GameObject menuPrev;
+    [SerializeField] public GameObject menuMain;
     [SerializeField] GameObject menuPause;
     [SerializeField] GameObject menuLose;
-    [SerializeField] GameObject menuMain;
+    [SerializeField] GameObject menuSelect;
     [SerializeField] GameObject menuBossWin;
     [SerializeField] GameObject inerface;
     [SerializeField] GameObject menuSettings;
     [SerializeField] GameObject menuAbilities;
     [SerializeField] GameObject menuControls;
+    [SerializeField] GameObject menuInventory;
     [SerializeField] GameObject itemMenu;
     [SerializeField] GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
+    [SerializeField] public GameObject loadingScreen;
 
     [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
@@ -44,15 +48,20 @@ public class UIManager : MonoBehaviour
     public bool gamePause;
     public bool classMele;
     public bool classGunner;
+    public bool abilityMenuOpen;
 
     int enemyCount;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
-        StartCoroutine(StartingMenu());
     }
 
+    private void Start()
+    {
+        StartCoroutine(MainMenu());
+        Debug.Log("MainMenu Up");
+    }
     // Update is called once per frame
     void Update()
     {
@@ -74,18 +83,25 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        if (playerHPBar.fillAmount == .1f ) 
+        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * .1) 
         {
             SetMenu(lowHealthIndi);
         }
     }
 
+    public IEnumerator MainMenu()
+    {
+        yield return new WaitForSeconds(.1f);
+        SetMenu(menuMain);
+        Debug.Log("Set Menu");
+    }
     public void statePause()
     {
         gamePause = !gamePause; 
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
+        Debug.Log("Menu Open");
     }
 
     public void stateUnpause()
@@ -96,7 +112,8 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         menuActive.SetActive(gamePause);
         inerface.SetActive(true);
-        menuActive = null;  
+        menuActive = null;
+        Debug.Log("Menu Close");
     }
 
     public void UpdateEnemyDisplay(int amount)
@@ -128,7 +145,7 @@ public class UIManager : MonoBehaviour
     }
     public void StartMenu()
     {
-        menuActive = menuMain;
+        menuActive = menuSelect;
         statePause();   
         menuActive.SetActive(gamePause);
     }
@@ -157,7 +174,7 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
     }
 
-    IEnumerator StartingMenu()
+    public IEnumerator StartingMenu()
     {
         yield return new WaitForSeconds(0.2f);
         StartMenu();
@@ -165,13 +182,32 @@ public class UIManager : MonoBehaviour
 
     public void SetMenu(GameObject menu)
     {
-        menuActive.SetActive(false);
-        menuActive = menu;
-        menuActive.SetActive(gamePause);
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+        }
+            menuPrev = menuActive;
+            menuActive = menu;
+            statePause();
+            menuActive.SetActive(gamePause);
+    }
+
+    public void SetPrevMenu()
+    {
+        SetMenu(menuPrev);
+    }
+
+    public void MenuOff() 
+    {
+        if(menuActive != null)
+        {
+            stateUnpause();
+        }
     }
 
     public void AbilityMenuOn()
     {
+        abilityMenuOpen = true;
         menuActive = itemMenu;
         menuActive.SetActive(true);
         Cursor.visible = true;
@@ -180,9 +216,21 @@ public class UIManager : MonoBehaviour
 
     public void AbilityMenuOff() 
     {
+        abilityMenuOpen = false;
         menuActive.SetActive(false);
         menuActive = null;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void ShowAbilityInventory()
+    {
+        if(menuActive != menuInventory && !gamePause)
+        { 
+            SetMenu(menuInventory);
+        }
+        else if(menuActive == menuInventory)
+        {
+            stateUnpause();
+        }
     }
 }

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class Clock : MonoBehaviour
 {
-    Timer timeInstance;
+    public static Clock timeInstance;
     [SerializeField] int startingTime;
     [SerializeField] public TMP_Text minText;
     [SerializeField] public TMP_Text secText;
@@ -14,13 +14,13 @@ public class Timer : MonoBehaviour
     public float remainingTime;
     float secRemaining;
     float minRemaining;
-    bool timerRunning;
+    public bool timerRunning;
     // Start is called before the first frame update
     void Start()
     {
         timeInstance = this;
         remainingTime = startingTime;
-        StartTimer();
+        UpdateTimer();
     }
 
     // Update is called once per frame
