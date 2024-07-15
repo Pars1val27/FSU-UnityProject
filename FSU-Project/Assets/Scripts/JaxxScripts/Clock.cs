@@ -6,7 +6,7 @@ using TMPro;
 
 public class Clock : MonoBehaviour
 {
-    Clock timeInstance;
+    static public Clock timeInstance;
     [SerializeField] int startingTime;
     [SerializeField] public TMP_Text minText;
     [SerializeField] public TMP_Text secText;
@@ -20,7 +20,6 @@ public class Clock : MonoBehaviour
     {
         timeInstance = this;
         remainingTime = startingTime;
-        StartTimer();
     }
 
     // Update is called once per frame

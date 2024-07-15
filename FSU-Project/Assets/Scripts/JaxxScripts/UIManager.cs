@@ -189,7 +189,7 @@ public class UIManager : MonoBehaviour
             menuPrev = menuActive;
             menuActive = menu;
             statePause();
-            menuActive.SetActive(gamePause);
+            menuActive.SetActive(true);
     }
 
     public void SetPrevMenu()
@@ -233,4 +233,6 @@ public class UIManager : MonoBehaviour
             stateUnpause();
         }
     }
+
+    
 }
