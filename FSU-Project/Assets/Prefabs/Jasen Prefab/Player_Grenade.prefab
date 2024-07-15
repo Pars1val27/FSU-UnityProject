@@ -147,4 +147,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionEffect: {fileID: 5577594427048162303, guid: 0ca8a684824a1034da8811d7b4551333, type: 3}
-  explosionSound: {fileID: 8300000, guid: 489baf122766da1469548d0bb14e4c70, type: 3}
+  explosionSound:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  explosionSpeedVol: 1
+  abilityHandler: {fileID: 0}
