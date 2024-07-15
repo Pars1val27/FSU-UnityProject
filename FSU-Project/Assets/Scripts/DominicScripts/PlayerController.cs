@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AbilitySystem;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage
@@ -8,24 +9,50 @@ public class PlayerController : MonoBehaviour, IDamage
     // this shouldn't change any of the prestablished funcionality of the code only changing the veriable location
 
     public static PlayerController playerInstance;
+    
     public CharacterController controller;
-    [SerializeField] public PlayerClass playerClass;
-    [SerializeField] AudioSource aud;
-    //[SerializeField] GameObject muzzleFlash;
-    [SerializeField] Transform weaponPos;
-    [SerializeField] Transform climbPos;
-    public PlayerStatUpgrade playerStatUp;
-    //[SerializeField] public float dashCD;
+    public AbilityHandler abilityHandler;
 
-    //[SerializeField] int PlayerHP;
-    //[SerializeField] int speed;
-    //[SerializeField] int sprintMod;
-    //[SerializeField] int dashMod;
-    //[SerializeField] int jumpMax;
-    //[SerializeField] int jumpSpeed;
+
+    [SerializeField] AudioSource aud;
+    [SerializeField] Transform gunPos;
+    [SerializeField] Transform swordPos;
+    [SerializeField] Transform climbPos;
+
+    [SerializeField] GameObject deathCam;
+
+    [Header("Class Weapons")]
+    [SerializeField] public GameObject gun;
+    [SerializeField] public GameObject sword;
+
+    [Header("Attributes")]
+    [Range(1, 150)]
+    [SerializeField] public int origHP;
+    public int playerHP;
+    [Range(1, 50)]
+    [SerializeField] public int damage;
+    [Range(0, 10)]
+    [SerializeField] public float attackSpeed;
+    [Range(1f, 1000f)]
+    [SerializeField] public float shootDist;
+    [Range(1, 20)]
+    [SerializeField] public int speed;
+    [Range(1, 5)]
+    [SerializeField] public int sprintMod;
+    [Range(1, 3)]
+    [SerializeField] public int jumpMax;
+    [Range(1, 20)]
+    [SerializeField] public int jumpSpeed;
+    [Range(1, 10)]
+    [SerializeField] public float dashCD;
+    [Range(1, 10)]
+    [SerializeField] public int dashMod;
+    [Range(1,20)]
     [SerializeField] int climbSpeed;
+    [Range(1,50)]
     [SerializeField] int gravity;
 
+    [Header("Audio")]
     [SerializeField] AudioClip[] audSteps;
     [SerializeField] float audStepsVol;
     [SerializeField] AudioClip[] audJump;
@@ -36,35 +63,23 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float audJumpBoostVol;
     [SerializeField] AudioClip[] audDash;
     [SerializeField] float audDashVol;
-    //[SerializeField] AudioClip[] audGun;
-    //[SerializeField] float audGunVol;
 
+    [Header("Field of View")]
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
 
-    /*[Range(1, 10)]
-    [SerializeField] int shootDmg;
-    [Range(.1f, 10)]
-    [SerializeField] float shootRate;
-    [Range(1, 1000)]
-    [SerializeField] int shootDist;*/
-
-    //bool isShooting;
-
     int jumpCount;
-    int origSpeed;
-    //public int origHP;
-    int origGravity;
-
-    bool isClimbing;
 
     bool isPlayingSteps;
     bool isPlayingHurt;
 
     public bool isSprinting;
+    public bool isClimbing;
     public bool isDashing;
     public bool isCoolDown;
+    public bool isBlocking;
+    public bool isCrouching;
 
     float origFOV;
     public float currFOV;
@@ -75,30 +90,32 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 playerVelocity;
 
 
-    GameObject classWeaponInstance;
-    GunScript gunScript;
-    SwordScript swordScript;
+    public GameObject classWeaponInstance;
+   
+    public GunScript gunScript;
+    public SwordScript swordScript;
+
     // Start is called before the first frame update
     void Start()
     {
         playerInstance = this;
-        origSpeed = playerClass.speed;
-        origGravity = gravity;
         origFOV = FOV;
-        isDashing = false;
-        isClimbing = false;
-        EquipClassWeapon();
-        isDashing = false;
-        playerStatUp = FindObjectOfType<PlayerStatUpgrade>();
+        playerHP = origHP;
+        isCoolDown = false;
+        deathCam.SetActive(false);
+        abilityHandler = GetComponent<AbilityHandler>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdatePlayerUI();   
         Movement();
         Sprint();
+        Crouch();
         wallClimb();
-        
+        EquipClassWeapon();
+
         //handled in gun.cs
         /*if (Input.GetButtonDown("Fire1"))
         {
@@ -122,21 +139,21 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
-        controller.Move(moveDirection * playerClass.speed * Time.deltaTime);
+        controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < playerClass.jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
         {
             if (jumpCount == 0)
             {
                 jumpCount++;
-                playerVelocity.y = playerClass.jumpSpeed;
+                playerVelocity.y = jumpSpeed;
                 aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
             }
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
                 jumpCount++;
-                playerVelocity.y = (playerClass.jumpSpeed * 1.5f);
+                playerVelocity.y = (jumpSpeed * 1.5f);
                 aud.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
             }
         }
@@ -153,14 +170,31 @@ public class PlayerController : MonoBehaviour, IDamage
         if (Input.GetButtonDown("Sprint"))
         {
             isSprinting = true;
-            playerClass.speed *= playerClass.sprintMod;
-            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.5f * Time.deltaTime);
+            speed *= sprintMod;
+            Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
         else if (Input.GetButtonUp("Sprint"))
         {
-            playerClass.speed /= playerClass.sprintMod;
+            speed /= sprintMod;
             isSprinting = false;
-            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.5f * Time.deltaTime);
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+        }
+    }
+    void Crouch()
+    {
+        if (Input.GetButtonDown("Crouch"))
+        {
+            isCrouching = true;
+            speed /= 2;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(-1, -1, -1);
+
+
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            speed *= 2;
+            isCrouching = false;
+            playerInstance.transform.localScale = playerInstance.transform.localScale + new Vector3(1, 1, 1);
         }
     }
 
@@ -204,22 +238,29 @@ public class PlayerController : MonoBehaviour, IDamage
         muzzleFlash.SetActive(false);
     }*/
    
-
-
-
+    
     public void TakeDamage(int dmg)
     {
-        playerClass.playerHP -= dmg;
-        UpdatePlayerUI();
-
-        if (!isPlayingHurt)
+        if (!isBlocking)
         {
-            StartCoroutine(isHurtAud());
-        }
+            playerHP -= dmg;
+            UpdatePlayerUI();
 
-        if (playerClass.playerHP <= 0)
-        {
-            UIManager.instance.onLose();
+            if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
+            {                  
+                abilityHandler.EnableHPRecovery(1, 5f);
+            }
+
+            if (!isPlayingHurt)
+            {
+                StartCoroutine(isHurtAud());
+            }
+
+            if (playerHP <= 0)
+            {
+                deathCam.SetActive(true);
+                UIManager.instance.onLose();
+            }
         }
     }
 
@@ -237,13 +278,13 @@ public class PlayerController : MonoBehaviour, IDamage
         aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining = playerClass.dashCD;
-        playerClass.speed *= playerClass.dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.05f * Time.deltaTime);
+        UIManager.instance.DashCDRemaining =dashCD;
+        speed *= dashMod;
+        Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
 
         StartCoroutine(DashDuration());
         isCoolDown = true;
-        yield return new WaitForSeconds(playerClass.dashCD);
+        yield return new WaitForSeconds(dashCD);
         isCoolDown = false;
         isDashing = false;
     }
@@ -252,14 +293,16 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         yield return new WaitForSeconds(dashDuration);
 
-        playerClass.speed /= playerClass.dashMod;
-        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.05f * Time.deltaTime); ;          
+        speed /= dashMod;
+        Camera.main.fieldOfView = Mathf.Lerp(currFOV, FOVDashMod, 0.2f); ;          
 
     }
-
-    void UpdatePlayerUI()
+    
+    public void UpdatePlayerUI()
     {
-        UIManager.instance.playerHPBar.fillAmount = (float)playerClass.playerHP / playerClass.origHP;
+        UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
+        UIManager.instance.maxPlayerHP.text = origHP.ToString();
+        UIManager.instance.currPlayerMP.text = playerHP.ToString();
     }
 
     void wallClimb()
@@ -267,7 +310,6 @@ public class PlayerController : MonoBehaviour, IDamage
         isClimbing = false;
 
         Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
 
         RaycastHit hit;
         if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2))
@@ -280,19 +322,67 @@ public class PlayerController : MonoBehaviour, IDamage
                 playerVelocity.y = climbSpeed;
 
             }
-
-
         }
     }
+
+/*    public void getGun(GameObject gun)
+    {
+        if (UIManager.instance.classGunner == true)
+        {
+            weapons.Add(gun);
+        }
+    }
+
+    public void getSword(GameObject sword)
+    {
+        if (UIManager.instance.classMele == true)
+        {
+            weapons.Add(sword);
+        }
+    }*/
 
     void EquipClassWeapon()
     {
-        if (playerClass.classWeapon != null)
+        if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
-            classWeaponInstance = Instantiate(playerClass.classWeapon, weaponPos.position, weaponPos.rotation, weaponPos);
-            gunScript = classWeaponInstance.GetComponent<GunScript>();
-            gunScript.Gunner = playerClass;
+            origHP = 20;
+            playerHP = origHP; 
+            UpdatePlayerUI();
 
+            speed = 14;
+            attackSpeed = 0.25f;
+            classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
+            gunScript = classWeaponInstance.GetComponent<GunScript>();
+            NotifyAbilityHandler();
+        }
+
+        if (UIManager.instance.classMele == true && classWeaponInstance == null)
+        {
+            origHP = 30;
+            playerHP = origHP;
+            speed = 20;
+            attackSpeed = 1;
+            shootDist = 2;
+            classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
+            swordScript = classWeaponInstance.GetComponent<SwordScript>();
+            AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
+            NotifyAbilityHandler();
         }
     }
-} 
+    private void NotifyAbilityHandler()
+    {
+       // AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
+        if (abilityHandler != null)
+        {
+            if (gunScript != null)
+            {
+                abilityHandler.gunScript = gunScript;
+            }
+            if (swordScript != null)
+            {
+                abilityHandler.swordScript = swordScript;
+                
+            }
+        }
+    }
+}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using AbilitySystem;
 
 public class Grenade : MonoBehaviour
 {
@@ -10,11 +11,14 @@ public class Grenade : MonoBehaviour
     private float explosionForce;
     private int damage;
     [SerializeField] ParticleSystem explosionEffect;
-    [SerializeField] AudioClip explosionSound;
+    [SerializeField] AudioClip[] explosionSound;
+    [SerializeField] float explosionSoundVol;
 
-    private AudioSource audioSource;
+    private AudioSource grenadeAudio;
     bool hasExploded = false;
     float countdown;
+
+    public AbilityHandler abilityHandler;
 
     public void Initialize(float delay, float explosionRadius, float explosionForce, int damage)
     {
@@ -27,9 +31,10 @@ public class Grenade : MonoBehaviour
 
     void Start()
     {
+        grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
-        audioSource = GetComponent<AudioSource>(); // Get the AudioSource component
     }
+
     void Update()
     {
         countdown -= Time.deltaTime;
@@ -45,9 +50,9 @@ public class Grenade : MonoBehaviour
         ParticleSystem effect = Instantiate(explosionEffect, transform.position, transform.rotation);
         effect.Play();
 
-        if (audioSource != null && explosionSound != null)
+        if (grenadeAudio != null && explosionSound != null)
         {
-            audioSource.PlayOneShot(explosionSound); 
+            grenadeAudio.PlayOneShot(explosionSound[Random.Range(0, explosionSound.Length)], explosionSoundVol);
         }
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
@@ -63,13 +68,28 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
+                //ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
         Destroy(effect.gameObject, effect.main.duration);
-
         Destroy(gameObject);
     }
+
+    //void ApplyFreezeEffect(GameObject target)
+    //{
+        
+    //    if (abilityHandler.HasAbility("FreezeEffect"))
+    //    {
+    //        var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
+    //        if (FreezeAbility != null)
+    //        {
+    //            FreezeAbility.Activate(target);
+    //        }
+    //    }
+    //}
+
+    
 
     void OnDrawGizmosSelected()
     {

@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
-  spawnPos: {fileID: 1621358744589595555}
+  playerScript: {fileID: 0}
   surface: {fileID: 4747072440536508959}
 --- !u!114 &4747072440536508959
 MonoBehaviour:
