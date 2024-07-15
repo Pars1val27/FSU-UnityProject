@@ -297,34 +297,35 @@ void Start()
         }
     }
 
-    int PickDoor(maps mapLevel, GameObject[] usedWallPosRoom)
-    {
-        int doorSpot1 = 5;
-        int doorSpot2 = 5;
-        for(int wallIndex = 0; wallIndex < usedWallPosRoom.Length; wallIndex++)
-        {
-            if (usedWallPosRoom[wallIndex].GetPrefabDefinition() == mapLevel.door.GetPrefabDefinition())
-            {
-                if(doorSpot1 == 5)
-                {
-                    doorSpot1 = wallIndex;
-                }
-                else 
-                {
-                    doorSpot2 = wallIndex;
-                }
-            }
-        }
-        int chance = UnityEngine.Random.Range(0, 2);
-        if(chance == 0)
-        {
-            return doorSpot1;
-        }
-        else
-        {
-            return doorSpot2;
-        }
-    }
+    //int PickDoor(maps mapLevel, GameObject[] usedWallPosRoom)
+    //{
+    //    int doorSpot1 = 5;
+    //    int doorSpot2 = 5;
+    //    for(int wallIndex = 0; wallIndex < usedWallPosRoom.Length; wallIndex++)
+    //    {
+    //        if (usedWallPosRoom[wallIndex].GetPrefabDefinition() == mapLevel.door.GetPrefabDefinition())
+    //        {
+    //            if(doorSpot1 == 5)
+    //            {
+    //                doorSpot1 = wallIndex;
+    //            }
+    //            else 
+    //            {
+    //                doorSpot2 = wallIndex;
+    //            }
+    //        }
+    //    }
+    //    int chance = UnityEngine.Random.Range(0, 2);
+    //    if(chance == 0)
+    //    {
+    //        return doorSpot1;
+    //    }
+    //    else
+    //    {
+    //        return doorSpot2;
+    //    }
+    //}
+
     //void UpdateDoors(maps mapLevel)
     //{
     //    Debug.Log("Update Doors Called");
