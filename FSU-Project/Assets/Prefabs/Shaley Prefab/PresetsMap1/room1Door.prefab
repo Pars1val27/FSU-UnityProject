@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1c432cdda37c08e419cd648e408268ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -153,6 +153,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roomDoorWallL
       objectReference: {fileID: 0}
+    - target: {fileID: 1556166412655658828, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 094c835627124fe4bbbaa762d2240cb1, type: 2}
     - target: {fileID: 5420369656700294192, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
       propertyPath: m_LocalScale.x
       value: 70
@@ -219,6 +223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roomDoorRoof
       objectReference: {fileID: 0}
+    - target: {fileID: 1556166412655658828, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0af81feaf9430e3409caab5f0fbea87c, type: 2}
     - target: {fileID: 5420369656700294192, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
       propertyPath: m_LocalScale.x
       value: 10
@@ -289,6 +297,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: roomDoorWallR
       objectReference: {fileID: 0}
+    - target: {fileID: 1556166412655658828, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 094c835627124fe4bbbaa762d2240cb1, type: 2}
     - target: {fileID: 5420369656700294192, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
       propertyPath: m_LocalScale.x
       value: 70
