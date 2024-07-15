@@ -31,6 +31,7 @@ public class GunScript : MonoBehaviour
 
     public bool isReloading;
     public bool isGrenadeReady = true;
+    public AbilityPickup PickupUI;
 
     void Start()
     {
@@ -74,10 +75,12 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.001f,0.001f), Random.Range(-.001f, 0.001f), Random.Range(-.001f, 0.001f))), out hit, PlayerController.playerInstance.shootDist))
+        if (Physics.Raycast(Camera.main.transform.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, PlayerController.playerInstance.shootDist))
         {
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
+
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
@@ -116,14 +119,14 @@ public class GunScript : MonoBehaviour
         isReloading = true;
         Quaternion rot;
         Vector3 pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));
+        PlayerController.playerInstance.gun.transform.GetLocalPositionAndRotation(out pos, out rot);
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(300, 0, 0));
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
         UpdateAmmoCount();
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(0, 0, 0));
-        PlayerController.playerInstance.classWeaponInstance.transform.localPosition = pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.localRotation = rot;
+        PlayerController.playerInstance.gun.transform.Rotate(new Vector3(0, 0, 0));
+        PlayerController.playerInstance.gun.transform.localPosition = pos;
+        PlayerController.playerInstance.gun.transform.localRotation = rot;
         isReloading = false;
     }
     IEnumerator flashMuzzle()
