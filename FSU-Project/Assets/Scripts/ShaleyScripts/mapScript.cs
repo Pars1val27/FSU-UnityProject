@@ -15,7 +15,7 @@ public class mapScript : MonoBehaviour
     int roomCount = 0;
     //wallScript currRoom;
     //public GameObject[] roomWalls;
-    maps mapLevel;
+    public static maps mapLevel;
     Vector3 pos;
     Vector3[] usedRoomPos;
     List<GameObject[]> usedWallPosRoom;
@@ -159,7 +159,7 @@ void Start()
 
     void GenerateRoomShop(maps mapLevel)
     {
-        GameObject room = Instantiate(mapLevel.roomShop);
+        GameObject room = Instantiate(RandRoomShop(mapLevel));
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -167,7 +167,7 @@ void Start()
     }
     void GenerateRoomItem(maps mapLevel)
     {
-        GameObject room = Instantiate(mapLevel.roomItem);
+        GameObject room = Instantiate(RandRoomItem(mapLevel));
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -175,7 +175,7 @@ void Start()
     }
     void GenerateRoomSpawn(maps mapLevel)
     {
-        GameObject room = Instantiate(mapLevel.roomSpawn);
+        GameObject room = Instantiate(RandRoomSpawn(mapLevel));
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -202,6 +202,36 @@ void Start()
         }
         lastRoom = room;
         return mapLevel.roomBosses[room];
+    }
+    GameObject RandRoomShop(maps mapLevel)
+    {
+        int room = UnityEngine.Random.Range(0, mapLevel.roomShops.Length);
+        if (lastRoom == room)
+        {
+            room = UnityEngine.Random.Range(0, mapLevel.roomShops.Length);
+        }
+        lastRoom = room;
+        return mapLevel.roomShops[room];
+    }
+    GameObject RandRoomItem(maps mapLevel)
+    {
+        int room = UnityEngine.Random.Range(0, mapLevel.roomItems.Length);
+        if (lastRoom == room)
+        {
+            room = UnityEngine.Random.Range(0, mapLevel.roomItems.Length);
+        }
+        lastRoom = room;
+        return mapLevel.roomItems[room];
+    }
+    GameObject RandRoomSpawn(maps mapLevel)
+    {
+        int room = UnityEngine.Random.Range(0, mapLevel.roomSpawns.Length);
+        if (lastRoom == room)
+        {
+            room = UnityEngine.Random.Range(0, mapLevel.roomSpawns.Length);
+        }
+        lastRoom = room;
+        return mapLevel.roomSpawns[room];
     }
 
     int RandDir()

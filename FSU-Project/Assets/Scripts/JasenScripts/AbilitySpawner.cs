@@ -85,7 +85,7 @@ namespace AbilitySystem
         }
 
 
-        private void SpawnAbilities(Transform[] points,  bool isStore)
+        private void SpawnAbilities(Transform[] points, bool isStore)
         {
             foreach (Transform spawnPoint in points)
             {
@@ -98,7 +98,7 @@ namespace AbilitySystem
                         GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation);
                         AbilityPickup pickupScript = pickup.AddComponent<AbilityPickup>();
                         pickupScript.ability = ability;
-                        pickupScript.isStorePickup = isStore;
+                        pickupScript.isItemPickup = !isStore;  // Set the pickup type
                         pickupScript.IsDebugAbility = IsDebugAbility;
 
                         SphereCollider pickupCollider = pickup.AddComponent<SphereCollider>();
