@@ -6081,7 +6081,8 @@ MonoBehaviour:
   menuPrev: {fileID: 0}
   menuMain: {fileID: 7860748002462606412}
   menuPause: {fileID: 852110087072390347}
-  menuLose: {fileID: 7984742330462239972}
+  menuTimeLose: {fileID: 0}
+  menuHPLose: {fileID: 0}
   menuSelect: {fileID: 3695644787894293498}
   menuBossWin: {fileID: 469884950113561109}
   inerface: {fileID: 658448772307220397}
@@ -6986,7 +6987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7744611785786343415
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18486,9 +18487,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  floor1Bosses: []
+  floor1Bosses:
+  - {fileID: 1651909575848334336, guid: 0aaf9900b42b0134eaf66b26e8bae298, type: 3}
   floor2Bosses: []
-  floor1Enemies: []
+  floor1Enemies:
+  - {fileID: 5764395668723536644, guid: 2f46914c2447c0d44be195e652279dad, type: 3}
+  - {fileID: 1672167307563670904, guid: cece0b75e677e8349895c490a534a698, type: 3}
+  - {fileID: 1788414880361438125, guid: c56ebb650d07d5c468204c8c29ee6686, type: 3}
+  - {fileID: 8028279669157993157, guid: 6c87df22928a7c445bb9e83ea57a938f, type: 3}
+  - {fileID: 9220460581011350205, guid: 856d97d351d45bd49b13f71c437e4478, type: 3}
   floor2Enemies: []
   floor1EnemiesHard: []
   floor2EnemiesHard: []
