@@ -100,8 +100,9 @@ public class PlayerController : MonoBehaviour, IDamage
         playerInstance = this;
         origFOV = FOV;
         playerHP = origHP;
-        isCoolDown = false; 
+        isCoolDown = false;
         deathCam.SetActive(false);
+        abilityHandler = GetComponent<AbilityHandler>();
     }
 
     // Update is called once per frame
@@ -346,7 +347,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     private void NotifyAbilityHandler()
     {
-        AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
+       // AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
         if (abilityHandler != null)
         {
             if (gunScript != null)

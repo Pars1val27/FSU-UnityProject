@@ -12,7 +12,6 @@ namespace AbilitySystem
         public AbilitiesUI abilitiesUI;
 
         public bool isItemPickup;
-        public bool isStorePickup;
         public bool IsDebugAbility = false;
 
         void Start()
@@ -45,16 +44,21 @@ namespace AbilitySystem
         private void ShowPickupUI(GameObject player)
         {
             
-                abilitiesUI.ShowAbilityItem(ability, isItemPickup);
-            
+            abilitiesUI.currentPickup = this;
+            abilitiesUI.ShowAbilityItem(ability, isItemPickup);
+
+           
+
         }
 
         private void HidePickupUI()
         {
             UIManager.instance.AbilityMenuOff();
+            
+            abilitiesUI.currentPickup = null;
         }
 
-        void ConfirmPickup(GameObject player)
+        public void ConfirmPickup(GameObject player)
         {
             var abilityHandler = player.GetComponent<AbilityHandler>();
             if (abilityHandler != null && ability != null)
@@ -70,7 +74,6 @@ namespace AbilitySystem
                             AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
                             Debug.Log("Ability " + ability.abilityName + " activated.");
                             Destroy(gameObject);
-                            //Debug.Log("Ability pickup destroyed.");
                         }
                         else
                         {
@@ -83,7 +86,6 @@ namespace AbilitySystem
                         AbilityManager.Instance.ActivateAbility(ability.abilityName, player);
                         Debug.Log("Ability " + ability.abilityName + " activated.");
                         Destroy(gameObject);
-                        //Debug.Log("Ability pickup destroyed.");
                     }
                 }
                 else
@@ -93,6 +95,7 @@ namespace AbilitySystem
                 }
             }
         }
+
 
         //make time remaining public and change edit time to a float
 
