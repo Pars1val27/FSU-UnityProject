@@ -14,7 +14,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] AudioSource gunAudio;
 
-    [SerializeField] ParticleSystem hitEffect;
+    [SerializeField] GameObject hitEffect;
 
     public int currAmmo;
     public int maxAmmo;
@@ -74,7 +74,7 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.001f,0.001f), Random.Range(-.001f, 0.001f), Random.Range(-.001f, 0.001f))), out hit, PlayerController.playerInstance.shootDist))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
@@ -85,7 +85,7 @@ public class GunScript : MonoBehaviour
             }
             else
             {
-                //Instantiate(hitEffect, hit.point, Quaternion.identity);
+                Destroy(Instantiate(hitEffect, hit.point, Quaternion.identity),.25f);
             }
         }
         yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
