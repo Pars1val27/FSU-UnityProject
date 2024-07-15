@@ -51,6 +51,9 @@ public class UIManager : MonoBehaviour
     public bool classGunner;
     public bool abilityMenuOpen;
 
+    [Header("----Values----")]
+    [SerializeField] float lowHealthPercentage;
+
     int enemyCount;
     // Start is called before the first frame update
     void Awake()
@@ -84,7 +87,7 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * .1) 
+        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * lowHealthPercentage) 
         {
             SetMenu(lowHealthIndi);
         }
