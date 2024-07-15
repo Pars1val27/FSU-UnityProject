@@ -122,12 +122,7 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
         
-        if(enemyCount <= 0)
-        {
-            onWin();
-            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-            //PlayerController.playerInstance.playerStatUp.GenerateRandomUpgrades();
-        }
+        
 
     }
 

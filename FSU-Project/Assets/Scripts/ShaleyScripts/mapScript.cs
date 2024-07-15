@@ -40,6 +40,7 @@ void Start()
         {
             if (pos == usedRoomPos[posIndex])
             {
+                Debug.Log("find new pos" + pos);
                 float moveDist = GetRoomWidth(mapLevel) * 2;
                 int dir = RandDir();
                 Vector3 newPos = pos;
@@ -131,7 +132,7 @@ void Start()
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
         GameObject wall = Instantiate(mapLevel.wall);
-        Debug.Log("Wall Object: " + wall);
+      
         float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
         wall.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -141,6 +142,7 @@ void Start()
 
     void GenerateRoom(maps mapLevel)
     {
+        Debug.Log("spawn room" + pos);
         GameObject room = Instantiate(RandRoom(mapLevel));
         room.transform.localPosition = pos;
         int dir = RandDir();

@@ -470,11 +470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37e54cdb9a7f5704693f2ca90d2c64d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPos:
-  - {fileID: 7435372934009321934}
-  - {fileID: 3496411497875908939}
-  - {fileID: 3322565105492294863}
-  - {fileID: 8690862957554499385}
+  spawnPoss:
+  - {fileID: 5826609130257818740}
+  - {fileID: 7973851869273081599}
+  - {fileID: 2851184030962697638}
+  - {fileID: 8775025610635339007}
   spawnPosHard: []
   spawnPosStationary: []
 --- !u!1 &3322565105492294863
