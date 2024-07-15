@@ -10,7 +10,7 @@ public class PresetArena1 : MonoBehaviour
 {
     [SerializeField] GameObject spawnPos;
 
-    private void Start()
+    /*private void Start()
     {
         StartArenaEnemy();
     }
@@ -40,5 +40,5 @@ public class PresetArena1 : MonoBehaviour
         {
             SpawnEnemy();
         }
-    }
+    }*/
 }

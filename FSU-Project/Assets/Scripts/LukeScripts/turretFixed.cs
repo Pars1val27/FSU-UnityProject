@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class turretFixed : MonoBehaviour
+public class turretFixed : MonoBehaviour, IDamage
 {
     //Luke
 

@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour, IDamage
     Vector3 playerVelocity;
 
 
-    GameObject classWeaponInstance;
+    public GameObject classWeaponInstance;
    
     public GunScript gunScript;
     public SwordScript swordScript;
