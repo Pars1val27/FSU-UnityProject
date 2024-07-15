@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 4233927127937313849}
   - component: {fileID: 6535399609784586684}
   - component: {fileID: 1975331487955884277}
+  - component: {fileID: 7516892404002648105}
+  - component: {fileID: 1085908491518851489}
+  - component: {fileID: -8353340140331726230}
   m_Layer: 0
   m_Name: room1Preset 1
   m_TagString: Untagged
@@ -115,6 +118,61 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7516892404002648105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108702657213628595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e54cdb9a7f5704693f2ca90d2c64d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoss: []
+  spawnPosHard: []
+  spawnPosStationary: []
+--- !u!65 &1085908491518851489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108702657213628595}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 1, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-8353340140331726230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3108702657213628595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e54cdb9a7f5704693f2ca90d2c64d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoss:
+  - {fileID: 5826609130257818740}
+  - {fileID: 7973851869273081599}
+  - {fileID: 2851184030962697638}
+  - {fileID: 8775025610635339007}
+  spawnPosHard: []
+  spawnPosStationary: []
 --- !u!1 &3322565105492294863
 GameObject:
   m_ObjectHideFlags: 0
