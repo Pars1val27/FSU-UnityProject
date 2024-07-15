@@ -101,13 +101,13 @@ namespace AbilitySystem
 
         private bool HasEnoughTime(GameObject player)
         {
-            var timer = player.GetComponent<Timer>();
+            var timer = player.GetComponent<Clock>();
             return timer != null && timer.remainingTime >= ability.abilityCost; 
         }
 
         private void RemoveTime(GameObject player)
         {
-            var timer = player.GetComponent<Timer>();
+            var timer = player.GetComponent<Clock>();
             if (timer != null)
             {
                 //timer.EditTime(-ability.abilityCost);

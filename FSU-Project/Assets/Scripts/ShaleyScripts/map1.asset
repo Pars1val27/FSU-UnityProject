@@ -12,13 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf272299afcad424dbff5f0a4ec604c9, type: 3}
   m_Name: map1
   m_EditorClassIdentifier: 
-  roomSpawn: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
-  roomShop: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
-  roomItem: {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  roomSpawns:
+  - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  roomShops:
+  - {fileID: 9197706017526019011, guid: 2bb52ffa56cace84697ad9ba4f0dd6f2, type: 3}
+  roomItems:
+  - {fileID: 7477869764841173441, guid: a894001310e0f554489570a15d9bad71, type: 3}
   rooms:
-  - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  - {fileID: 3931855534450948029, guid: 111f8b800e00135448accde777097a81, type: 3}
   roomBosses:
-  - {fileID: 3108702657213628595, guid: 85d901d08ea70a24ca0d510c21e59714, type: 3}
+  - {fileID: 5698373370199119146, guid: 249c9e15ea748e847b13e58a6150e874, type: 3}
   maxRooms: 10
+  level: 1
   wall: {fileID: 667212295717866849, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
   door: {fileID: 4946934125015250609, guid: d3f433571d552d04089131004a93cfb4, type: 3}

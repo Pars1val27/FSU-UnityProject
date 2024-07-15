@@ -13,19 +13,29 @@ MonoBehaviour:
   m_Name: MeleeClass
   m_EditorClassIdentifier: 
   classWeapon: {fileID: 0}
+  origHP: 1
+  playerHP: 1
   speed: 1
   sprintMod: 1
+  dashCD: 1
   dashMod: 1
   jumpMax: 1
   jumpSpeed: 1
-  gravity: 1
-  playerHP: 1
   damage: 1
   attackSpeed: 1
+  showGunnerAttributes: 0
   maxAmmo: 1
+  currAmmo: 0
   shootRate: 0.1
+  shootDist: 0
   reloadTime: 0.5
   delay: 0
+  grenadeThrowForce: 0
   explosionRadius: 5
   explosionForce: 50
   explosionDamage: 5
+  grenadeRechargeRate: 5
+  showMeleeAttributes: 0
+  meleeBlock: 0
+  meleeAttackRate: 0
+  meleeRange: 0
