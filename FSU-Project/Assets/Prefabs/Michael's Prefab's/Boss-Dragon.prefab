@@ -429,7 +429,8 @@ MonoBehaviour:
   faceTargetSpeed: 0.3
   anim: {fileID: 79752198690169732}
   animTranSpeed: 30
-  model: []
+  model:
+  - {fileID: 5886925213860121088}
   flyIntervalMin: 5
   flyIntervalMax: 10
   FireIntervalMin: 5
