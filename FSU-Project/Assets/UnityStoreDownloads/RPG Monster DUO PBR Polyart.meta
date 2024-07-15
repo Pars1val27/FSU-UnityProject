@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:FSU-Project/Assets/Prefabs/Luke Prefab/BMinion.prefab.meta
+guid: 8ead80084aaf9414eb281cdf9057b9c9
+PrefabImporter:
+========
 guid: ec155f35036d4eb4a4d6e96b1c379934
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> 3ae0607f46be87da4665a23a38ff35efe759e8ce:FSU-Project/Assets/UnityStoreDownloads/RPG Monster DUO PBR Polyart.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
