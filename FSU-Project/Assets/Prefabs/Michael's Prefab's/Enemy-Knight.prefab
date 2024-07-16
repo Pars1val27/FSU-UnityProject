@@ -213,6 +213,8 @@ MonoBehaviour:
   - {fileID: 1788414880347838175}
   anim: {fileID: 1788414880351922207}
   animTranSpeed: 90
+  deathEffect: {fileID: 4527798502645971034, guid: 247fca0d4e0c37047b51ab649f742af7, type: 3}
+  SpawnEffect: {fileID: 4527798502645971034, guid: c83abdc03d03dbc4286476edeedf957d, type: 3}
   attackPos: {fileID: 5978825643508752807}
   attack: {fileID: 1220392383094623791, guid: a15f68341d847e04c8a1269d6e420593, type: 3}
   attackRate: 1
