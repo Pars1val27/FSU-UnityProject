@@ -54,7 +54,7 @@ public class UIManager : MonoBehaviour
     [Header("----Values----")]
     [SerializeField] float lowHealthPercentage;
 
-    int enemyCount;
+    public int enemyCount;
     // Start is called before the first frame update
     void Awake()
     {

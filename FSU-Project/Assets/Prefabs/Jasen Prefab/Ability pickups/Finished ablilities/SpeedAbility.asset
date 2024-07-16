@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpeedAbility
   m_EditorClassIdentifier: 
   abilityName: SpeedIncrease
-  ablitiyDisctriptions: 
-  abilityCost: 0
+  ablitiyDisctriptions: increases player speed
+  abilityCost: 15
   uiIcon: {fileID: 21300000, guid: 7f522e5c71cc833449698c145069233f, type: 3}
   modelPrefab: {fileID: 3953768525008260369, guid: 4079575f32ab8b14490dd456964cfd79, type: 3}
   speedIncreaseAmount: 5

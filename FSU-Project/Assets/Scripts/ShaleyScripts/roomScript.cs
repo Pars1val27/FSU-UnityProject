@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class roomScript : MonoBehaviour
@@ -8,7 +9,12 @@ public class roomScript : MonoBehaviour
     [SerializeField] Transform[] spawnPoss;
     [SerializeField] Transform[] spawnPosHard;
     [SerializeField] Transform[] spawnPosStationary;
+    [SerializeField] GameObject doors;
+    [SerializeField] GameObject doorColliders;
+    [SerializeField] float doorMoveDist;
+    [SerializeField] float doorMoveSpeed;
     bool collisionOccured;
+    bool doorsReopened;
     //private void Start()
     //{
     //    spawnPosAll.Add(spawnPos);
@@ -39,9 +45,22 @@ public class roomScript : MonoBehaviour
             {
                 RandEnemyStationary(spawnPoss[posIndex]);
             }
+            doorColliders.SetActive(true);
+            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(doorMoveDist, -doorMoveDist, doorMoveSpeed * Time.deltaTime), 0);
             collisionOccured = true;
         }
         Debug.Log("trigger finished");
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //test to make sure dont need coroutine
+        if (doorsReopened == false && other.CompareTag("Player") && UIManager.instance.enemyCount <= 0)
+        {
+            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(-doorMoveDist, doorMoveDist, doorMoveSpeed*Time.deltaTime), 0);
+            doorColliders.SetActive(false);
+            doorsReopened = true;
+        }
     }
 
     void RandEnemy(Transform spawnPos)
