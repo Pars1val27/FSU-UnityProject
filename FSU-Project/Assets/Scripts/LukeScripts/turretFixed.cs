@@ -15,14 +15,15 @@ public class turretFixed : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer[] model;
+    [SerializeField] Renderer model;
+    [SerializeField] GameObject swivel;
     
 
     [Header("----- Attack -----")]
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject projectile;
     [SerializeField] float shootRate;
-    [SerializeField] float rotateAngle;
+    [SerializeField] float rotateSpeed;
     bool isshooting;
 
     void Start()
@@ -32,7 +33,7 @@ public class turretFixed : MonoBehaviour, IDamage
 
     private void Update()
     {
-        transform.Rotate(transform.position, rotateAngle * Time.deltaTime);
+        swivel.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
         if (!isshooting)
         {
             StartCoroutine(shoot());
@@ -43,7 +44,7 @@ public class turretFixed : MonoBehaviour, IDamage
     {
         isshooting = true;
         yield return new WaitForSeconds(shootRate);
-        Instantiate(projectile, shootPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        Instantiate(projectile, shootPos.position, new Quaternion(swivel.transform.rotation.x, swivel.transform.rotation.y, swivel.transform.rotation.z, swivel.transform.rotation.w));
         isshooting = false;
     }
 
@@ -61,18 +62,9 @@ public class turretFixed : MonoBehaviour, IDamage
 
     IEnumerator flashDamage()
     {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
+        model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
+        model.material.color = Color.white;
     }
 
     public void Death()
