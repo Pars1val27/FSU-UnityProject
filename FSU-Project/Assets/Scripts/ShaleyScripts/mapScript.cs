@@ -28,7 +28,7 @@ void Start()
         usedWallPosRoom = new List<GameObject[]>();
         usedWallPos = new List<GameObject>();
         GameObject player = GameObject.FindWithTag("Player");
-        pos = new Vector3(player.transform.position.x, 0, player.transform.position.y);
+        pos = new Vector3(player.transform.position.x, player.transform.position.y - 3, player.transform.position.z);
         GenerateMap(mapLevel);
         gameManager.instance.surface.BuildNavMesh();
         UpdateDoors(mapLevel);

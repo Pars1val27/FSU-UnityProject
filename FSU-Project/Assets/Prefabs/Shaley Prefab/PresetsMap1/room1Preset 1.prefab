@@ -162,7 +162,7 @@ MonoBehaviour:
   doors: {fileID: 3696712303466288504}
   doorColliders: {fileID: 6100175559577838077}
   doorMoveDist: 1.6
-  doorMoveSpeed: 1
+  doorMoveSpeed: 0.01
 --- !u!1 &3322565105492294863
 GameObject:
   m_ObjectHideFlags: 0

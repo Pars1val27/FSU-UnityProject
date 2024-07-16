@@ -46,18 +46,26 @@ public class roomScript : MonoBehaviour
                 RandEnemyStationary(spawnPoss[posIndex]);
             }
             doorColliders.SetActive(true);
-            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(doorMoveDist, -doorMoveDist, doorMoveSpeed * Time.deltaTime), 0);
+            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(-doorMoveDist, doorMoveDist, doorMoveSpeed * Time.deltaTime), 0);
             collisionOccured = true;
         }
         Debug.Log("trigger finished");
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay (Collider other)
     {
-        //test to make sure dont need coroutine
-        if (doorsReopened == false && other.CompareTag("Player") && UIManager.instance.enemyCount <= 0)
+        if (doorsReopened == false && other.CompareTag("Player"))
         {
-            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(-doorMoveDist, doorMoveDist, doorMoveSpeed*Time.deltaTime), 0);
+            StartCoroutine(Wait());
+        }
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(0.1f);
+        if (UIManager.instance.enemyCount <= 0)
+        {
+            doors.transform.localPosition += new Vector3(0, Mathf.Lerp(doorMoveDist, -doorMoveDist, doorMoveSpeed * Time.deltaTime), 0);
             doorColliders.SetActive(false);
             doorsReopened = true;
         }
