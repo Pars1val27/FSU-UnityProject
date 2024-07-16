@@ -35,7 +35,7 @@ public class AbilitiesUI : MonoBehaviour
         {
             Debug.Log("Input accepted");
             UIManager.instance.ShowAbilityInventory();
-            Debug.Log("Menu Open");
+            Debug.Log("Ability Menu Open");
         }
     }
 
