@@ -67,6 +67,10 @@ public class Clock : MonoBehaviour
         secRemaining = ((int)remainingTime % 60);
         minText.text = minRemaining.ToString("00");
         secText.text = secRemaining.ToString("00");
-       
+    }
+
+    public float GetRemainingTime()
+    {
+        return remainingTime;
     }
 }

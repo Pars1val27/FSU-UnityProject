@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        Debug.Log("Menu Open");
+        Debug.Log("Game State Paused");
     }
 
     public void stateUnpause()
@@ -133,10 +133,12 @@ public class UIManager : MonoBehaviour
         Debug.Log("Time lose Set");
     }
 
-    public void onLose()
+    public IEnumerator onLose()
     {
-        menuActive = menuHPLose;
+        yield return new WaitForSeconds(1);
         statePause();
+        menuActive = menuHPLose;
+        menuActive.SetActive(true);
         Debug.Log("HP lose Set");
     }
 
