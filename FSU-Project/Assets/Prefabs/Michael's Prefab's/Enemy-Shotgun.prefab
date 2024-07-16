@@ -803,6 +803,7 @@ MonoBehaviour:
   - {fileID: 8028279669154879417}
   anim: {fileID: 8028279669150607737}
   animTranSpeed: 90
+  deathEffect: {fileID: 4527798502645971034, guid: 247fca0d4e0c37047b51ab649f742af7, type: 3}
   shootPos:
   - {fileID: 2354036411734104405}
   - {fileID: 3070929378011276878}

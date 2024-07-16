@@ -105,7 +105,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        Debug.Log("Menu Open");
+        Debug.Log("Game State Paused");
     }
 
     public void stateUnpause()
@@ -125,18 +125,21 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
         
-        
-
     }
 
     public void onTimeLose()
     {
         SetMenu(menuTimeLose);
+        Debug.Log("Time lose Set");
     }
 
-    public void onLose()
+    public IEnumerator onLose()
     {
-        SetMenu(menuHPLose);
+        yield return new WaitForSeconds(1);
+        statePause();
+        menuActive = menuHPLose;
+        menuActive.SetActive(true);
+        Debug.Log("HP lose Set");
     }
 
     public void onWin()

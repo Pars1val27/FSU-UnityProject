@@ -303,6 +303,11 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
         UIManager.instance.maxPlayerHP.text = origHP.ToString();
         UIManager.instance.currPlayerMP.text = playerHP.ToString();
+        if(playerHP <= 0)
+        {
+            StartCoroutine(UIManager.instance.onLose());
+            Debug.Log("Lose Menu Called");
+        }
     }
 
     void wallClimb()
