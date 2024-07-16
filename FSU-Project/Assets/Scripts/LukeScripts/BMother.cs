@@ -15,11 +15,11 @@ public class BMother : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer[] model;
+    [SerializeField] Renderer model;
 
 
     [Header("----- Attack -----")]
-    [SerializeField] Transform spawnPos;
+    [SerializeField] Transform[] spawnPos;
     [SerializeField] GameObject spawn;
     [SerializeField] float spawnRate;
 
@@ -83,7 +83,8 @@ public class BMother : MonoBehaviour, IDamage
     {
         isshooting = true;
         yield return new WaitForSeconds(spawnRate);
-        Instantiate(spawn, spawnPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        for(int i = 0; i < spawnPos.Length; i++)
+            Instantiate(spawn, spawnPos[i].position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
         isshooting = false;
     }
 
@@ -101,18 +102,9 @@ public class BMother : MonoBehaviour, IDamage
 
     IEnumerator flashDamage()
     {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
+        model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
+        model.material.color = Color.white;
     }
 
     public void Death()

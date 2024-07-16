@@ -12,7 +12,7 @@ public class turretFixedTrap : MonoBehaviour
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer[] model;
+    [SerializeField] GameObject swivel;
 
 
     [Header("----- Attack -----")]
@@ -24,7 +24,7 @@ public class turretFixedTrap : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(transform.position, rotateAngle * Time.deltaTime);
+        swivel.transform.Rotate(transform.position, rotateAngle * Time.deltaTime);
         if (!isshooting)
         {
             StartCoroutine(shoot());

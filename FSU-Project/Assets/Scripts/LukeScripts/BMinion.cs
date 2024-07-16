@@ -12,7 +12,6 @@ public class BMinion : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer[] model;
 
 
     [Header("----- Attack -----")]
@@ -61,8 +60,6 @@ public class BMinion : MonoBehaviour, IDamage
 
     public void TakeDamage(int amount)
     {
-        Debug.Log("BMinion got hit");
-        StartCoroutine(flashDamage());
         Death();
     }
 
@@ -70,21 +67,5 @@ public class BMinion : MonoBehaviour, IDamage
     {
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
-    }
-
-    IEnumerator flashDamage()
-    {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
     }
 }
