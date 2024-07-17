@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2715464760919658580}
   - component: {fileID: 3761172355698206283}
   - component: {fileID: 1492563096712884332}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: PlayerGun
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3404024799275723205}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: grenadeSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,6 +255,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5551940750831839728}
     m_Modifications:
+    - target: {fileID: 224850618694623197, guid: 977b2d648c8eb8342aa516156a00cdc5, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 5484697365175432180, guid: 977b2d648c8eb8342aa516156a00cdc5, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.33333334
@@ -332,6 +336,10 @@ PrefabInstance:
     - target: {fileID: 3298076334517568183, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
       propertyPath: m_Name
       value: muzzleFlash
+      objectReference: {fileID: 0}
+    - target: {fileID: 3298076334517568183, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3298076334517568183, guid: cbd05cb2b7b92d341acc45f5ad713880, type: 3}
       propertyPath: m_IsActive

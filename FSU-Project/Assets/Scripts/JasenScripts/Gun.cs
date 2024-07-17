@@ -55,6 +55,11 @@ public class GunScript : MonoBehaviour
             ThrowGrenade();
         }
 
+        if (Input.GetButtonDown("Reload") && !isReloading && currAmmo != maxAmmo)
+        {
+            StartCoroutine(Reload());
+        }
+
         if (currAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
