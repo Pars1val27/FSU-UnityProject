@@ -6,7 +6,7 @@ namespace AbilitySystem
 {
     public class AbilityHandler : MonoBehaviour
     {
-        
+        static public AbilityHandler handlerInstance;
         public PlayerController playerController;
         public GunScript gunScript;
         public SwordScript swordScript;
@@ -20,7 +20,8 @@ namespace AbilitySystem
 
         void Start()
         {
-            
+
+            handlerInstance = this;
             playerController = GetComponent<PlayerController>();
 
         }

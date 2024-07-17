@@ -7,10 +7,11 @@ using UnityEngine.UI;
 
 public class AbilitiesUI : MonoBehaviour
 {
-    AbilitiesUI abilitiesUI;
+    static public AbilitiesUI abilitiesUI;
     [SerializeField] Button purchaseButton;
     [SerializeField] GameObject shownPrice;
     [SerializeField] GameObject inventoryMenu;
+    [SerializeField] GameObject[] abilityIcons; 
     public Image icon;
     public TMP_Text Name;
     public TMP_Text description;
@@ -19,6 +20,8 @@ public class AbilitiesUI : MonoBehaviour
     public Image[] ownedAbil;
 
     public AbilityPickup currentPickup;
+
+    bool invActive;
 
 
     // Start is called before the first frame update
@@ -64,7 +67,15 @@ public class AbilitiesUI : MonoBehaviour
 
     public void ShowAbilityInventory()
     {
-        UIManager.instance.SetMenu(inventoryMenu);
+            int index = 0;
+            foreach (var ability in AbilityHandler.handlerInstance.abilities)
+            {
+                abilityIcons[index].SetActive(true);
+                Debug.Log("Icons aactivated");
+                ownedAbil[index].sprite = ability.uiIcon;
+                Debug.Log("Icon Set");
+                ++index;
+            }
     }
     public void OnButtonPressed()
     {

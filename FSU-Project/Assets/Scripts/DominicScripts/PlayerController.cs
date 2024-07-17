@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             playerHP -= dmg;
             UpdatePlayerUI();
-
+            StartCoroutine(UIManager.instance.FlashDamage());
             if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
             {                  
                 abilityHandler.EnableHPRecovery(1, 5f);
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if (playerHP <= 0)
             {
                 deathCam.SetActive(true);
-                UIManager.instance.onLose();
+                StartCoroutine(UIManager.instance.onLose());
             }
         }
     }
@@ -305,7 +305,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.currPlayerMP.text = playerHP.ToString();
         if(playerHP <= 0)
         {
-            StartCoroutine(UIManager.instance.onLose());
+            UIManager.instance.onLose();
             Debug.Log("Lose Menu Called");
         }
     }
