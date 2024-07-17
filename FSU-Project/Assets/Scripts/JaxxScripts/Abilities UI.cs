@@ -53,7 +53,7 @@ public class AbilitiesUI : MonoBehaviour
         shownPrice.SetActive(true);
         if (isItemRoom)
         {
-            purchaseButton.gameObject.SetActive(true);
+            //purchaseButton.gameObject.SetActive(true);
             purchaseButton.GetComponentInChildren<TMP_Text>().text = "PickUP";
             shownPrice.SetActive(false);
         }
@@ -71,7 +71,7 @@ public class AbilitiesUI : MonoBehaviour
         if (currentPickup != null)
         {
             currentPickup.ConfirmPickup(GameObject.FindGameObjectWithTag("Player"));
-            UIManager.instance.AbilityMenuOff();
+           // UIManager.instance.AbilityMenuOff();
         }
     }
 }

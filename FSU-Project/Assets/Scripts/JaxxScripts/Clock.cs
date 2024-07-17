@@ -55,10 +55,11 @@ public class Clock : MonoBehaviour
         Debug.Log("Timer Stop");
     }
 
-    public void EditTIme(int seconds)
+    public void EditTIme(float seconds)
     {
         remainingTime += seconds;
         Debug.Log("Time Changed");
+        UpdateTimer();
     }
 
     public void UpdateTimer()
@@ -71,6 +72,8 @@ public class Clock : MonoBehaviour
 
     public float GetRemainingTime()
     {
+        Debug.Log("GetRemainingTime called. Remaining time: " + remainingTime);
         return remainingTime;
+
     }
 }
