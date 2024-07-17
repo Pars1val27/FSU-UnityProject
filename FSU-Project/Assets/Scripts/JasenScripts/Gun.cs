@@ -13,6 +13,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] float shootSoundVol;
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] AudioSource gunAudio;
+    //[SerializeField] LineRenderer bulletTrace;
 
     [SerializeField] GameObject hitEffect;
 
@@ -85,6 +86,10 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
+            /*bulletTrace.enabled = true;
+            bulletTrace.SetPosition(0, muzzleFlash.transform.position);
+            bulletTrace.SetPosition(1, hit.point);*/
+
             anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
             anim.SetTrigger("Shoot");
 
@@ -92,7 +97,7 @@ public class GunScript : MonoBehaviour
             
             
             if (hit.transform != transform && dmg != null)
-            {
+            {   
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
                 if (hit.collider != null)
                 { 
@@ -105,6 +110,7 @@ public class GunScript : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
+        //bulletTrace.enabled = false;
         isShooting = false;
     }
 

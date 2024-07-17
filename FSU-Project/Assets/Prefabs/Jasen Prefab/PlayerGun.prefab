@@ -38,7 +38,7 @@ Transform:
   - {fileID: 3897978935273691409}
   - {fileID: 5785752127051795027}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -121, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2864118193884686145
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
   shootSoundVol: 0.2
   grenadePrefab: {fileID: 9176752609549514185, guid: a93a4dce0696fda44959f509fc56e357, type: 3}
   gunAudio: {fileID: 1492563096712884332}
+  bulletTrace: {fileID: 0}
   hitEffect: {fileID: 224850618694623197, guid: 977b2d648c8eb8342aa516156a00cdc5, type: 3}
   currAmmo: 0
   maxAmmo: 25
