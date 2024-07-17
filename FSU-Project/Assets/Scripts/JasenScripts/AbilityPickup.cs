@@ -123,7 +123,7 @@ namespace AbilitySystem
                 Debug.Log("HasEnoughTime called. Current remaining time: " + timer.GetRemainingTime());
                 return timer.GetRemainingTime() >= ability.abilityCost;
             }
-            Debug.Log("Clock component not found on UIManager.");
+            //Debug.Log("Clock component not found.");
             return false;
         }
 
@@ -131,9 +131,10 @@ namespace AbilitySystem
         {
             if (timer != null)
             {
-                Debug.Log("Removing time: " + ability.abilityCost);
+                Debug.Log("Removed time: " + ability.abilityCost);
                 timer.EditTIme(-ability.abilityCost);   
             }
+            
         }
 
 

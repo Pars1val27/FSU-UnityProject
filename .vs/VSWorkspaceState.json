@@ -7,8 +7,9 @@
     "\\FSU-Project\\Assets\\Scripts\\DominicScripts",
     "\\FSU-Project\\Assets\\Scripts\\JasenScripts",
     "\\FSU-Project\\Assets\\Scripts\\JasenScripts\\Abilities",
+    "\\FSU-Project\\Assets\\Scripts\\JasenScripts\\Abilities\\Interfaces",
     "\\FSU-Project\\Assets\\Scripts\\JaxxScripts"
   ],
-  "SelectedNode": "\\FSU-Project\\Assets\\Scripts\\JaxxScripts\\Clock.cs",
+  "SelectedNode": "\\FSU-Project\\Assets\\Scripts\\JasenScripts\\Gun.cs",
   "PreviewInSolutionExplorer": false
 }

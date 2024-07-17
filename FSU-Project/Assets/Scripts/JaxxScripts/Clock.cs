@@ -72,7 +72,7 @@ public class Clock : MonoBehaviour
 
     public float GetRemainingTime()
     {
-        Debug.Log("GetRemainingTime called. Remaining time: " + remainingTime);
+        //Debug.Log("GetRemainingTime called. Remaining time: " + remainingTime);
         return remainingTime;
 
     }

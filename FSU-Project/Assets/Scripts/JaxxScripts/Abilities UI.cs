@@ -71,7 +71,7 @@ public class AbilitiesUI : MonoBehaviour
         if (currentPickup != null)
         {
             currentPickup.ConfirmPickup(GameObject.FindGameObjectWithTag("Player"));
-           // UIManager.instance.AbilityMenuOff();
+            UIManager.instance.AbilityMenuOff();
         }
     }
 }

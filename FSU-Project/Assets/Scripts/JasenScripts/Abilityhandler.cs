@@ -14,9 +14,9 @@ namespace AbilitySystem
         public List<Ability> abilities = new List<Ability>();
         //public Ability[] abilities;
         public bool isHPRecoveryEnabled = false;
-
-         //Coroutine hpRecoveryCoroutine;
-
+        private Coroutine hpRecoveryCoroutine;
+        private int recoveryAmount;
+        private float recoveryRate;
 
         void Start()
         {
@@ -100,26 +100,44 @@ namespace AbilitySystem
             gunScript.UpdateAmmoCount();
 
         }
-        public void EnableHPRecovery(int amount, float interval)
+        public void EnableHPRecovery(int amount, float rate)
         {
-            StartCoroutine(HPRecoveryCoroutine(amount, interval));
-      
-        }
+            recoveryAmount = amount;
+            recoveryRate = rate;
 
-        private IEnumerator HPRecoveryCoroutine(int amount, float interval)
-        {
-            while (isHPRecoveryEnabled && playerController.playerHP < playerController.origHP)
+            isHPRecoveryEnabled = true;
+
+            if (hpRecoveryCoroutine == null)
             {
-                playerController.playerHP += amount;
-                if (playerController.playerHP > playerController.origHP)
-                {
-                    playerController.playerHP = playerController.origHP;
-                    isHPRecoveryEnabled = false; 
-                }
-                playerController.UpdatePlayerUI();
-                yield return new WaitForSeconds(interval);
+                hpRecoveryCoroutine = StartCoroutine(HPRecovery());
             }
         }
+
+        private IEnumerator HPRecovery()
+        {
+            while (isHPRecoveryEnabled)
+            {
+                yield return new WaitForSeconds(recoveryRate);
+                if (playerController.playerHP < playerController.origHP)
+                {
+                    playerController.playerHP += recoveryAmount;
+                    
+                    playerController.UpdatePlayerUI();
+                }
+                else
+                {
+                    isHPRecoveryEnabled = false;
+                }
+            }
+            hpRecoveryCoroutine = null;
+        }
+
+        public void DisableHPRecovery()
+        {
+            isHPRecoveryEnabled = false;
+        }
+
+       
 
 
         public void AddAbility(Ability ability)

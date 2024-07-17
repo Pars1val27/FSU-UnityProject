@@ -218,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: jumpMax
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: playerHP
@@ -226,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: jumpSpeed
-      value: 1
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8907265532103128991, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
       propertyPath: shootDist

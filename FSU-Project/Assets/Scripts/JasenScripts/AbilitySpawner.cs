@@ -38,15 +38,6 @@ namespace AbilitySystem
                 Debug.LogError("Collider is missing on AbilitySpawner.");
             }
 
-            if (!spawnOnStart)
-            {
-                gameObject.SetActive(false);
-            }
-            else if (IsDebugAbility)
-            {
-                Debug.Log("Debug Mode: Spawner active on start.");
-            }
-
             if (spawnOnStart)
             {
                 SpawnPickups();
