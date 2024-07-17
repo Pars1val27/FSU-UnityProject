@@ -7,7 +7,7 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "FireEffect", menuName = "Abilities/FireEffect")]
     public class FireEffect : Ability
     {
-        public float fireDamage;
+        public int fireDamage;
         public float duration;
 
         public override void Activate(GameObject target)
