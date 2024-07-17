@@ -16,6 +16,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] ParticleSystem deathEffect;
 
     [Header("----- Attack -----")]
     [SerializeField] Transform attackPos;
@@ -69,7 +70,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
         if (HP <= 0)
         {
 
-            anim.SetTrigger("Death");
+            Death();
         }
     }
     void faceTarget()
@@ -80,6 +81,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

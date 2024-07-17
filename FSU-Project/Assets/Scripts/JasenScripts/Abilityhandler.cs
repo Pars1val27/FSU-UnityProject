@@ -12,11 +12,11 @@ namespace AbilitySystem
         public SwordScript swordScript;
 
         public List<Ability> abilities = new List<Ability>();
-
-        //private bool isHPRecoveryEnabled = false;
-
-         //Coroutine hpRecoveryCoroutine;
-
+        //public Ability[] abilities;
+        public bool isHPRecoveryEnabled = false;
+        private Coroutine hpRecoveryCoroutine;
+        private int recoveryAmount;
+        private float recoveryRate;
 
         void Start()
         {
@@ -101,26 +101,44 @@ namespace AbilitySystem
             gunScript.UpdateAmmoCount();
 
         }
-        public void EnableHPRecovery(int amount, float interval)
+        public void EnableHPRecovery(int amount, float rate)
         {
-            //StartCoroutine(HPRecoveryCoroutine(amount, interval));
-      
+            recoveryAmount = amount;
+            recoveryRate = rate;
+
+            isHPRecoveryEnabled = true;
+
+            if (hpRecoveryCoroutine == null)
+            {
+                hpRecoveryCoroutine = StartCoroutine(HPRecovery());
+            }
         }
 
-        /*private IEnumerator HPRecoveryCoroutine(int amount, float interval)
+        private IEnumerator HPRecovery()
         {
-            while (playerController.playerHP < playerController.origHP)
+            while (isHPRecoveryEnabled)
             {
-                playerController.playerHP += amount;
-                if (playerController.playerHP > playerController.origHP)
+                yield return new WaitForSeconds(recoveryRate);
+                if (playerController.playerHP < playerController.origHP)
                 {
-                    playerController.playerHP = playerController.origHP;
+                    playerController.playerHP += recoveryAmount;
+                    
+                    playerController.UpdatePlayerUI();
                 }
-                playerController.UpdatePlayerUI();
-                yield return new WaitForSeconds(interval);
+                else
+                {
+                    isHPRecoveryEnabled = false;
+                }
             }
             hpRecoveryCoroutine = null;
-        }*/
+        }
+
+        public void DisableHPRecovery()
+        {
+            isHPRecoveryEnabled = false;
+        }
+
+       
 
 
         public void AddAbility(Ability ability)
@@ -130,7 +148,7 @@ namespace AbilitySystem
                 Debug.Log(ability + " added to Abilities");
                 abilities.Add(ability);
 
-                ability.Activate(gameObject);
+                //ability.Activate(gameObject);
             }
         }
     }

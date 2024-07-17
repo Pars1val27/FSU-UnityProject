@@ -16,6 +16,8 @@ public class SlimeEnemy : MonoBehaviour , IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] ParticleSystem SpawnEffect;
 
     [Header("----- Attack -----")]
     [SerializeField] Transform attackPos;
@@ -34,6 +36,7 @@ public class SlimeEnemy : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(SpawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
         
@@ -75,7 +78,7 @@ public class SlimeEnemy : MonoBehaviour , IDamage
         if (HP <= 0)
         {
 
-            anim.SetTrigger("Death");
+            Death();
         }
     }
     void faceTarget()
@@ -88,7 +91,9 @@ public class SlimeEnemy : MonoBehaviour , IDamage
     {
         Instantiate(splitSlime, transform.position + new Vector3(0,-4,0), transform.rotation);
         Instantiate(splitSlime, transform.position + new Vector3(0, 4, 0), transform.rotation);
-        StartCoroutine(GetDestroyed());
+        Instantiate(deathEffect, transform.position, transform.rotation);
+        Destroy(gameObject);
+        UIManager.instance.UpdateEnemyDisplay(-1);
     }
     IEnumerator flashDamage()
     {
@@ -129,10 +134,5 @@ public class SlimeEnemy : MonoBehaviour , IDamage
         isAttacking = false;
     }
     
-    IEnumerator GetDestroyed()
-    {
-        yield return new WaitForSeconds(0.2f);
-        Destroy(gameObject);
-        UIManager.instance.UpdateEnemyDisplay(-1);
-    }
+  
 }

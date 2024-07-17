@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,6 +19,8 @@ public class RangedEnemy : MonoBehaviour , IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] ParticleSystem SpawnEffect;
 
     [Header("----- Attack -----")]
     [SerializeField] Transform[] shootPos;
@@ -40,6 +43,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(SpawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
 
@@ -104,8 +108,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
         if (HP <= 0)
         {
-            anim.StopPlayback();
-            anim.SetTrigger("Death");
+            Death();
         }
     }
 
@@ -117,6 +120,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect,new Vector3(transform.position.x,transform.position.y + 3,transform.position.z),transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

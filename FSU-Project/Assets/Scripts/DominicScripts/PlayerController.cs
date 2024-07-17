@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] public float shootDist;
     [Range(1, 20)]
     [SerializeField] public int speed;
+    public int baseSpeed;
     [Range(1, 5)]
     [SerializeField] public int sprintMod;
     [Range(1, 3)]
@@ -51,6 +52,17 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int climbSpeed;
     [Range(1,50)]
     [SerializeField] int gravity;
+
+    [Header("Stamina")]
+    public float stamina;
+    [Range(50,150)]
+    [SerializeField] public float maxStamina;
+    [SerializeField] public float jumpCost;
+    public bool staminaFull;
+    [Range(0,20)]
+    [SerializeField] public float staminaDrain;
+    [Range(0, 20)]
+    [SerializeField] public float staminaRegen;
 
     [Header("Audio")]
     [SerializeField] AudioClip[] audSteps;
@@ -128,6 +140,25 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             StartCoroutine(Dash());
         }
+
+        if (isSprinting && !UIManager.instance.gamePause)
+        {
+            staminaFull = false;
+            stamina -= staminaDrain * Time.deltaTime;
+        }
+
+        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause)
+        {
+            if(stamina <= maxStamina - 0.01)
+            {
+                stamina += staminaRegen + Time.deltaTime;
+
+                if(stamina >= maxStamina)
+                {
+                    staminaFull = true;
+                }
+            }
+        }
     }
 
     void Movement()
@@ -141,10 +172,12 @@ public class PlayerController : MonoBehaviour, IDamage
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && (stamina >= (maxStamina * jumpCost / maxStamina)))
         {
             if (jumpCount == 0)
             {
+                stamina -= jumpCost;
+                staminaFull = false;
                 jumpCount++;
                 playerVelocity.y = jumpSpeed;
                 aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
@@ -152,6 +185,8 @@ public class PlayerController : MonoBehaviour, IDamage
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
+                stamina -= jumpCost * 1.5f;
+                staminaFull = false;
                 jumpCount++;
                 playerVelocity.y = (jumpSpeed * 1.5f);
                 aud.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
@@ -167,15 +202,22 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+
+        if (Input.GetButtonDown("Sprint") && stamina >= 5)
         {
             isSprinting = true;
-            speed *= sprintMod;
+            speed = speed * sprintMod;
             Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
-        else if (Input.GetButtonUp("Sprint"))
+        if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            speed /= sprintMod;
+            speed = baseSpeed;
+            isSprinting = false;
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+        }
+        if(stamina <= 0 && isSprinting)
+        {
+            speed = baseSpeed;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
         }
@@ -317,13 +359,15 @@ public class PlayerController : MonoBehaviour, IDamage
         Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
 
         RaycastHit hit;
-        if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2))
+        if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2) && stamina >= 5)
         {
             if (hit.collider.CompareTag("Climbable"))
             {
                 Debug.Log(hit.collider.name);
 
                 isClimbing = true;
+                stamina -= staminaDrain * Time.deltaTime;
+                staminaFull = false;
                 playerVelocity.y = climbSpeed;
 
             }
@@ -355,6 +399,7 @@ public class PlayerController : MonoBehaviour, IDamage
             UpdatePlayerUI();
 
             speed = 14;
+            baseSpeed = speed;
             attackSpeed = 0.25f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
@@ -366,6 +411,7 @@ public class PlayerController : MonoBehaviour, IDamage
             origHP = 30;
             playerHP = origHP;
             speed = 20;
+            baseSpeed = speed;
             attackSpeed = 1;
             shootDist = 2;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);

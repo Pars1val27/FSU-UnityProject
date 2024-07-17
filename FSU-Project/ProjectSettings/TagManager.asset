@@ -22,10 +22,10 @@ TagManager:
   - Not Climbable
   - Player
   - Wall
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player Bullet
+  - Enemy Bullet
+  - Weapons
   - 
   - 
   - 

@@ -640,6 +640,8 @@ MonoBehaviour:
   - {fileID: 6297995791095230021}
   anim: {fileID: 7371573635700173029}
   animTranSpeed: 90
+  deathEffect: {fileID: 4527798502645971034, guid: e091fc8329601cb49bb417b5c1b2cbd5, type: 3}
+  SpawnEffect: {fileID: 4527798502645971034, guid: 7319ba924b77eb04e91188d4aed7dc2b, type: 3}
   shootPos: {fileID: 3695208872553346422}
   projectile: {fileID: 122231006637389524, guid: 667ce7a3106593d439033bdaf21416bd, type: 3}
   shootAngle: 90

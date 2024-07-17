@@ -16,6 +16,8 @@ public class MeleeEnemy : MonoBehaviour , IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] ParticleSystem SpawnEffect;
 
     [Header("----- Attack -----")]
     [SerializeField] Transform attackPos;
@@ -33,6 +35,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(SpawnEffect,new Vector3(transform.position.x, transform.position.y + 5,transform.position.z),transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
@@ -68,8 +71,8 @@ public class MeleeEnemy : MonoBehaviour , IDamage
 
         if (HP <= 0)
         {
-            
-            anim.SetTrigger("Death");
+
+            Death();
         }
     }
     void faceTarget()
@@ -80,6 +83,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
