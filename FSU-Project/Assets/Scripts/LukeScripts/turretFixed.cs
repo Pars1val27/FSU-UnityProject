@@ -6,28 +6,30 @@ using UnityEngine.AI;
 public class turretFixed : MonoBehaviour, IDamage
 {
     //Luke
-
     [Header("----- Health -----")]
     [SerializeField] int HP;
 
     [Header("----- AI -----")]
-    [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer model;
+    [SerializeField] ParticleSystem spark;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
     [SerializeField] GameObject swivel;
-    
+
 
     [Header("----- Attack -----")]
     [SerializeField] Transform shootPos;
     [SerializeField] GameObject projectile;
     [SerializeField] float shootRate;
     [SerializeField] float rotateSpeed;
+
     bool isshooting;
 
     void Start()
     {
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -52,7 +54,7 @@ public class turretFixed : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        StartCoroutine(flashDamage());
+        flashDamage();
 
         if (HP <= 0)
         {
@@ -60,15 +62,14 @@ public class turretFixed : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashDamage()
+    void flashDamage()
     {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        Instantiate(spark, transform.position, transform.rotation);
     }
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

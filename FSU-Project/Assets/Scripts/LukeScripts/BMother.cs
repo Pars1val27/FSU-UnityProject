@@ -16,6 +16,8 @@ public class BMother : MonoBehaviour, IDamage
 
     [Header("----- Animation's -----")]
     [SerializeField] Renderer model;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
 
 
     [Header("----- Attack -----")]
@@ -32,10 +34,9 @@ public class BMother : MonoBehaviour, IDamage
 
     void Start()
     {
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
-        
-        
     }
     private void Update()
     {
@@ -109,6 +110,7 @@ public class BMother : MonoBehaviour, IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

@@ -16,6 +16,10 @@ public class turretDynamic : MonoBehaviour, IDamage
 
     [Header("----- Animation's -----")]
     [SerializeField] Renderer[] model;
+    [SerializeField] GameObject swivel;
+    [SerializeField] ParticleSystem spark;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
 
 
     [Header("----- Attack -----")]
@@ -32,14 +36,17 @@ public class turretDynamic : MonoBehaviour, IDamage
 
     void Start()
     {
-        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
+        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
+        
     }
 
     private void Update()
     {
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
+        faceTarget();
         if (!isshooting)
         {
             StartCoroutine(shoot());
@@ -49,15 +56,14 @@ public class turretDynamic : MonoBehaviour, IDamage
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        swivel.transform.rotation = Quaternion.Lerp(swivel.transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
     IEnumerator shoot()
     {
         isshooting = true;
         yield return new WaitForSeconds(shootRate);
-        faceTarget();
-        Instantiate(projectile, shootPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        Instantiate(projectile, shootPos.position, new Quaternion(swivel.transform.rotation.x, swivel.transform.rotation.y, swivel.transform.rotation.z, swivel.transform.rotation.w));
         isshooting = false;
     }
 
@@ -65,7 +71,7 @@ public class turretDynamic : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        StartCoroutine(flashDamage());
+        flashDamage();
 
         if (HP <= 0)
         {
@@ -73,24 +79,14 @@ public class turretDynamic : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashDamage()
+    void flashDamage()
     {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
+        Instantiate(spark, transform.position, transform.rotation);
     }
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

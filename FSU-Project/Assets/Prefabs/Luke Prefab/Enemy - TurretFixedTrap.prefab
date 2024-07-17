@@ -262,6 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 7375218296418322723}
   swivel: {fileID: 1881797740976619184}
+  spawnEffect: {fileID: 4527798502645971034, guid: c83abdc03d03dbc4286476edeedf957d, type: 3}
   shootPos: {fileID: 7375355697038412168}
   projectile: {fileID: 6645269678796020084, guid: 97988ad9082443d49ad120fc0837e1e7, type: 3}
   shootRate: 0.5

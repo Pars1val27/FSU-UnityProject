@@ -12,6 +12,8 @@ public class BMinion : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
 
 
     [Header("----- Attack -----")]
@@ -26,6 +28,7 @@ public class BMinion : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -65,6 +68,7 @@ public class BMinion : MonoBehaviour, IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

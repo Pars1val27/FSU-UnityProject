@@ -12,6 +12,7 @@ public class turretFixedTrap : MonoBehaviour
 
     [Header("----- Animation's -----")]
     [SerializeField] GameObject swivel;
+    [SerializeField] ParticleSystem spawnEffect;
 
 
     [Header("----- Attack -----")]
@@ -21,6 +22,11 @@ public class turretFixedTrap : MonoBehaviour
     [SerializeField] float rotateSpeed;
 
     bool isshooting;
+
+    private void Start()
+    {
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
+    }
 
     private void Update()
     {

@@ -14,6 +14,9 @@ public class Kamikaze : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
+    [SerializeField] ParticleSystem spark;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
     [SerializeField] Renderer model;
 
 
@@ -29,6 +32,7 @@ public class Kamikaze : MonoBehaviour, IDamage
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -65,7 +69,7 @@ public class Kamikaze : MonoBehaviour, IDamage
     {
         HP -= amount;
 
-        StartCoroutine(flashDamage());
+        flashDamage();
 
         if (HP <= 0)
         {
@@ -73,15 +77,14 @@ public class Kamikaze : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashDamage()
+    void flashDamage()
     {
-        model.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        model.material.color = Color.white;
+        Instantiate(spark, transform.position, transform.rotation);
     }
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }

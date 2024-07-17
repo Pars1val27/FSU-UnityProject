@@ -664,8 +664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   faceTargetSpeed: 40
   agent: {fileID: 297568914317934320}
-  model:
-  - {fileID: 4540831841375410580}
+  spawnEffect: {fileID: 4527798502645971034, guid: 3d4e524e6fdc96048b9d1014ff564016, type: 3}
+  deathEffect: {fileID: 4527798502645971034, guid: f59716cb2b4f6d54691bef8e08af90eb, type: 3}
   damage: 1
   attackRate: 0
 --- !u!95 &1627399123041178978
