@@ -16,6 +16,8 @@ public class GunScript : MonoBehaviour
 
     [SerializeField] GameObject hitEffect;
 
+    private Animator anim;
+
     public int currAmmo;
     public int maxAmmo;
     [SerializeField] public float reloadTime;
@@ -34,6 +36,7 @@ public class GunScript : MonoBehaviour
 
     void Start()
     {
+        anim = GetComponent<Animator>();
         currAmmo = maxAmmo;
         UpdateAmmoCount();
     }
@@ -44,7 +47,7 @@ public class GunScript : MonoBehaviour
         {
             return;
         }
-        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0 && !UIManager.instance.abilityMenuOpen)
+        if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0 && !UIManager.instance.abilityMenuOpen && !isReloading)
         {
 
             StartCoroutine(Shoot());
@@ -81,6 +84,9 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
+            anim.SetTrigger("Shoot");
+            anim.speed = anim.speed * (1 + (1 - PlayerController.playerInstance.attackSpeed));
+
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
             
