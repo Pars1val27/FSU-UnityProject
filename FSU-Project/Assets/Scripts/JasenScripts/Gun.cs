@@ -50,7 +50,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0 && !UIManager.instance.abilityMenuOpen && !isReloading)
         {
-
+           
             StartCoroutine(Shoot());
 
         }
@@ -86,7 +86,7 @@ public class GunScript : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
             anim.SetTrigger("Shoot");
-            anim.speed = anim.speed * (1 + (1 - PlayerController.playerInstance.attackSpeed));
+            anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             

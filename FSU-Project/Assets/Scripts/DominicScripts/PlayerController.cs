@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public int playerHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
-    [Range(0, 10)]
+    [Range(0, 2)]
     [SerializeField] public float attackSpeed;
     [Range(1f, 1000f)]
     [SerializeField] public float shootDist;
@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
+    float origFOV;
+    public float currFOV;
 
     int jumpCount;
 
@@ -93,10 +95,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isBlocking;
     public bool isCrouching;
 
-    float origFOV;
-    public float currFOV;
-
     public float dashDuration = 0.2f;
+    public float interactDist = 10;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -159,6 +159,9 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
             }
         }
+
+        RaycastHit interactHit;
+        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist);
     }
 
     void Movement()
@@ -356,15 +359,11 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isClimbing = false;
 
-        Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
         RaycastHit hit;
         if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2) && stamina >= 5)
         {
             if (hit.collider.CompareTag("Climbable"))
             {
-                Debug.Log(hit.collider.name);
-
                 isClimbing = true;
                 stamina -= staminaDrain * Time.deltaTime;
                 staminaFull = false;
