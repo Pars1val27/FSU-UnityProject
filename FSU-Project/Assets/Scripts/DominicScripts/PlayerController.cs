@@ -141,13 +141,13 @@ public class PlayerController : MonoBehaviour, IDamage
             StartCoroutine(Dash());
         }
 
-        if (isSprinting)
+        if (isSprinting && !UIManager.instance.gamePause)
         {
             staminaFull = false;
             stamina -= staminaDrain * Time.deltaTime;
         }
 
-        if (!isSprinting && staminaFull == false)
+        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause)
         {
             if(stamina <= maxStamina - 0.01)
             {

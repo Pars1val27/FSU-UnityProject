@@ -557,6 +557,7 @@ MonoBehaviour:
   attackSpeed: 0.5
   shootDist: 100
   speed: 14
+  baseSpeed: 0
   sprintMod: 2
   jumpMax: 2
   jumpSpeed: 18
@@ -564,6 +565,12 @@ MonoBehaviour:
   dashMod: 3
   climbSpeed: 15
   gravity: 35
+  stamina: 50
+  maxStamina: 50
+  jumpCost: 10
+  staminaFull: 0
+  staminaDrain: 2
+  staminaRegen: 0.1
   audSteps:
   - {fileID: 8300000, guid: 65e443630e8b8994faae72b77afe5af0, type: 3}
   - {fileID: 8300000, guid: 1e3c1973407d42943b46a6b88f91093a, type: 3}
