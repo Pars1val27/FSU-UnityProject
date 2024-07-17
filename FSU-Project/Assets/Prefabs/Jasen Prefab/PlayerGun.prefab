@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityHandler: {fileID: 0}
+  player: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
   GrenadePos: {fileID: 3404024799275723205}
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
