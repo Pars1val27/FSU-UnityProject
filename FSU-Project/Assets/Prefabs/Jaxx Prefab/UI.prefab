@@ -503,7 +503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4304771919827491121
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1717,9 +1717,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8099912276338524726}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SetPrevMenu
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1970,7 +1970,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6999952104984036120
 Transform:
   m_ObjectHideFlags: 0
@@ -2298,7 +2298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8596399095012373205
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2898,7 +2898,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.34509805}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.3019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3756,7 +3756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7659350805557371863
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5426,7 +5426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8674408531510761635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5763,7 +5763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5942148096811576084
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5972,7 +5972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2131953571069555923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6095,20 +6095,26 @@ MonoBehaviour:
   bossHealth: {fileID: 4341904541190205417}
   loadingScreen: {fileID: 1669944471729183950}
   enemyCountText: {fileID: 8875380148455726945}
+  totalKills: {fileID: 0}
   ammoMax: {fileID: 3691588732523930491}
   ammoCur: {fileID: 9215865496429267581}
   maxPlayerHP: {fileID: 7284020005129815450}
   currPlayerMP: {fileID: 6552251447396791860}
+  bossName: {fileID: 0}
   playerHPBar: {fileID: 31004223904205541}
   DashCoolDownFill: {fileID: 8893328575700997150}
   bossHealthBar: {fileID: 5053568594427040898}
+  staminaBar: {fileID: 0}
   DashCDRemaining: 0
   dashingTime: 0
+  staminaCD: 0
   gamePause: 0
   classMele: 0
   classGunner: 0
   abilityMenuOpen: 0
-  lowHealthPercentage: 0.25
+  lowHealthPercentage: 0.5
+  enemiesKilled: 0
+  enemyCount: 0
 --- !u!114 &8209078707155062884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6153,6 +6159,31 @@ MonoBehaviour:
   purchaseButton: {fileID: 3936279286663239772}
   shownPrice: {fileID: 6659114167252719960}
   inventoryMenu: {fileID: 4813685261369366866}
+  abilityIcons:
+  - {fileID: 4712114378276674370}
+  - {fileID: 8568247738056808200}
+  - {fileID: 1599082192316261674}
+  - {fileID: 2334932690200582750}
+  - {fileID: 7116583247376591010}
+  - {fileID: 4602177699911396254}
+  - {fileID: 1088384989720060527}
+  - {fileID: 6694702242516539211}
+  - {fileID: 2778139984074273124}
+  - {fileID: 8746566142293440811}
+  - {fileID: 2388964098673924568}
+  - {fileID: 5018534555911342249}
+  - {fileID: 6039800312071089993}
+  - {fileID: 2360171090485134801}
+  - {fileID: 5104004258670793453}
+  - {fileID: 5691778798456792912}
+  - {fileID: 7682268356789659980}
+  - {fileID: 5191192957018283301}
+  - {fileID: 6952205714418453373}
+  - {fileID: 4631541379106575596}
+  - {fileID: 4131910805919957119}
+  - {fileID: 387321611618596748}
+  - {fileID: 6698997289323891554}
+  - {fileID: 9167682041590046926}
   icon: {fileID: 1172734309398783004}
   Name: {fileID: 4893164850107067665}
   description: {fileID: 4777660277856655387}
@@ -6498,7 +6529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5585214307676097828
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7172,18 +7203,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8209078707155062884}
         m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: ClassSetGunner
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 8209078707155062884}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
         m_MethodName: TurnOnUI
         m_Mode: 2
         m_Arguments:
@@ -7197,6 +7216,30 @@ MonoBehaviour:
       - m_Target: {fileID: 386389651428664835}
         m_TargetAssemblyTypeName: Audio, Assembly-CSharp
         m_MethodName: PlayClicks
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: TurnOffUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3695644787894293498}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: ClassSetGunner
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7756,7 +7799,7 @@ MonoBehaviour:
         m_MethodName: SetMenu
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 2652088568872942769}
+          m_ObjectArgument: {fileID: 7860748002462606412}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -8143,9 +8186,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8209078707155062884}
-        m_TargetAssemblyTypeName: UI, Assembly-CSharp
-        m_MethodName: ClassSetMele
+      - m_Target: {fileID: 386389651428664835}
+        m_TargetAssemblyTypeName: Audio, Assembly-CSharp
+        m_MethodName: PlayClicks
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8155,9 +8198,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 386389651428664835}
-        m_TargetAssemblyTypeName: Audio, Assembly-CSharp
-        m_MethodName: PlayClicks
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: TurnOffUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3695644787894293498}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: ClassSetMele
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8527,7 +8582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8381126466609195476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9897,7 +9952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8969573156759597862
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9972,7 +10027,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1074455869977052203
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10047,7 +10102,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7910769958986344319
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10714,7 +10769,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2652563071064730852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10789,7 +10844,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4180127848231929966
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11004,6 +11059,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8209078707155062884}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: TurnOffUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 7860748002462606412}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5137558646709513066
 GameObject:
   m_ObjectHideFlags: 0
@@ -11155,7 +11222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &119189787357364840
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12405,7 +12472,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2287757003644857000
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13457,7 +13524,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7459280118283385125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14620,7 +14687,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &547029247181583943
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14695,7 +14762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1002671347331560471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15317,7 +15384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9166033307470865194
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15503,7 +15570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1375173191956201878
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16851,7 +16918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5781001650233969634
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18310,7 +18377,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1291551279661912185
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18786,7 +18853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5046555923542440622
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18967,11 +19034,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8099912276338524726}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SetMenu
-        m_Mode: 2
+        m_MethodName: SetPrevMenu
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1533306977509777512}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -19619,7 +19686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &121373499368824102
 RectTransform:
   m_ObjectHideFlags: 0
