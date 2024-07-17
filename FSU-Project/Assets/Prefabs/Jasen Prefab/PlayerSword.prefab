@@ -60,6 +60,7 @@ MonoBehaviour:
   attackEffect: {fileID: 0}
   blockCooldown: 10
   blockDuration: 3
+  blockStamCost: 10
   isAttacking: 0
   isBlockReady: 0
 --- !u!33 &2715464760919658580

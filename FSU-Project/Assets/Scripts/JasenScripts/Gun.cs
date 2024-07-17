@@ -85,8 +85,8 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
-            anim.SetTrigger("Shoot");
             anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
+            anim.SetTrigger("Shoot");
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
@@ -130,16 +130,18 @@ public class GunScript : MonoBehaviour
     IEnumerator Reload()
     {
         isReloading = true;
-        Quaternion rot;
-        Vector3 pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));
+        /*        Quaternion rot;
+                Vector3 pos;
+                PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
+                PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));*/
+        anim.speed = 1;
+        anim.SetTrigger("Reload");
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
         UpdateAmmoCount();
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(0, 0, 0));
+ /*       PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(0, 0, 0));
         PlayerController.playerInstance.classWeaponInstance.transform.localPosition = pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.localRotation = rot;
+        PlayerController.playerInstance.classWeaponInstance.transform.localRotation = rot;*/
         isReloading = false;
     }
     IEnumerator flashMuzzle()

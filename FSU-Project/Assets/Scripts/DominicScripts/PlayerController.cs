@@ -128,14 +128,6 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         EquipClassWeapon();
 
-        //handled in gun.cs
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            //StartCoroutine(shoot());
-            
-            
-        }
-        */
         if (Input.GetButton("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
@@ -147,7 +139,13 @@ public class PlayerController : MonoBehaviour, IDamage
             stamina -= staminaDrain * Time.deltaTime;
         }
 
-        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause)
+        if (isBlocking)
+        {
+            staminaFull = false;
+            stamina -= staminaDrain * Time.deltaTime;
+        }
+
+        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause && !isBlocking)
         {
             if(stamina <= maxStamina - 0.01)
             {
@@ -253,36 +251,6 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
-
-    //moveed to Gun.cs
-   /* IEnumerator shoot()
-    {
-        isShooting = true;
-        StartCoroutine(flashMuzzle());
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
-        {
-            Debug.Log(hit);
-
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if(hit.transform != transform && dmg != null)
-            {
-                dmg.TakeDamage(shootDmg);
-            }
-        }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }*/
-
-    /*IEnumerator flashMuzzle()
-    {
-        muzzleFlash.SetActive(true);
-        aud.PlayOneShot(audGun[Random.Range(0, audGun.Length)], audGunVol);
-        yield return new WaitForSeconds(0.1f);
-        muzzleFlash.SetActive(false);
-    }*/
-   
     
     public void TakeDamage(int dmg)
     {
