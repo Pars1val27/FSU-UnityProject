@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4527798502645971034}
   - component: {fileID: 980185073885744457}
   m_Layer: 0
-  m_Name: Large Death effect
+  m_Name: Particle Effect- Medium Death effect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 5
-      minScalar: 3
+      scalar: 4
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -751,7 +751,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 10
+      value: 5
       mode: 0
       spread: 0
       speed:
@@ -870,8 +870,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1200
-      minScalar: 1000
+      scalar: 600
+      minScalar: 400
       maxCurve:
         serializedVersion: 2
         m_Curve:

@@ -1802,6 +1802,7 @@ MonoBehaviour:
   anim: {fileID: 7820320962231266268}
   animTranSpeed: 90
   deathEffect: {fileID: 4527798502645971034, guid: f59716cb2b4f6d54691bef8e08af90eb, type: 3}
+  SpawnEffect: {fileID: 4527798502645971034, guid: 3d4e524e6fdc96048b9d1014ff564016, type: 3}
   shootPos:
   - {fileID: 4175054255908537402}
   projectile: {fileID: 8048136264307098328, guid: 5a689af6dbcae6c4f8a9eba8f287a0ff, type: 3}
