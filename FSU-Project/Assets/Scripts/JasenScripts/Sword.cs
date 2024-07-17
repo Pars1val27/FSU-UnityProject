@@ -38,7 +38,7 @@ public class SwordScript : MonoBehaviour
             }
         //}
 
-        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady && UIManager.instance.abilityMenuOpen)
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady && !UIManager.instance.abilityMenuOpen)
         {
             PlayerController.playerInstance.isBlocking = true;
             anim.SetBool("Block", true);
