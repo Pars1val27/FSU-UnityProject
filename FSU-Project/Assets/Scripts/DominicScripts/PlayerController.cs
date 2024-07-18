@@ -96,7 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isCrouching;
 
     public float dashDuration = 0.2f;
-    public float interactDist = 10;
+    [SerializeField] public float interactDist;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
