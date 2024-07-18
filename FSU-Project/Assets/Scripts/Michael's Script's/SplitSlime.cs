@@ -7,6 +7,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
 {
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject HealthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
@@ -28,12 +29,14 @@ public class SplitSlime : MonoBehaviour ,IDamage
 
     float angleToPlayer;
     float SavedTime = 0;
+    float StartHP;
 
     bool playerInRange;
     bool isAttacking;
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         for (int i = 0; i < model.Length; i++)
         {
@@ -50,7 +53,8 @@ public class SplitSlime : MonoBehaviour ,IDamage
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        HealthBar.transform.rotation = rot;
         agent.SetDestination(playerPos);
         if ((Time.time - SavedTime) > attackRate && !isAttacking)
         {
@@ -70,7 +74,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
         HP -= amount;
         Debug.Log("got hit");
         StartCoroutine(flashDamage());
-
+        HealthBar.transform.localScale = new Vector3(HP / StartHP * 2, HealthBar.transform.localScale.y, transform.transform.localScale.z);
         if (HP <= 0)
         {
 
