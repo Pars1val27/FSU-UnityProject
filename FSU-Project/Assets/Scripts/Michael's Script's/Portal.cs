@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,8 @@ public class Portal : MonoBehaviour , IDamage
 
     [Header("----- Model -----")]
     [SerializeField] Renderer[] model;
+    [SerializeField] ParticleSystem DeathEffect;
+    [SerializeField] ParticleSystem HitEffect;
 
     [Header("----- Spawn Settings ----")]
     [SerializeField] Transform[] spawnPOS;
@@ -41,26 +44,18 @@ public class Portal : MonoBehaviour , IDamage
     {
         HP -= amount;
 
-        StartCoroutine(flashDamage());
+
 
         if (HP <= 0)
         {
             Destroy(gameObject);
+            Instantiate(DeathEffect, new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.rotation);
         }
-    }
-    IEnumerator flashDamage()
-    {
-        for (int i = 0; i < model.Length; i++)
+        else
         {
-            model[i].material.color = Color.red;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
+            Instantiate(HitEffect, new Vector3(transform.position.x, transform.position.y , transform.position.z), transform.rotation);
         }
 
     }
+    
 }

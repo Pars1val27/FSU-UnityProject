@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Brute : MonoBehaviour , IDamage
+public class Brute : MonoBehaviour , IDamage, IFireDamage
 {
 
     [Header("----- Health -----")]
@@ -70,15 +70,15 @@ public class Brute : MonoBehaviour , IDamage
         RaycastHit hit;
 
 
-       if((Time.time-SavedTime) > attackRate)
+        if ((Time.time - SavedTime) > attackRate)
         {
             SavedTime = Time.time;
-           
+
             if (distance < 10 && !isAttacking)
             {
                 isAttacking = false;
                 anim.SetTrigger("Melee");
-            } 
+            }
             else if (!isAttacking && canSeePlayer)
             {
                 isAttacking = true;
@@ -92,7 +92,7 @@ public class Brute : MonoBehaviour , IDamage
             Debug.Log(hit.collider.tag);
             if (hit.collider.CompareTag("Player") && playerInRange)
             {
-                
+
                 canSeePlayer = true;
                 agent.SetDestination(transform.position);
                 faceTarget();
@@ -109,6 +109,25 @@ public class Brute : MonoBehaviour , IDamage
 
         }
 
+    }
+    // Status Effect  Implementaion
+    public void ApplyFireDamage(int fireDamage, float duration)
+    {
+        Debug.Log("brute Hp" + HP);
+        StartCoroutine(FireDamageCoroutine(fireDamage, duration));
+    }
+
+    private IEnumerator FireDamageCoroutine(int fireDamage, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            Debug.Log("brute Hp" + HP);
+            TakeDamage(fireDamage);
+            elapsed += 1f;
+            Debug.Log(fireDamage + " FireDamage");
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     public void TakeDamage(int amount)
