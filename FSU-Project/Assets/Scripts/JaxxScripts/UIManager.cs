@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuControls;
     [SerializeField] GameObject menuInventory;
     [SerializeField] GameObject itemMenu;
-    [SerializeField] GameObject lowHealthIndi;
+    [SerializeField] public GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
     [SerializeField] public GameObject loadingScreen;
 
@@ -145,7 +145,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator onLose()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.3f);
         statePause();
         menuActive = menuHPLose;
         menuActive.SetActive(gamePause);
@@ -259,11 +259,16 @@ public class UIManager : MonoBehaviour
     public IEnumerator FlashDamage()
     {
 
-        menuActive = lowHealthIndi;
-        menuActive.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        menuActive.SetActive(false);
-
+        //GameObject test = Instantiate(UIManager.instance.lowHealthIndi);
+        //Debug.Log(UIManager.instance.lowHealthIndi);
+        //test.SetActive(true);
+        //Destroy(test, 0.1f);
+        //menuActive = lowHealthIndi;
+        //menuActive.SetActive(true);
+        //yield return new WaitForSeconds(0.1f);
+        //menuActive.SetActive(false);
+        //menuActive = null;
+        yield return null;
     }
     
 }
