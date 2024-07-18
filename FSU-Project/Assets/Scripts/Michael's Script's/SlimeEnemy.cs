@@ -37,6 +37,10 @@ public class SlimeEnemy : MonoBehaviour , IDamage
     void Start()
     {
         Instantiate(SpawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.green;
+        }
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
         
@@ -106,7 +110,7 @@ public class SlimeEnemy : MonoBehaviour , IDamage
 
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.white;
+            model[i].material.color = Color.green;
         }
 
     }

@@ -35,6 +35,10 @@ public class SplitSlime : MonoBehaviour ,IDamage
     void Start()
     {
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.green;
+        }
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -89,14 +93,14 @@ public class SplitSlime : MonoBehaviour ,IDamage
     {
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.yellow;
+            model[i].material.color = Color.red;
         }
 
         yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.white;
+            model[i].material.color = Color.green;
         }
 
     }
