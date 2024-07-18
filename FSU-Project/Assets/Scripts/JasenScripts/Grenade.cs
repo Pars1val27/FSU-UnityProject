@@ -29,6 +29,7 @@ public class Grenade : MonoBehaviour
         this.explosionForce = explosionForce;
         this.damage = damage;
         countdown = delay;
+        UpdateGrenadeUI();
     }
 
     void Start()
@@ -41,6 +42,7 @@ public class Grenade : MonoBehaviour
     void Update()
     {
         countdown -= Time.deltaTime;
+        UpdateGrenadeUI();
         if (countdown <= 0f && !hasExploded)
         {
             Explode();
@@ -98,5 +100,10 @@ public class Grenade : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    public void UpdateGrenadeUI()
+    {
+        UIManager.instance.grenadeFill.fillAmount = countdown / delay;
     }
 }

@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour, IDamage
     public int playerHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
-    [Range(0, 10)]
+    [Range(0, 2)]
     [SerializeField] public float attackSpeed;
     [Range(1f, 1000f)]
     [SerializeField] public float shootDist;
@@ -80,6 +80,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
+    float origFOV;
+    public float currFOV;
 
     int jumpCount;
 
@@ -93,10 +95,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isBlocking;
     public bool isCrouching;
 
-    float origFOV;
-    public float currFOV;
-
     public float dashDuration = 0.2f;
+    [SerializeField] public float interactDist;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -128,15 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         EquipClassWeapon();
 
-        //handled in gun.cs
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            //StartCoroutine(shoot());
-            
-            
-        }
-        */
-        if (Input.GetButton("Dash") && !isDashing)
+        if (Input.GetButtonDown("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
         }
@@ -147,7 +139,13 @@ public class PlayerController : MonoBehaviour, IDamage
             stamina -= staminaDrain * Time.deltaTime;
         }
 
-        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause)
+        if (isBlocking)
+        {
+            staminaFull = false;
+            stamina -= staminaDrain * Time.deltaTime;
+        }
+
+        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause && !isBlocking)
         {
             if(stamina <= maxStamina - 0.01)
             {
@@ -159,6 +157,9 @@ public class PlayerController : MonoBehaviour, IDamage
                 }
             }
         }
+
+        RaycastHit interactHit;
+        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist);
     }
 
     void Movement()
@@ -220,6 +221,7 @@ public class PlayerController : MonoBehaviour, IDamage
             speed = baseSpeed;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+            
         }
     }
     void Crouch()
@@ -250,36 +252,6 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
-
-    //moveed to Gun.cs
-   /* IEnumerator shoot()
-    {
-        isShooting = true;
-        StartCoroutine(flashMuzzle());
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
-        {
-            Debug.Log(hit);
-
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if(hit.transform != transform && dmg != null)
-            {
-                dmg.TakeDamage(shootDmg);
-            }
-        }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }*/
-
-    /*IEnumerator flashMuzzle()
-    {
-        muzzleFlash.SetActive(true);
-        aud.PlayOneShot(audGun[Random.Range(0, audGun.Length)], audGunVol);
-        yield return new WaitForSeconds(0.1f);
-        muzzleFlash.SetActive(false);
-    }*/
-   
     
     public void TakeDamage(int dmg)
     {
@@ -320,10 +292,9 @@ public class PlayerController : MonoBehaviour, IDamage
         aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining =dashCD;
+        UIManager.instance.DashCDRemaining = dashCD;
         speed *= dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
-
         StartCoroutine(DashDuration());
         isCoolDown = true;
         yield return new WaitForSeconds(dashCD);
@@ -357,15 +328,11 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         isClimbing = false;
 
-        Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
         RaycastHit hit;
         if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2) && stamina >= 5)
         {
             if (hit.collider.CompareTag("Climbable"))
             {
-                Debug.Log(hit.collider.name);
-
                 isClimbing = true;
                 stamina -= staminaDrain * Time.deltaTime;
                 staminaFull = false;
@@ -397,11 +364,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             origHP = 20;
             playerHP = origHP; 
-            UpdatePlayerUI();
-
             speed = 14;
             baseSpeed = speed;
-            attackSpeed = 0.25f;
+            attackSpeed = 0.5f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
             NotifyAbilityHandler();
@@ -413,8 +378,7 @@ public class PlayerController : MonoBehaviour, IDamage
             playerHP = origHP;
             speed = 20;
             baseSpeed = speed;
-            attackSpeed = 1;
-            shootDist = 2;
+            attackSpeed = .75f;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
             AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
