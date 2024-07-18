@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         EquipClassWeapon();
 
-        if (Input.GetButton("Dash") && !isDashing)
+        if (Input.GetButtonDown("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
         }
@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour, IDamage
             speed = baseSpeed;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+            
         }
     }
     void Crouch()
@@ -291,10 +292,9 @@ public class PlayerController : MonoBehaviour, IDamage
         aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining =dashCD;
+        UIManager.instance.DashCDRemaining = dashCD;
         speed *= dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
-
         StartCoroutine(DashDuration());
         isCoolDown = true;
         yield return new WaitForSeconds(dashCD);
@@ -363,11 +363,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             origHP = 20;
             playerHP = origHP; 
-            UpdatePlayerUI();
-
             speed = 14;
             baseSpeed = speed;
-            attackSpeed = 0.25f;
+            attackSpeed = 0.5f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
             NotifyAbilityHandler();
@@ -379,8 +377,7 @@ public class PlayerController : MonoBehaviour, IDamage
             playerHP = origHP;
             speed = 20;
             baseSpeed = speed;
-            attackSpeed = 1;
-            shootDist = 2;
+            attackSpeed = .75f;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
             AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");
