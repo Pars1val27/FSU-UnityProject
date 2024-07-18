@@ -566,6 +566,8 @@ MonoBehaviour:
   HP: 5
   faceTargetSpeed: 40
   agent: {fileID: 15270009300149190}
+  anim: {fileID: 6401301444132422667}
+  animTranSpeed: 180
   model: {fileID: 8405828367385333888}
   spawnEffect: {fileID: 4527798502645971034, guid: c83abdc03d03dbc4286476edeedf957d, type: 3}
   deathEffect: {fileID: 4527798502645971034, guid: 247fca0d4e0c37047b51ab649f742af7, type: 3}
@@ -574,7 +576,7 @@ MonoBehaviour:
   - {fileID: 239292083549524604}
   - {fileID: 2439782286863532544}
   spawn: {fileID: 8838781959634469216, guid: ea0b3d48178ee3644b8b9212b4fa9fc1, type: 3}
-  spawnRate: 300
+  spawnRate: 3
 --- !u!95 &6401301444132422667
 Animator:
   serializedVersion: 5

@@ -15,6 +15,8 @@ public class BMother : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
+    [SerializeField] Animator anim;
+    [SerializeField] int animTranSpeed;
     [SerializeField] Renderer model;
     [SerializeField] ParticleSystem spawnEffect;
     [SerializeField] ParticleSystem deathEffect;
@@ -40,6 +42,8 @@ public class BMother : MonoBehaviour, IDamage
     }
     private void Update()
     {
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         faceTarget();
@@ -84,8 +88,7 @@ public class BMother : MonoBehaviour, IDamage
     {
         isshooting = true;
         yield return new WaitForSeconds(spawnRate);
-        for(int i = 0; i < spawnPos.Length; i++)
-            Instantiate(spawn, spawnPos[i].position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        anim.SetTrigger("Attack");
         isshooting = false;
     }
 
@@ -113,5 +116,11 @@ public class BMother : MonoBehaviour, IDamage
         Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
+    }
+
+    public void Sting()
+    {
+        for (int i = 0; i < spawnPos.Length; i++)
+            Instantiate(spawn, spawnPos[i].position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
     }
 }
