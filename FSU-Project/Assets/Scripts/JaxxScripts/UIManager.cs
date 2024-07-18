@@ -1,4 +1,5 @@
 using AbilitySystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -26,7 +27,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuControls;
     [SerializeField] GameObject menuInventory;
     [SerializeField] GameObject itemMenu;
-    [SerializeField] GameObject lowHealthIndi;
+    [SerializeField] public GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
     [SerializeField] public GameObject loadingScreen;
 
@@ -44,6 +45,7 @@ public class UIManager : MonoBehaviour
     public Image DashCoolDownFill;
     public Image bossHealthBar;
     public Image staminaBar;
+    public Image grenadeFill;
 
 
     [Header("----CoolDowns")]
@@ -56,6 +58,7 @@ public class UIManager : MonoBehaviour
     public bool classMele;
     public bool classGunner;
     public bool abilityMenuOpen;
+    public bool gameStarted;
 
     [Header("----Values----")]
     [SerializeField] float lowHealthPercentage;
@@ -70,8 +73,11 @@ public class UIManager : MonoBehaviour
      
     private void Start()
     {
-        StartCoroutine(MainMenu());
-        Debug.Log("MainMenu Up");
+        if(gameStarted)
+        { return; }
+            StartCoroutine(MainMenu());
+            Debug.Log("MainMenu Up");
+
     }
     // Update is called once per frame
     void Update()
@@ -139,7 +145,7 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator onLose()
     {
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.3f);
         statePause();
         menuActive = menuHPLose;
         menuActive.SetActive(gamePause);
@@ -253,11 +259,16 @@ public class UIManager : MonoBehaviour
     public IEnumerator FlashDamage()
     {
 
-        menuActive = lowHealthIndi;
-        menuActive.SetActive(true);
-        yield return new WaitForSeconds(0.1f);
-        menuActive.SetActive(false);
-
+        //GameObject test = Instantiate(UIManager.instance.lowHealthIndi);
+        //Debug.Log(UIManager.instance.lowHealthIndi);
+        //test.SetActive(true);
+        //Destroy(test, 0.1f);
+        //menuActive = lowHealthIndi;
+        //menuActive.SetActive(true);
+        //yield return new WaitForSeconds(0.1f);
+        //menuActive.SetActive(false);
+        //menuActive = null;
+        yield return null;
     }
     
 }
