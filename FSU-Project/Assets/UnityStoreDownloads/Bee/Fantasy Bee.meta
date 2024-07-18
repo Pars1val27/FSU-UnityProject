@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:FSU-Project/Assets/UnityStoreDownloads/Bee/Fantasy Bee.meta
 guid: c9e77fda64fb2744395375feaee18d56
 folderAsset: yes
 DefaultImporter:
+========
+guid: ccb07ae76921e134ebee0642ef267265
+PrefabImporter:
+>>>>>>>> 57478889ab9f08ca59b1cd5d3dd776e1ad8d11b4:FSU-Project/Assets/Prefabs/Michael's Prefab's/Animation Stuff/Particle Effect- Portal Death effect.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

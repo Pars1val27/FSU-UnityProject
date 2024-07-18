@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +9,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject HealthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
@@ -35,6 +35,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
     float angleToPlayer;
     float SavedTime = 0;
+    float StartHP;
 
     bool isshooting;
     bool canSeePlayer;
@@ -43,6 +44,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         Instantiate(SpawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
@@ -52,13 +54,15 @@ public class RangedEnemy : MonoBehaviour , IDamage
     // Update is called once per frame
     void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        HealthBar.transform.rotation = rot;
         float agentSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-       
+     
 
         RaycastHit hit;
 
@@ -103,8 +107,8 @@ public class RangedEnemy : MonoBehaviour , IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
-        StartCoroutine(flashDamage());
+        HealthBar.transform.localScale = new Vector3(HP / StartHP * 2, HealthBar.transform.localScale.y, transform.transform.localScale.z);
+      StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
