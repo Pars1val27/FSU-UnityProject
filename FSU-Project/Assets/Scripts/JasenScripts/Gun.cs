@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AbilitySystem;
+using System.Linq.Expressions;
 
 public class GunScript : MonoBehaviour
 {
@@ -34,16 +35,19 @@ public class GunScript : MonoBehaviour
     public bool isReloading;
     public bool isGrenadeReady = true;
 
+
     void Start()
     {
-        abilityHandler = player.GetComponent<AbilityHandler>();
+        abilityHandler = AbilityHandler.handlerInstance;
         anim = GetComponent<Animator>();
         currAmmo = maxAmmo;
         UpdateAmmoCount();
     }
 
     void Update()
+
     {
+        
         if (isReloading)
         {
             return;
@@ -67,8 +71,11 @@ public class GunScript : MonoBehaviour
         if (currAmmo <= 0 && !isReloading)
         {
             StartCoroutine(Reload());
+
         }
+
     }
+
 
     public void UpdateAmmoCount()
     {
@@ -83,25 +90,28 @@ public class GunScript : MonoBehaviour
         UpdateAmmoCount();
         RaycastHit hit;
         StartCoroutine(flashMuzzle());
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + (new Vector3(Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
             anim.SetTrigger("Shoot");
             anim.speed = anim.speed * (1 + (1 - PlayerController.playerInstance.attackSpeed));
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
-            
-            
+
+
             if (hit.transform != transform && dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
+
                 if (hit.collider != null)
-                { 
-                    ApplyStatusEffects(hit.collider.gameObject); 
+                {
+                    Debug.Log("Applying status effects to: " + hit.collider.name);
+                    ApplyStatusEffects(hit.collider.gameObject);
                 }
+                // else { Debug.Log("ApplyStatus Hit Collider null"); }
             }
             else
             {
-                Destroy(Instantiate(hitEffect, hit.point, Quaternion.identity),.25f);
+                Destroy(Instantiate(hitEffect, hit.point, Quaternion.identity), .25f);
             }
         }
         yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
@@ -159,33 +169,31 @@ public class GunScript : MonoBehaviour
         yield return new WaitForSeconds(grenadeRechargeRate);
         isGrenadeReady = true;
     }
-    void ApplyStatusEffects(GameObject target)
+    public void ApplyStatusEffects(GameObject target)
     {
-        if (abilityHandler.HasAbility("FireEffect"))
+        Debug.Log(abilityHandler.abilities);
+        foreach (var ability in abilityHandler.abilities)
         {
-            var fireAbility = abilityHandler.GetAbility("FireEffect");
-            if (fireAbility != null)
+            if (ability is FireEffect fireEffect && abilityHandler.hasFireEffect)
             {
-                fireAbility.Activate(target);
+                Debug.Log("Activating FireEffect on target: " + target.name);
+                abilityHandler.ApplyFireDamage(target, fireEffect);
+            }
+            if (ability is PoisonEffect poisonEffect && abilityHandler.hasPoisonEffect)
+            {
+                Debug.Log("Activating PoisonEffect on target: " + target.name);
+                abilityHandler.ApplyPoisonDamage(target, poisonEffect);
+            }
+            if (ability is SlowedEffect slowEffect && abilityHandler.hasSlowEffect)
+            {
+                Debug.Log("Activating SlowEffect on target: " + target.name);
+                abilityHandler.ApplySlow(target, slowEffect);
+            }
+            if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
+            {
+                Debug.Log("Activating FreezeEffect on target: " + target.name);
+                abilityHandler.ApplyFreeze(target, freezeEffect);
             }
         }
-        if (abilityHandler.HasAbility("PoisonEffect"))
-        {
-            var poisonAbility = abilityHandler.GetAbility("PoisonEffect");
-            if (poisonAbility != null)
-            {
-                poisonAbility.Activate(target);
-            }
-        }
-        if (abilityHandler.HasAbility("SlowedEffect"))
-        {
-            var slowAbility = abilityHandler.GetAbility("SlowedEffect");
-            if (slowAbility != null)
-            {
-                slowAbility.Activate(target);
-            }
-        }
-        
     }
-
 }

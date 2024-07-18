@@ -56,7 +56,7 @@ public class AbilitiesUI : MonoBehaviour
         shownPrice.SetActive(true);
         if (isItemRoom)
         {
-            //purchaseButton.gameObject.SetActive(true);
+            purchaseButton.gameObject.SetActive(true);
             purchaseButton.GetComponentInChildren<TMP_Text>().text = "PickUP";
             shownPrice.SetActive(false);
         }

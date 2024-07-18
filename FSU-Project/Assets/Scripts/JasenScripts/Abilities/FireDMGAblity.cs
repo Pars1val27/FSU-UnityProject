@@ -12,11 +12,14 @@ namespace AbilitySystem
 
         public override void Activate(GameObject target)
         {
-            var flammable = target.GetComponent<IFireDamage>();
-            if (flammable != null)
+            if (debugAbility)
             {
-                flammable.ApplyFireDamage(fireDamage, duration);
+                Debug.Log("FireEffect Triggered in ability");
+
             }
+            AbilityHandler.handlerInstance.ApplyFireDamage(target, this);
+
         }
+
     }
 }

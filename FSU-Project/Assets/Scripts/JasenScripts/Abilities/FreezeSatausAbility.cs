@@ -11,11 +11,12 @@ namespace AbilitySystem
 
         public override void Activate(GameObject target)
         {
-            var freeze = target.GetComponent<IFreeze>();
-            if (freeze != null)
+            if (debugAbility)
             {
-                freeze.ApplyFreeze(duration);
+                Debug.Log("FreezeEffect Triggered in ability");
+
             }
+            AbilityHandler.handlerInstance.ApplyFreeze(target, this);
         }
     }
 }

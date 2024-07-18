@@ -89,7 +89,7 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
         Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir);
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir, out hit))
         {
-            Debug.Log(hit.collider.tag);
+            //Debug.Log(hit.collider.tag);
             if (hit.collider.CompareTag("Player") && playerInRange)
             {
 
@@ -113,11 +113,11 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
     // Status Effect  Implementaion
     public void ApplyFireDamage(int fireDamage, float duration)
     {
-        Debug.Log("brute Hp" + HP);
+        Debug.Log("brute current Hp" + HP);
         StartCoroutine(FireDamageCoroutine(fireDamage, duration));
     }
 
-    private IEnumerator FireDamageCoroutine(int fireDamage, float duration)
+    IEnumerator FireDamageCoroutine(int fireDamage, float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -126,6 +126,25 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
             TakeDamage(fireDamage);
             elapsed += 1f;
             Debug.Log(fireDamage + " FireDamage");
+            yield return new WaitForSeconds(1f);
+        }
+    }
+    public void ApplyPoisonDamage(int PosionDamage, float duration)
+    {
+        StartCoroutine(PoisonDamageCoroutine(PosionDamage, duration));
+    }
+
+
+    private IEnumerator PoisonDamageCoroutine(int PosionDamage, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            Debug.Log("brute Hp" + HP);
+
+            TakeDamage(PosionDamage);
+            elapsed += 1f;
+            Debug.Log(PosionDamage + " PoisonDamage");
             yield return new WaitForSeconds(1f);
         }
     }
@@ -187,7 +206,7 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
     }
     public void shoot()
     {
-        Instantiate(projectile, shootPos.position, transform.rotation);
+        //Instantiate(projectile, shootPos.position, transform.rotation);
         
         isAttacking = false;
     }

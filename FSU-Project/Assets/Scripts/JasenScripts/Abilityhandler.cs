@@ -1,44 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+
 using UnityEngine;
 
 namespace AbilitySystem
 {
     public class AbilityHandler : MonoBehaviour
     {
-        static public AbilityHandler handlerInstance;
+        public static AbilityHandler handlerInstance;
         public PlayerController playerController;
         public GunScript gunScript;
         public SwordScript swordScript;
 
         public List<Ability> abilities = new List<Ability>();
-        //public Ability[] abilities;
         public bool isHPRecoveryEnabled = false;
         private Coroutine hpRecoveryCoroutine;
         private int recoveryAmount;
         private float recoveryRate;
 
+        public bool hasFireEffect = false;
+        public bool hasPoisonEffect = false;
+        public bool hasSlowEffect = false;
+        public bool hasFreezeEffect = false;
+
         void Start()
         {
-
             handlerInstance = this;
             playerController = GetComponent<PlayerController>();
-
         }
+
         void Update()
-        {    
+        {
             if (gunScript == null && playerController.gunScript != null)
             {
                 gunScript = playerController.gunScript;
             }
 
-            
             if (swordScript == null && playerController.swordScript != null)
             {
                 swordScript = playerController.swordScript;
-                
             }
         }
+
         public bool HasAbility(string abilityName)
         {
             foreach (var ability in abilities)
@@ -50,6 +54,7 @@ namespace AbilitySystem
             }
             return false;
         }
+
         public Ability GetAbility(string abilityName)
         {
             foreach (var ability in abilities)
@@ -62,30 +67,84 @@ namespace AbilitySystem
             return null;
         }
 
+
+        public void AddAbility(Ability ability)
+        {
+            if (!abilities.Contains(ability))
+            {
+                Debug.Log(ability.abilityName + " added to Abilities");
+                abilities.Add(ability);
+
+                ActivateAbilityFlags(ability.abilityName);
+            }
+        }
+        private void ActivateAbilityFlags(string abilityName)
+        {
+            if (abilityName == "FireEffect")
+                hasFireEffect = true;
+            else if (abilityName == "PoisonEffect")
+                hasPoisonEffect = true;
+            else if (abilityName == "SlowEffect")
+                hasSlowEffect = true;
+            else if (abilityName == "FreezeEffect")
+                hasFreezeEffect = true;
+        }
+
+        public void ApplyFireDamage(GameObject target, FireEffect fireEffect)
+        {
+            var flammable = target.GetComponent<IFireDamage>();
+            if (flammable != null)
+            {
+                flammable.ApplyFireDamage(fireEffect.fireDamage, fireEffect.duration);
+            }
+        }
+
+        public void ApplyPoisonDamage(GameObject target, PoisonEffect poisonEffect)
+        {
+            var poisonable = target.GetComponent<IPoisonDamage>();
+            if (poisonable != null)
+            {
+                poisonable.ApplyPoisonDamage(poisonEffect.poisonDamage, poisonEffect.duration);
+            }
+        }
+
+        public void ApplySlow(GameObject target, SlowedEffect slowEffect)
+        {
+            var slowable = target.GetComponent<ISlow>();
+            if (slowable != null)
+            {
+                slowable.ApplySlow(slowEffect.slowAmount, slowEffect.duration);
+            }
+        }
+
+        public void ApplyFreeze(GameObject target, FreezeEffect freezeEffect)
+        {
+            var freezable = target.GetComponent<IFreeze>();
+            if (freezable != null)
+            {
+                freezable.ApplyFreeze(freezeEffect.duration);
+            }
+        }
+
         public void IncreaseMaxHP(int amount)
         {
-             playerController.origHP += amount;
-             playerController.playerHP = playerController.origHP; 
-             playerController.UpdatePlayerUI();
-
+            playerController.origHP += amount;
+            playerController.playerHP = playerController.origHP;
+            playerController.UpdatePlayerUI();
         }
 
         public void IncreaseSpeed(int amount)
         {
-            playerController.speed += amount;    
+            playerController.speed += amount;
         }
-
-
 
         public void IncreaseStamina(int amount)
         {
-
         }
 
         public void IncreaseDamage(int amount)
         {
             playerController.damage += amount;
-            
         }
 
         public void IncreaseAttackSpeed(float amount)
@@ -95,12 +154,11 @@ namespace AbilitySystem
 
         public void IncreaseMaxAmmo(int amount)
         {
-
             gunScript.maxAmmo += amount;
             gunScript.currAmmo = gunScript.maxAmmo;
             gunScript.UpdateAmmoCount();
-
         }
+
         public void EnableHPRecovery(int amount, float rate)
         {
             recoveryAmount = amount;
@@ -122,7 +180,6 @@ namespace AbilitySystem
                 if (playerController.playerHP < playerController.origHP)
                 {
                     playerController.playerHP += recoveryAmount;
-                    
                     playerController.UpdatePlayerUI();
                 }
                 else
@@ -138,18 +195,7 @@ namespace AbilitySystem
             isHPRecoveryEnabled = false;
         }
 
-       
-
-
-        public void AddAbility(Ability ability)
-        {
-            if (!abilities.Contains(ability))
-            {
-                Debug.Log(ability + " added to Abilities");
-                abilities.Add(ability);
-
-                //ability.Activate(gameObject);
-            }
-        }
+        
+        
     }
 }
