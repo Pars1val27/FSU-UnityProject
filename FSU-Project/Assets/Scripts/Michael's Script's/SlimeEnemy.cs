@@ -7,6 +7,7 @@ public class SlimeEnemy : MonoBehaviour , IDamage
 {
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject HealthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
@@ -30,12 +31,14 @@ public class SlimeEnemy : MonoBehaviour , IDamage
 
     float angleToPlayer;
     float SavedTime = 0;
+    float StartHP;
 
     bool playerInRange;
     bool isAttacking;
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         Instantiate(SpawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         for (int i = 0; i < model.Length; i++)
         {
@@ -54,7 +57,8 @@ public class SlimeEnemy : MonoBehaviour , IDamage
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        HealthBar.transform.rotation = rot;
         agent.SetDestination(playerPos);
         if ((Time.time - SavedTime) > attackRate && !isAttacking)
         {
@@ -78,7 +82,7 @@ public class SlimeEnemy : MonoBehaviour , IDamage
         HP -= amount;
         Debug.Log("got hit");
         StartCoroutine(flashDamage());
-
+        HealthBar.transform.localScale = new Vector3(HP / StartHP * 2, HealthBar.transform.localScale.y, transform.transform.localScale.z);
         if (HP <= 0)
         {
 
@@ -93,8 +97,8 @@ public class SlimeEnemy : MonoBehaviour , IDamage
 
     public void Death()
     {
-        Instantiate(splitSlime, transform.position + new Vector3(0,-4,0), transform.rotation);
-        Instantiate(splitSlime, transform.position + new Vector3(0, 4, 0), transform.rotation);
+        Instantiate(splitSlime, transform.position + new Vector3(4,0,0), transform.rotation);
+        Instantiate(splitSlime, transform.position + new Vector3(4, 0, 0), transform.rotation);
         Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
