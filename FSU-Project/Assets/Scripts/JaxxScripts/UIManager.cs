@@ -228,10 +228,10 @@ public class UIManager : MonoBehaviour
     public void AbilityMenuOff() 
     {
         abilityMenuOpen = false;
-        //if (menuActive != null)
-        //{
-        menuActive.SetActive(false);
-        //}
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+        }
         menuActive = null;
 
         Cursor.visible = false;

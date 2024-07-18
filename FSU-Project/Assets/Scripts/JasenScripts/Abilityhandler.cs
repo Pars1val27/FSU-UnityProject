@@ -73,20 +73,21 @@ namespace AbilitySystem
             if (!abilities.Contains(ability))
             {
                 Debug.Log(ability.abilityName + " added to Abilities");
+                
                 abilities.Add(ability);
 
-                ActivateAbilityFlags(ability.abilityName);
+                ActivateAbilityFlags(ability);
             }
         }
-        private void ActivateAbilityFlags(string abilityName)
+        private void ActivateAbilityFlags(Ability ability)
         {
-            if (abilityName == "FireEffect")
+            if (ability is FireEffect)
                 hasFireEffect = true;
-            else if (abilityName == "PoisonEffect")
+            else if (ability is PoisonEffect)
                 hasPoisonEffect = true;
-            else if (abilityName == "SlowEffect")
+            else if (ability is SlowedEffect)
                 hasSlowEffect = true;
-            else if (abilityName == "FreezeEffect")
+            else if (ability is FreezeEffect)
                 hasFreezeEffect = true;
         }
 
@@ -97,15 +98,25 @@ namespace AbilitySystem
             {
                 flammable.ApplyFireDamage(fireEffect.fireDamage, fireEffect.duration);
             }
+            else
+            {
+                Debug.Log(target.name + " Can not Burned");
+            }
         }
 
         public void ApplyPoisonDamage(GameObject target, PoisonEffect poisonEffect)
         {
+            Debug.Log("ApplyPoisonDamage has been called" );
             var poisonable = target.GetComponent<IPoisonDamage>();
             if (poisonable != null)
             {
                 poisonable.ApplyPoisonDamage(poisonEffect.poisonDamage, poisonEffect.duration);
             }
+            else 
+            {
+                Debug.Log(target.name + " Can not be Posioned");
+            }
+
         }
 
         public void ApplySlow(GameObject target, SlowedEffect slowEffect)
@@ -115,6 +126,10 @@ namespace AbilitySystem
             {
                 slowable.ApplySlow(slowEffect.slowAmount, slowEffect.duration);
             }
+            else
+            {
+                Debug.Log(target.name + " Can not be Slowed");
+            }
         }
 
         public void ApplyFreeze(GameObject target, FreezeEffect freezeEffect)
@@ -123,6 +138,10 @@ namespace AbilitySystem
             if (freezable != null)
             {
                 freezable.ApplyFreeze(freezeEffect.duration);
+            }
+            else
+            {
+                Debug.Log(target.name + " Can not be Frozen");
             }
         }
 

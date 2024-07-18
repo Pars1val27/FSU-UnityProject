@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 public class GunScript : MonoBehaviour
 {
     public AbilityHandler abilityHandler;
-    [SerializeField] public GameObject player;
     [SerializeField] Transform GrenadePos;
     [SerializeField] GameObject muzzleFlash;
     [SerializeField] AudioClip[] shootSound;

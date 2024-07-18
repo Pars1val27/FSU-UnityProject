@@ -71,6 +71,7 @@ namespace AbilitySystem
             if (abilitiesUI != null)
             {
                 abilitiesUI.currentPickup = null;
+                UIManager.instance.AbilityMenuOff();
             }
             isPickupActive = false;
         }

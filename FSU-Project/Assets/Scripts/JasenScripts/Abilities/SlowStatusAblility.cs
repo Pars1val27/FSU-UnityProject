@@ -11,9 +11,9 @@ namespace AbilitySystem
         public float duration;
         public override void Activate(GameObject target)
         {
-            if (debugAbility)
+            if (debugAbility == true)
             {
-                Debug.Log("sloweEffect Triggered in ability");
+                Debug.Log("slowedEffect Triggered in ability");
 
             }
             AbilityHandler.handlerInstance.ApplySlow(target, this);
