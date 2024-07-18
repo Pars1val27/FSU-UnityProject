@@ -1,4 +1,5 @@
 using AbilitySystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,6 +45,7 @@ public class UIManager : MonoBehaviour
     public Image DashCoolDownFill;
     public Image bossHealthBar;
     public Image staminaBar;
+    public Image grenadeFill;
 
 
     [Header("----CoolDowns")]
@@ -56,6 +58,7 @@ public class UIManager : MonoBehaviour
     public bool classMele;
     public bool classGunner;
     public bool abilityMenuOpen;
+    public bool gameStarted;
 
     [Header("----Values----")]
     [SerializeField] float lowHealthPercentage;
@@ -70,8 +73,11 @@ public class UIManager : MonoBehaviour
      
     private void Start()
     {
-        StartCoroutine(MainMenu());
-        Debug.Log("MainMenu Up");
+        if(gameStarted)
+        { return; }
+            StartCoroutine(MainMenu());
+            Debug.Log("MainMenu Up");
+
     }
     // Update is called once per frame
     void Update()
