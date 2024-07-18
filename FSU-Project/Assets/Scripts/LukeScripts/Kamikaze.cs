@@ -14,15 +14,18 @@ public class Kamikaze : MonoBehaviour, IDamage
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
+    [SerializeField] Animator anim;
+    [SerializeField] int animTranSpeed;
     [SerializeField] ParticleSystem spark;
     [SerializeField] ParticleSystem spawnEffect;
-    [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] ParticleSystem explodeEffect;
     [SerializeField] Renderer model;
 
 
     [Header("----- Attack -----")]
     [SerializeField] int damage;
     [SerializeField] int attackRate;
+    IDamage dmg;
 
     bool isAttacking;
     bool playerInRange;
@@ -33,15 +36,17 @@ public class Kamikaze : MonoBehaviour, IDamage
     void Start()
     {
         Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
+        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
     // Update is called once per frame
     void Update()
     {
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
-
         agent.SetDestination(playerPos);
     }
     private void OnTriggerEnter(Collider other)
@@ -49,12 +54,12 @@ public class Kamikaze : MonoBehaviour, IDamage
         if (other.tag == "Player")
         {
 
-            IDamage dmg = other.GetComponent<IDamage>();
+            dmg = other.GetComponent<IDamage>();
 
             if (dmg != null)
             {
-                dmg.TakeDamage(damage);
-                Death();
+                agent.isStopped = true;
+                anim.SetTrigger("Attack");
             }
         }
     }
@@ -73,7 +78,7 @@ public class Kamikaze : MonoBehaviour, IDamage
 
         if (HP <= 0)
         {
-            Death();
+            anim.SetTrigger("Attack");
         }
     }
 
@@ -82,10 +87,11 @@ public class Kamikaze : MonoBehaviour, IDamage
         Instantiate(spark, transform.position, transform.rotation);
     }
 
-    public void Death()
+    public void Explode()
     {
-        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
+        Instantiate(explodeEffect, transform.position, transform.rotation);
         Destroy(gameObject);
+        dmg.TakeDamage(damage);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
 }
