@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 1}
+  m_Color: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6313,7 +6313,7 @@ MonoBehaviour:
   playerHPBar: {fileID: 31004223904205541}
   DashCoolDownFill: {fileID: 8893328575700997150}
   bossHealthBar: {fileID: 5053568594427040898}
-  staminaBar: {fileID: 0}
+  staminaBar: {fileID: 2142331101574206434}
   DashCDRemaining: 0
   dashingTime: 0
   staminaCD: 0

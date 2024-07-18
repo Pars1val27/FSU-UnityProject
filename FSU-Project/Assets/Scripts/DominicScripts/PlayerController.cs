@@ -345,6 +345,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
         UIManager.instance.maxPlayerHP.text = origHP.ToString();
         UIManager.instance.currPlayerMP.text = playerHP.ToString();
+        UIManager.instance.staminaBar.fillAmount = stamina / maxStamina;
         if(playerHP <= 0)
         {
             UIManager.instance.onLose();
