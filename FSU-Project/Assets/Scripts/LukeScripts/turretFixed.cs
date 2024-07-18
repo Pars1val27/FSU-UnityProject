@@ -8,6 +8,7 @@ public class turretFixed : MonoBehaviour, IDamage
     //Luke
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] NavMeshAgent agent;
@@ -17,6 +18,7 @@ public class turretFixed : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem spawnEffect;
     [SerializeField] ParticleSystem deathEffect;
     [SerializeField] GameObject swivel;
+    
 
 
     [Header("----- Attack -----")]
@@ -26,15 +28,24 @@ public class turretFixed : MonoBehaviour, IDamage
     [SerializeField] float rotateSpeed;
 
     bool isshooting;
+    float StartHP;
+
+    Vector3 playerDir;
+    Vector3 playerPos;
 
     void Start()
     {
+        StartHP = HP;
         Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
     private void Update()
     {
+        playerPos = EnemyManager.instance.player.transform.position;
+        playerDir = playerPos - transform.position;
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
         swivel.transform.Rotate(0, rotateSpeed * Time.deltaTime, 0);
         if (!isshooting)
         {
@@ -53,7 +64,7 @@ public class turretFixed : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         flashDamage();
 
         if (HP <= 0)

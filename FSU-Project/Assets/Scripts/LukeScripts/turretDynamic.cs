@@ -9,12 +9,15 @@ public class turretDynamic : MonoBehaviour, IDamage
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] GameObject timeDrop;
 
     [Header("----- Animation's -----")]
+    [SerializeField] Animator anim;
     [SerializeField] Renderer[] model;
     [SerializeField] GameObject swivel;
     [SerializeField] ParticleSystem spark;
@@ -31,19 +34,19 @@ public class turretDynamic : MonoBehaviour, IDamage
     Vector3 playerPos;
 
     bool isshooting;
-    bool canSeePlayer;
-    bool playerInRange;
+    float StartHP;
 
     void Start()
     {
+        StartHP = HP;
         Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
-        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
-        
     }
 
     private void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         faceTarget();
@@ -51,6 +54,7 @@ public class turretDynamic : MonoBehaviour, IDamage
         {
             StartCoroutine(shoot());
         }
+        
     }
 
     void faceTarget()
@@ -63,14 +67,15 @@ public class turretDynamic : MonoBehaviour, IDamage
     {
         isshooting = true;
         yield return new WaitForSeconds(shootRate);
-        Instantiate(projectile, shootPos.position, new Quaternion(swivel.transform.rotation.x, swivel.transform.rotation.y, swivel.transform.rotation.z, swivel.transform.rotation.w));
+        anim.SetTrigger("Shot");
+        Instantiate(projectile, shootPos.position, new Quaternion(shootPos.transform.rotation.x, shootPos.transform.rotation.y, shootPos.transform.rotation.z, shootPos.transform.rotation.w));
         isshooting = false;
     }
 
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         flashDamage();
 
         if (HP <= 0)
@@ -88,6 +93,7 @@ public class turretDynamic : MonoBehaviour, IDamage
     {
         Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
 }

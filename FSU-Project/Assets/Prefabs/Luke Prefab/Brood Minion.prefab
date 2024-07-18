@@ -778,6 +778,7 @@ MonoBehaviour:
   animTranSpeed: 90
   spawnEffect: {fileID: 4527798502645971034, guid: 3d4e524e6fdc96048b9d1014ff564016, type: 3}
   deathEffect: {fileID: 4527798502645971034, guid: f59716cb2b4f6d54691bef8e08af90eb, type: 3}
+  timeDrop: {fileID: 3311477272066090196, guid: abe5d1baa636f1a4b96e5c022ead725b, type: 3}
   damage: 1
   attackRate: 0.5
   sting: {fileID: 8219927686456715519}

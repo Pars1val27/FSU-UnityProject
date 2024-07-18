@@ -8,6 +8,7 @@ public class Kamikaze : MonoBehaviour, IDamage
     //Luke
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
@@ -16,25 +17,29 @@ public class Kamikaze : MonoBehaviour, IDamage
     [Header("----- Animation's -----")]
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] Renderer model;
     [SerializeField] ParticleSystem spark;
     [SerializeField] ParticleSystem spawnEffect;
     [SerializeField] ParticleSystem explodeEffect;
-    [SerializeField] Renderer model;
+    [SerializeField] GameObject timeDrop;
+    
 
 
     [Header("----- Attack -----")]
     [SerializeField] int damage;
     [SerializeField] int attackRate;
-    IDamage dmg;
+    IDamage dmg = null;
 
     bool isAttacking;
     bool playerInRange;
+    float StartHP;
     Vector3 playerDir;
     Vector3 playerPos;
 
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
@@ -43,6 +48,8 @@ public class Kamikaze : MonoBehaviour, IDamage
     // Update is called once per frame
     void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
         float agentSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
@@ -73,7 +80,7 @@ public class Kamikaze : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         flashDamage();
 
         if (HP <= 0)
@@ -91,7 +98,9 @@ public class Kamikaze : MonoBehaviour, IDamage
     {
         Instantiate(explodeEffect, transform.position, transform.rotation);
         Destroy(gameObject);
-        dmg.TakeDamage(damage);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
+        if(dmg != null)
+            dmg.TakeDamage(damage);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
 }

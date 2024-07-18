@@ -9,6 +9,7 @@ public class BMother : MonoBehaviour, IDamage
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
@@ -20,6 +21,7 @@ public class BMother : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] ParticleSystem spawnEffect;
     [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] GameObject timeDrop;
 
 
     [Header("----- Attack -----")]
@@ -33,15 +35,19 @@ public class BMother : MonoBehaviour, IDamage
     bool isshooting;
     bool canSeePlayer;
     bool playerInRange;
+    float StartHP;
 
     void Start()
     {
+        StartHP = HP;
         Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
     }
     private void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
         float agentSpeed = agent.velocity.normalized.magnitude;
         anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
@@ -95,7 +101,7 @@ public class BMother : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -115,6 +121,7 @@ public class BMother : MonoBehaviour, IDamage
     {
         Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
 

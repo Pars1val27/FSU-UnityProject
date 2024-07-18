@@ -13,6 +13,7 @@ public class turretFixedTrap : MonoBehaviour
     [Header("----- Animation's -----")]
     [SerializeField] GameObject swivel;
     [SerializeField] ParticleSystem spawnEffect;
+    
 
 
     [Header("----- Attack -----")]
