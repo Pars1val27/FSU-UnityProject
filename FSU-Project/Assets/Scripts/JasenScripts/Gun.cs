@@ -69,6 +69,15 @@ public class GunScript : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+
+        if (!isShooting)
+        {
+            anim.speed = 1;
+        }
+        else
+        {
+            anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
+        }
     }
 
     public void UpdateAmmoCount()
@@ -79,7 +88,9 @@ public class GunScript : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        
         isShooting = true;
+        //anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
         currAmmo--;
         UpdateAmmoCount();
         RaycastHit hit;
@@ -90,7 +101,6 @@ public class GunScript : MonoBehaviour
             bulletTrace.SetPosition(0, muzzleFlash.transform.position);
             bulletTrace.SetPosition(1, hit.point);*/
 
-            anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
             anim.SetTrigger("Shoot");
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
@@ -140,7 +150,7 @@ public class GunScript : MonoBehaviour
                 Vector3 pos;
                 PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
                 PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));*/
-        anim.speed = 1;
+        //anim.speed = 1;
         anim.SetTrigger("Reload");
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
