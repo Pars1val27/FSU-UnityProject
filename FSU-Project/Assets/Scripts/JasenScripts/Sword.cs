@@ -83,7 +83,12 @@ public class SwordScript : MonoBehaviour
     {
         if (other.name != "Player" && !other.isTrigger)
         {
-            other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
+            IDamage dmg = other.GetComponent<IDamage>();
+
+            if (dmg != null)
+            {
+                dmg.TakeDamage(PlayerController.playerInstance.damage);
+            }
         }
     }
 
