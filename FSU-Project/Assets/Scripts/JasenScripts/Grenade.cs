@@ -10,7 +10,7 @@ public class Grenade : MonoBehaviour
     private float explosionRadius;
     private float explosionForce;
     private int damage;
-    AbilityHandler handler;
+    //AbilityHandler handler;
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip[] explosionSound;
@@ -20,7 +20,7 @@ public class Grenade : MonoBehaviour
     bool hasExploded = false;
     float countdown;
 
-    public AbilityHandler abilityHandler;
+    //public AbilityHandler abilityHandler;
 
     public void Initialize(float delay, float explosionRadius, float explosionForce, int damage)
     {
@@ -34,7 +34,7 @@ public class Grenade : MonoBehaviour
 
     void Start()
     {
-        handler = player.GetComponent<AbilityHandler>();
+        //handler = player.GetComponent<AbilityHandler>();
         grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
     }
@@ -52,7 +52,7 @@ public class Grenade : MonoBehaviour
 
     void Explode()
     {
-        ParticleSystem effect = Instantiate(explosionEffect, transform.position, transform.rotation);
+        ParticleSystem effect = (Instantiate(explosionEffect, transform.position, transform.rotation.normalized));
         effect.Play();
 
         if (grenadeAudio != null && explosionSound != null)
@@ -73,15 +73,15 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
-                ApplyFreezeEffect(nearbyObject.gameObject);
+                //ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
-        Destroy(effect.gameObject, effect.main.duration);
+        Destroy(effect, delay);
         Destroy(gameObject);
     }
 
-    void ApplyFreezeEffect(GameObject target)
+    /*void ApplyFreezeEffect(GameObject target)
     {
 
         if (abilityHandler.HasAbility("FreezeEffect"))
@@ -92,7 +92,7 @@ public class Grenade : MonoBehaviour
                 FreezeAbility.Activate(target);
             }
         }
-    }
+    }*/
 
 
 
