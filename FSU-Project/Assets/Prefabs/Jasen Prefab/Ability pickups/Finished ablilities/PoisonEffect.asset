@@ -17,5 +17,6 @@ MonoBehaviour:
   abilityCost: 3
   uiIcon: {fileID: 0}
   modelPrefab: {fileID: 3953768525008260369, guid: ac6c2eec57d797d45bd81cb9285fe798, type: 3}
-  damageOverTime: 5
-  duration: 1
+  debugAbility: 0
+  poisonDamage: 2
+  duration: 5

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Brute : MonoBehaviour , IDamage, IFireDamage
+public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow, IFreeze
 {
 
     [Header("----- Health -----")]
@@ -42,6 +42,14 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
     bool canSeePlayer;
     bool playerInRange;
     bool isAttacking;
+    bool isSlowed = false;
+    bool isFrozen = false;
+
+    //Slow And Freeze logic
+    float originalSpeed;
+    float origAttackRate;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,71 +61,76 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
         {
             model[i].material.color = Color.white;
         }
+        
+        originalSpeed = agent.speed;
+        origAttackRate = attackRate;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float agentSpeed = agent.velocity.normalized.magnitude;
-        float distance = Vector3.Distance(transform.position, playerPos);
-        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
-        playerPos = EnemyManager.instance.player.transform.position;
-        playerDir = playerPos - transform.position;
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
-
-
-        RaycastHit hit;
-
-
-        if ((Time.time - SavedTime) > attackRate)
+        if (!isFrozen)
         {
-            SavedTime = Time.time;
+            float agentSpeed = agent.velocity.normalized.magnitude;
+            float distance = Vector3.Distance(transform.position, playerPos);
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
+            playerPos = EnemyManager.instance.player.transform.position;
+            playerDir = playerPos - transform.position;
+            angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-            if (distance < 10 && !isAttacking)
+
+
+            RaycastHit hit;
+
+
+            if ((Time.time - SavedTime) > attackRate)
             {
-                isAttacking = false;
-                anim.SetTrigger("Melee");
+                SavedTime = Time.time;
+
+                if (distance < 10 && !isAttacking)
+                {
+                    isAttacking = false;
+                    anim.SetTrigger("Melee");
+                }
+                else if (!isAttacking && canSeePlayer)
+                {
+                    isAttacking = true;
+                    anim.SetTrigger("Shoot");
+                }
             }
-            else if (!isAttacking && canSeePlayer)
+
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir, out hit))
             {
-                isAttacking = true;
-                anim.SetTrigger("Shoot");
+                //Debug.Log(hit.collider.tag);
+                if (hit.collider.CompareTag("Player") && playerInRange)
+                {
+
+                    canSeePlayer = true;
+                    agent.SetDestination(transform.position);
+                    faceTarget();
+                }
+                else
+                {
+                    canSeePlayer = false;
+                    agent.SetDestination(playerPos);
+                }
+
+
+
+
+
             }
         }
-
-        Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir);
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), playerDir, out hit))
-        {
-            Debug.Log(hit.collider.tag);
-            if (hit.collider.CompareTag("Player") && playerInRange)
-            {
-
-                canSeePlayer = true;
-                agent.SetDestination(transform.position);
-                faceTarget();
-            }
-            else
-            {
-                canSeePlayer = false;
-                agent.SetDestination(playerPos);
-            }
-
-
-
-
-
-        }
-
     }
     // Status Effect  Implementaion
     public void ApplyFireDamage(int fireDamage, float duration)
     {
-        Debug.Log("brute Hp" + HP);
+        Debug.Log("brute current Hp" + HP);
         StartCoroutine(FireDamageCoroutine(fireDamage, duration));
     }
 
-    private IEnumerator FireDamageCoroutine(int fireDamage, float duration)
+    IEnumerator FireDamageCoroutine(int fireDamage, float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -129,12 +142,31 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
             yield return new WaitForSeconds(1f);
         }
     }
+    public void ApplyPoisonDamage(int PosionDamage, float duration)
+    {
+        StartCoroutine(PoisonDamageCoroutine(PosionDamage, duration));
+    }
+
+
+    private IEnumerator PoisonDamageCoroutine(int PosionDamage, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            Debug.Log("brute Hp" + HP);
+
+            TakeDamage(PosionDamage);
+            elapsed += 1f;
+            Debug.Log(PosionDamage + " PoisonDamage");
+            yield return new WaitForSeconds(1f);
+        }
+    }
 
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
-        StartCoroutine(flashDamage());
+        
+        StartCoroutine(flashDamage(Color.red));
 
         if (HP <= 0)
         {
@@ -142,6 +174,72 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
         }
     }
 
+    public void ApplySlow(float slowAmount, float duration)
+    {
+        if (!isSlowed)
+        {
+            isSlowed = true;
+            
+            Debug.Log(agent.speed + " normal speed");
+
+            agent.speed /= slowAmount;
+            attackRate /= slowAmount;
+            Debug.Log(agent.speed + " Slow Speed Slow Start ");
+
+            StartCoroutine(SlowCoroutine(duration));
+        }
+    }
+
+    public void RemoveSlow()
+    {
+        isSlowed = false;
+
+        agent.speed = originalSpeed;
+        attackRate = origAttackRate;
+        Debug.Log(agent.speed + " Slow end normal speed");
+
+    }
+    private IEnumerator SlowCoroutine(float duration)
+    {
+
+        yield return new WaitForSeconds(duration);
+        RemoveSlow();
+    }
+
+    
+
+    public void ApplyFreeze(float duration)
+    {
+        if (!isFrozen)
+        {
+            Debug.Log(gameObject.name + " Enemy Frozen");
+            isFrozen = true;
+            for (int i = 0; i < model.Length; i++)
+            {
+                model[i].material.color = Color.blue;
+            }
+            StartCoroutine(FreezeCoroutine(duration));
+        }
+    }
+
+    private IEnumerator FreezeCoroutine(float duration)
+    {
+
+        agent.speed = 0f;
+        anim.enabled = false;
+        
+            yield return new WaitForSeconds(duration);
+        anim.enabled = true;
+        agent.speed = originalSpeed;
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.white;
+        }
+        Debug.Log(gameObject.name + " Enemy Unfrozen");
+        isFrozen = false;
+    }
+
+    //status effect end
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
@@ -154,11 +252,12 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
-    IEnumerator flashDamage()
+    IEnumerator flashDamage(Color input)
     {
+
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.red;
+            model[i].material.color = input;
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -188,13 +287,16 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage
     public void shoot()
     {
         Instantiate(projectile, shootPos.position, transform.rotation);
-        
         isAttacking = false;
-    }
+       
+     }
 
     public void punch()
     {
+        
         Instantiate(attack, attackPos.position, transform.rotation);
         isAttacking = false;
+        
+
     }
 }
