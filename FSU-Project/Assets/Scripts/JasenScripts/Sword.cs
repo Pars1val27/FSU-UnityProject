@@ -27,7 +27,8 @@ public class SwordScript : MonoBehaviour
 
     void Update()
     {
- 
+        anim.SetInteger("AttackNum", Random.Range(0, 6));
+
         if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen)
         {
             StartCoroutine(Attack());
@@ -38,7 +39,6 @@ public class SwordScript : MonoBehaviour
             PlayerController.playerInstance.isBlocking = true;
             PlayerController.playerInstance.stamina -= blockStamCost;
             anim.SetBool("Block", true);
-            anim.SetInteger("AttackNum", 1);
         }
 
         if(Input.GetButtonUp("Fire2") || PlayerController.playerInstance.stamina <= 0)
