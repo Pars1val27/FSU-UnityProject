@@ -33,6 +33,7 @@ namespace AbilitySystem
         private void Start()
         {
             spawnerCollider = GetComponent<Collider>();
+            spawnerCollider = GetComponent<Collider>();
             if (spawnerCollider == null)
             {
                 Debug.LogError("Collider is missing on AbilitySpawner.");

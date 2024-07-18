@@ -10,6 +10,8 @@ public class Grenade : MonoBehaviour
     private float explosionRadius;
     private float explosionForce;
     private int damage;
+    AbilityHandler handler;
+    [SerializeField] GameObject player;
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip[] explosionSound;
     [SerializeField] float explosionSoundVol;
@@ -27,10 +29,12 @@ public class Grenade : MonoBehaviour
         this.explosionForce = explosionForce;
         this.damage = damage;
         countdown = delay;
+        UpdateGrenadeUI();
     }
 
     void Start()
     {
+        handler = player.GetComponent<AbilityHandler>();
         grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
     }
@@ -38,6 +42,7 @@ public class Grenade : MonoBehaviour
     void Update()
     {
         countdown -= Time.deltaTime;
+        UpdateGrenadeUI();
         if (countdown <= 0f && !hasExploded)
         {
             Explode();
@@ -68,7 +73,7 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
-                //ApplyFreezeEffect(nearbyObject.gameObject);
+                ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
@@ -76,24 +81,29 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //void ApplyFreezeEffect(GameObject target)
-    //{
-        
-    //    if (abilityHandler.HasAbility("FreezeEffect"))
-    //    {
-    //        var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
-    //        if (FreezeAbility != null)
-    //        {
-    //            FreezeAbility.Activate(target);
-    //        }
-    //    }
-    //}
+    void ApplyFreezeEffect(GameObject target)
+    {
 
-    
+        if (abilityHandler.HasAbility("FreezeEffect"))
+        {
+            var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
+            if (FreezeAbility != null)
+            {
+                FreezeAbility.Activate(target);
+            }
+        }
+    }
+
+
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    public void UpdateGrenadeUI()
+    {
+        UIManager.instance.grenadeFill.fillAmount = countdown / delay;
     }
 }
