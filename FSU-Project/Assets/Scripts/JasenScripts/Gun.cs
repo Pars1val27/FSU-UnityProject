@@ -13,6 +13,7 @@ public class GunScript : MonoBehaviour
     [SerializeField] float shootSoundVol;
     [SerializeField] GameObject grenadePrefab;
     [SerializeField] AudioSource gunAudio;
+    //[SerializeField] TrailRenderer bulletTrail;
 
     [SerializeField] GameObject hitEffect;
 
@@ -50,7 +51,7 @@ public class GunScript : MonoBehaviour
         }
         if (Input.GetButton("Fire1") && !isShooting && !UIManager.instance.gamePause && currAmmo > 0 && !UIManager.instance.abilityMenuOpen && !isReloading)
         {
-
+           
             StartCoroutine(Shoot());
 
         }
@@ -68,6 +69,15 @@ public class GunScript : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+
+        if (!isShooting)
+        {
+            anim.speed = 1;
+        }
+        else
+        {
+            anim.speed = 1 + (1 - PlayerController.playerInstance.attackSpeed);
+        }
     }
 
     public void UpdateAmmoCount()
@@ -78,6 +88,7 @@ public class GunScript : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        
         isShooting = true;
         currAmmo--;
         UpdateAmmoCount();
@@ -85,14 +96,16 @@ public class GunScript : MonoBehaviour
         StartCoroutine(flashMuzzle());
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward+(new Vector3(Random.Range(-.01f,0.01f), Random.Range(-.01f, 0.01f), Random.Range(-.01f, 0.01f))), out hit, PlayerController.playerInstance.shootDist))
         {
+
+            //TrailRenderer trail = Instantiate(bulletTrail, GrenadePos.position, Quaternion.identity);
+
             anim.SetTrigger("Shoot");
-            anim.speed = anim.speed * (1 + (1 - PlayerController.playerInstance.attackSpeed));
 
             IDamage dmg = hit.collider.GetComponent<IDamage>();
             
             
             if (hit.transform != transform && dmg != null)
-            {
+            {   
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
                 if (hit.collider != null)
                 { 
@@ -129,17 +142,13 @@ public class GunScript : MonoBehaviour
 
     IEnumerator Reload()
     {
+        isShooting = false;
         isReloading = true;
-        Quaternion rot;
-        Vector3 pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.GetLocalPositionAndRotation(out pos, out rot);
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(300, 0, 0));
+        anim.speed = 1;
+        anim.SetTrigger("Reload");
         yield return new WaitForSeconds(reloadTime);
         currAmmo = maxAmmo;
         UpdateAmmoCount();
-        PlayerController.playerInstance.classWeaponInstance.transform.Rotate(new Vector3(0, 0, 0));
-        PlayerController.playerInstance.classWeaponInstance.transform.localPosition = pos;
-        PlayerController.playerInstance.classWeaponInstance.transform.localRotation = rot;
         isReloading = false;
     }
     IEnumerator flashMuzzle()
