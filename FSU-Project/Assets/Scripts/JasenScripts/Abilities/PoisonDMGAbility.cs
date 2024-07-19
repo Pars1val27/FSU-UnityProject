@@ -7,8 +7,10 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "PoisonEffect", menuName = "Abilities/Poison Effect")]
     public class PoisonEffect : Ability
     {
-        public int poisonDamage;
-        public float duration;
+        [Range(1, 5)]
+        [SerializeField] public int poisonDamage;
+        [Range(0, 10)]
+        [SerializeField] public float duration;
 
         public override void Activate(GameObject target)
         {

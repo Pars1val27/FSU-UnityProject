@@ -7,8 +7,10 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "FireEffect", menuName = "Abilities/FireEffect")]
     public class FireEffect : Ability
     {
-        public int fireDamage;
-        public float duration;
+        [Range(1, 10)]
+        [SerializeField] public int fireDamage;
+        [Range(0, 5)]
+        [SerializeField] public float duration;
 
         public override void Activate(GameObject target)
         {

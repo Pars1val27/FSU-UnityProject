@@ -182,8 +182,8 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
             
             Debug.Log(agent.speed + " normal speed");
 
-            agent.speed /= slowAmount;
-            attackRate /= slowAmount;
+            agent.speed *= slowAmount;
+            attackRate *= slowAmount;
             Debug.Log(agent.speed + " Slow Speed Slow Start ");
 
             StartCoroutine(SlowCoroutine(duration));

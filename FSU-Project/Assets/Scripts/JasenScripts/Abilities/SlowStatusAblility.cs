@@ -7,8 +7,11 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "SlowedEffect", menuName = "Abilities/Slowed Effect")]
     public class SlowedEffect : Ability
     {
-        public float slowAmount;
-        public float duration;
+        [Range(0, 1)] 
+        [SerializeField]public float slowAmount;
+
+        [Range(0, 10)]
+        [SerializeField] public float duration;
         public override void Activate(GameObject target)
         {
             if (debugAbility == true)

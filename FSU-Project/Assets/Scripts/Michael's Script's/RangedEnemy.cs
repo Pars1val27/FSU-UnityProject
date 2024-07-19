@@ -96,10 +96,6 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
             }
              
-           
-
-
-
         }
 
     }

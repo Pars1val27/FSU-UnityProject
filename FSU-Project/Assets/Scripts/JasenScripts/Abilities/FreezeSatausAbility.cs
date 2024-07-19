@@ -7,7 +7,8 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "FreezeEffect", menuName = "Abilities/Freeze Effect")]
     public class FreezeEffect : Ability
     {
-        public float duration;
+        [Range(0, 5)]
+        [SerializeField] public float duration;
 
         public override void Activate(GameObject target)
         {

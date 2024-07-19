@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: FreezeEffect
   m_EditorClassIdentifier: 
   abilityName: Freeze
-  ablitiyDisctriptions: 
-  abilityCost: 0
-  uiIcon: {fileID: 0}
+  ablitiyDisctriptions: Sets the targets movement to 0 for the duration of the abliltiy
+  abilityCost: 10
+  uiIcon: {fileID: 21300000, guid: a78829c9f8116cf42b5f0fb1b09be313, type: 3}
   modelPrefab: {fileID: 3953768525008260369, guid: 62b82b7de17a7e34aa7d56c8e015301a, type: 3}
-  duration: 1
+  debugAbility: 0
+  duration: 2
