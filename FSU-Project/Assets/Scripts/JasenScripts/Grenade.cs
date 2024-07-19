@@ -10,6 +10,7 @@ public class Grenade : MonoBehaviour
     private float explosionRadius;
     private float explosionForce;
     private int damage;
+    AbilityHandler handler;
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip[] explosionSound;
     [SerializeField] float explosionSoundVol;
@@ -27,10 +28,12 @@ public class Grenade : MonoBehaviour
         this.explosionForce = explosionForce;
         this.damage = damage;
         countdown = delay;
+        UpdateGrenadeUI();
     }
 
     void Start()
     {
+        handler = AbilityHandler.handlerInstance;
         grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
     }
@@ -38,6 +41,7 @@ public class Grenade : MonoBehaviour
     void Update()
     {
         countdown -= Time.deltaTime;
+        UpdateGrenadeUI();
         if (countdown <= 0f && !hasExploded)
         {
             Explode();
@@ -78,22 +82,27 @@ public class Grenade : MonoBehaviour
 
     //void ApplyFreezeEffect(GameObject target)
     //{
-        
-    //    if (abilityHandler.HasAbility("FreezeEffect"))
+
+    //    foreach (var ability in abilityHandler.abilities)
     //    {
-    //        var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
-    //        if (FreezeAbility != null)
+    //        if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
     //        {
-    //            FreezeAbility.Activate(target);
+    //            Debug.Log("Activating FreezeEffect on target: " + target.name);
+    //            abilityHandler.ApplyFreeze(target, freezeEffect);
     //        }
     //    }
     //}
 
-    
+
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, explosionRadius);
+    }
+
+    public void UpdateGrenadeUI()
+    {
+        UIManager.instance.grenadeFill.fillAmount = countdown / delay;
     }
 }

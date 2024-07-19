@@ -7,16 +7,17 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "PoisonEffect", menuName = "Abilities/Poison Effect")]
     public class PoisonEffect : Ability
     {
-        public float damageOverTime;
+        public int poisonDamage;
         public float duration;
 
         public override void Activate(GameObject target)
         {
-            var poisonDamage = target.GetComponent<IPoisonDamage>();
-            if (poisonDamage != null)
+            if (debugAbility)
             {
-                poisonDamage.ApplyPoisonDamage(damageOverTime, duration);
+                Debug.Log("PoisonEffect Triggered in ability");
             }
+
+            AbilityHandler.handlerInstance.ApplyPoisonDamage(target, this);
         }
     }
 }

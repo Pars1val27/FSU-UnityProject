@@ -31,12 +31,13 @@ public class PlayerController : MonoBehaviour, IDamage
     public int playerHP;
     [Range(1, 50)]
     [SerializeField] public int damage;
-    [Range(0, 10)]
+    [Range(0, 2)]
     [SerializeField] public float attackSpeed;
     [Range(1f, 1000f)]
     [SerializeField] public float shootDist;
     [Range(1, 20)]
     [SerializeField] public int speed;
+    public int baseSpeed;
     [Range(1, 5)]
     [SerializeField] public int sprintMod;
     [Range(1, 3)]
@@ -51,6 +52,17 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] int climbSpeed;
     [Range(1,50)]
     [SerializeField] int gravity;
+
+    [Header("Stamina")]
+    public float stamina;
+    [Range(50,150)]
+    [SerializeField] public float maxStamina;
+    [SerializeField] public float jumpCost;
+    public bool staminaFull;
+    [Range(0,20)]
+    [SerializeField] public float staminaDrain;
+    [Range(0, 20)]
+    [SerializeField] public float staminaRegen;
 
     [Header("Audio")]
     [SerializeField] AudioClip[] audSteps;
@@ -68,6 +80,8 @@ public class PlayerController : MonoBehaviour, IDamage
     [SerializeField] float FOV;
     [SerializeField] float FOVSprintMod;
     [SerializeField] float FOVDashMod;
+    float origFOV;
+    public float currFOV;
 
     int jumpCount;
 
@@ -81,10 +95,8 @@ public class PlayerController : MonoBehaviour, IDamage
     public bool isBlocking;
     public bool isCrouching;
 
-    float origFOV;
-    public float currFOV;
-
     public float dashDuration = 0.2f;
+    [SerializeField] public float interactDist;
 
     Vector3 moveDirection;
     Vector3 playerVelocity;
@@ -103,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerHP = origHP;
         isCoolDown = false;
         deathCam.SetActive(false);
-        abilityHandler = GetComponent<AbilityHandler>();
+        abilityHandler = AbilityHandler.handlerInstance;
     }
 
     // Update is called once per frame
@@ -116,18 +128,38 @@ public class PlayerController : MonoBehaviour, IDamage
         wallClimb();
         EquipClassWeapon();
 
-        //handled in gun.cs
-        /*if (Input.GetButtonDown("Fire1"))
-        {
-            //StartCoroutine(shoot());
-            
-            
-        }
-        */
-        if (Input.GetButton("Dash") && !isDashing)
+        if (Input.GetButtonDown("Dash") && !isDashing)
         {
             StartCoroutine(Dash());
         }
+
+        if (isSprinting && !UIManager.instance.gamePause)
+        {
+            staminaFull = false;
+            stamina -= staminaDrain * Time.deltaTime;
+        }
+
+        if (isBlocking)
+        {
+            staminaFull = false;
+            stamina -= staminaDrain * Time.deltaTime;
+        }
+
+        if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause && !isBlocking)
+        {
+            if(stamina <= maxStamina - 0.01)
+            {
+                stamina += staminaRegen + Time.deltaTime;
+
+                if(stamina >= maxStamina)
+                {
+                    staminaFull = true;
+                }
+            }
+        }
+
+        RaycastHit interactHit;
+        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist);
     }
 
     void Movement()
@@ -141,10 +173,12 @@ public class PlayerController : MonoBehaviour, IDamage
         moveDirection = Input.GetAxis("Horizontal") * transform.right + Input.GetAxis("Vertical") * transform.forward;
         controller.Move(moveDirection * speed * Time.deltaTime);
 
-        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpCount < jumpMax && (stamina >= (maxStamina * jumpCost / maxStamina)))
         {
             if (jumpCount == 0)
             {
+                stamina -= jumpCost;
+                staminaFull = false;
                 jumpCount++;
                 playerVelocity.y = jumpSpeed;
                 aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
@@ -152,6 +186,8 @@ public class PlayerController : MonoBehaviour, IDamage
             //jump modifier to make player go higher on second jump
             else if (jumpCount == 1)
             {
+                stamina -= jumpCost * 1.5f;
+                staminaFull = false;
                 jumpCount++;
                 playerVelocity.y = (jumpSpeed * 1.5f);
                 aud.PlayOneShot(audJumpBoost[Random.Range(0, audJumpBoost.Length)], audJumpBoostVol);
@@ -167,17 +203,25 @@ public class PlayerController : MonoBehaviour, IDamage
 
     void Sprint()
     {
-        if (Input.GetButtonDown("Sprint"))
+
+        if (Input.GetButtonDown("Sprint") && stamina >= 5)
         {
             isSprinting = true;
-            speed *= sprintMod;
+            speed = speed * sprintMod;
             Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
-        else if (Input.GetButtonUp("Sprint"))
+        if (Input.GetButtonUp("Sprint") && isSprinting)
         {
-            speed /= sprintMod;
+            speed = baseSpeed;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+        }
+        if(stamina <= 0 && isSprinting)
+        {
+            speed = baseSpeed;
+            isSprinting = false;
+            Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
+            
         }
     }
     void Crouch()
@@ -208,36 +252,6 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
-
-    //moveed to Gun.cs
-   /* IEnumerator shoot()
-    {
-        isShooting = true;
-        StartCoroutine(flashMuzzle());
-        RaycastHit hit;
-        if(Physics.Raycast(Camera.main.transform.position + new Vector3(0,0,0), Camera.main.transform.forward, out hit, shootDist))
-        {
-            Debug.Log(hit);
-
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-
-            if(hit.transform != transform && dmg != null)
-            {
-                dmg.TakeDamage(shootDmg);
-            }
-        }
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
-    }*/
-
-    /*IEnumerator flashMuzzle()
-    {
-        muzzleFlash.SetActive(true);
-        aud.PlayOneShot(audGun[Random.Range(0, audGun.Length)], audGunVol);
-        yield return new WaitForSeconds(0.1f);
-        muzzleFlash.SetActive(false);
-    }*/
-   
     
     public void TakeDamage(int dmg)
     {
@@ -245,7 +259,7 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             playerHP -= dmg;
             UpdatePlayerUI();
-
+            StartCoroutine(UIManager.instance.FlashDamage());
             if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
             {                  
                 abilityHandler.EnableHPRecovery(1, 5f);
@@ -259,7 +273,7 @@ public class PlayerController : MonoBehaviour, IDamage
             if (playerHP <= 0)
             {
                 deathCam.SetActive(true);
-                UIManager.instance.onLose();
+                StartCoroutine(UIManager.instance.onLose());
             }
         }
     }
@@ -278,10 +292,9 @@ public class PlayerController : MonoBehaviour, IDamage
         aud.PlayOneShot(audDash[Random.Range(0, audDash.Length)], audDashVol);
         isDashing = true;
         UIManager.instance.DashCoolDownFill.fillAmount = 0;
-        UIManager.instance.DashCDRemaining =dashCD;
+        UIManager.instance.DashCDRemaining = dashCD;
         speed *= dashMod;
         Camera.main.fieldOfView = Mathf.Lerp(FOVDashMod, currFOV, 0.2f);
-
         StartCoroutine(DashDuration());
         isCoolDown = true;
         yield return new WaitForSeconds(dashCD);
@@ -303,22 +316,26 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.playerHPBar.fillAmount = (float)playerHP / origHP;
         UIManager.instance.maxPlayerHP.text = origHP.ToString();
         UIManager.instance.currPlayerMP.text = playerHP.ToString();
+        UIManager.instance.staminaBar.fillAmount = stamina / maxStamina;
+        if(playerHP <= 0)
+        {
+            UIManager.instance.onLose();
+            Debug.Log("Lose Menu Called");
+        }
     }
 
     void wallClimb()
     {
         isClimbing = false;
 
-        Debug.DrawRay(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, Color.red);
-
         RaycastHit hit;
-        if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2))
+        if (Physics.Raycast(climbPos.position + new Vector3(0, 0, 0), Camera.main.transform.forward, out hit, 2) && stamina >= 5)
         {
             if (hit.collider.CompareTag("Climbable"))
             {
-                Debug.Log(hit.collider.name);
-
                 isClimbing = true;
+                stamina -= staminaDrain * Time.deltaTime;
+                staminaFull = false;
                 playerVelocity.y = climbSpeed;
 
             }
@@ -347,10 +364,9 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             origHP = 20;
             playerHP = origHP; 
-            UpdatePlayerUI();
-
             speed = 14;
-            attackSpeed = 0.25f;
+            baseSpeed = speed;
+            attackSpeed = 0.5f;
             classWeaponInstance = Instantiate(gun, gunPos.position, gunPos.rotation, gunPos);
             gunScript = classWeaponInstance.GetComponent<GunScript>();
             NotifyAbilityHandler();
@@ -361,8 +377,8 @@ public class PlayerController : MonoBehaviour, IDamage
             origHP = 30;
             playerHP = origHP;
             speed = 20;
-            attackSpeed = 1;
-            shootDist = 2;
+            baseSpeed = speed;
+            attackSpeed = .75f;
             classWeaponInstance = Instantiate(sword, swordPos.position, swordPos.rotation, swordPos);
             swordScript = classWeaponInstance.GetComponent<SwordScript>();
             AbilityManager.Instance.RemoveSpawnableAbility("increaseMaxAmmo");

@@ -7,6 +7,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
 {
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject HealthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
@@ -16,6 +17,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
     [SerializeField] Renderer[] model;
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
+    [SerializeField] ParticleSystem deathEffect;
 
     [Header("----- Attack -----")]
     [SerializeField] Transform attackPos;
@@ -27,13 +29,19 @@ public class SplitSlime : MonoBehaviour ,IDamage
 
     float angleToPlayer;
     float SavedTime = 0;
+    float StartHP;
 
     bool playerInRange;
     bool isAttacking;
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
+        for (int i = 0; i < model.Length; i++)
+        {
+            model[i].material.color = Color.green;
+        }
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
@@ -45,7 +53,8 @@ public class SplitSlime : MonoBehaviour ,IDamage
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        HealthBar.transform.rotation = rot;
         agent.SetDestination(playerPos);
         if ((Time.time - SavedTime) > attackRate && !isAttacking)
         {
@@ -65,11 +74,11 @@ public class SplitSlime : MonoBehaviour ,IDamage
         HP -= amount;
         Debug.Log("got hit");
         StartCoroutine(flashDamage());
-
+        HealthBar.transform.localScale = new Vector3(HP / StartHP * 2, HealthBar.transform.localScale.y, transform.transform.localScale.z);
         if (HP <= 0)
         {
 
-            anim.SetTrigger("Death");
+            Death();
         }
     }
     void faceTarget()
@@ -80,6 +89,7 @@ public class SplitSlime : MonoBehaviour ,IDamage
 
     public void Death()
     {
+        Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(gameObject);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
@@ -87,14 +97,14 @@ public class SplitSlime : MonoBehaviour ,IDamage
     {
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.yellow;
+            model[i].material.color = Color.red;
         }
 
         yield return new WaitForSeconds(0.1f);
 
         for (int i = 0; i < model.Length; i++)
         {
-            model[i].material.color = Color.white;
+            model[i].material.color = Color.green;
         }
 
     }
