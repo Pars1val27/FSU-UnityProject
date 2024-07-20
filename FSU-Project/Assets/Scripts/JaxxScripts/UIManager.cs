@@ -113,6 +113,8 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         SetMenu(menuMain);
         Debug.Log("Set Menu");
+        Audio.audioInstance.PlayBackground(0);
+        Debug.Log("Music set");
     }
     public void statePause()
     {

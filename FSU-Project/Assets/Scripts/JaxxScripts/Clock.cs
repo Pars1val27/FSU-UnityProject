@@ -15,6 +15,7 @@ public class Clock : MonoBehaviour
     float secRemaining;
     float minRemaining;
     public bool timerRunning;
+    bool lowTimerAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +37,12 @@ public class Clock : MonoBehaviour
 
                 Debug.Log("Timer End");
             }
+        }
+        if(remainingTime < 60 && !lowTimerAudio)
+        {
+            lowTimerAudio = true;
+            Audio.audioInstance.PlayLowTime();
+
         }
         if(remainingTime <= 0)
         {
