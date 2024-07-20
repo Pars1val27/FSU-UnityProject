@@ -257,14 +257,32 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!isBlocking)
         {
-            playerHP -= dmg;
-            UpdatePlayerUI();
-            StartCoroutine(UIManager.instance.FlashDamage());
-            if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
+            if (abilityHandler.hasReflectDamage)
+            {
+                //AbilityHandler.handlerInstance.ApplyReflectDamage(damageSource, dmg);
+            }
+
+            if (abilityHandler.hasOneHitShield && !abilityHandler.isOneHitShieldActive)
+            {
+                if (!abilityHandler.hasDamageReduction)
+                {
+                    playerHP -= dmg;
+                }
+                else
+                {
+                    playerHP -= abilityHandler.CalculateReducedDamage(dmg);
+                }
+
+                UpdatePlayerUI();
+                StartCoroutine(UIManager.instance.FlashDamage());
+            }
+
+            if (abilityHandler.hasHPRecovery && !abilityHandler.isHPRecoveryEnabled && playerHP < 10)
             {                  
                 abilityHandler.EnableHPRecovery(1, 5f);
             }
 
+            
             if (!isPlayingHurt)
             {
                 StartCoroutine(isHurtAud());
@@ -275,6 +293,7 @@ public class PlayerController : MonoBehaviour, IDamage
                 deathCam.SetActive(true);
                 StartCoroutine(UIManager.instance.onLose());
             }
+
         }
     }
 

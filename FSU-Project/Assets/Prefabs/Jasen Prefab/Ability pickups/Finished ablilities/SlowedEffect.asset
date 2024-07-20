@@ -18,5 +18,5 @@ MonoBehaviour:
   uiIcon: {fileID: 21300000, guid: 9e8f1c6857158a541946f696e2f3f395, type: 3}
   modelPrefab: {fileID: 3953768525008260369, guid: a8c085edb7b6090498bc0db157a33816, type: 3}
   debugAbility: 0
-  slowAmount: 2
+  slowAmount: 0.75
   duration: 5

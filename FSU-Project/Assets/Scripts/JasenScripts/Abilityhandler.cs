@@ -14,15 +14,34 @@ namespace AbilitySystem
         public SwordScript swordScript;
 
         public List<Ability> abilities = new List<Ability>();
-        public bool isHPRecoveryEnabled = false;
-        private Coroutine hpRecoveryCoroutine;
-        private int recoveryAmount;
-        private float recoveryRate;
 
+
+        //HpRecovery
+        public bool hasHPRecovery = false;
+        public bool isHPRecoveryEnabled = false;
+        public int recoveryAmount;
+        public float recoveryRate;
+
+
+
+        //Status Effects 
         public bool hasFireEffect = false;
         public bool hasPoisonEffect = false;
         public bool hasSlowEffect = false;
         public bool hasFreezeEffect = false;
+        public bool hasDamageReduction = false;
+
+        //Reflect damage
+        public bool hasReflectDamage = false;
+        public float reflectDamagePercentage;
+
+        //reduced damage
+        public bool HasReduseddamage = false;
+        public float ReducedDamagePercentage;
+
+        //One hit shield
+        public bool hasOneHitShield = false;
+        public bool isOneHitShieldActive;
 
         void Start()
         {
@@ -55,25 +74,12 @@ namespace AbilitySystem
             return false;
         }
 
-        public Ability GetAbility(string abilityName)
-        {
-            foreach (var ability in abilities)
-            {
-                if (ability.abilityName == abilityName)
-                {
-                    return ability;
-                }
-            }
-            return null;
-        }
-
-
         public void AddAbility(Ability ability)
         {
             if (!abilities.Contains(ability))
             {
                 Debug.Log(ability.abilityName + " added to Abilities");
-                
+
                 abilities.Add(ability);
 
                 ActivateAbilityFlags(ability);
@@ -89,7 +95,17 @@ namespace AbilitySystem
                 hasSlowEffect = true;
             else if (ability is FreezeEffect)
                 hasFreezeEffect = true;
+            else if (ability is ReflectDamageAbility)
+                hasReflectDamage = true;
+            else if (ability is DamageReductionAbility)
+                hasDamageReduction = true;
+            else if (ability is OneHitShieldAbility)
+                 hasOneHitShield = true;
+
+
+
         }
+
 
         public void ApplyFireDamage(GameObject target, FireEffect fireEffect)
         {
@@ -106,13 +122,13 @@ namespace AbilitySystem
 
         public void ApplyPoisonDamage(GameObject target, PoisonEffect poisonEffect)
         {
-            Debug.Log("ApplyPoisonDamage has been called" );
+            Debug.Log("ApplyPoisonDamage has been called");
             var poisonable = target.GetComponent<IPoisonDamage>();
             if (poisonable != null)
             {
                 poisonable.ApplyPoisonDamage(poisonEffect.poisonDamage, poisonEffect.duration);
             }
-            else 
+            else
             {
                 Debug.Log(target.name + " Can not be Posioned");
             }
@@ -144,6 +160,21 @@ namespace AbilitySystem
                 Debug.Log(target.name + " Can not be Frozen");
             }
         }
+        public void ApplyReflectDamage(GameObject damageSource, int damageAmount)
+        {
+
+            if (hasReflectDamage)
+            {
+                var damageable = damageSource.GetComponent<IDamage>();
+                if (damageable != null)
+                {
+
+                    int reflectedDamage = Mathf.CeilToInt(damageAmount * reflectDamagePercentage / 100);
+                    //damageable.TakeDamage(reflectedDamage, gameObject); 
+                    Debug.Log("Reflect Damage applied to: " + damageSource.name + " for amount: " + reflectedDamage);
+                }
+            }
+        }
 
         public void IncreaseMaxHP(int amount)
         {
@@ -159,6 +190,8 @@ namespace AbilitySystem
 
         public void IncreaseStamina(int amount)
         {
+            playerController.maxStamina += amount;
+            playerController.UpdatePlayerUI();
         }
 
         public void IncreaseDamage(int amount)
@@ -178,43 +211,64 @@ namespace AbilitySystem
             gunScript.UpdateAmmoCount();
         }
 
+        public int CalculateReducedDamage(int damage)
+        {
+            if (hasDamageReduction)
+            {
+                int reducedDamage = Mathf.CeilToInt(damage * (1 - ReducedDamagePercentage / 100f));
+                Debug.Log("Damage reduced by " + ReducedDamagePercentage + "%, new damage: " + reducedDamage);
+                return reducedDamage;
+            }
+            return damage;
+        }
+
         public void EnableHPRecovery(int amount, float rate)
         {
-            recoveryAmount = amount;
-            recoveryRate = rate;
 
-            isHPRecoveryEnabled = true;
-
-            if (hpRecoveryCoroutine == null)
+            if (!isHPRecoveryEnabled)
             {
-                hpRecoveryCoroutine = StartCoroutine(HPRecovery());
+                StartCoroutine(HPRecovery());
+
             }
         }
 
         private IEnumerator HPRecovery()
         {
-            while (isHPRecoveryEnabled)
+            isHPRecoveryEnabled = true;
+            while (playerController.playerHP < playerController.origHP)
             {
                 yield return new WaitForSeconds(recoveryRate);
-                if (playerController.playerHP < playerController.origHP)
+                playerController.playerHP += recoveryAmount;
+                if (playerController.playerHP >= playerController.origHP)
                 {
-                    playerController.playerHP += recoveryAmount;
+                    playerController.playerHP = playerController.origHP;
                     playerController.UpdatePlayerUI();
-                }
-                else
-                {
                     isHPRecoveryEnabled = false;
+                    yield break;
                 }
+                playerController.UpdatePlayerUI();
             }
-            hpRecoveryCoroutine = null;
-        }
-
-        public void DisableHPRecovery()
-        {
             isHPRecoveryEnabled = false;
         }
 
-        
-        
+
+        public void ActivateOneHitShield(OneHitShieldAbility ability)
+        { 
+            StartCoroutine(ShieldRechargeCoroutine(ability.rechargeTime));
+        }
+
+        public void DeactivateOneFreeHitShield()
+        {
+            isOneHitShieldActive = false;
+        }
+
+        private IEnumerator ShieldRechargeCoroutine(float rechargeTime)
+        {
+            yield return new WaitForSeconds(rechargeTime);
+            isOneHitShieldActive = true;
+            Debug.Log("One Free Hit Shield recharged.");
+        }
+
+
     }
 }
