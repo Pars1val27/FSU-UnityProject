@@ -69,14 +69,19 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        gameStarted = false;
     }
      
     private void Start()
     {
-        if(gameStarted)
+        if (gameStarted)
         { return; }
+        else
+        {
             StartCoroutine(MainMenu());
+            gameStarted = true;
             Debug.Log("MainMenu Up");
+        }
 
     }
     // Update is called once per frame
@@ -258,17 +263,13 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator FlashDamage()
     {
-
-        //GameObject test = Instantiate(UIManager.instance.lowHealthIndi);
+        lowHealthIndi.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        lowHealthIndi.SetActive(false);
+        //GameObject damageScreen = Instantiate(UIManager.instance.lowHealthIndi,);
         //Debug.Log(UIManager.instance.lowHealthIndi);
-        //test.SetActive(true);
-        //Destroy(test, 0.1f);
-        //menuActive = lowHealthIndi;
-        //menuActive.SetActive(true);
-        //yield return new WaitForSeconds(0.1f);
-        //menuActive.SetActive(false);
-        //menuActive = null;
-        yield return null;
+        ////damageScreen.SetActive(true);
+        //Destroy(damageScreen, 0.1f);
     }
-    
+
 }
