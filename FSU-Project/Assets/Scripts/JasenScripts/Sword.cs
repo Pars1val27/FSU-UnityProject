@@ -22,6 +22,7 @@ public class SwordScript : MonoBehaviour
 
     void Start()
     {
+        abilityHandler = AbilityHandler.handlerInstance;
         anim = GetComponent<Animator>();
     }
 
