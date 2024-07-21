@@ -424,8 +424,7 @@ MonoBehaviour:
   agent: {fileID: 2994834973987438986}
   timeDrop: {fileID: 3311477272066090196, guid: dd44bff3bcd98084db344b593c2dc733, type: 3}
   anim: {fileID: 3706867000209023759}
-  model:
-  - {fileID: 3632723805583447306}
+  model: {fileID: 3632723805583447306}
   swivel: {fileID: 735147550640610314}
   spark: {fileID: 4527798502645971034, guid: 1e57ef13aad2ebc4c84ccd26f5b05c86, type: 3}
   spawnEffect: {fileID: 4527798502645971034, guid: c83abdc03d03dbc4286476edeedf957d, type: 3}

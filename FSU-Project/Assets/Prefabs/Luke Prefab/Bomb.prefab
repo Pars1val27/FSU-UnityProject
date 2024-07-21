@@ -30404,7 +30404,7 @@ MonoBehaviour:
   explodeEffect: {fileID: 1527107930809258277}
   timeDrop: {fileID: 3311477272066090196, guid: abe5d1baa636f1a4b96e5c022ead725b, type: 3}
   damage: 5
-  attackRate: 0
+  attackRate: 0.5
 --- !u!95 &2751167884004540880
 Animator:
   serializedVersion: 5
