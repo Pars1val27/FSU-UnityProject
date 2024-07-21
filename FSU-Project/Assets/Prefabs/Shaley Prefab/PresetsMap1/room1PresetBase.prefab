@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300957382701292840}
+  - component: {fileID: -3294272336389204294}
   - component: {fileID: 1215820240177204328}
   - component: {fileID: 8901230101429440408}
   - component: {fileID: 4049796002247905827}
@@ -37,6 +38,25 @@ Transform:
   - {fileID: 7489880316693657463}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3294272336389204294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3931855534450948029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e54cdb9a7f5704693f2ca90d2c64d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPoss: []
+  spawnPosHard: []
+  spawnPosStationary: []
+  doors: {fileID: 5441677850719862715, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+  doorColliders: {fileID: 9157402088448566265}
+  doorMoveDist: 3.2
+  doorMoveSpeed: 0
 --- !u!33 &1215820240177204328
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -65,7 +85,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1c432cdda37c08e419cd648e408268ee, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -128,7 +148,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 9.5, y: 1, z: 9.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &379579002035372849
 PrefabInstance:
@@ -194,6 +214,11 @@ PrefabInstance:
 --- !u!4 &5692087814856713972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5456905495872349637, guid: ddc95453e934c9043b974c131c473a94, type: 3}
+  m_PrefabInstance: {fileID: 379579002035372849}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9157402088448566265 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8813871821089775816, guid: ddc95453e934c9043b974c131c473a94, type: 3}
   m_PrefabInstance: {fileID: 379579002035372849}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2773635738257346512

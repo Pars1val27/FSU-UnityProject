@@ -667,6 +667,10 @@ MonoBehaviour:
   - {fileID: 8775025610635339007}
   spawnPosHard: []
   spawnPosStationary: []
+  doors: {fileID: 5904755669138001151}
+  doorColliders: {fileID: 8784759526736720340}
+  doorMoveDist: 3.2
+  doorMoveSpeed: 0
 --- !u!65 &4326835931202672720
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -686,7 +690,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 1, z: 10}
+  m_Size: {x: 9.5, y: 1, z: 9.5}
   m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &3322565105492294863
 GameObject:
@@ -1299,6 +1303,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5456905495872349637, guid: ddc95453e934c9043b974c131c473a94, type: 3}
   m_PrefabInstance: {fileID: 268128588568416540}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8784759526736720340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8813871821089775816, guid: ddc95453e934c9043b974c131c473a94, type: 3}
+  m_PrefabInstance: {fileID: 268128588568416540}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1906534280179577668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1356,6 +1365,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+--- !u!1 &5904755669138001151 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5441677850719862715, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+  m_PrefabInstance: {fileID: 1906534280179577668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6627565437564095459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4723301245708630183, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}

@@ -5,17 +5,12 @@ using UnityEngine;
 
 public class mapScript : MonoBehaviour
 {
-    //the array position is map level - 1
-    [SerializeField] maps[] maps;
-    //public static mapScript instance;
-
     int lastDir;
     int lastRoom;
     int lastChance;
     int roomCount = 0;
     //wallScript currRoom;
     //public GameObject[] roomWalls;
-    public static maps mapLevel;
     Vector3 pos;
     Vector3[] usedRoomPos;
     List<GameObject[]> usedWallPosRoom;
@@ -23,15 +18,14 @@ public class mapScript : MonoBehaviour
 
 void Start()
     {
-        mapLevel = maps[0];
-        usedRoomPos = new Vector3[mapLevel.maxRooms];
+        GameObject player = GameObject.FindWithTag("Player");
+        pos = new Vector3(0, 0, 0);
+        usedRoomPos = new Vector3[mapManager.instance.mapLevel.maxRooms];
         usedWallPosRoom = new List<GameObject[]>();
         usedWallPos = new List<GameObject>();
-        GameObject player = GameObject.FindWithTag("Player");
-        pos = new Vector3(player.transform.position.x, player.transform.position.y - 3, player.transform.position.z);
-        GenerateMap(mapLevel);
+        GenerateMap(mapManager.instance.mapLevel);
         gameManager.instance.surface.BuildNavMesh();
-        UpdateDoors(mapLevel);
+        UpdateDoors(mapManager.instance.mapLevel);
     }
 
     void NextPos(maps mapLevel)
@@ -40,7 +34,7 @@ void Start()
         {
             if (pos == usedRoomPos[posIndex])
             {
-                Debug.Log("find new pos" + pos);
+                //Debug.Log("find new pos" + pos);
                 float moveDist = GetRoomWidth(mapLevel) * 2;
                 int dir = RandDir();
                 Vector3 newPos = pos;
@@ -131,7 +125,7 @@ void Start()
 
     GameObject GenerateWall(maps mapLevel, int dir, float x, float z)
     {
-        GameObject wall = Instantiate(mapLevel.wall);
+        GameObject wall = Instantiate(mapLevel.wall, this.transform);
       
         float wallHeight = (wall.transform.localScale.y) / 2;
         wall.transform.localPosition = new Vector3(x, wallHeight, z) + pos;
@@ -143,7 +137,7 @@ void Start()
     void GenerateRoom(maps mapLevel)
     {
         Debug.Log("spawn room" + pos);
-        GameObject room = Instantiate(RandRoom(mapLevel));
+        GameObject room = Instantiate(RandRoom(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -152,7 +146,7 @@ void Start()
 
     void GenerateRoomBoss(maps mapLevel)
     {
-        GameObject room = Instantiate(RandRoomBoss(mapLevel));
+        GameObject room = Instantiate(RandRoomBoss(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -161,7 +155,7 @@ void Start()
 
     void GenerateRoomShop(maps mapLevel)
     {
-        GameObject room = Instantiate(RandRoomShop(mapLevel));
+        GameObject room = Instantiate(RandRoomShop(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -169,7 +163,7 @@ void Start()
     }
     void GenerateRoomItem(maps mapLevel)
     {
-        GameObject room = Instantiate(RandRoomItem(mapLevel));
+        GameObject room = Instantiate(RandRoomItem(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -177,7 +171,7 @@ void Start()
     }
     void GenerateRoomSpawn(maps mapLevel)
     {
-        GameObject room = Instantiate(RandRoomSpawn(mapLevel));
+        GameObject room = Instantiate(RandRoomSpawn(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
         room.transform.localEulerAngles = new Vector3(0, dir, 0);
@@ -372,7 +366,7 @@ void Start()
 
     GameObject AddDoor(maps mapLevel, GameObject wall)
     {
-        GameObject door = Instantiate(mapLevel.door);
+        GameObject door = Instantiate(mapLevel.door, this.transform);
         door.transform.position = wall.transform.position;
         door.transform.rotation = wall.transform.rotation;
         return door;
