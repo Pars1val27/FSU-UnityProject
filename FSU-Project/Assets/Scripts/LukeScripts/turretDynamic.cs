@@ -9,13 +9,20 @@ public class turretDynamic : MonoBehaviour, IDamage
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] GameObject timeDrop;
 
     [Header("----- Animation's -----")]
+    [SerializeField] Animator anim;
     [SerializeField] Renderer[] model;
+    [SerializeField] GameObject swivel;
+    [SerializeField] ParticleSystem spark;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
 
 
     [Header("----- Attack -----")]
@@ -27,45 +34,49 @@ public class turretDynamic : MonoBehaviour, IDamage
     Vector3 playerPos;
 
     bool isshooting;
-    bool canSeePlayer;
-    bool playerInRange;
+    float StartHP;
 
     void Start()
     {
-        transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
+        StartHP = HP;
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(1);
     }
 
     private void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
+        faceTarget();
         if (!isshooting)
         {
             StartCoroutine(shoot());
         }
+        
     }
 
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
-        transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        swivel.transform.rotation = Quaternion.Lerp(swivel.transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
     }
 
     IEnumerator shoot()
     {
         isshooting = true;
         yield return new WaitForSeconds(shootRate);
-        faceTarget();
-        Instantiate(projectile, shootPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        anim.SetTrigger("Shot");
+        Instantiate(projectile, shootPos.position, new Quaternion(shootPos.transform.rotation.x, shootPos.transform.rotation.y, shootPos.transform.rotation.z, shootPos.transform.rotation.w));
         isshooting = false;
     }
 
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
-        StartCoroutine(flashDamage());
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
+        flashDamage();
 
         if (HP <= 0)
         {
@@ -73,25 +84,16 @@ public class turretDynamic : MonoBehaviour, IDamage
         }
     }
 
-    IEnumerator flashDamage()
+    void flashDamage()
     {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
+        Instantiate(spark, transform.position, transform.rotation);
     }
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
 }

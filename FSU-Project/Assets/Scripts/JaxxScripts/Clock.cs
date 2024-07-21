@@ -15,6 +15,7 @@ public class Clock : MonoBehaviour
     float secRemaining;
     float minRemaining;
     public bool timerRunning;
+    bool lowTimerAudio;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +38,12 @@ public class Clock : MonoBehaviour
                 Debug.Log("Timer End");
             }
         }
+        if(remainingTime < 60 && !lowTimerAudio)
+        {
+            lowTimerAudio = true;
+            Audio.audioInstance.PlayLowTime();
+
+        }
         if(remainingTime <= 0)
         {
             UIManager.instance.onTimeLose();
@@ -55,10 +62,11 @@ public class Clock : MonoBehaviour
         Debug.Log("Timer Stop");
     }
 
-    public void EditTIme(int seconds)
+    public void EditTIme(float seconds)
     {
         remainingTime += seconds;
         Debug.Log("Time Changed");
+        UpdateTimer();
     }
 
     public void UpdateTimer()
@@ -67,6 +75,12 @@ public class Clock : MonoBehaviour
         secRemaining = ((int)remainingTime % 60);
         minText.text = minRemaining.ToString("00");
         secText.text = secRemaining.ToString("00");
-       
+    }
+
+    public float GetRemainingTime()
+    {
+        //Debug.Log("GetRemainingTime called. Remaining time: " + remainingTime);
+        return remainingTime;
+
     }
 }

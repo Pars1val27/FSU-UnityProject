@@ -13,44 +13,45 @@ public class SwordScript : MonoBehaviour
     [SerializeField] float attackSoundVol;
     [SerializeField] ParticleSystem attackEffect;
 
-    [SerializeField] float blockCooldown;
     [SerializeField] float blockDuration;
+    [SerializeField] float blockStamCost;
 
     private Animator anim;
 
     public bool isAttacking;
-    public bool isBlockReady;
 
     void Start()
     {
         anim = GetComponent<Animator>();
-        isBlockReady = true;
     }
 
     void Update()
     {
-        //if (Time.time >= nextAttackTime)
-        //{
-            if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen)
-            {
-                StartCoroutine(Attack());
-                //nextAttackTime = Time.time + 1f / PlayerController.playerInstance.attackSpeed;
-            }
-        //}
+        anim.SetInteger("AttackNum", Random.Range(0, 6));
 
-        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && isBlockReady && UIManager.instance.abilityMenuOpen)
+        if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen)
+        {
+            StartCoroutine(Attack());
+        }
+
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && !UIManager.instance.abilityMenuOpen && PlayerController.playerInstance.stamina >= blockStamCost)
         {
             PlayerController.playerInstance.isBlocking = true;
+            PlayerController.playerInstance.stamina -= blockStamCost;
             anim.SetBool("Block", true);
-            StartCoroutine(BlockDuration());
-            StartCoroutine(BlockCooldown());
+        }
+
+        if(Input.GetButtonUp("Fire2") || PlayerController.playerInstance.stamina <= 0)
+        {
+            PlayerController.playerInstance.isBlocking = false;
+            anim.SetBool("Block", false);
         }
     }
 
     IEnumerator Attack()
     {
         isAttacking = true;
-        //aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
+        aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
 
         if (PlayerController.playerInstance.attackSpeed < 1)
         {
@@ -64,16 +65,6 @@ public class SwordScript : MonoBehaviour
             attackEffect.Play();
         }
 
-        /*RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.forward, out hit, range))
-        {
-            IDamage dmg = hit.collider.GetComponent<IDamage>();
-            if (dmg != null)
-            {
-                dmg.TakeDamage(damage);
-            }
-        }*/
-
         yield return new WaitForSeconds(PlayerController.playerInstance.attackSpeed);
 
         isAttacking = false;
@@ -83,33 +74,12 @@ public class SwordScript : MonoBehaviour
     {
         if (other.name != "Player" && !other.isTrigger)
         {
-            other.GetComponent<IDamage>().TakeDamage(PlayerController.playerInstance.damage);
+            IDamage dmg = other.GetComponent<IDamage>();
+
+            if (dmg != null)
+            {
+                dmg.TakeDamage(PlayerController.playerInstance.damage);
+            }
         }
     }
-
-    IEnumerator BlockDuration()
-    {
-        /*if (Input.GetButtonUp("Fire2")) {
-            yield return new WaitForSeconds(0);
-            PlayerController.playerInstance.isBlocking = false;
-            anim.SetBool("Block", false);
-        }*/
-        yield return new WaitForSeconds(blockDuration);
-        PlayerController.playerInstance.isBlocking = false;
-        anim.SetBool("Block", false);
-
-    }
-
-    IEnumerator BlockCooldown()
-    {
-        isBlockReady = false;
-        yield return new WaitForSeconds(blockCooldown);
-        isBlockReady = true;
-    }
-
-    /*void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, range);
-    }*/
 }

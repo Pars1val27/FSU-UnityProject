@@ -1,7 +1,10 @@
+using AbilitySystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -24,47 +27,62 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menuControls;
     [SerializeField] GameObject menuInventory;
     [SerializeField] GameObject itemMenu;
-    [SerializeField] GameObject lowHealthIndi;
+    [SerializeField] public GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
     [SerializeField] public GameObject loadingScreen;
 
     [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
+    [SerializeField] TMP_Text totalKills;
     [SerializeField] public TMP_Text ammoMax;
     [SerializeField] public TMP_Text ammoCur;
     [SerializeField] public TMP_Text maxPlayerHP;
     [SerializeField] public TMP_Text currPlayerMP;
+    [SerializeField] public TMP_Text bossName;
 
     [Header("----Image----")]
     public Image playerHPBar;
     public Image DashCoolDownFill;
     public Image bossHealthBar;
+    public Image staminaBar;
+    public Image grenadeFill;
 
 
     [Header("----CoolDowns")]
     public float DashCDRemaining;
     public float dashingTime;
+    public float staminaCD;
 
     [Header("----Bools----")]
     public bool gamePause;
     public bool classMele;
     public bool classGunner;
     public bool abilityMenuOpen;
+    public bool gameStarted;
 
     [Header("----Values----")]
     [SerializeField] float lowHealthPercentage;
+    [SerializeField] public int enemiesKilled;
 
     public int enemyCount;
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
+        gameStarted = false;
     }
-
+     
     private void Start()
     {
-        StartCoroutine(MainMenu());
-        Debug.Log("MainMenu Up");
+        if (gameStarted)
+        { return; }
+        else
+        {
+            StartCoroutine(MainMenu());
+            gameStarted = true;
+            Debug.Log("MainMenu Up");
+        }
+
     }
     // Update is called once per frame
     void Update()
@@ -87,10 +105,7 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        if (playerHPBar.fillAmount <= playerHPBar.fillAmount * lowHealthPercentage) 
-        {
-            SetMenu(lowHealthIndi);
-        }
+        
     }
 
     public IEnumerator MainMenu()
@@ -98,6 +113,8 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         SetMenu(menuMain);
         Debug.Log("Set Menu");
+        Audio.audioInstance.PlayBackground(0);
+        Debug.Log("Music set");
     }
     public void statePause()
     {
@@ -105,7 +122,7 @@ public class UIManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        Debug.Log("Menu Open");
+        Debug.Log("Game State Paused");
     }
 
     public void stateUnpause()
@@ -117,7 +134,7 @@ public class UIManager : MonoBehaviour
         menuActive.SetActive(gamePause);
         inerface.SetActive(true);
         menuActive = null;
-        Debug.Log("Menu Close");
+        Debug.Log("Game State Unpause");
     }
 
     public void UpdateEnemyDisplay(int amount)
@@ -125,18 +142,21 @@ public class UIManager : MonoBehaviour
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
         
-        
-
     }
 
     public void onTimeLose()
     {
         SetMenu(menuTimeLose);
+        Debug.Log("Time lose Set");
     }
 
-    public void onLose()
+    public IEnumerator onLose()
     {
-        SetMenu(menuHPLose);
+        yield return new WaitForSeconds(.3f);
+        statePause();
+        menuActive = menuHPLose;
+        menuActive.SetActive(gamePause);
+        Debug.Log("HP lose Set");
     }
 
     public void onWin()
@@ -165,9 +185,10 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void StartBoss()
+    public void StartBoss(string name)
     {
        bossHealth.SetActive(true);
+        bossName.text = name;
     }
     public void BossWin()
     {
@@ -192,6 +213,7 @@ public class UIManager : MonoBehaviour
             menuActive = menu;
             statePause();
             menuActive.SetActive(true);
+        
     }
 
     public void SetPrevMenu()
@@ -219,8 +241,12 @@ public class UIManager : MonoBehaviour
     public void AbilityMenuOff() 
     {
         abilityMenuOpen = false;
-        menuActive.SetActive(false);
+        if (menuActive != null)
+        {
+            menuActive.SetActive(false);
+        }
         menuActive = null;
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -229,6 +255,7 @@ public class UIManager : MonoBehaviour
         if(menuActive != menuInventory && !gamePause)
         { 
             SetMenu(menuInventory);
+            AbilitiesUI.abilitiesUI.ShowAbilityInventory();
         }
         else if(menuActive == menuInventory)
         {
@@ -236,5 +263,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    
+    public IEnumerator FlashDamage()
+    {
+        lowHealthIndi.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        lowHealthIndi.SetActive(false);
+        //GameObject damageScreen = Instantiate(UIManager.instance.lowHealthIndi,);
+        //Debug.Log(UIManager.instance.lowHealthIndi);
+        ////damageScreen.SetActive(true);
+        //Destroy(damageScreen, 0.1f);
+    }
+
 }

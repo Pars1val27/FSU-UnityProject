@@ -7,6 +7,7 @@ namespace AbilitySystem
     public class AbilityManager : MonoBehaviour
     {
         public static AbilityManager Instance;
+        
         public Dictionary<string, Ability> abilities = new Dictionary<string, Ability>();
         [SerializeField] public List<string> spawnableAbilities = new List<string>();
         void Start()

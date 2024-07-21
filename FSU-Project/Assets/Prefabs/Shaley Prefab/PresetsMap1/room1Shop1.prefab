@@ -480,17 +480,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5558750f8c6e6d42bee38179e8c1215, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  availableAbilities:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  availableAbilities: []
   pickupRadius: 5
   spawnOnStart: 0
   IsDebugAbility: 0
-  spawnCondition: 1
+  spawnCondition: 0
   bossSpawnPoint: {fileID: 0}
   spawnPoints:
   - {fileID: 2280679027150648310}

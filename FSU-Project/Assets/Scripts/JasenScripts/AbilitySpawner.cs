@@ -9,7 +9,6 @@ namespace AbilitySystem
         bool collisionOccured;
         public enum SpawnCondition
         {
-
             Store,
             ItemRoom,
             BossRoom
@@ -31,9 +30,9 @@ namespace AbilitySystem
         private Collider spawnerCollider;
 
 
-
         private void Start()
         {
+            spawnerCollider = GetComponent<Collider>();
             spawnerCollider = GetComponent<Collider>();
             if (spawnerCollider == null)
             {
@@ -81,8 +80,7 @@ namespace AbilitySystem
         {
             // either use boss spawner or get boss position 
             SpawnAbilities(new Transform[] { bossSpawnPoint }, false);
-          
-            
+
         }
 
 
@@ -99,7 +97,7 @@ namespace AbilitySystem
                         GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation);
                         AbilityPickup pickupScript = pickup.AddComponent<AbilityPickup>();
                         pickupScript.ability = ability;
-                        pickupScript.isItemPickup = !isStore;  // Set the pickup type
+                        pickupScript.isItemPickup = !isStore;  
                         pickupScript.IsDebugAbility = IsDebugAbility;
 
                         SphereCollider pickupCollider = pickup.AddComponent<SphereCollider>();
@@ -149,7 +147,6 @@ namespace AbilitySystem
             }
             if (!spawnOnStart && other.CompareTag("Player"))
             {
-
                 SpawnPickups();
                 if (spawnerCollider != null)
                 {
