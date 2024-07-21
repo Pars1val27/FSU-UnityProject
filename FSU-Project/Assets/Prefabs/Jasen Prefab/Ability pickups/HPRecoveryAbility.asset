@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8b0c74364b152f47a6c2a84204cdf06, type: 3}
   m_Name: HPRecoveryAbility
   m_EditorClassIdentifier: 
-  abilityName: 
-  ablitiyDisctriptions: 
-  abilityCost: 0
+  abilityName: HpRecovery
+  ablitiyDisctriptions: The player X hp every X untill they are fully Healed
+  abilityCost: 5
   uiIcon: {fileID: 0}
   modelPrefab: {fileID: 0}
-  hpRecoveryAmount: 0
-  tickInterval: 0
+  debugAbility: 0
+  hpRecoveryAmount: 1
+  tickInterval: 3

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace AbilitySystem
@@ -94,12 +95,13 @@ namespace AbilitySystem
                     Ability ability = AbilityManager.Instance.GetAbility(abilityName);
                     if (ability != null && ability.modelPrefab != null)
                     {
-                        GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation);
+                        GameObject pickup = Instantiate(ability.modelPrefab, spawnPoint.position, spawnPoint.rotation );
+                        //transform.pickup.tag = "Ability";
                         AbilityPickup pickupScript = pickup.AddComponent<AbilityPickup>();
                         pickupScript.ability = ability;
                         pickupScript.isItemPickup = !isStore;  
                         pickupScript.IsDebugAbility = IsDebugAbility;
-
+                        
                         SphereCollider pickupCollider = pickup.AddComponent<SphereCollider>();
                         pickupCollider.isTrigger = true;
                         pickupCollider.radius = pickupRadius;

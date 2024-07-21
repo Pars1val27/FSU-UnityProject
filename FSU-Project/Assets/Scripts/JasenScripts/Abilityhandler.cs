@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text;
 using UnityEngine;
 
 namespace AbilitySystem
@@ -33,7 +33,7 @@ namespace AbilitySystem
 
         //Reflect damage
         public bool hasReflectDamage = false;
-        public float reflectDamagePercentage;
+        public int reflectDamagePercentage;
 
         //reduced damage
         public bool HasReduseddamage = false;
@@ -42,6 +42,7 @@ namespace AbilitySystem
         //One hit shield
         public bool hasOneHitShield = false;
         public bool isOneHitShieldActive;
+        public int shieldRecharge;
 
         void Start()
         {
@@ -112,7 +113,7 @@ namespace AbilitySystem
             var flammable = target.GetComponent<IFireDamage>();
             if (flammable != null)
             {
-                flammable.ApplyFireDamage(fireEffect.fireDamage, fireEffect.duration);
+                flammable.ApplyFireDamage(fireEffect.fireDamage, fireEffect.duration, fireEffect.fireEffectPrefab);
             }
             else
             {
@@ -126,7 +127,7 @@ namespace AbilitySystem
             var poisonable = target.GetComponent<IPoisonDamage>();
             if (poisonable != null)
             {
-                poisonable.ApplyPoisonDamage(poisonEffect.poisonDamage, poisonEffect.duration);
+                poisonable.ApplyPoisonDamage(poisonEffect.poisonDamage, poisonEffect.duration, poisonEffect.PoisonEffectPrefab);
             }
             else
             {
@@ -135,12 +136,12 @@ namespace AbilitySystem
 
         }
 
-        public void ApplySlow(GameObject target, SlowedEffect slowEffect)
+        public void ApplySlow(GameObject target, SlowedEffect slowEffect )
         {
             var slowable = target.GetComponent<ISlow>();
             if (slowable != null)
             {
-                slowable.ApplySlow(slowEffect.slowAmount, slowEffect.duration);
+                slowable.ApplySlow(slowEffect.slowAmount, slowEffect.duration, slowEffect.slowEffectPrefab);
             }
             else
             {
@@ -153,7 +154,7 @@ namespace AbilitySystem
             var freezable = target.GetComponent<IFreeze>();
             if (freezable != null)
             {
-                freezable.ApplyFreeze(freezeEffect.duration);
+                freezable.ApplyFreeze(freezeEffect.duration, freezeEffect.freezeEffectPrefab);
             }
             else
             {
@@ -162,18 +163,19 @@ namespace AbilitySystem
         }
         public void ApplyReflectDamage(GameObject damageSource, int damageAmount)
         {
+            //Removed
 
-            if (hasReflectDamage)
-            {
-                var damageable = damageSource.GetComponent<IDamage>();
-                if (damageable != null)
-                {
+            //if (hasReflectDamage)
+            //{
+            //    var damageable = damageSource.GetComponent<IDamage>();
+            //    if (damageable != null)
+            //    {
 
-                    int reflectedDamage = Mathf.CeilToInt(damageAmount * reflectDamagePercentage / 100);
-                    //damageable.TakeDamage(reflectedDamage, gameObject); 
-                    Debug.Log("Reflect Damage applied to: " + damageSource.name + " for amount: " + reflectedDamage);
-                }
-            }
+            //        int reflectedDamage = Mathf.CeilToInt(damageAmount * reflectDamagePercentage / 100);
+            //        //damageable.TakeDamage(reflectedDamage, gameObject); 
+            //        Debug.Log("Reflect Damage applied to: " + damageSource.name + " for amount: " + reflectedDamage);
+            //    }
+            //}
         }
 
         public void IncreaseMaxHP(int amount)
@@ -224,17 +226,13 @@ namespace AbilitySystem
 
         public void EnableHPRecovery(int amount, float rate)
         {
-
-            if (!isHPRecoveryEnabled)
-            {
-                StartCoroutine(HPRecovery());
-
-            }
+            isHPRecoveryEnabled = true;
+            StartCoroutine(HPRecovery());
         }
 
         private IEnumerator HPRecovery()
         {
-            isHPRecoveryEnabled = true;
+            
             while (playerController.playerHP < playerController.origHP)
             {
                 yield return new WaitForSeconds(recoveryRate);
@@ -250,25 +248,28 @@ namespace AbilitySystem
             }
             isHPRecoveryEnabled = false;
         }
-
-
-        public void ActivateOneHitShield(OneHitShieldAbility ability)
-        { 
-            StartCoroutine(ShieldRechargeCoroutine(ability.rechargeTime));
-        }
-
-        public void DeactivateOneFreeHitShield()
+        public void ActivateOneHitShield()
         {
-            isOneHitShieldActive = false;
-        }
-
-        private IEnumerator ShieldRechargeCoroutine(float rechargeTime)
-        {
-            yield return new WaitForSeconds(rechargeTime);
+            Debug.Log("one hit shild active");
             isOneHitShieldActive = true;
-            Debug.Log("One Free Hit Shield recharged.");
         }
 
+        public void DeactivateOneHitShield()
+        {
+            if (isOneHitShieldActive)
+            {
+                Debug.Log("one hit shild used");
+                isOneHitShieldActive = false;
+                StartCoroutine(RechargeShield());
+            }
+        }
 
+        private IEnumerator RechargeShield()
+        {
+            yield return new WaitForSeconds(shieldRecharge);
+            isOneHitShieldActive = true;
+            Debug.Log("one hit shild Recharged");
+
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "DamageReductionAbility", menuName = "Abilities/Damage Reduction")]
     public class DamageReductionAbility : Ability
     {
-        [SerializeField] public float reductionPercentage;
+        [Range(1,100)] [SerializeField] public float reductionPercentage;
 
         public override void Activate(GameObject target)
         {

@@ -14,7 +14,7 @@ namespace AbilitySystem
             var abilityHandler = target.GetComponent<AbilityHandler>();
             if (abilityHandler != null)
             {
-                abilityHandler.reflectDamagePercentage = reflectDamagePercentage;
+                //abilityHandler.reflectDamagePercentage = reflectDamagePercentage;
             }
         }
     }

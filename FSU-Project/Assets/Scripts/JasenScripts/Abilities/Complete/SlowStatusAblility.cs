@@ -12,6 +12,8 @@ namespace AbilitySystem
 
         [Range(0, 10)]
         [SerializeField] public float duration;
+
+        [SerializeField ]public GameObject slowEffectPrefab;
         public override void Activate(GameObject target)
         {
             if (debugAbility == true)

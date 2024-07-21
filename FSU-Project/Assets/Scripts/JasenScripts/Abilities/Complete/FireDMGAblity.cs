@@ -11,6 +11,7 @@ namespace AbilitySystem
         [SerializeField] public int fireDamage;
         [Range(0, 5)]
         [SerializeField] public float duration;
+        [SerializeField] public GameObject fireEffectPrefab;
 
         public override void Activate(GameObject target)
         {

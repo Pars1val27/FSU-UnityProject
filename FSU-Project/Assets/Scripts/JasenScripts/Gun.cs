@@ -115,7 +115,7 @@ public class GunScript : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    Debug.Log("Applying status effects to: " + hit.collider.name);
+                    //Debug.Log("Applying status effects to: " + hit.collider.name);
                     ApplyStatusEffects(hit.collider.gameObject);
                 }
                 // else { Debug.Log("ApplyStatus Hit Collider null"); }
@@ -178,7 +178,7 @@ public class GunScript : MonoBehaviour
     }
     public void ApplyStatusEffects(GameObject target)
     {
-        Debug.Log(abilityHandler.abilities);
+        //Debug.Log(abilityHandler.abilities);
         foreach (var ability in abilityHandler.abilities)
         {
             if (ability is FireEffect fireEffect )
@@ -193,13 +193,19 @@ public class GunScript : MonoBehaviour
             }
             if (ability is SlowedEffect slowEffect )
             {
-                Debug.Log("Activating SlowEffect on target: " + target.name);
-                abilityHandler.ApplySlow(target, slowEffect);
+                if (!abilityHandler.hasFreezeEffect)
+                {
+                    Debug.Log("Activating SlowEffect on target: " + target.name);
+                    abilityHandler.ApplySlow(target, slowEffect);
+                }
+
             }
             if (ability is FreezeEffect freezeEffect)
             {
+                
                 Debug.Log("Activating FreezeEffect on target: " + target.name);
                 abilityHandler.ApplyFreeze(target, freezeEffect);
+
             }
         }
     }

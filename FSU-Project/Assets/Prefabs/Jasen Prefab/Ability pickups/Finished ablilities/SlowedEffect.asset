@@ -20,3 +20,4 @@ MonoBehaviour:
   debugAbility: 0
   slowAmount: 0.75
   duration: 5
+  slowEffectPrefab: {fileID: 1829240620930676029, guid: d14e1e96edc97e746855f4143d5ff06f, type: 3}

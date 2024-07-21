@@ -11,7 +11,7 @@ namespace AbilitySystem
         [SerializeField] public int poisonDamage;
         [Range(0, 10)]
         [SerializeField] public float duration;
-
+        [SerializeField] public GameObject PoisonEffectPrefab;
         public override void Activate(GameObject target)
         {
             if (debugAbility)

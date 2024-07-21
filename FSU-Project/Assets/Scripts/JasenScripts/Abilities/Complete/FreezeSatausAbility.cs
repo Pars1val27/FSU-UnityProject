@@ -10,6 +10,7 @@ namespace AbilitySystem
         [Range(0, 5)]
         [SerializeField] public float duration;
 
+        [SerializeField] public GameObject freezeEffectPrefab;
         public override void Activate(GameObject target)
         {
             if (debugAbility)
