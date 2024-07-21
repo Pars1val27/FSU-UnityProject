@@ -101,8 +101,11 @@ public class SwordScript : MonoBehaviour
             }
             if (ability is SlowedEffect slowEffect && abilityHandler.hasSlowEffect)
             {
-                Debug.Log("Activating SlowEffect on target: " + target.name);
-                abilityHandler.ApplySlow(target, slowEffect);
+                if (!abilityHandler.hasFreezeEffect)
+                {
+                    Debug.Log("Activating SlowEffect on target: " + target.name);
+                    abilityHandler.ApplySlow(target, slowEffect);
+                }
             }
             if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
             {
