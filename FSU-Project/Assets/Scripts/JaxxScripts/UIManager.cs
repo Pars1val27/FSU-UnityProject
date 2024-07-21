@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] float lowHealthPercentage;
     [SerializeField] public int enemiesKilled;
 
+
     public int enemyCount;
     // Start is called before the first frame update
     void Awake()
@@ -278,9 +279,16 @@ public class UIManager : MonoBehaviour
         //Destroy(damageScreen, 0.1f);
     }
 
-    public void StartCredits()
-    {
-       
+    //public void StartCredits()
+    //{
+    //   creditsPage.SetActive(true);
+    //    StartCoroutine(WaitForCredits());
+    //    creditsPage.SetActive(false);
         
+    //}
+
+    IEnumerator WaitForCredits()
+    {
+        yield return new WaitForSeconds(20);
     }
 }
