@@ -11,7 +11,6 @@ public class Grenade : MonoBehaviour
     private float explosionForce;
     private int damage;
     AbilityHandler handler;
-    [SerializeField] GameObject player;
     [SerializeField] ParticleSystem explosionEffect;
     [SerializeField] AudioClip[] explosionSound;
     [SerializeField] float explosionSoundVol;
@@ -34,7 +33,7 @@ public class Grenade : MonoBehaviour
 
     void Start()
     {
-        handler = player.GetComponent<AbilityHandler>();
+        handler = AbilityHandler.handlerInstance;
         grenadeAudio = GetComponent<AudioSource>();
         countdown = delay;
     }
@@ -73,7 +72,7 @@ public class Grenade : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(damage);
-                ApplyFreezeEffect(nearbyObject.gameObject);
+                //ApplyFreezeEffect(nearbyObject.gameObject);
             }
         }
 
@@ -81,18 +80,18 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void ApplyFreezeEffect(GameObject target)
-    {
+    //void ApplyFreezeEffect(GameObject target)
+    //{
 
-        if (abilityHandler.HasAbility("FreezeEffect"))
-        {
-            var FreezeAbility = abilityHandler.GetAbility("FreezeEffect");
-            if (FreezeAbility != null)
-            {
-                FreezeAbility.Activate(target);
-            }
-        }
-    }
+    //    foreach (var ability in abilityHandler.abilities)
+    //    {
+    //        if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
+    //        {
+    //            Debug.Log("Activating FreezeEffect on target: " + target.name);
+    //            abilityHandler.ApplyFreeze(target, freezeEffect);
+    //        }
+    //    }
+    //}
 
 
 

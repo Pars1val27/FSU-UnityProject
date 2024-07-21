@@ -9,38 +9,38 @@ public interface ISlow
 }
 
 /*
-float originalSpeed;
-float origAttackRate
+    float originalSpeed;
+    float origAttackRate
 
-float attackRate;
-float slowMultiplier;
+    float attackRate;
+    float slowMultiplier;
 
 //declare this in start after navMesh Agent
-originalSpeed = agent.speed;
-origAttackRate = attackRate;
+    originalSpeed = agent.speed;
+    origAttackRate = attackRate;
 
-public void ApplySlow(float slowAmount, float duration)
-    {
-        if (!isSlowed)
+    public void ApplySlow(float slowAmount, float duration)
         {
-            isSlowed = true;
-            slowMultiplier = slowAmount;
-            agent.speed *= slowAmount;
-            attackRate *= slowAmount;
-            StartCoroutine(SlowCoroutine(duration));
+            if (!isSlowed)
+            {
+                isSlowed = true;
+                slowMultiplier = slowAmount;
+                agent.speed *= slowAmount;
+                attackRate *= slowAmount;
+                StartCoroutine(SlowCoroutine(duration));
+            }
         }
-    }
 
-    public void RemoveSlow()
-    {
-        isSlowed = false;
-        agent.speed = originalSpeed;
-        attackRate = origAttackRate;
+        public void RemoveSlow()
+         {
+            isSlowed = false;
+            agent.speed = originalSpeed;
+            attackRate = origAttackRate;
         
-    }
+        }
      private IEnumerator SlowCoroutine(float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        RemoveSlow();
-    }
+        {
+            yield return new WaitForSeconds(duration);
+            RemoveSlow();
+        }
 */

@@ -9,14 +9,14 @@ namespace AbilitySystem
     {
         public float slowAmount;
         public float duration;
-
         public override void Activate(GameObject target)
         {
-            var slow = target.GetComponent<ISlow>();
-            if (slow != null)
+            if (debugAbility == true)
             {
-                slow.ApplySlow(slowAmount, duration);
+                Debug.Log("slowedEffect Triggered in ability");
+
             }
+            AbilityHandler.handlerInstance.ApplySlow(target, this);
         }
     }
 }

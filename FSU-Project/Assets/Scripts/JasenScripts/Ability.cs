@@ -11,7 +11,8 @@ namespace AbilitySystem
         [SerializeField] public float abilityCost;
         [SerializeField] public Sprite uiIcon;
         [SerializeField] public GameObject modelPrefab;
-        
+        [SerializeField] public bool debugAbility;
+
 
         public abstract void Activate(GameObject target);
     }

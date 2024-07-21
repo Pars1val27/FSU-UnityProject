@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IPoisonDamage 
 {
-    void ApplyPoisonDamage(float poisonDamage, float duration);
+    void ApplyPoisonDamage(int poisonDamage, float duration);
 }
 
 /*

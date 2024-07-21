@@ -57,7 +57,7 @@ public class AbilitiesUI : MonoBehaviour
         if (isItemRoom)
         {
             //purchaseButton.gameObject.SetActive(true);
-            purchaseButton.GetComponentInChildren<TMP_Text>().text = "PickUP";
+            purchaseButton.GetComponentInChildren<TMP_Text>().text = "Pick Up";
             shownPrice.SetActive(false);
         }
         purchaseButton.onClick.RemoveAllListeners();
