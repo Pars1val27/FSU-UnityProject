@@ -685,7 +685,7 @@ MonoBehaviour:
   - {fileID: 239292083549524604}
   - {fileID: 2439782286863532544}
   spawn: {fileID: 8838781959634469216, guid: ea0b3d48178ee3644b8b9212b4fa9fc1, type: 3}
-  spawnRate: 300
+  spawnRate: 3
 --- !u!95 &6401301444132422667
 Animator:
   serializedVersion: 5
