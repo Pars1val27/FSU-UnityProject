@@ -20,16 +20,9 @@ MonoBehaviour:
   - {fileID: 7477869764841173441, guid: a894001310e0f554489570a15d9bad71, type: 3}
   rooms:
   - {fileID: 3108702657213628595, guid: cc649290d13adc8479721338c07b98b4, type: 3}
-  - {fileID: 3108702657213628595, guid: 5b46b810c85891c4d9e3862e1b5ebec4, type: 3}
-  - {fileID: 3108702657213628595, guid: 5adb1c9c19eb5cb4c94b8610f66c4c01, type: 3}
-  - {fileID: 3108702657213628595, guid: 94f91540fbd9fad4fafa794d3ff8d8d8, type: 3}
-  - {fileID: 3108702657213628595, guid: d16a0d9e8dca0ad4189ec024828a122e, type: 3}
-  - {fileID: 3108702657213628595, guid: 4a4268ac92202c74986b9473658a180c, type: 3}
-  - {fileID: 3108702657213628595, guid: f6a7213bcaf4663419805c97aa17de27, type: 3}
-  - {fileID: 3108702657213628595, guid: 0bf7032a6544e9949929e60d72fa03bd, type: 3}
-  - {fileID: 3108702657213628595, guid: a754c4164ce98e945b4887e50a40ca66, type: 3}
-  - {fileID: 3108702657213628595, guid: c54fd3e4dda6e2849beabf0db244f0cf, type: 3}
   roomBosses:
+  - {fileID: 4549397048724166214, guid: ee67084f88d675043b946cfc6164e11c, type: 3}
+  bossArenas:
   - {fileID: 3108702657213628595, guid: fbd3960c4095b7b4883d32870f6a20fb, type: 3}
   maxRooms: 4
   level: 1

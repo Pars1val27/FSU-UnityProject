@@ -51,7 +51,7 @@ public class SwordScript : MonoBehaviour
     IEnumerator Attack()
     {
         isAttacking = true;
-        //aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
+        aud.PlayOneShot(attackSound[Random.Range(0, attackSound.Length)], attackSoundVol);
 
         if (PlayerController.playerInstance.attackSpeed < 1)
         {
