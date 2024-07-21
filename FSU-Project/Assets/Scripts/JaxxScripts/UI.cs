@@ -17,6 +17,7 @@ public class UI : MonoBehaviour
         StartCoroutine(UIManager.instance.StartingMenu());
         Debug.Log("Class Select");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gameManager.instance.player.transform.position = new Vector3(0, 4, 0);
         //UIManager.instance.bossHealth.SetActive(false);
         UIManager.instance.stateUnpause();
     }
