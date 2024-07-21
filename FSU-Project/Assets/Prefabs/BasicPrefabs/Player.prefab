@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 8815374632065002912}
   - component: {fileID: 7823584667624931867}
   m_Layer: 14
-  m_Name: Quad
+  m_Name: Player Map Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -698,12 +698,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342979499909458283}
+  m_GameObject: {fileID: 9087085058946635055}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.207, z: 0.011}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 4377413321258789308}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -713,7 +713,7 @@ MeshFilter:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342979499909458283}
+  m_GameObject: {fileID: 9087085058946635055}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8815374632065002912
 MeshRenderer:
@@ -721,7 +721,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342979499909458283}
+  m_GameObject: {fileID: 9087085058946635055}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
@@ -763,7 +763,7 @@ MeshCollider:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342979499909458283}
+  m_GameObject: {fileID: 9087085058946635055}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -819,6 +819,8 @@ Transform:
   - {fileID: 4949162200189842116}
   - {fileID: 6298429543223233534}
   - {fileID: 4914802275234252090}
+  - {fileID: 3533934892022457076}
+  - {fileID: 6738972960560990140}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5454422006058903454
