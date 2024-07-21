@@ -8,6 +8,7 @@ public class bossArenaScript : MonoBehaviour
     void Start()
     {
         RandEnemyBoss(spawnPos);
+        UIManager.instance.StartBoss("Shenlong");
     }
     void RandEnemyBoss(Transform spawnPos)
     {
