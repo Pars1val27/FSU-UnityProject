@@ -64,7 +64,7 @@ MonoBehaviour:
   currAmmo: 0
   maxAmmo: 25
   reloadTime: 3
-  grenadeThrowForce: 20
+  grenadeThrowForce: 50
   delay: 1.5
   explosionRadius: 3
   explosionForce: 5

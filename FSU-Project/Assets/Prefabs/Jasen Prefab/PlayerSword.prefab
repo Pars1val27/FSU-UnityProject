@@ -52,7 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityHandler: {fileID: 0}
   SwordCollider: {fileID: 4821672371264454631}
-  aud: {fileID: 0}
+  aud: {fileID: 1492563096712884332}
   attackSound:
   - {fileID: 8300000, guid: bc0b5f06fcf217e499f1682cf726345a, type: 3}
   - {fileID: 8300000, guid: 690993e4cf4504d44b5c45ef3088e15e, type: 3}

@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
     [SerializeField] public GameObject loadingScreen;
+    [SerializeField] GameObject creditsPage;
 
     [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
@@ -69,14 +70,19 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        gameStarted = false;
     }
      
     private void Start()
     {
-        if(gameStarted)
+        if (gameStarted)
         { return; }
+        else
+        {
             StartCoroutine(MainMenu());
+            gameStarted = true;
             Debug.Log("MainMenu Up");
+        }
 
     }
     // Update is called once per frame
@@ -89,10 +95,12 @@ public class UIManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(gamePause);
+                Audio.audioInstance.PauseMusic();
             }
             else if(menuActive == menuPause)
             {
                 stateUnpause();
+                Audio.audioInstance.PlayMusic();
             }
         }
 
@@ -108,6 +116,8 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
         SetMenu(menuMain);
         Debug.Log("Set Menu");
+        Audio.audioInstance.PlayBackground(0);
+        Debug.Log("Music set");
     }
     public void statePause()
     {
@@ -182,6 +192,7 @@ public class UIManager : MonoBehaviour
     {
        bossHealth.SetActive(true);
         bossName.text = name;
+        Audio.audioInstance.PlayBoss(0);
     }
     public void BossWin()
     {
@@ -258,17 +269,18 @@ public class UIManager : MonoBehaviour
 
     public IEnumerator FlashDamage()
     {
-
-        //GameObject test = Instantiate(UIManager.instance.lowHealthIndi);
+        lowHealthIndi.SetActive(true);
+        yield return new WaitForSeconds(.1f);
+        lowHealthIndi.SetActive(false);
+        //GameObject damageScreen = Instantiate(UIManager.instance.lowHealthIndi,);
         //Debug.Log(UIManager.instance.lowHealthIndi);
-        //test.SetActive(true);
-        //Destroy(test, 0.1f);
-        //menuActive = lowHealthIndi;
-        //menuActive.SetActive(true);
-        //yield return new WaitForSeconds(0.1f);
-        //menuActive.SetActive(false);
-        //menuActive = null;
-        yield return null;
+        ////damageScreen.SetActive(true);
+        //Destroy(damageScreen, 0.1f);
     }
-    
+
+    public void StartCredits()
+    {
+       
+        
+    }
 }

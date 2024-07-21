@@ -6,12 +6,17 @@ using UnityEngine.UI;
 
 public class Audio : MonoBehaviour
 {
+
+    static public Audio audioInstance;
     [Header("----Audios----")]
     [SerializeField] AudioMixer audioMixer;
-    [SerializeField] AudioSource aud;
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource sfxSource;
     [SerializeField] AudioClip[] clickSounds;
     [SerializeField] AudioClip[] Background;
     [SerializeField] AudioClip[] Boss;
+    [SerializeField] AudioClip[] sliderSounds;
+    [SerializeField] AudioClip lowTime;
 
     [Header("----Sliders----")]
     [SerializeField] Slider masterSlider;
@@ -25,6 +30,7 @@ public class Audio : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioInstance = this;
         if (PlayerPrefs.HasKey("MasterVolume") || PlayerPrefs.HasKey("MusicVolume") || PlayerPrefs.HasKey("SFXVolume"))
         {
             LoadVolume();
@@ -77,17 +83,41 @@ public class Audio : MonoBehaviour
 
     public void PlayClicks()
     {
-        aud.PlayOneShot(clickSounds[Random.Range(0, clickSounds.Length)], sfxVol);
+        sfxSource.PlayOneShot(clickSounds[Random.Range(0, clickSounds.Length)], sfxVol);
         Debug.Log("Click Sound Played");
     }
 
-    public void PlayBackground()
+    public void PlayBackground(int index)
     {
-        aud.PlayOneShot(Background[Random.Range(0, Background.Length)], musicVol);
+        musicSource.clip = Background[index];
+        musicSource.Play();
     }
 
     public void PlayBoss(int index)
+    { 
+        musicSource.clip = Boss[index];
+        musicSource.Play();
+    }
+
+    public void PlaySlider()
     {
-        aud.PlayOneShot(Boss[index], musicVol);
+        sfxSource.clip = sliderSounds[Random.Range(0, sliderSounds.Length)];
+        sfxSource.Play();
+    }
+
+    public void PlayLowTime()
+    {
+        musicSource.clip = lowTime;
+        musicSource.Play();
+    }
+
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+    }
+
+    public void PlayMusic()
+    {
+        musicSource.UnPause();
     }
 }

@@ -64,7 +64,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
 
      
 
-        RaycastHit hit;
+      
 
 
         if ((Time.time - SavedTime) > shootRate && angleToPlayer < shootAngle && !isshooting)
@@ -79,6 +79,7 @@ public class RangedEnemy : MonoBehaviour , IDamage
             }
 
         }
+        RaycastHit hit;
 
         if (Physics.Raycast(new Vector3(transform.position.x,transform.position.y +1,transform.position.z), playerDir, out hit))
         {
