@@ -20,8 +20,6 @@ public class mapManager : MonoBehaviour
 
     private void Start()
     {
-        //map = Instantiate(mapObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 1));
-        //PlayerController.playerInstance.transform.position += new Vector3(0, 3, 0);
         mapLevel = maps[0];
     }
 
