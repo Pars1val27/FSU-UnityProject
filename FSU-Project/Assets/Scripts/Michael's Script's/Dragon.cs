@@ -14,12 +14,11 @@ public class Dragon : MonoBehaviour , IDamage
     [SerializeField] Animator anim;
     [SerializeField] int animTranSpeed;
     [SerializeField] Renderer[] model;
+    [SerializeField] GameObject FireBreathAir;
+    [SerializeField] GameObject FireBreathGround;
     [Header("Attack")]
-    [SerializeField] float FlyRate;
+    
     [SerializeField] float FireRate;
-    [SerializeField] float BiteRate;
-    [SerializeField] float WingRate;
-
     [SerializeField] GameObject fireAttackAir;
     [SerializeField] GameObject fireAttackGround;
     [SerializeField] GameObject biteObject;
@@ -29,74 +28,59 @@ public class Dragon : MonoBehaviour , IDamage
     Vector3 playerDir;
 
     float maxHP;
+    int RandNum;
 
     bool isFly;
     bool isFire;
+    bool isLanding;
    
     bool isDying;
+    bool isInAnim;
 
     bool playerInRange;
 
 
     float SavedTime;
-
-    float currInterval;
-  
-
-    int randAction;
-
-    bool[] actions;
     // Update is called once per frame
     void Start()
     {
-        actions = new bool[4];
+        
         UIManager.instance.UpdateEnemyDisplay(1);
-        for (int i = 0; i < actions.Length; i++) { actions[i] = false; }
-        SetRand();
-        actions[randAction] = true;
-        currInterval = 10;
+       
+       
+      
+        
         maxHP = HP;
     }
     void Update()
     { 
         playerDir = EnemyManager.instance.player.transform.position - transform.position;
-        if((Time.time - SavedTime) > FireRate && !isDying)
+        if(((Time.time - SavedTime) > FireRate) && !isDying && !isInAnim)
         {
-            Debug.Log("in list");
-            if (actions[0] == true)
-            {
-                Debug.Log("in fire");
-              
-               
-                anim.SetTrigger("Fire");
-            }
-            else if (actions[1] == true)
-            {
-                Debug.Log("in fly");
-               
-               
-                anim.SetTrigger("Fly");
-            }
-            else if (actions[2] == true && playerInRange)
-            {
-                Debug.Log("in bite");
+            isInAnim = true;
+          RandNum = Random.Range(0, 2);
+            if(!playerInRange)
+                switch (RandNum)
+                {
+                    case 0:
+                        
+                        anim.SetTrigger("Fly");
+                        break;
+                    case 1:
+                        anim.SetTrigger("Fire");
+                        break;
                 
-               
-                anim.SetTrigger("Bite");
-            }
-            else if (actions[3] == true && playerInRange)
-            {
-                Debug.Log("in wing");
-               
-                actions[3] = false;
-                anim.SetTrigger("Wing");
-            }
-            else
-            {
-                for (int i = 0; i < actions.Length; i++) { actions[i] = false; }
-                Debug.Log("in else");
-                SetRand();
-            }
+                }
+            if(playerInRange)
+               // switch (RandNum)
+                //{
+                    //case 0:
+                        anim.SetTrigger("Bite");
+                       // break;
+                   // case 1:
+                       // anim.SetTrigger("Wing");
+                      //  break;
+               // }
             SavedTime = Time.time;
 
 
@@ -105,7 +89,14 @@ public class Dragon : MonoBehaviour , IDamage
 
         if(!isFire)
             faceTarget();
-        
+        if (isFly && !isLanding)
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, 30, transform.position.z), 0.5f * Time.deltaTime);
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x, 0, transform.position.z), 1.5f * Time.deltaTime);
+        }
     }
 
     public void TakeDamage(int amount)
@@ -127,6 +118,7 @@ public class Dragon : MonoBehaviour , IDamage
     {
         Quaternion rot = Quaternion.LookRotation(new Vector3(playerDir.x, 0, playerDir.z));
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * faceTargetSpeed);
+        
     }
     public void Death()
     {
@@ -139,20 +131,33 @@ public class Dragon : MonoBehaviour , IDamage
     {
         isFire = true;
         if (isFly)
+        {
+            FireBreathAir.SetActive(true);
             fireAttackAir.SetActive(true);
+            
+        }
         else
+        {
+            FireBreathGround.SetActive(true);
             fireAttackGround.SetActive(true);
+        }
+            
     } 
     public void FireDone()
     {
-      
-        if(isFly)
+
+        if (isFly)
+        {
+            FireBreathAir.SetActive(false);
             fireAttackAir.SetActive(false);
+            isLanding = true;
+        }
+            
         else
         {
+            FireBreathGround.SetActive(false);
             fireAttackGround.SetActive(false);
-            SetRand();
-            actions[0] = false;
+           isInAnim = false;
         }
         isFire = false;
         
@@ -160,32 +165,34 @@ public class Dragon : MonoBehaviour , IDamage
     }
     public void Fly()
     {
-      isFly = true;
+       isFly = true;
     }
 
     public void Land()
     {
-        isFly = false;
-        SetRand();
-        actions[1] = false;
        
+        isFly = false;
+        isLanding = false;
+
     }
     public void Bite()
     {
         Instantiate(biteObject, BitePos.position,transform.rotation);
-        SetRand();
-        actions[2] = false;
+        
         
     }
-    public void Wing()
+    /*public void Wing()
     {
         if (playerInRange)
         {
-            CharacterController player = EnemyManager.instance.player.GetComponent<CharacterController>();
-            player.SimpleMove(playerDir * 10);
+            EnemyManager.instance.player.GetComponent<Rigidbody>().AddForce(playerDir * 40, ForceMode.Impulse);
         }
-        actions[3] = false;
-        SetRand();
+        
+      
+    }*/
+    public void LeaveAnim()
+    {
+        isInAnim = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -217,9 +224,5 @@ public class Dragon : MonoBehaviour , IDamage
         }
 
     }
-    void SetRand()
-    {
-        randAction = Random.Range(0,actions.Length);
-        actions[randAction] = true;
-    }
+    
 }
