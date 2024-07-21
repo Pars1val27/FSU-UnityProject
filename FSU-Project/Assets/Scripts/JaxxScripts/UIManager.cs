@@ -30,6 +30,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject lowHealthIndi;
     [SerializeField] public GameObject bossHealth;
     [SerializeField] public GameObject loadingScreen;
+    [SerializeField] GameObject creditsPage;
 
     [Header("----Text----")]
     [SerializeField] TMP_Text enemyCountText;
@@ -94,10 +95,12 @@ public class UIManager : MonoBehaviour
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(gamePause);
+                Audio.audioInstance.PauseMusic();
             }
             else if(menuActive == menuPause)
             {
                 stateUnpause();
+                Audio.audioInstance.PlayMusic();
             }
         }
 
@@ -189,6 +192,7 @@ public class UIManager : MonoBehaviour
     {
        bossHealth.SetActive(true);
         bossName.text = name;
+        Audio.audioInstance.PlayBoss(0);
     }
     public void BossWin()
     {
@@ -274,4 +278,9 @@ public class UIManager : MonoBehaviour
         //Destroy(damageScreen, 0.1f);
     }
 
+    public void StartCredits()
+    {
+       
+        
+    }
 }

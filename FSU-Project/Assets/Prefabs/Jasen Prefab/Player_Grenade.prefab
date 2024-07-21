@@ -146,10 +146,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb4f0134bb99c864490def81fa8d72ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
   explosionEffect: {fileID: 5577594427048162303, guid: 0ca8a684824a1034da8811d7b4551333, type: 3}
   explosionSound:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  explosionSpeedVol: 1
+  explosionSoundVol: 0
   abilityHandler: {fileID: 0}

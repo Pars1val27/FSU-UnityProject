@@ -9977,7 +9977,7 @@ MonoBehaviour:
   HP: 5
   HealthBar: {fileID: 1492923593164927846}
   model: []
-  DeathEffect: {fileID: 4527798502645971034, guid: ccb07ae76921e134ebee0642ef267265, type: 3}
+  DeathEffect: {fileID: 4527798502645971034, guid: 2cdc42140e199f04f8cbc4e6f549db67, type: 3}
   HitEffect: {fileID: 4527798502645971034, guid: 41dd26495e215844aa830b7134510eef, type: 3}
   spawnPOS:
   - {fileID: 1623024040815245377}

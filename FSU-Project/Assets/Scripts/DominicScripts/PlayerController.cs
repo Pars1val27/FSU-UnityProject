@@ -159,7 +159,10 @@ public class PlayerController : MonoBehaviour, IDamage
         }
 
         RaycastHit interactHit;
-        Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist);
+        if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist))
+        {
+
+        }
     }
 
     void Movement()
