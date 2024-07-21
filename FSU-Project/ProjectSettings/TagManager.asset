@@ -11,6 +11,7 @@ TagManager:
   - ArenaSpawns
   - Wall
   - Door
+  - Ability
   layers:
   - Default
   - TransparentFX

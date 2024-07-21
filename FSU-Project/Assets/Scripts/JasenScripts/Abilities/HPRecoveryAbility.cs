@@ -13,7 +13,8 @@ namespace AbilitySystem
             var abilityHandler = target.GetComponent<AbilityHandler>();
             if (abilityHandler != null)
             {
-                abilityHandler.EnableHPRecovery(hpRecoveryAmount, tickInterval);
+                abilityHandler.recoveryAmount = hpRecoveryAmount;
+                abilityHandler.recoveryAmount = hpRecoveryAmount;
             }
         }
     }

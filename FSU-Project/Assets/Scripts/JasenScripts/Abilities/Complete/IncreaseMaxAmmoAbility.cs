@@ -8,7 +8,8 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "IncreaseMaxAmmoAbility", menuName = "Abilities/Increase Max Ammo")]
     public class IncreaseMaxAmmoAbility : Ability
     {
-        public int ammoIncreaseAmount;
+        [Range(1, 25)]
+        [SerializeField] public int ammoIncreaseAmount;
 
         public override void Activate(GameObject target)
         {

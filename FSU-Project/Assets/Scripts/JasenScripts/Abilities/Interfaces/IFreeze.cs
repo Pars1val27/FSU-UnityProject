@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IFreeze 
 {
-    void ApplyFreeze(float duration);
+    void ApplyFreeze(float duration, GameObject fireEffect);
 }
 /*
 create bool 
