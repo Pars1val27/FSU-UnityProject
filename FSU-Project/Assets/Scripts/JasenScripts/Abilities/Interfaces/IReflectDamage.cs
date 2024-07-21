@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IReflectDamage
 {   
-   void ApplyReflectDamage(int damage);
+   void ApplyReflectDamage( int damage);
 }
 

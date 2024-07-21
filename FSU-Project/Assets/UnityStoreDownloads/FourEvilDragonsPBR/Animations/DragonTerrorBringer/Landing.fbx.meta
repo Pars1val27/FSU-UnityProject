@@ -537,7 +537,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: 
+    motionNodeName: DragonMesh
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
@@ -581,6 +581,13 @@ ModelImporter:
       events:
       - time: 0.93037933
         functionName: Land
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: LeaveAnim
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

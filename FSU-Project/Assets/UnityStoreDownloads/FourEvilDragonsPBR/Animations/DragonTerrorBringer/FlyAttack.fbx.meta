@@ -537,7 +537,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: 
+    motionNodeName: DragonMesh
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 

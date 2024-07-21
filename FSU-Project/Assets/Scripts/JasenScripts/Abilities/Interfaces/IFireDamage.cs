@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IFireDamage
 {
-    void ApplyFireDamage(int fireDamage, float duration);
+    void ApplyFireDamage(int fireDamage, float duration , GameObject fireEffect);
 }
 /*
  public void ApplyFireDamage(float damageOverTime, float duration)

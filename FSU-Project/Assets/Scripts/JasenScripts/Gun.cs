@@ -115,7 +115,7 @@ public class GunScript : MonoBehaviour
 
                 if (hit.collider != null)
                 {
-                    Debug.Log("Applying status effects to: " + hit.collider.name);
+                    //Debug.Log("Applying status effects to: " + hit.collider.name);
                     ApplyStatusEffects(hit.collider.gameObject);
                 }
                 // else { Debug.Log("ApplyStatus Hit Collider null"); }
@@ -178,28 +178,34 @@ public class GunScript : MonoBehaviour
     }
     public void ApplyStatusEffects(GameObject target)
     {
-        Debug.Log(abilityHandler.abilities);
+        //Debug.Log(abilityHandler.abilities);
         foreach (var ability in abilityHandler.abilities)
         {
-            if (ability is FireEffect fireEffect && abilityHandler.hasFireEffect)
+            if (ability is FireEffect fireEffect )
             {
                 Debug.Log("Activating FireEffect on target: " + target.name);
                 abilityHandler.ApplyFireDamage(target, fireEffect);
             }
-            if (ability is PoisonEffect poisonEffect && abilityHandler.hasPoisonEffect)
+            if (ability is PoisonEffect poisonEffect )
             {
                 Debug.Log("Activating PoisonEffect on target: " + target.name);
                 abilityHandler.ApplyPoisonDamage(target, poisonEffect);
             }
-            if (ability is SlowedEffect slowEffect && abilityHandler.hasSlowEffect)
+            if (ability is SlowedEffect slowEffect )
             {
-                Debug.Log("Activating SlowEffect on target: " + target.name);
-                abilityHandler.ApplySlow(target, slowEffect);
+                if (!abilityHandler.hasFreezeEffect)
+                {
+                    Debug.Log("Activating SlowEffect on target: " + target.name);
+                    abilityHandler.ApplySlow(target, slowEffect);
+                }
+
             }
-            if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
+            if (ability is FreezeEffect freezeEffect)
             {
+                
                 Debug.Log("Activating FreezeEffect on target: " + target.name);
                 abilityHandler.ApplyFreeze(target, freezeEffect);
+
             }
         }
     }
