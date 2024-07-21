@@ -163,9 +163,11 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             if (interactHit.collider.CompareTag("Ability"))
             {
+                UIManager.instance.AbilityMenuOn();
+
                 if (Input.GetButtonDown("Interact"))
                 {
-
+                    AbilitiesUI.abilitiesUI.OnButtonPressed();
                 }
             }
         }
