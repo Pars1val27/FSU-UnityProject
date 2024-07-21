@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface ISlow
 {
-    void ApplySlow(float slowAmount, float duration);
+    void ApplySlow(float slowAmount, float duration, GameObject SlowEffect);
     void RemoveSlow();
 }
 

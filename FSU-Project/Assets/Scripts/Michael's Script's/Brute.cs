@@ -117,20 +117,19 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
                 }
 
 
-
-
-
             }
         }
     }
     // Status Effect  Implementaion
-    public void ApplyFireDamage(int fireDamage, float duration)
+    public void ApplyFireDamage(int fireDamage, float duration, GameObject fireEffect)
     {
         Debug.Log("brute current Hp" + HP);
-        StartCoroutine(FireDamageCoroutine(fireDamage, duration));
+        GameObject FireEffect = Instantiate(fireEffect, transform.position, Quaternion.identity, transform);
+        FireEffect.transform.SetParent(transform);
+        StartCoroutine(FireDamageCoroutine(fireDamage, duration, FireEffect));
     }
 
-    IEnumerator FireDamageCoroutine(int fireDamage, float duration)
+    IEnumerator FireDamageCoroutine(int fireDamage, float duration, GameObject FireEffect)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -140,15 +139,19 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
             elapsed += 1f;
             Debug.Log(fireDamage + " FireDamage");
             yield return new WaitForSeconds(1f);
+            
         }
+        Destroy(FireEffect);
     }
-    public void ApplyPoisonDamage(int PosionDamage, float duration)
+    public void ApplyPoisonDamage(int PosionDamage, float duration, GameObject poisonEffect)
     {
-        StartCoroutine(PoisonDamageCoroutine(PosionDamage, duration));
+        GameObject PoisonEffect = Instantiate(poisonEffect, transform.position, Quaternion.identity, transform);
+        PoisonEffect.transform.SetParent(transform);
+        StartCoroutine(PoisonDamageCoroutine(PosionDamage, duration, PoisonEffect ));
     }
 
 
-    private IEnumerator PoisonDamageCoroutine(int PosionDamage, float duration)
+    private IEnumerator PoisonDamageCoroutine(int PosionDamage, float duration,GameObject PoisonEffect)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -159,7 +162,9 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
             elapsed += 1f;
             Debug.Log(PosionDamage + " PoisonDamage");
             yield return new WaitForSeconds(1f);
+            
         }
+        Destroy(PoisonEffect);
     }
 
     public void TakeDamage(int amount)
@@ -174,7 +179,7 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
         }
     }
 
-    public void ApplySlow(float slowAmount, float duration)
+    public void ApplySlow(float slowAmount, float duration, GameObject slowEffect)
     {
         if (!isSlowed)
         {
@@ -182,47 +187,50 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
             
             Debug.Log(agent.speed + " normal speed");
 
-            agent.speed /= slowAmount;
-            attackRate /= slowAmount;
+            agent.speed *= slowAmount;
+            attackRate *= slowAmount;
             Debug.Log(agent.speed + " Slow Speed Slow Start ");
 
-            StartCoroutine(SlowCoroutine(duration));
+            GameObject SlowEffect = Instantiate(slowEffect, transform.position, Quaternion.identity, transform);
+            SlowEffect.transform.SetParent(transform);
+            SlowEffect.transform.localScale = Vector3.one;
+            StartCoroutine(SlowCoroutine(duration, SlowEffect));
         }
     }
+     private IEnumerator SlowCoroutine(float duration,GameObject SlowEffect)
+    {
 
+        yield return new WaitForSeconds(duration);
+        RemoveSlow();
+        Destroy(SlowEffect);
+    }
     public void RemoveSlow()
     {
         isSlowed = false;
 
         agent.speed = originalSpeed;
         attackRate = origAttackRate;
+        
         Debug.Log(agent.speed + " Slow end normal speed");
 
     }
-    private IEnumerator SlowCoroutine(float duration)
-    {
-
-        yield return new WaitForSeconds(duration);
-        RemoveSlow();
-    }
+   
 
     
 
-    public void ApplyFreeze(float duration)
+    public void ApplyFreeze(float duration, GameObject freezeEffect)
     {
         if (!isFrozen)
         {
             Debug.Log(gameObject.name + " Enemy Frozen");
             isFrozen = true;
-            for (int i = 0; i < model.Length; i++)
-            {
-                model[i].material.color = Color.blue;
-            }
-            StartCoroutine(FreezeCoroutine(duration));
+            GameObject FreezeEffect = Instantiate(freezeEffect, transform.position, Quaternion.identity, transform);
+            FreezeEffect.transform.SetParent(transform);
+            StartCoroutine(FreezeCoroutine(duration, FreezeEffect));
         }
     }
 
-    private IEnumerator FreezeCoroutine(float duration)
+    private IEnumerator FreezeCoroutine(float duration, GameObject FreeezEffect)
     {
 
         agent.speed = 0f;
@@ -236,6 +244,7 @@ public class Brute : MonoBehaviour , IDamage, IFireDamage, IPoisonDamage, ISlow,
             model[i].material.color = Color.white;
         }
         Debug.Log(gameObject.name + " Enemy Unfrozen");
+        Destroy(FreeezEffect);
         isFrozen = false;
     }
 

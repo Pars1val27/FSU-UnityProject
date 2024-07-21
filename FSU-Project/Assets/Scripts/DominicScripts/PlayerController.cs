@@ -115,7 +115,16 @@ public class PlayerController : MonoBehaviour, IDamage
         playerHP = origHP;
         isCoolDown = false;
         deathCam.SetActive(false);
-        abilityHandler = AbilityHandler.handlerInstance;
+        
+        //abilityHandler = AbilityHandler.handlerInstance;
+        //if (abilityHandler == null)
+        //{
+        //    Debug.LogError("AbilityHandler is not assigned!");
+        //}
+        //else
+        //{
+        //    Debug.Log("AbilityHandler assigned successfully.");
+        //}
     }
 
     // Update is called once per frame
@@ -127,6 +136,12 @@ public class PlayerController : MonoBehaviour, IDamage
         Crouch();
         wallClimb();
         EquipClassWeapon();
+
+
+        if (abilityHandler == null)
+        {
+            abilityHandler = AbilityHandler.handlerInstance;
+        }
 
         if (Input.GetButtonDown("Dash") && !isDashing)
         {
@@ -147,21 +162,29 @@ public class PlayerController : MonoBehaviour, IDamage
 
         if (!isSprinting && staminaFull == false && !UIManager.instance.gamePause && !isBlocking)
         {
-            if(stamina <= maxStamina - 0.01)
+            if (stamina <= maxStamina - 0.01)
             {
                 stamina += staminaRegen + Time.deltaTime;
 
-                if(stamina >= maxStamina)
+                if (stamina >= maxStamina)
                 {
                     staminaFull = true;
                 }
             }
         }
-
+        
         RaycastHit interactHit;
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist))
         {
+            if (interactHit.collider.CompareTag("Ability"))
+            {
+                UIManager.instance.AbilityMenuOn();
 
+                if (Input.GetButtonDown("Interact"))
+                {
+                    AbilitiesUI.abilitiesUI.OnButtonPressed();
+                }
+            }
         }
     }
 
@@ -255,29 +278,79 @@ public class PlayerController : MonoBehaviour, IDamage
             yield return new WaitForSeconds(0.2f);
         isPlayingSteps = false;
     }
-    
+
+    //public void TakeDamage(int dmg)
+    //{
+    //    if (!isBlocking)
+    //    {
+    //        playerHP -= dmg;
+    //        UpdatePlayerUI();
+    //        StartCoroutine(UIManager.instance.FlashDamage());
+    //        if (!isPlayingHurt)
+    //        {
+    //            StartCoroutine(isHurtAud());
+    //        }
+
+    //        if (playerHP <= 0)
+    //        {
+    //            deathCam.SetActive(true);
+    //            StartCoroutine(UIManager.instance.onLose());
+    //        }
+    //    }
+    //}
+
     public void TakeDamage(int dmg)
     {
         if (!isBlocking)
         {
-            playerHP -= dmg;
-            UpdatePlayerUI();
-            StartCoroutine(UIManager.instance.FlashDamage());
-            if (abilityHandler != null && abilityHandler.HasAbility("HPRecoveryAbility"))
-            {                  
-                abilityHandler.EnableHPRecovery(1, 5f);
-            }
+            
+            //if (abilityHandler.hasOneHitShield && abilityHandler.isOneHitShieldActive)
+            //{
 
-            if (!isPlayingHurt)
-            {
-                StartCoroutine(isHurtAud());
-            }
+            //    Debug.Log("Shield Used");
+            //    abilityHandler.DeactivateOneHitShield();
+            //}
+            //else
+            //{
+                //if (!abilityHandler.hasDamageReduction)
+                //{
+                   
+                //}
+                //else
+                //{
+                    
+                //    playerHP -= abilityHandler.CalculateReducedDamage(dmg);
+                //    Debug.Log("redused dammage applyed");
+                //}
+                playerHP -= dmg;
 
-            if (playerHP <= 0)
-            {
-                deathCam.SetActive(true);
-                StartCoroutine(UIManager.instance.onLose());
-            }
+                //if (abilityHandler.hasHPRecovery && !abilityHandler.isHPRecoveryEnabled )
+                //{
+                //    Debug.Log("recovery start Used");
+                //    abilityHandler.EnableHPRecovery(1, 5f);
+                //}
+
+
+                UpdatePlayerUI();
+                StartCoroutine(UIManager.instance.FlashDamage());
+
+
+                if (!isPlayingHurt)
+                {
+                    StartCoroutine(isHurtAud());
+                }
+
+                if (playerHP <= 0)
+                {
+                    deathCam.SetActive(true);
+                    StartCoroutine(UIManager.instance.onLose());
+                }
+
+                if (abilityHandler.hasHPRecovery && !abilityHandler.isHPRecoveryEnabled)
+                {
+                    abilityHandler.EnableHPRecovery(1, 5f);
+                }
+            //}
         }
     }
 
@@ -390,7 +463,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     private void NotifyAbilityHandler()
     {
-       // AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
+       //AbilityHandler abilityHandler = GetComponent<AbilityHandler>();
         if (abilityHandler != null)
         {
             if (gunScript != null)

@@ -94,7 +94,7 @@ public class Audio : MonoBehaviour
     }
 
     public void PlayBoss(int index)
-    {
+    { 
         musicSource.clip = Boss[index];
         musicSource.Play();
     }
@@ -111,4 +111,13 @@ public class Audio : MonoBehaviour
         musicSource.Play();
     }
 
+    public void PauseMusic()
+    {
+        musicSource.Pause();
+    }
+
+    public void PlayMusic()
+    {
+        musicSource.UnPause();
+    }
 }
