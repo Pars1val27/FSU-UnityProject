@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage
         playerHP = origHP;
         isCoolDown = false;
         deathCam.SetActive(false);
-        abilityHandler = GetComponent<AbilityHandler>();
+        abilityHandler = AbilityHandler.handlerInstance;
     }
 
     // Update is called once per frame

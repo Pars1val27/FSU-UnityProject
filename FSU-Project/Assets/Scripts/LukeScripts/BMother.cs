@@ -9,17 +9,23 @@ public class BMother : MonoBehaviour, IDamage
 
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTargetSpeed;
     [SerializeField] NavMeshAgent agent;
 
     [Header("----- Animation's -----")]
-    [SerializeField] Renderer[] model;
+    [SerializeField] Animator anim;
+    [SerializeField] int animTranSpeed;
+    [SerializeField] Renderer model;
+    [SerializeField] ParticleSystem spawnEffect;
+    [SerializeField] ParticleSystem deathEffect;
+    [SerializeField] GameObject timeDrop;
 
 
     [Header("----- Attack -----")]
-    [SerializeField] Transform spawnPos;
+    [SerializeField] Transform[] spawnPos;
     [SerializeField] GameObject spawn;
     [SerializeField] float spawnRate;
 
@@ -29,16 +35,21 @@ public class BMother : MonoBehaviour, IDamage
     bool isshooting;
     bool canSeePlayer;
     bool playerInRange;
+    float StartHP;
 
     void Start()
     {
+        StartHP = HP;
+        Instantiate(spawnEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
-        
-        
     }
     private void Update()
     {
+        Quaternion rot = Quaternion.LookRotation(-new Vector3(playerDir.x, 0, playerDir.z));
+        healthBar.transform.rotation = rot;
+        float agentSpeed = agent.velocity.normalized.magnitude;
+        anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agentSpeed, Time.deltaTime * animTranSpeed));
         playerPos = EnemyManager.instance.player.transform.position;
         playerDir = playerPos - transform.position;
         faceTarget();
@@ -83,14 +94,14 @@ public class BMother : MonoBehaviour, IDamage
     {
         isshooting = true;
         yield return new WaitForSeconds(spawnRate);
-        Instantiate(spawn, spawnPos.position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
+        anim.SetTrigger("Attack");
         isshooting = false;
     }
 
     public void TakeDamage(int amount)
     {
         HP -= amount;
-
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
@@ -101,23 +112,22 @@ public class BMother : MonoBehaviour, IDamage
 
     IEnumerator flashDamage()
     {
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.red;
-        }
-
+        model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
-
-        for (int i = 0; i < model.Length; i++)
-        {
-            model[i].material.color = Color.white;
-        }
-
+        model.material.color = Color.white;
     }
 
     public void Death()
     {
+        Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         Destroy(gameObject);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y - 3, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(-1);
+    }
+
+    public void Sting()
+    {
+        for (int i = 0; i < spawnPos.Length; i++)
+            Instantiate(spawn, spawnPos[i].position, new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w));
     }
 }

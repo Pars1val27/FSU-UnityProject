@@ -10,6 +10,7 @@ public class Grenade : MonoBehaviour
     private float explosionRadius;
     private float explosionForce;
     private int damage;
+    AbilityHandler handler;
     //AbilityHandler handler;
     [SerializeField] GameObject player;
     [SerializeField] ParticleSystem explosionEffect;

@@ -15,7 +15,6 @@ namespace AbilitySystem
         public bool IsDebugAbility = false;
 
         private Clock timer;
-
         private static bool isPickupActive = false;
 
         void Start()
@@ -30,23 +29,25 @@ namespace AbilitySystem
             {
                 isPickupActive = true;
                 if (IsDebugAbility)
-                    { 
+                {
                     ConfirmPickup(other.gameObject);
-                    }
+                }
                 else
-                    {
-                        ShowPickupUI(other.gameObject);
-                    }
+                {
+                    ShowPickupUI(other.gameObject);
+                }
             }
         }
+
         void OnTriggerExit(Collider other)
-        {      
+        {
             if (other.CompareTag("Player"))
             {
                 HidePickupUI();
                 isPickupActive = false;
             }
         }
+
         private void ShowPickupUI(GameObject player)
         {
             if (abilitiesUI != null)
@@ -70,13 +71,14 @@ namespace AbilitySystem
             if (abilitiesUI != null)
             {
                 abilitiesUI.currentPickup = null;
+                UIManager.instance.AbilityMenuOff();
             }
             isPickupActive = false;
         }
 
         public void ConfirmPickup(GameObject player)
         {
-            if (ability == null || player == null) return; 
+            if (ability == null || player == null) return;
 
             var abilityHandler = player.GetComponent<AbilityHandler>();
             if (abilityHandler != null && !abilityHandler.HasAbility(ability.abilityName))
@@ -113,9 +115,6 @@ namespace AbilitySystem
             isPickupActive = false;
         }
 
-        //make time remaining public and change edit time to a float
-
-
         private bool HasEnoughTime()
         {
             if (timer != null)
@@ -123,7 +122,7 @@ namespace AbilitySystem
                 Debug.Log("HasEnoughTime called. Current remaining time: " + timer.GetRemainingTime());
                 return timer.GetRemainingTime() >= ability.abilityCost;
             }
-            //Debug.Log("Clock component not found.");
+            Debug.Log("Clock component not found.");
             return false;
         }
 
@@ -132,11 +131,8 @@ namespace AbilitySystem
             if (timer != null)
             {
                 Debug.Log("Removed time: " + ability.abilityCost);
-                timer.EditTIme(-ability.abilityCost);   
+                timer.EditTIme(-ability.abilityCost);
             }
-            
         }
-
-
     }
 }
