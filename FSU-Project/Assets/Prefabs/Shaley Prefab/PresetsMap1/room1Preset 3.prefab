@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8844093516610791835}
   - component: {fileID: 41690265671131947}
   - component: {fileID: 9009603320338256759}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: room1Preset 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 6037397046891242880}
   - component: {fileID: 2141664606127479467}
   - component: {fileID: 2753816652722125060}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}

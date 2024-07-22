@@ -523,7 +523,7 @@ GameObject:
   - component: {fileID: 6061004758238318236}
   - component: {fileID: 3352775421820306092}
   - component: {fileID: 4755297665473006341}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,7 +662,7 @@ GameObject:
   - component: {fileID: 1125816523267873750}
   - component: {fileID: 17254695977057852}
   - component: {fileID: 767762463709983309}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: room1Shop1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

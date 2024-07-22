@@ -36129,9 +36129,14 @@ MonoBehaviour:
   floor1Enemies:
   - {fileID: 9220460581011350205, guid: 856d97d351d45bd49b13f71c437e4478, type: 3}
   floor2Enemies: []
-  floor1EnemiesHard: []
+  floor1EnemiesHard:
+  - {fileID: 6992073790244882909, guid: e08f925a1ad27df4db2329eeb8b0ef68, type: 3}
+  - {fileID: 5549604000314979092, guid: 4427761c5e262634c9e9079f1289e670, type: 3}
   floor2EnemiesHard: []
-  floor1StationaryEnemies: []
+  floor1StationaryEnemies:
+  - {fileID: 3328047568127042123, guid: c18e1a03d38115c4594cba13d70d68e3, type: 3}
+  - {fileID: 4747647995965206210, guid: 650202e2abb5f59448f18cb64862be61, type: 3}
+  - {fileID: 3593076486948895764, guid: 283f79dcc3c6c99479d13cc2ecec17dc, type: 3}
   floor2StationaryEnemies: []
 --- !u!1 &8675838123002701149
 GameObject:
@@ -39048,6 +39053,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: mapManager
       objectReference: {fileID: 0}
+    - target: {fileID: 4515446364562132973, guid: c826223699fa48747a783be552c363c6, type: 3}
+      propertyPath: mapLevel
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515446364562132973, guid: c826223699fa48747a783be552c363c6, type: 3}
+      propertyPath: maps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4515446364562132973, guid: c826223699fa48747a783be552c363c6, type: 3}
+      propertyPath: maps.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 97b745ef4fd1dca4a9e47805f744e3f3, type: 2}
     - target: {fileID: 8289947485893398348, guid: c826223699fa48747a783be552c363c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -969.37866

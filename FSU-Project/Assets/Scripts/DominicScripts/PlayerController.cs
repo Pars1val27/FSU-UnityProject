@@ -115,8 +115,8 @@ public class PlayerController : MonoBehaviour, IDamage
         playerHP = origHP;
         isCoolDown = false;
         deathCam.SetActive(false);
-        
-        //abilityHandler = AbilityHandler.handlerInstance;
+        abilityHandler = AbilityHandler.handlerInstance;
+        //
         //if (abilityHandler == null)
         //{
         //    Debug.LogError("AbilityHandler is not assigned!");
@@ -303,28 +303,30 @@ public class PlayerController : MonoBehaviour, IDamage
     {
         if (!isBlocking)
         {
-            
-            //if (abilityHandler.hasOneHitShield && abilityHandler.isOneHitShieldActive)
-            //{
 
-            //    Debug.Log("Shield Used");
-            //    abilityHandler.DeactivateOneHitShield();
-            //}
-            //else
+            //if (abilityHandler.hasOneHitShield == true )
+            //{
+            //    if (abilityHandler.isOneHitShieldActive == true)
+            //    {
+            //        Debug.Log("Shield Used");
+            //        abilityHandler.DeactivateOneHitShield();
+            //        }
+            //    }
+            //else if (!abilityHandler.isOneHitShieldActive)
             //{
                 //if (!abilityHandler.hasDamageReduction)
                 //{
-                   
+
                 //}
                 //else
                 //{
-                    
+
                 //    playerHP -= abilityHandler.CalculateReducedDamage(dmg);
                 //    Debug.Log("redused dammage applyed");
                 //}
                 playerHP -= dmg;
 
-                //if (abilityHandler.hasHPRecovery && !abilityHandler.isHPRecoveryEnabled )
+                //if (abilityHandler.hasHPRecovery == true && abilityHandler.isHPRecoveryEnabled == false)
                 //{
                 //    Debug.Log("recovery start Used");
                 //    abilityHandler.EnableHPRecovery(1, 5f);
@@ -346,10 +348,10 @@ public class PlayerController : MonoBehaviour, IDamage
                     StartCoroutine(UIManager.instance.onLose());
                 }
 
-                if (abilityHandler.hasHPRecovery && !abilityHandler.isHPRecoveryEnabled)
-                {
-                    abilityHandler.EnableHPRecovery(1, 5f);
-                }
+                //if (abilityHandler.hasHPRecovery == true && abilityHandler.isHPRecoveryEnabled == false)
+                //{
+                //    abilityHandler.EnableHPRecovery(1, 5f);
+                //}
             //}
         }
     }
