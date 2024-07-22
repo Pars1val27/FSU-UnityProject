@@ -83,7 +83,7 @@ namespace AbilitySystem
 
                 abilities.Add(ability);
 
-                //ActivateAbilityFlags(ability);
+                ActivateAbilityFlags(ability);
             }
         }
         private void ActivateAbilityFlags(Ability ability)

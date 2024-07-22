@@ -441,7 +441,8 @@ public class PlayerController : MonoBehaviour, IDamage
         if (UIManager.instance.classGunner == true && classWeaponInstance == null)
         {
             origHP = 20;
-            playerHP = origHP; 
+            playerHP = origHP;
+
             speed = 14;
             baseSpeed = speed;
             attackSpeed = 0.5f;

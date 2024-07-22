@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: PoisonEffect
   m_EditorClassIdentifier: 
   abilityName: PoisonEffect
-  ablitiyDisctriptions: discription
-  abilityCost: 3
+  ablitiyDisctriptions: Applies 2 poison damage per second for 5 seconds
+  abilityCost: 30
   uiIcon: {fileID: 21300000, guid: ae339aa43880c8c45a9dc5b5ee6cdc47, type: 3}
   modelPrefab: {fileID: 3953768525008260369, guid: ac6c2eec57d797d45bd81cb9285fe798, type: 3}
   debugAbility: 1
   poisonDamage: 2
   duration: 5
+  PoisonEffectPrefab: {fileID: 2200455942010962861, guid: b4ea625f41e4b444e9a73ad0365eed59, type: 3}

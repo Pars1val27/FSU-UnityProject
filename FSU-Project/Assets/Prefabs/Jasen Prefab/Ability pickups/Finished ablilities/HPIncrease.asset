@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: HPIncrease
   ablitiyDisctriptions: 'give you 10 more hp '
-  abilityCost: 15
+  abilityCost: 20
   uiIcon: {fileID: 0}
   modelPrefab: {fileID: 6560024532416312084, guid: 95fbaa96dc0723048887218ccfce89cc, type: 3}
+  debugAbility: 0
   hpIncreaseAmount: 10

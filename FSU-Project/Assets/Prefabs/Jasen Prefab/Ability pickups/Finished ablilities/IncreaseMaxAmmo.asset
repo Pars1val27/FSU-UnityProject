@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityName: increaseMaxAmmo
   ablitiyDisctriptions: Increase ammo by 15
-  abilityCost: 10
+  abilityCost: 15
   uiIcon: {fileID: 21300000, guid: a89fa3bfb7a209e40b0ed1767338c6a3, type: 3}
   modelPrefab: {fileID: 3953768525008260369, guid: 1a371ab99feb72c4989e4eefbe6bbccb, type: 3}
+  debugAbility: 0
   ammoIncreaseAmount: 15
