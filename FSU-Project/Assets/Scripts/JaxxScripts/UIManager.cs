@@ -279,4 +279,8 @@ public class UIManager : MonoBehaviour
         //Destroy(damageScreen, 0.1f);
     }
 
+    public void StartCredits()
+    {
+        SetMenu(creditsPage);
+    }
 }
