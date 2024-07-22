@@ -176,7 +176,15 @@ public class PlayerController : MonoBehaviour, IDamage
         RaycastHit interactHit;
         if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out interactHit, interactDist))
         {
+            if (interactHit.collider.CompareTag("Ability"))
+            {
+                UIManager.instance.AbilityMenuOn();
 
+                if (Input.GetButtonDown("Interact"))
+                {
+                    AbilitiesUI.abilitiesUI.OnButtonPressed();
+                }
+            }
         }
     }
 

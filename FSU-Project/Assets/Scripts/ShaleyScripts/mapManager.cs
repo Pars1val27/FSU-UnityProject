@@ -15,7 +15,6 @@ public class mapManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
         map = Instantiate(mapObj, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 1));
     }
 

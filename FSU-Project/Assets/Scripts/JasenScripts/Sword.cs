@@ -22,6 +22,7 @@ public class SwordScript : MonoBehaviour
 
     void Start()
     {
+        abilityHandler = AbilityHandler.handlerInstance;
         anim = GetComponent<Animator>();
         abilityHandler = AbilityHandler.handlerInstance;
     }
@@ -80,6 +81,37 @@ public class SwordScript : MonoBehaviour
             if (dmg != null)
             {
                 dmg.TakeDamage(PlayerController.playerInstance.damage);
+                ApplyStatusEffects(other.gameObject);
+            }
+        }
+    }
+    public void ApplyStatusEffects(GameObject target)
+    {
+        Debug.Log(abilityHandler.abilities);
+        foreach (var ability in abilityHandler.abilities)
+        {
+            if (ability is FireEffect fireEffect && abilityHandler.hasFireEffect)
+            {
+                Debug.Log("Activating FireEffect on target: " + target.name);
+                abilityHandler.ApplyFireDamage(target, fireEffect);
+            }
+            if (ability is PoisonEffect poisonEffect && abilityHandler.hasPoisonEffect)
+            {
+                Debug.Log("Activating PoisonEffect on target: " + target.name);
+                abilityHandler.ApplyPoisonDamage(target, poisonEffect);
+            }
+            if (ability is SlowedEffect slowEffect && abilityHandler.hasSlowEffect)
+            {
+                if (!abilityHandler.hasFreezeEffect)
+                {
+                    Debug.Log("Activating SlowEffect on target: " + target.name);
+                    abilityHandler.ApplySlow(target, slowEffect);
+                }
+            }
+            if (ability is FreezeEffect freezeEffect && abilityHandler.hasFreezeEffect)
+            {
+                Debug.Log("Activating FreezeEffect on target: " + target.name);
+                abilityHandler.ApplyFreeze(target, freezeEffect);
             }
         }
     }
