@@ -38,11 +38,11 @@ public class roomScript : MonoBehaviour
             }
             for (int posIndex = 0; posIndex < spawnPosHard.Length; posIndex++)
             {
-                RandEnemyHard(spawnPoss[posIndex]);
+                RandEnemyHard(spawnPosHard[posIndex]);
             }
             for (int posIndex = 0; posIndex < spawnPosStationary.Length; posIndex++)
             {
-                RandEnemyStationary(spawnPoss[posIndex]);
+                RandEnemyStationary(spawnPosStationary[posIndex]);
             }
             doorColliders.SetActive(true);
             doors.transform.localPosition += new Vector3(0, doors.transform.localPosition.y - doorMoveDist, 0);

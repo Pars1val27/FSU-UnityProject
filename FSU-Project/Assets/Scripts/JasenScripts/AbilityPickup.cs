@@ -83,7 +83,7 @@ namespace AbilitySystem
             var abilityHandler = player.GetComponent<AbilityHandler>();
             if (abilityHandler != null && !abilityHandler.HasAbility(ability.abilityName))
             {
-                if (isItemPickup)
+                if (!isItemPickup)
                 {
                     if (HasEnoughTime())
                     {

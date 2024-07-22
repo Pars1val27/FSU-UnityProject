@@ -99,9 +99,17 @@ namespace AbilitySystem
             else if (ability is ReflectDamageAbility)
                 hasReflectDamage = true;
             else if (ability is DamageReductionAbility)
+            {
+
                 hasDamageReduction = true;
+            }
             else if (ability is OneHitShieldAbility)
-                 hasOneHitShield = true;
+            {
+                hasOneHitShield = true; 
+                Debug.Log("onehitshield = true");
+
+                
+            }
 
 
 
@@ -248,8 +256,9 @@ namespace AbilitySystem
             }
             isHPRecoveryEnabled = false;
         }
-        public void ActivateOneHitShield()
+        public void ActivateOneHitShield(OneHitShieldAbility RechargeTime)
         {
+            shieldRecharge = RechargeTime.rechargeTime;
             Debug.Log("one hit shild active");
             isOneHitShieldActive = true;
         }

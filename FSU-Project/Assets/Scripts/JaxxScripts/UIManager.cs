@@ -65,6 +65,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] float lowHealthPercentage;
     [SerializeField] public int enemiesKilled;
 
+
     public int enemyCount;
     // Start is called before the first frame update
     void Awake()
@@ -72,7 +73,7 @@ public class UIManager : MonoBehaviour
         instance = this;
         gameStarted = false;
     }
-     
+
     private void Start()
     {
         if (gameStarted)
@@ -90,14 +91,14 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
-            if(menuActive == null)
+            if (menuActive == null)
             {
                 statePause();
                 menuActive = menuPause;
                 menuActive.SetActive(gamePause);
                 Audio.audioInstance.PauseMusic();
             }
-            else if(menuActive == menuPause)
+            else if (menuActive == menuPause)
             {
                 stateUnpause();
                 Audio.audioInstance.PlayMusic();
@@ -108,7 +109,7 @@ public class UIManager : MonoBehaviour
         {
             DashCD();
         }
-        
+
     }
 
     public IEnumerator MainMenu()
@@ -121,7 +122,7 @@ public class UIManager : MonoBehaviour
     }
     public void statePause()
     {
-        gamePause = !gamePause; 
+        gamePause = !gamePause;
         Time.timeScale = 0;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
@@ -144,7 +145,7 @@ public class UIManager : MonoBehaviour
     {
         enemyCount += amount;
         enemyCountText.text = enemyCount.ToString("f0");
-        
+
     }
 
     public void onTimeLose()
@@ -171,14 +172,14 @@ public class UIManager : MonoBehaviour
     public void StartMenu()
     {
         menuActive = menuSelect;
-        statePause();   
+        statePause();
         menuActive.SetActive(gamePause);
     }
 
     public void DashCD()
     {
         DashCDRemaining -= Time.deltaTime;
-        if(DashCDRemaining <= 0) 
+        if (DashCDRemaining <= 0)
         {
             DashCoolDownFill.fillAmount = 1;
         }
@@ -190,7 +191,7 @@ public class UIManager : MonoBehaviour
 
     public void StartBoss(string name)
     {
-       bossHealth.SetActive(true);
+        bossHealth.SetActive(true);
         bossName.text = name;
         Audio.audioInstance.PlayBoss(0);
     }
@@ -213,11 +214,11 @@ public class UIManager : MonoBehaviour
         {
             menuActive.SetActive(false);
         }
-            menuPrev = menuActive;
-            menuActive = menu;
-            statePause();
-            menuActive.SetActive(true);
-        
+        menuPrev = menuActive;
+        menuActive = menu;
+        statePause();
+        menuActive.SetActive(true);
+
     }
 
     public void SetPrevMenu()
@@ -225,9 +226,9 @@ public class UIManager : MonoBehaviour
         SetMenu(menuPrev);
     }
 
-    public void MenuOff() 
+    public void MenuOff()
     {
-        if(menuActive != null)
+        if (menuActive != null)
         {
             stateUnpause();
         }
@@ -242,7 +243,7 @@ public class UIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    public void AbilityMenuOff() 
+    public void AbilityMenuOff()
     {
         abilityMenuOpen = false;
         if (menuActive != null)
@@ -256,12 +257,12 @@ public class UIManager : MonoBehaviour
     }
     public void ShowAbilityInventory()
     {
-        if(menuActive != menuInventory && !gamePause)
-        { 
+        if (menuActive != menuInventory && !gamePause)
+        {
             SetMenu(menuInventory);
             AbilitiesUI.abilitiesUI.ShowAbilityInventory();
         }
-        else if(menuActive == menuInventory)
+        else if (menuActive == menuInventory)
         {
             stateUnpause();
         }
@@ -280,7 +281,6 @@ public class UIManager : MonoBehaviour
 
     public void StartCredits()
     {
-       
-        
+        SetMenu(creditsPage);
     }
 }

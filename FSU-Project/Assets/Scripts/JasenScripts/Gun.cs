@@ -193,7 +193,7 @@ public class GunScript : MonoBehaviour
             }
             if (ability is SlowedEffect slowEffect )
             {
-                if (!abilityHandler.hasFreezeEffect)
+                if (abilityHandler.hasFreezeEffect == false)
                 {
                     Debug.Log("Activating SlowEffect on target: " + target.name);
                     abilityHandler.ApplySlow(target, slowEffect);
@@ -202,11 +202,12 @@ public class GunScript : MonoBehaviour
             }
             if (ability is FreezeEffect freezeEffect)
             {
-                
+
                 Debug.Log("Activating FreezeEffect on target: " + target.name);
                 abilityHandler.ApplyFreeze(target, freezeEffect);
 
             }
+
         }
     }
 }

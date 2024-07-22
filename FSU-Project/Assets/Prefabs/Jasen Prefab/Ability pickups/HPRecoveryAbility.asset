@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: HPRecoveryAbility
   m_EditorClassIdentifier: 
   abilityName: HpRecovery
-  ablitiyDisctriptions: The player X hp every X untill they are fully Healed
+  ablitiyDisctriptions: if the player Hit 25 % they recover 1 hp every 3 seconds
+    untill they are fully Healed
   abilityCost: 5
-  uiIcon: {fileID: 0}
-  modelPrefab: {fileID: 0}
+  uiIcon: {fileID: 21300000, guid: bf01137e22486ae4ea7bc10197c7ede7, type: 3}
+  modelPrefab: {fileID: 1703924611819168424, guid: 283150b0233d86b41b21bfc99dfb9798, type: 3}
   debugAbility: 0
-  hpRecoveryAmount: 1
+  hpRecoveryAmount: 2
   tickInterval: 3
