@@ -86,7 +86,10 @@ public class roomScript : MonoBehaviour
     void RandEnemyStationary(Transform spawnPos)
     {
         int chosenEnemy = UnityEngine.Random.Range(0, EnemyManager.instance.enemiesStationary[mapManager.instance.mapLevel.level-1].Length);
+        Debug.Log("Chosen enemy num: " + chosenEnemy);
         GameObject enemy = Instantiate(EnemyManager.instance.enemiesStationary[mapManager.instance.mapLevel.level-1][chosenEnemy],
         spawnPos.transform.position, spawnPos.transform.rotation);
+        Debug.Log("Stationary enemy length: " + EnemyManager.instance.enemiesStationary[mapManager.instance.mapLevel.level - 1].Length);
+        //Debug.Log("Chosen enemy: " + enemy);
     }
 }

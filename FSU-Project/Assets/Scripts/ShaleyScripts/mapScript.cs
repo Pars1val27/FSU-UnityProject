@@ -135,7 +135,7 @@ void Start()
 
     void GenerateRoom(maps mapLevel)
     {
-        Debug.Log("spawn room" + pos);
+        //Debug.Log("spawn room" + pos);
         GameObject room = Instantiate(RandRoom(mapLevel), this.transform);
         room.transform.localPosition = pos;
         int dir = RandDir();
