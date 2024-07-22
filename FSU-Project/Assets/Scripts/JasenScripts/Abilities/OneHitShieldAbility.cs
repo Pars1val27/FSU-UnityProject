@@ -7,15 +7,16 @@ namespace AbilitySystem
     [CreateAssetMenu(fileName = "OneHitShieldAbility", menuName = "Abilities/OneHitShield")]
     public class OneHitShieldAbility : Ability
     {
+        //AbilityHandler handler;
         [Range(1,25)][SerializeField] public int rechargeTime;
 
         public override void Activate(GameObject target)
         {
-            var abilityHandler = target.GetComponent<AbilityHandler>();
-            if (abilityHandler != null)
+            var handler = target.GetComponent<AbilityHandler>();
+            if (handler != null)
             {
-                abilityHandler.shieldRecharge = rechargeTime;
-                abilityHandler.ActivateOneHitShield();
+
+                handler.ActivateOneHitShield(this);
             }
         }
     }

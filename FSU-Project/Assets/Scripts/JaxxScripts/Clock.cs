@@ -66,6 +66,7 @@ public class Clock : MonoBehaviour
     {
         remainingTime += seconds;
         Debug.Log("Time Changed");
+        Debug.Log(remainingTime +"Time Remaining");
         UpdateTimer();
     }
 
