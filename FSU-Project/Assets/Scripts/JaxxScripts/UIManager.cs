@@ -110,6 +110,7 @@ public class UIManager : MonoBehaviour
             DashCD();
         }
 
+        UpdateEnemyDisplay(0);
     }
 
     public IEnumerator MainMenu()
