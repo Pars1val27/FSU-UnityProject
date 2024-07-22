@@ -11,6 +11,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] GameObject timeDrop;
 
     [Header("----- Animation's -----")]
     [SerializeField] Renderer[] model;
@@ -210,6 +211,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
     {
         Instantiate(deathEffect, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), transform.rotation);
         Destroy(gameObject);
+        Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
     IEnumerator flashDamage()
