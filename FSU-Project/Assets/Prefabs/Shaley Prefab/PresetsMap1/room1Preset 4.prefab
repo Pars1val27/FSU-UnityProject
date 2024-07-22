@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 2563300674088884818}
   - {fileID: 4720057432651629970}
   - {fileID: 4317138263990404250}
-  doors: {fileID: 5441677850719862715, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+  doors: {fileID: 6166824252625710926}
   doorColliders: {fileID: 8895117708936150629}
   doorMoveDist: 3.2
   doorMoveSpeed: 0
@@ -1866,6 +1866,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+--- !u!1 &6166824252625710926 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5441677850719862715, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
+  m_PrefabInstance: {fileID: 2166315879153815797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6889598845481592914 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4723301245708630183, guid: 33ad22074e4d863428fb97b1ebb59b8c, type: 3}
