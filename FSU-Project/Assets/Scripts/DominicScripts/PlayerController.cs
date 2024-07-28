@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour, IDamage
             abilityHandler = AbilityHandler.handlerInstance;
         }
 
-        if (Input.GetButtonDown("Dash") && !isDashing)
+        if (Input.GetButtonDown("Dash") && !isDashing && !UIManager.instance.gamePause)
         {
             StartCoroutine(Dash());
         }
@@ -230,19 +230,19 @@ public class PlayerController : MonoBehaviour, IDamage
     void Sprint()
     {
 
-        if (Input.GetButtonDown("Sprint") && stamina >= 5)
+        if (Input.GetButtonDown("Sprint") && stamina >= 5 && !UIManager.instance.gamePause)
         {
             isSprinting = true;
             speed = speed * sprintMod;
             Camera.main.fieldOfView = Mathf.Lerp(FOVSprintMod, origFOV, 0.25f);
         }
-        if (Input.GetButtonUp("Sprint") && isSprinting)
+        if (Input.GetButtonUp("Sprint") && isSprinting && !UIManager.instance.gamePause)
         {
             speed = baseSpeed;
             isSprinting = false;
             Camera.main.fieldOfView = Mathf.Lerp(origFOV, FOVSprintMod, 0.25f);
         }
-        if(stamina <= 0 && isSprinting)
+        if(stamina <= 0 && isSprinting && !UIManager.instance.gamePause)
         {
             speed = baseSpeed;
             isSprinting = false;
@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     void Crouch()
     {
-        if (Input.GetButtonDown("Crouch"))
+        if (Input.GetButtonDown("Crouch") && !isCrouching && !UIManager.instance.gamePause && playerHP > 0)
         {
             isCrouching = true;
             speed /= 2;
@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
         }
-        else if (Input.GetButtonUp("Crouch"))
+        else if (Input.GetButtonUp("Crouch") && isCrouching && !UIManager.instance.gamePause && playerHP > 0)
         {
             speed *= 2;
             isCrouching = false;
