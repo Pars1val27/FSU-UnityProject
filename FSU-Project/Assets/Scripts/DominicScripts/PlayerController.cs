@@ -397,6 +397,7 @@ public class PlayerController : MonoBehaviour, IDamage
         UIManager.instance.staminaBar.fillAmount = stamina / maxStamina;
         if(playerHP <= 0)
         {
+            UIManager.instance.currPlayerMP.text = 0.ToString();
             UIManager.instance.onLose();
             Debug.Log("Lose Menu Called");
         }
