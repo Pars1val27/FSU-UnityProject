@@ -679,7 +679,7 @@ MonoBehaviour:
   model: {fileID: 8405828367385333888}
   spawnEffect: {fileID: 4527798502645971034, guid: c83abdc03d03dbc4286476edeedf957d, type: 3}
   deathEffect: {fileID: 4527798502645971034, guid: 247fca0d4e0c37047b51ab649f742af7, type: 3}
-  timeDrop: {fileID: 3311477272066090196, guid: 5007af2769bc8a348a7f03cc0a5b4194, type: 3}
+  timeDrop: {fileID: 3311477272066090196, guid: d753e3f462adb724d8d2f5f788d97db0, type: 3}
   spawnPos:
   - {fileID: 4762758757590486281}
   - {fileID: 239292083549524604}

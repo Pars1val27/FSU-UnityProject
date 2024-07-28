@@ -185,7 +185,7 @@ public class turretFixed : MonoBehaviour, IDamage
     public void TakeDamage(int amount)
     {
         HP -= amount;
-        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 50, healthBar.transform.localScale.y, transform.transform.localScale.z);
         flashDamage();
 
         if (HP <= 0)
