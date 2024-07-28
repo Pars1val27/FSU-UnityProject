@@ -28,8 +28,8 @@ public class Kamikaze : MonoBehaviour, IDamage
     [Header("----- Attack -----")]
     [SerializeField] int damage;
     [SerializeField] float attackRate;
-    IDamage dmg = null;
 
+    IDamage dmg = null;
     bool isAttacking;
     bool playerInRange;
     float StartHP;
@@ -150,8 +150,6 @@ public class Kamikaze : MonoBehaviour, IDamage
     }
 
 
-
-
     public void ApplyFreeze(float duration, GameObject freezeEffect)
     {
         if (!isFrozen)
@@ -179,6 +177,7 @@ public class Kamikaze : MonoBehaviour, IDamage
     //Status Effect Implementation end
     private void OnTriggerEnter(Collider other)
     {
+        playerInRange = true;
         if (other.tag == "Player")
         {
 
@@ -190,6 +189,10 @@ public class Kamikaze : MonoBehaviour, IDamage
                 anim.SetTrigger("Attack");
             }
         }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        playerInRange = false;
     }
 
     void faceTarget()
@@ -220,7 +223,7 @@ public class Kamikaze : MonoBehaviour, IDamage
         Instantiate(explodeEffect, transform.position, transform.rotation);
         Destroy(gameObject);
         Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y + 3, transform.position.z), transform.rotation);
-        if(dmg != null)
+        if (dmg != null && playerInRange)
             dmg.TakeDamage(damage);
         UIManager.instance.UpdateEnemyDisplay(-1);
     }
