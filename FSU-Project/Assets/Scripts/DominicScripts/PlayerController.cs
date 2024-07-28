@@ -252,7 +252,7 @@ public class PlayerController : MonoBehaviour, IDamage
     }
     void Crouch()
     {
-        if (Input.GetButtonDown("Crouch") && !isCrouching && !UIManager.instance.gamePause)
+        if (Input.GetButtonDown("Crouch") && !isCrouching && !UIManager.instance.gamePause && playerHP > 0)
         {
             isCrouching = true;
             speed /= 2;
@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage
 
 
         }
-        else if (Input.GetButtonUp("Crouch") && isCrouching && !UIManager.instance.gamePause)
+        else if (Input.GetButtonUp("Crouch") && isCrouching && !UIManager.instance.gamePause && playerHP > 0)
         {
             speed *= 2;
             isCrouching = false;
