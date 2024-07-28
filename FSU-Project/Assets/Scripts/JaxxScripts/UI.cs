@@ -26,6 +26,10 @@ public class UI : MonoBehaviour
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+
+#elif UNITY_WEBGL
+        Application.OpenURL("https://www.newgrounds.com/portal/view/940367");
+
 #else
         Application.Quit();
 #endif
