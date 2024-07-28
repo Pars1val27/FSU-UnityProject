@@ -209,6 +209,7 @@ MonoBehaviour:
   HP: 3
   faceTaregtSpeed: 90
   agent: {fileID: 7260814468224261897}
+  timeDrop: {fileID: 3311477272066090196, guid: abe5d1baa636f1a4b96e5c022ead725b, type: 3}
   model:
   - {fileID: 1788414880347838175}
   anim: {fileID: 1788414880351922207}

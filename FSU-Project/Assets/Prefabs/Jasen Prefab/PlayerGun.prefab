@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityHandler: {fileID: 0}
-  player: {fileID: 9107036256956263201, guid: 887d7fd502927514b82fc0b9693cfdc5, type: 3}
   GrenadePos: {fileID: 3404024799275723205}
   muzzleFlash: {fileID: 6571646373147575441}
   shootSound:
@@ -62,7 +61,7 @@ MonoBehaviour:
   gunAudio: {fileID: 1492563096712884332}
   hitEffect: {fileID: 224850618694623197, guid: 977b2d648c8eb8342aa516156a00cdc5, type: 3}
   currAmmo: 0
-  maxAmmo: 25
+  maxAmmo: 100
   reloadTime: 3
   grenadeThrowForce: 50
   delay: 1.5
