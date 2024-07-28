@@ -36,6 +36,7 @@ public class AbilitiesUI : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
+            
             Debug.Log("Input accepted");
             UIManager.instance.ShowAbilityInventory();
             Debug.Log("Ability Menu Open");
@@ -71,7 +72,7 @@ public class AbilitiesUI : MonoBehaviour
             foreach (var ability in AbilityHandler.handlerInstance.abilities)
             {
                 abilityIcons[index].SetActive(true);
-                Debug.Log("Icons aactivated");
+                Debug.Log("Icons activated");
                 ownedAbil[index].sprite = ability.uiIcon;
                 Debug.Log("Icon Set");
                 ++index;

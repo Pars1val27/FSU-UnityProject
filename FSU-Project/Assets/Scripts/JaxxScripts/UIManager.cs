@@ -91,6 +91,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            if(menuActive == menuAbilities)
+            {
+                menuAbilities.SetActive(false);
+                menuActive = null;
+            }
             if (menuActive == null)
             {
                 statePause();
@@ -100,6 +105,7 @@ public class UIManager : MonoBehaviour
             }
             else if (menuActive == menuPause)
             {
+                menuAbilities.SetActive(false);
                 stateUnpause();
                 Audio.audioInstance.PlayMusic();
             }
@@ -260,12 +266,14 @@ public class UIManager : MonoBehaviour
     {
         if (menuActive != menuInventory && !gamePause)
         {
-            SetMenu(menuInventory);
+            menuActive = menuAbilities;
+            menuActive.SetActive(true);
             AbilitiesUI.abilitiesUI.ShowAbilityInventory();
         }
         else if (menuActive == menuInventory)
         {
-            stateUnpause();
+            menuActive.SetActive(false);
+            menuActive = null;
         }
     }
 
