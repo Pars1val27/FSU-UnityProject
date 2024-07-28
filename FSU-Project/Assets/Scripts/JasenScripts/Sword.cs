@@ -31,19 +31,19 @@ public class SwordScript : MonoBehaviour
     {
         anim.SetInteger("AttackNum", Random.Range(0, 6));
 
-        if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen)
+        if (Input.GetButtonDown("Fire1") && !isAttacking && !UIManager.instance.abilityMenuOpen && !UIManager.instance.gamePause)
         {
             StartCoroutine(Attack());
         }
 
-        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && !UIManager.instance.abilityMenuOpen && PlayerController.playerInstance.stamina >= blockStamCost)
+        if (Input.GetButtonDown("Fire2") && !PlayerController.playerInstance.isBlocking && !UIManager.instance.abilityMenuOpen && PlayerController.playerInstance.stamina >= blockStamCost && !UIManager.instance.gamePause)
         {
             PlayerController.playerInstance.isBlocking = true;
             PlayerController.playerInstance.stamina -= blockStamCost;
             anim.SetBool("Block", true);
         }
 
-        if(Input.GetButtonUp("Fire2") || PlayerController.playerInstance.stamina <= 0)
+        if(Input.GetButtonUp("Fire2") || PlayerController.playerInstance.stamina <= 0 && !UIManager.instance.gamePause)
         {
             PlayerController.playerInstance.isBlocking = false;
             anim.SetBool("Block", false);
