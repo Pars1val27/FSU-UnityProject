@@ -33,7 +33,7 @@ MonoBehaviour:
   - {fileID: 4549397048724166214, guid: ee67084f88d675043b946cfc6164e11c, type: 3}
   bossArenas:
   - {fileID: 3108702657213628595, guid: fbd3960c4095b7b4883d32870f6a20fb, type: 3}
-  maxRooms: 10
+  maxRooms: 4
   level: 1
   wall: {fileID: 667212295717866849, guid: 3e67b6387826f0641a5a727b2eefc391, type: 3}
   door: {fileID: 4946934125015250609, guid: d3f433571d552d04089131004a93cfb4, type: 3}

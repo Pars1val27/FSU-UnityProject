@@ -7,6 +7,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
 {
     [Header("----- Health -----")]
     [SerializeField] int HP;
+    [SerializeField] GameObject healthBar;
 
     [Header("----- AI -----")]
     [SerializeField] int faceTaregtSpeed;
@@ -27,6 +28,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
 
     Vector3 playerDir;
     Vector3 playerPos;
+    float StartHP;
 
     float angleToPlayer;
     float SavedTime = 0;
@@ -44,6 +46,7 @@ public class MeleeEnemy : MonoBehaviour , IDamage
     // Start is called before the first frame update
     void Start()
     {
+        StartHP = HP;
         Instantiate(SpawnEffect,new Vector3(transform.position.x, transform.position.y + 5,transform.position.z),transform.rotation);
         transform.GetComponent<SphereCollider>().radius = agent.stoppingDistance;
         UIManager.instance.UpdateEnemyDisplay(1);
@@ -75,10 +78,10 @@ public class MeleeEnemy : MonoBehaviour , IDamage
             }
         }
     }
-        public void TakeDamage(int amount)
+    public void TakeDamage(int amount)
     {
         HP -= amount;
-        Debug.Log("got hit");
+        healthBar.transform.localScale = new Vector3(HP / StartHP * 2, healthBar.transform.localScale.y, transform.transform.localScale.z);
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
