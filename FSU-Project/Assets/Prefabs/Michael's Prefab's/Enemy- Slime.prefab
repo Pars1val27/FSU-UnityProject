@@ -214,7 +214,7 @@ MonoBehaviour:
   HealthBar: {fileID: 1079222242828772996}
   faceTaregtSpeed: 90
   agent: {fileID: 725266199799917629}
-  timeDrop: {fileID: 3311477272066090196, guid: dd44bff3bcd98084db344b593c2dc733, type: 3}
+  timeDrop: {fileID: 3311477272066090196, guid: b7a28628c70585a4ca94eb30df0e4727, type: 3}
   model:
   - {fileID: 5625916581691538456}
   anim: {fileID: 2672091182660899906}

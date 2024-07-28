@@ -422,7 +422,7 @@ MonoBehaviour:
   healthBar: {fileID: 6554915260012095219}
   faceTargetSpeed: 80
   agent: {fileID: 2994834973987438986}
-  timeDrop: {fileID: 3311477272066090196, guid: dd44bff3bcd98084db344b593c2dc733, type: 3}
+  timeDrop: {fileID: 3311477272066090196, guid: b7a28628c70585a4ca94eb30df0e4727, type: 3}
   anim: {fileID: 3706867000209023759}
   model: {fileID: 3632723805583447306}
   swivel: {fileID: 735147550640610314}

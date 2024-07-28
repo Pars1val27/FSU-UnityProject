@@ -17,7 +17,6 @@ public class mapScript : MonoBehaviour
 
 void Start()
     {
-        GameObject player = GameObject.FindWithTag("Player");
         pos = new Vector3(0, 0, 0);
         usedRoomPos = new Vector3[mapManager.instance.mapLevel.maxRooms];
         usedWallPosRoom = new List<GameObject[]>();

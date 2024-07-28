@@ -18,7 +18,6 @@ public class Portal : MonoBehaviour , IDamage
     [SerializeField] Transform[] spawnPOS;
     [SerializeField] float spawnInterval;
     [SerializeField] GameObject[] Enemys;
-    [SerializeField] GameObject timeDrop;
 
     bool isSpawning;
     float StartHP;
@@ -71,7 +70,6 @@ public class Portal : MonoBehaviour , IDamage
         {
             Destroy(gameObject);
             Instantiate(DeathEffect, transform.position, transform.rotation);
-            Instantiate(timeDrop, new Vector3(transform.position.x, transform.position.y, transform.position.z), transform.rotation);
         }
         else
         {
